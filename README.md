@@ -2,8 +2,6 @@
 
 **A Python-based testing framework for validating Yambo simulations using the official Yambo test suite.**
 
----
-
 ## Overview
 
 **yambo-tester** is a Python program designed to automate and simplify the validation of the open-source **Yambo** code for Many-Body Perturbation Theory and excited-state calculations.
@@ -13,8 +11,6 @@ The current version of yambo-tester relies on a curated subset of tests taken di
 <https://github.com/yambo-code/yambo-tests>. Additional tests will be gradually integrated over time to provide broader coverage.
 
 Users can execute **all available tests** or select a **specific subset**, making yambo-tester particularly suitable for **automated CI workflows** where fast, selective validation is required. Depending on how Yambo has been compiled on the system, tests can run in **serial** or **parallel** using OpenMP and MPI.
-
----
 
 ## Installation
 
@@ -40,13 +36,9 @@ pip install -e .
 
 Note: yambo-tester is not yet published on PyPI, but it will become available once the first release is finalized.
 
----
-
 ## Usage
 
-(*A full usage guide will be added soon. Placeholder section.*)
-
----
+(*A full usage guide will be added soon.*)
 
 ## Authors and Acknowledgments
 
@@ -57,21 +49,15 @@ Special acknowledgments:
 - **Claudio Attaccalite**, whose earlier scripts inspired part of the initial design.
 - The **Yambo developer team**, who maintain the official Yambo test suite from which many tests included in this project are derived.
 
----
-
 ## Contributing
 
 Contributions are welcome!
 Please refer to the guidelines in **CONTRIBUTING.md** before submitting pull requests.
 
----
-
 ## License
 
 yambo-tester is distributed under the **MIT License**.
 For details, see the **LICENSE** file included in this repository.
-
----
 
 ## TODO
 
@@ -82,5 +68,3 @@ The following features and improvements are planned for future releases of yambo
 - [ ] Support for project-specific executables (e.g., yambo_rt, ypp_rt, etc.).
 - [ ] Publishing the package on PyPI, allowing installation via pip install yambo-tester and integration into CI pipelines without local cloning.
 - [ ] Generation of a final test report suitable for upload to a web portal or dashboard, enabling remote monitoring of test outcomes.
-
----
