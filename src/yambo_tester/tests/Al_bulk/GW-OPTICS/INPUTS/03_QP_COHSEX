@@ -1,0 +1,42 @@
+#                                                           
+#  __  __   ________   ___ __ __    _______   ______        
+# /_/\/_/\ /_______/\ /__//_//_/\ /_______/\ /_____/\       
+# \ \ \ \ \\::: _  \ \\::\| \| \ \\::: _  \ \\:::_ \ \      
+#  \:\_\ \ \\::(_)  \ \\:.      \ \\::(_)  \/_\:\ \ \ \     
+#   \::::_\/ \:: __  \ \\:.\-/\  \ \\::  _  \ \\:\ \ \ \    
+#     \::\ \  \:.\ \  \ \\. \  \  \ \\::(_)  \ \\:\_\ \ \   
+#      \__\/   \__\/\__\/ \__\/ \__\/ \_______\/ \_____\/   
+#                                                           
+#                                                           
+#               Version 4.0.2 Revision 4658                 
+#                      OpenMPI Build                        
+#                http://www.yambo-code.org                  
+#
+gw0                          # [R GW] GoWo Quasiparticle energy levels
+cohsex                       # [R Xp] COlumb Hole Screened EXchange
+HF_and_locXC                 # [R XX] Hartree-Fock Self-energy and Vxc
+em1s                         # [R Xs] Static Inverse Dielectric Matrix
+BoseTemp=  1.E-4 eV
+ElecTemp=  1.E-4 eV
+FFTGvecs= 229          RL    # [FFT] Plane-waves
+EXXRLvcs= 229          RL    # [XX] Exchange RL components
+Chimod= "hartree"            # [X] IP/Hartree/ALDA/LRC/BSfxc
+% BndsRnXs
+  1 | 20 |                   # [Xs] Polarization function bands
+%
+NGsBlkXs= 27           RL    # [Xs] Response block size
+% DmRngeXs
+  0.00100 |  0.00100 | eV    # [Xs] Damping range
+%
+% LongDrXs
+ 1.000000 | 0.000000 | 0.000000 |        # [Xs] [cc] Electric Field
+%
+% GbndRnge
+  1 | 20 |                   # [GW] G[W] bands range
+%
+%QPkrange                    # [GW] QP generalized Kpoint/Band indices
+  1|  8|  2|  3|
+%
+%QPerange                    # [GW] QP generalized Kpoint/Energy indices
+  1|  8| 0.0|-1.0|
+%

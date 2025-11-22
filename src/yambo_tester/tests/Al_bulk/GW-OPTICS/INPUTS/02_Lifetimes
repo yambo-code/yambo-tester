@@ -1,0 +1,32 @@
+#                                                           
+#  /$$     /$$ /$$$$$$  /$$      /$$ /$$$$$$$   /$$$$$$     
+# |  $$   /$$//$$__  $$| $$$    /$$$| $$__  $$ /$$__  $$    
+#  \  $$ /$$/| $$  \ $$| $$$$  /$$$$| $$  \ $$| $$  \ $$    
+#   \  $$$$/ | $$$$$$$$| $$ $$/$$ $$| $$$$$$$ | $$  | $$    
+#    \  $$/  | $$__  $$| $$  $$$| $$| $$__  $$| $$  | $$    
+#     | $$   | $$  | $$| $$\  $ | $$| $$  \ $$| $$  | $$    
+#     | $$   | $$  | $$| $$ \/  | $$| $$$$$$$/|  $$$$$$/    
+#     |__/   |__/  |__/|__/     |__/|_______/  \______/     
+#                                                           
+#             GPL Version 3.2.2 Revision 666                
+#               http://www.yambo-code.org                   
+#
+life                         # [R GW] GoWo Quasiparticle lifetimes
+el_el_corr
+DBsIOoff= "DIP X"            # [IO] Space-separated list of DB with NO I/O. DB=(DIP,X,HF,COLLs,J,GF,CARRIERs,WF,W,SC,BS)
+ElecTemp=0.1000E-3     eV    # Electronic Temperature
+BoseTemp=0.1000E-3     eV    # Bosonic Temperature
+LifeTrCG= 30.0000           # [GW] [o/o] Lifetime transitions reduction
+% BndsRnXd
+  1 | 20 |                   # [Xd] Polarization function bands
+%
+NGsBlkXd=21            RL    # [Xd] Response block size
+% DmRngeXd
+  0.10000 |  0.10000 | eV    # [Xd] Damping range
+%
+% LongDrXd
+ 1.000000 | 0.000000 | 0.000000 |        # [Xd] [cc] Electric Field
+%
+%QPkrange                    # [GW] QP generalized Kpoint/Band indices
+  1|  8|  1| 4|
+%

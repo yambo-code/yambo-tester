@@ -1,0 +1,42 @@
+
+
+
+_|      _|   _|_|   _|      _|  _|_|_|     _|_|
+  _|  _|   _|    _| _|_|  _|_| _|    _| _|    _|
+    _|     _|_|_|_| _|  _|  _| _|_|_|   _|    _|
+    _|     _|    _| _|      _| _|    _| _|    _|
+    _|     _|    _| _|      _| _|_|_|     _|_|
+
+
+
+ <---> [01] CPU structure, Files & I/O Directories
+ <---> [02] CORE Variables Setup
+ <---> [02.01] Unit cells
+ <---> [02.02] Symmetries
+ <---> [02.03] RL shells
+ <---> Shells finder |                                        | [000%] --(E) --(X)
+ <---> Shells finder |########################################| [100%] --(E) --(X)
+ <---> [02.04] K-grid lattice
+ <---> [02.05] Energies [ev] & Occupations
+ <---> [WARNING][X] Metallic system
+ <---> [03] Transferred momenta grid
+ <---> BZ -> IBZ reduction |                                        | [000%] --(E) --(X)
+ <---> BZ -> IBZ reduction |########################################| [100%] --(E) --(X)
+ <---> X indexes |                                        | [000%] --(E) --(X)
+ <---> X indexes |########################################| [100%] --(E) --(X)
+ <---> SE indexes |                                        | [000%] --(E) --(X)
+ <---> SE indexes |########################################| [100%] --(E) --(X)
+ <---> [04] Timing Overview
+ <---> [TIMING]                              io_WF :     0.00s CPU
+ <---> [TIMING]                            io_GROT :     0.00s CPU (       3 calls,   0.000 s avg)
+ <---> [TIMING]                           io_QINDX :     0.00s CPU (       3 calls,   0.000 s avg)
+ <---> [TIMING]                         io_COL_CUT :     0.00s CPU
+ <---> [TIMING]                     io_Double_Grid :     0.00s CPU
+ <---> [TIMING]                              io_HF :     0.00s CPU
+ <---> [TIMING]                         io_DIPOLES :     0.00s CPU
+ <---> [TIMING]                        io_KB_pwscf :     0.00s CPU
+ <---> [TIMING]                       io_KB_abinit :     0.00s CPU
+ <---> [TIMING]                              io_BS :     0.00s CPU
+ <---> [TIMING]                    bz_samp_indexes :     0.00s CPU
+ <---> [05] Memory Overview
+ <---> [06] Game Over & Game summary

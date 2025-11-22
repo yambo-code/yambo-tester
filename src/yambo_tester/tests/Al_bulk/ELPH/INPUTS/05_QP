@@ -1,0 +1,36 @@
+#                                                                     
+#  /$$     /$$ /$$$$$$  /$$      /$$ /$$$$$$$   /$$$$$$               
+# |  $$   /$$//$$__  $$| $$$    /$$$| $$__  $$ /$$__  $$              
+#  \  $$ /$$/| $$  \ $$| $$$$  /$$$$| $$  \ $$| $$  \ $$              
+#   \  $$$$/ | $$$$$$$$| $$ $$/$$ $$| $$$$$$$ | $$  | $$              
+#    \  $$/  | $$__  $$| $$  $$$| $$| $$__  $$| $$  | $$              
+#     | $$   | $$  | $$| $$\  $ | $$| $$  \ $$| $$  | $$              
+#     | $$   | $$  | $$| $$ \/  | $$| $$$$$$$/|  $$$$$$/              
+#     |__/   |__/  |__/|__/     |__/|_______/  \______/               
+#                                                                     
+# Version 5.1.1 Revision 21243 Hash (prev commit) a6b626d             
+#                  Branch is bug-fixes                                
+#         MPI+OpenMP+SLK+SLEPC+HDF5_MPI_IO Build                      
+#               http://www.yambo-code.org                             
+#
+dyson                            # [R] Dyson Equation solver
+gw0                              # [R] GW approximation
+el_ph_corr                       # [R] Electron-Phonon Correlation
+Nelectro= 3.000000               # Electrons number
+ElecTemp= 0.010000         eV    # Electronic Temperature
+BoseTemp= 100.0            Kn    # Bosonic Temperature
+OccTresh= 0.100000E-4            # Occupation treshold (metallic bands)
+SE_Threads=0                     # [OPENMP/GW] Number of threads for self-energy
+DysSolver= "n"                   # [GW] Dyson Equation solver ("n","s","g")
+% GphBRnge
+  1 | 20 |                           # [ELPH] G[W] bands range
+%
+% ElPhModes
+ 1 | 3 |                             # [ELPH] Phonon modes included
+%
+GDamping= 0.0500000         eV    # [GW] G[W] damping
+RandQpts=0                       # [RIM] Number of random q-points in the BZ
+#WRgFsq                        # [ELPH] Dump on file gFsq coefficients
+%QPkrange                        # [GW] QP generalized Kpoint/Band indices
+1|8|1|5|
+%
