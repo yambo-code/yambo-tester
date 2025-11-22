@@ -1,0 +1,111 @@
+#                                                                     
+#  __  __   ________   ___ __ __    _______   ______                  
+# /_/\/_/\ /_______/\ /__//_//_/\ /_______/\ /_____/\                 
+# \ \ \ \ \\::: _  \ \\::\| \| \ \\::: _  \ \\:::_ \ \                
+#  \:\_\ \ \\::(_)  \ \\:.      \ \\::(_)  \/_\:\ \ \ \               
+#   \::::_\/ \:: __  \ \\:.\-/\  \ \\::  _  \ \\:\ \ \ \              
+#     \::\ \  \:.\ \  \ \\. \  \  \ \\::(_)  \ \\:\_\ \ \             
+#      \__\/   \__\/\__\/ \__\/ \__\/ \_______\/ \_____\/             
+#                                                                     
+#                                                                     
+# Version 5.1.1 Revision 21243 Hash (prev commit) a6b626d             
+#                   Branch is bug-fixes                               
+#         MPI+OpenMP+SLK+SLEPC+HDF5_MPI_IO Build                      
+#                http://www.yambo-code.org                            
+#
+#
+# GW solver                                       : Newton
+# GW approximation                                : Fan + DW
+# [ph] dS/dw steps                                :  2
+# [ph] dS/dw step                                 :  0.100000001    [ev]
+# [ph] Sc/G damping                               :  0.500000007E-1 [ev]
+# El-Ph correlation                               : yes
+# El-Ph Sc. G bands                               :   1  20
+# El-Ph phonon branches                           :  1  3
+# El-Ph momenta used                              :   8
+# Energy treshold                                 :  0.999999997E-6 [FAN]
+# Energy treshold                                 :  0.999999997E-6 [DW]
+#                                                 
+# QP @ state[ 1 ] K range                         :   1   8
+# QP @ state[ 1 ] b range                         :   1   5
+# GF energies kind                                : Slater exchange(X)+Perdew & Zunger(C)
+# GF WF`s kind                                    : Slater exchange(X)+Perdew & Zunger(C)
+#                                                 
+# [ELPH] Phonon modes                             :  3
+# [ELPH] Q points                                 :   8 [avail]
+# [ELPH] K points                                 :   64
+# [ELPH] El-PH bands                              :  20
+# [ELPH] Using the Q-grid                         : yes
+# [ELPH] Bare interaction                         : no
+# PH double-grid                                  : no
+#
+#
+#    K-point            Band               Eo [eV]            E-Eo [eV]          Sc|Eo [eV]         Width [meV]
+#
+        1                  1                 -10.72437          -0.039852          -0.040423           0.33954E-10
+        1                  2                  13.64773           0.008150           0.016173           0.745666E-7
+        1                  3                  13.64773           0.008150           0.016173           0.745666E-7
+        1                   4                 13.64773           0.008150           0.016173           0.745666E-7
+        1                   5                 15.02402          -0.002339          -0.004730           0.106484
+        2                  1                 -8.955996           0.050225           0.020357           54.37817
+        2                  2                  4.253466          -0.088524          -0.082289           20.52819
+        2                  3                  11.86110          -0.086736          -0.067441           85.17619
+        2                   4                 11.86110          -0.086736          -0.067441           85.17619
+        2                   5                 15.42305          -0.002868          -0.249140           714.5960
+        3                  1                 -3.941759          -0.004501          -0.003063           5.997761
+        3                  2                 -3.713989           0.001728           0.001670           6.446065
+        3                  3                  12.36462          -0.083845          -0.008736           4.619828
+        3                   4                 12.36462          -0.083845          -0.008736           4.619828
+        3                   5                 12.42640           0.271074          -0.025650           96.08295
+         4                 1                 -8.374518           0.045265           0.031221           41.54376
+         4                 2                  8.253244          -0.071959          -0.055932           14.64451
+         4                 3                  8.436568           0.018370           0.650923E-4        61.80008
+         4                  4                 8.436568           0.018370           0.650923E-4        61.80008
+         4                  5                 9.152494          -0.044991          -0.044206           19.70975
+         5                 1                 -4.397550           0.112772           0.103048           31.13098
+         5                 2                 -0.013361           0.125982           0.078690           33.69885
+         5                 3                  4.495710           0.241364          -0.058081          -33.15911
+         5                  4                 7.971345           0.118006          -0.074365           321.9019
+         5                  5                 9.683083           0.330262          -0.139096          -12.90279
+         6                 1                 -6.078499           0.077948           0.053562           45.87327
+         6                 2                  1.984258           1.348314          -0.086731           699.3671
+         6                 3                  3.625866          -0.130285          -0.092612           253.8564
+         6                  4                 10.41642           0.040992           0.045782           30.47057
+         6                  5                 12.45010           0.205703          -0.024388          -5.576334
+         7                 1                 -2.201215          -0.018267          -0.024359          -0.179588E-7
+         7                 2                 -0.895797          -0.036550          -0.049079          -0.112771E-3
+         7                 3                  5.941879          -0.014880          -0.026188           0.003421
+         7                  4                 6.520837          -0.011201          -0.017634           0.043490
+         7                  5                 6.520837          -0.011201          -0.017634           0.043490
+         8                 1                 -0.115292           0.128547          -0.071877          -576.3553
+         8                 2                 -0.115292           0.128547          -0.071877          -576.3553
+         8                 3                  0.832724           0.153188          -0.076309           415.7903
+         8                  4                 2.105473           0.006461           0.004680           20.99296
+         8                  5                 16.93331          -2.755099          -0.117730           -1820.41
+# 
+# 05/17/2022 at 11:28 yambo_ph @ pc-tsn10 [start]
+# 05/17/2022 at 11:28                     [end]
+#
+# .-Input file  yambo.in
+# | gw0                              # [R] GW approximation
+# | dyson                            # [R] Dyson Equation solver
+# | el_ph_corr                       # [R] Electron-Phonon Correlation
+# | ElecTemp= 0.010009         eV    # Electronic Temperature
+# | BoseTemp= 100.0000         Kn    # Bosonic Temperature
+# | SE_Threads= 1                    # [OPENMP/GW] Number of threads for self-energy
+# | DysSolver= "n"                   # [GW] Dyson Equation solver ("n","s","g")
+# | % GphBRnge
+# |   1 | 20 |                           # [ELPH] G[W] bands range
+# | %
+# | % ElPhModes
+# |  1 | 3 |                             # [ELPH] Phonon modes included
+# | %
+# | GDamping= 0.050000         eV    # [GW] G[W] damping
+# | RandQpts=0                       # [RIM] Number of random q-points in the BZ
+# | #WRgFsq                        # [ELPH] Dump on file gFsq coefficients
+# | %QPkrange                        # [GW] QP generalized Kpoint/Band indices
+# | 1|8|1|5|
+# | %
+# | %QPerange                        # [GW] QP generalized Kpoint/Energy indices
+# | 1|8| 0.000000|-1.000000|
+# | %

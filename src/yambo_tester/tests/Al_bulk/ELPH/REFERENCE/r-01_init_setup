@@ -1,0 +1,331 @@
+                                                                          
+    :   :::   :::     ::::    ::::  :::::::::   ::::::::                  
+    :+:   :+: :+: :+:   +:+:+: :+:+:+ :+:    :+: :+:    :+                
+     +:+ +:+ +:+   +:+  +:+ +:+:+ +:+ +:+    +:+ +:+    +:+               
+      +#++: +#++:++#++: +#+  +:+  +#+ +#++:++#+  +#+    +:+               
+       +#+  +#+     +#+ +#+       +#+ +#+    +#+ +#+    +#+               
+       #+#  #+#     #+# #+#       #+# #+#    #+# #+#    #+#               
+       ###  ###     ### ###       ### #########   ########                
+                                                                          
+                                                                          
+    Version 5.1.1 Revision 21243 Hash (prev commit) a6b626d               
+                      Branch is bug-fixes                                 
+            MPI+OpenMP+SLK+SLEPC+HDF5_MPI_IO Build                        
+                   http://www.yambo-code.org                              
+ 
+ 05/17/2022 at 11:09 yambo_ph @ pc-tsn10
+ ==================================================
+
+ Cores               :  1
+ Threads per core    :  1
+ Threads total       :  1
+ Nodes Computing     :  1
+ Nodes IO            :  1
+
+ Fragmented WFs      : yes
+ CORE databases      : .
+ Additional I/O      : .
+ Communications      : .
+ Input file          : INPUTS/01_init
+ Report file         : ./r-01_init_setup
+ Verbose log/report  : no
+
+ Job   string        : 01_init
+
+ Precision           : SINGLE
+  
+ [RD./SAVE//ns.db1]--------------------------------------------------------------
+  Bands                                            :  20
+  K-points                                         :   8
+  G-vectors                                        :   941 [RL space]
+  Components                                       :  125 [wavefunctions]
+  Symmetries                                       :   48 [spatial]
+  Spinor components                                :  1
+  Spin polarizations                               :  1
+  Temperature                                      :  0.025852 [eV]
+  Electrons                                        :  3.000000
+  WF G-vectors                                     :  175
+  Max atoms/species                                :  1
+  No. of atom species                              :  1
+  Magnetic symmetries                              : no
+ - S/N 002104 ---------------------------------------------- v.04.01.05 r.14047 -
+
+ [02] CORE Variables Setup
+ =========================
+
+
+  [02.01] Unit cells
+  ==================
+
+  Cell kind             :  FCC
+  Atoms in the cell     :  Al
+  number of Al atoms    :  1
+
+  List of atomic coordinates    : [cc]
+  Al1       :  0.000000  0.000000  0.000000
+
+  Alat factors          :  3.750000  3.750000  3.750000 [a.u.]
+  Direct lattice volume :  105.4688 [a.u.]
+  Direct lattice vectors:  A[ 1 ]  A[ 2 ]  A[ 3 ]
+   A[ 1 ]: -1.000000  0.000000  1.000000  [iru]
+  -3.750000  0.000000  3.750000  [cc]
+   A[ 2 ]:  0.000000  1.000000  1.000000  [iru]
+   0.000000  3.750000  3.750000  [cc]
+   A[ 3 ]: -1.000000  1.000000  0.000000  [iru]
+  -3.750000  3.750000  0.000000  [cc]
+
+  Recip. lattice volume :  2.351884 [a.u.]
+  Recip. lattice vectors:  B[ 1 ]  B[ 2 ]  B[ 3 ]
+   B[ 1 ]: -0.500000 -0.500000  0.500000  [iku]
+  -0.837758 -0.837758  0.837758  [cc]
+   B[ 2 ]:  0.500000  0.500000  0.500000  [iku]
+   0.837758  0.837758  0.837758  [cc]
+   B[ 3 ]: -0.500000  0.500000 -0.500000  [iku]
+  -0.837758  0.837758 -0.837758  [cc]
+   
+
+  [02.02] Symmetries
+  ==================
+
+  Inversion symmetry    : yes
+  Spatial inversion     : yes
+  Inversion index       :  25
+  K-space Time-reversal : no
+  Magnetic symmetries   : no
+  Group table correct   : yes
+  Symmetries units      :  [cc]
+
+   [S  1]:  1.000000  0.000000  0.000000  0.000000  1.000000  0.000000  0.000000  0.000000  1.000000
+   [S  2]: -1.000000  0.000000  0.000000  0.000000 -1.000000  0.000000  0.000000  0.000000  1.000000
+   [S  3]: -1.000000  0.000000  0.000000  0.000000  1.000000  0.000000  0.000000  0.000000 -1.000000
+   [S  4]:  1.000000  0.000000  0.000000  0.000000 -1.000000  0.000000  0.000000  0.000000 -1.000000
+   [S  5]:  0.000000  1.000000  0.000000  1.000000  0.000000  0.000000  0.000000  0.000000 -1.000000
+   [S  6]:  0.000000 -1.000000  0.000000 -1.000000  0.000000  0.000000  0.000000  0.000000 -1.000000
+   [S  7]:  0.000000 -1.000000  0.000000  1.000000  0.000000  0.000000  0.000000  0.000000  1.000000
+   [S  8]:  0.000000  1.000000  0.000000 -1.000000  0.000000  0.000000  0.000000  0.000000  1.000000
+   [S  9]:  0.000000  0.000000  1.000000  0.000000 -1.000000  0.000000  1.000000  0.000000  0.000000
+   [S 10]:  0.000000  0.000000 -1.000000  0.000000 -1.000000  0.000000 -1.000000  0.000000  0.000000
+   [S 11]:  0.000000  0.000000 -1.000000  0.000000  1.000000  0.000000  1.000000  0.000000  0.000000
+   [S 12]:  0.000000  0.000000  1.000000  0.000000  1.000000  0.000000 -1.000000  0.000000  0.000000
+   [S 13]: -1.000000  0.000000  0.000000  0.000000  0.000000  1.000000  0.000000  1.000000  0.000000
+   [S 14]: -1.000000  0.000000  0.000000  0.000000  0.000000 -1.000000  0.000000 -1.000000  0.000000
+   [S 15]:  1.000000  0.000000  0.000000  0.000000  0.000000 -1.000000  0.000000  1.000000  0.000000
+   [S 16]:  1.000000  0.000000  0.000000  0.000000  0.000000  1.000000  0.000000 -1.000000  0.000000
+   [S 17]:  0.000000  0.000000  1.000000  1.000000  0.000000  0.000000  0.000000  1.000000  0.000000
+   [S 18]:  0.000000  0.000000 -1.000000 -1.000000  0.000000  0.000000  0.000000  1.000000  0.000000
+   [S 19]:  0.000000  0.000000 -1.000000  1.000000  0.000000  0.000000  0.000000 -1.000000  0.000000
+   [S 20]:  0.000000  0.000000  1.000000 -1.000000  0.000000  0.000000  0.000000 -1.000000  0.000000
+   [S 21]:  0.000000  1.000000  0.000000  0.000000  0.000000  1.000000  1.000000  0.000000  0.000000
+   [S 22]:  0.000000 -1.000000  0.000000  0.000000  0.000000 -1.000000  1.000000  0.000000  0.000000
+   [S 23]:  0.000000 -1.000000  0.000000  0.000000  0.000000  1.000000 -1.000000  0.000000  0.000000
+   [S 24]:  0.000000  1.000000  0.000000  0.000000  0.000000 -1.000000 -1.000000  0.000000  0.000000
+   [S 25]: -1.000000  0.000000  0.000000  0.000000 -1.000000  0.000000  0.000000  0.000000 -1.000000
+   [S 26]:  1.000000  0.000000  0.000000  0.000000  1.000000  0.000000  0.000000  0.000000 -1.000000
+   [S 27]:  1.000000  0.000000  0.000000  0.000000 -1.000000  0.000000  0.000000  0.000000  1.000000
+   [S 28]: -1.000000  0.000000  0.000000  0.000000  1.000000  0.000000  0.000000  0.000000  1.000000
+   [S 29]:  0.000000 -1.000000  0.000000 -1.000000  0.000000  0.000000  0.000000  0.000000  1.000000
+   [S 30]:  0.000000  1.000000  0.000000  1.000000  0.000000  0.000000  0.000000  0.000000  1.000000
+   [S 31]:  0.000000  1.000000  0.000000 -1.000000  0.000000  0.000000  0.000000  0.000000 -1.000000
+   [S 32]:  0.000000 -1.000000  0.000000  1.000000  0.000000  0.000000  0.000000  0.000000 -1.000000
+   [S 33]:  0.000000  0.000000 -1.000000  0.000000  1.000000  0.000000 -1.000000  0.000000  0.000000
+   [S 34]:  0.000000  0.000000  1.000000  0.000000  1.000000  0.000000  1.000000  0.000000  0.000000
+   [S 35]:  0.000000  0.000000  1.000000  0.000000 -1.000000  0.000000 -1.000000  0.000000  0.000000
+   [S 36]:  0.000000  0.000000 -1.000000  0.000000 -1.000000  0.000000  1.000000  0.000000  0.000000
+   [S 37]:  1.000000  0.000000  0.000000  0.000000  0.000000 -1.000000  0.000000 -1.000000  0.000000
+   [S 38]:  1.000000  0.000000  0.000000  0.000000  0.000000  1.000000  0.000000  1.000000  0.000000
+   [S 39]: -1.000000  0.000000  0.000000  0.000000  0.000000  1.000000  0.000000 -1.000000  0.000000
+   [S 40]: -1.000000  0.000000  0.000000  0.000000  0.000000 -1.000000  0.000000  1.000000  0.000000
+   [S 41]:  0.000000  0.000000 -1.000000 -1.000000  0.000000  0.000000  0.000000 -1.000000  0.000000
+   [S 42]:  0.000000  0.000000  1.000000  1.000000  0.000000  0.000000  0.000000 -1.000000  0.000000
+   [S 43]:  0.000000  0.000000  1.000000 -1.000000  0.000000  0.000000  0.000000  1.000000  0.000000
+   [S 44]:  0.000000  0.000000 -1.000000  1.000000  0.000000  0.000000  0.000000  1.000000  0.000000
+   [S 45]:  0.000000 -1.000000  0.000000  0.000000  0.000000 -1.000000 -1.000000  0.000000  0.000000
+   [S 46]:  0.000000  1.000000  0.000000  0.000000  0.000000  1.000000 -1.000000  0.000000  0.000000
+   [S 47]:  0.000000  1.000000  0.000000  0.000000  0.000000 -1.000000  1.000000  0.000000  0.000000
+   [S 48]:  0.000000 -1.000000  0.000000  0.000000  0.000000  1.000000  1.000000  0.000000  0.000000
+
+  [02.03] Reciprocal space
+  ========================
+
+
+  [WARNING] Found non closed shells. Max cutoff will be reduced.
+
+  [WARNING] Set Gthresh>1.E-5 in input to avoid this. Too big Gthresh will pack shells together
+  Full and reduced cutoff:   12282.2      12633.1    [mHa]
+
+  nG shells         :  13
+  nG charge         :  229
+  nG WFs            :  175
+  nC WFs            :  125
+  G-vecs. in first 1 shells:  [ Number ]
+   1
+  ...
+  Shell energy in first 1 shells:  [ mHa ]
+   0.000000
+  ...
+
+  [02.04] K-grid lattice
+  ======================
+
+  Compatible Grid is   : 3D
+  Base K vectors       :  K_min[ 1 ]  K_min[ 2 ]  K_min[ 3 ]
+  K_min[ 1 ] :  0.000000  0.250000  0.000000 [rlu]
+  K_min[ 2 ] :  0.000000  0.000000  0.250000 [rlu]
+  K_min[ 3 ] :  0.250000  0.000000  0.000000 [rlu]
+  Grid dimensions      :   4   4   4
+  K lattice UC volume  :  0.036748 [a.u.]
+
+  IBZ K-points :   8
+  BZ  K-points :   64
+
+  K/Q-points units:
+  rlu = crystal or reduced units; cc = cartesian coordinates; iku = interal k-units
+
+  K [1]:  0.000000  0.000000  0.000000 [rlu]
+        : wf components:  113
+  K [2]:  0.000000  0.000000  0.250000 [rlu]
+        : wf components:  117
+  K [3]:  0.000000  0.000000 -0.500000 [rlu]
+        : wf components:  120
+  K [4]:  0.000000  0.250000  0.250000 [rlu]
+        : wf components:  125
+  K [5]:  0.000000  0.250000 -0.500000 [rlu]
+        : wf components:  113
+  K [6]:  0.000000  0.250000 -0.250000 [rlu]
+        : wf components:  117
+  K [7]:  0.000000 -0.500000 -0.500000 [rlu]
+        : wf components:  116
+  K [8]:  0.250000 -0.500000 -0.250000 [rlu]
+        : wf components:  108
+
+  [02.05] Energies & Occupations
+  ==============================
+
+  [X] === General ===
+  [X] Electronic Temperature                        :  0.258606E-1   300.100    [eV K]
+  [X] Bosonic    Temperature                        :  0.258606E-1   300.100    [eV K]
+  [X] Finite Temperature mode                       : yes
+  [X] El. density                                   :  0.19195E+24 [cm-3]
+  [X] Fermi Level                                   :  7.559246 [eV]
+
+  [X] === Gaps and Widths ===
+  [X] Conduction Band Min                           :  7.559246 [eV]
+  [X] Valence Band Max                              :  7.559246 [eV]
+  [X] Metallic Bands                                :  1  2
+  [X] Empty Bands                                   :   3  20
+   
+  [X] === Metallic Characters ===
+  [X] N of el / N of met el                         :  3.000000  2.946038
+  [X] Average metallic occ.                         :  0.368255
+
+  [WARNING][X] Metallic system
+   
+  E @ K [1]:  [eV]
+  occ @ K [1]
+  E @ K [2]:  [eV]
+  occ @ K [2]
+  E @ K [3]:  [eV]
+  occ @ K [3]
+  E @ K [4]:  [eV]
+  occ @ K [4]
+  E @ K [5]:  [eV]
+  occ @ K [5]
+  E @ K [6]:  [eV]
+  occ @ K [6]
+  E @ K [7]:  [eV]
+  occ @ K [7]
+  E @ K [8]:  [eV]
+  occ @ K [8]
+
+ [03] Transferred momenta grid and indexing
+ ==========================================
+
+ [BZ sampling] Q-grid is read from the El-Ph databases
+
+ IBZ Q-points :   8
+ BZ  Q-points :   64
+
+ K/Q-points units:
+ rlu = crystal or reduced units; cc = cartesian coordinates; iku = interal k-units
+
+ Q [1]:  0.000000  0.000000  0.000000 [rlu]
+ Q [2]:  0.000000  0.000000  0.250000 [rlu]
+ Q [3]:  0.000000  0.000000 -0.500000 [rlu]
+ Q [4]:  0.000000  0.250000  0.250000 [rlu]
+ Q [5]:  0.000000  0.250000  0.500000 [rlu]
+ Q [6]:  0.000000  0.250000 -0.250000 [rlu]
+ Q [7]:  0.000000 -0.500000 -0.500000 [rlu]
+ Q [8]:  0.250000 -0.500000 -0.250000 [rlu]
+
+  [03.01] X + BSE indexes
+  =======================
+
+
+   [03.01.01] Sigma indexes
+   ========================
+
+   [WR./SAVE//ndb.kindx]-----------------------------------------------------------
+    Fragmentation                                    : no
+    Polarization last K                              :   8
+    QP states                                        :   1   8
+    X grid is uniform                                : yes
+    Grids                                            : X B S
+    BS scattering                                    : yes
+    COLL scattering                                  : no
+    Sigma scattering                                 : yes
+    X scattering                                     : yes
+   - S/N 002104 ---------------------------------------------- v.05.01.01 r.21243 -
+
+ [04] Timing Overview
+ ====================
+
+ Clock: global
+             io_ATMPROJ_pwscf :      0.0000s CPU
+      IO_and_Messaging_switch :      0.0000s CPU (3 calls,   0.002 msec avg)
+                 io_KB_abinit :      0.0000s CPU
+                   io_COL_CUT :      0.0000s CPU
+                   io_DIPOLES :      0.0000s CPU
+                        io_BS :      0.0000s CPU
+                        io_HF :      0.0000s CPU
+               io_Double_Grid :      0.0001s CPU
+                  io_KB_pwscf :      0.0002s CPU
+                        io_WF :      0.0003s CPU
+                      io_ELPH :      0.0033s CPU (2 calls,   1.657 msec avg)
+                      io_GROT :      0.0041s CPU (3 calls,   1.364 msec avg)
+                     io_QINDX :      0.0080s CPU (4 calls,   2.006 msec avg)
+              bz_samp_indexes :      0.0125s CPU
+
+ [05] Game Over & Game summary
+ =============================
+
+ 05/17/2022 at 11:09 yambo_ph @ pc-tsn10 [start]
+ 05/17/2022 at 11:09                     [end]
+
+  
+ .-ACKNOWLEDGMENT
+ |
+ | The users of YAMBO have little formal obligations with respect to
+ | the YAMBO group (those specified in the GNU General Public
+ | License, http://www.gnu.org/copyleft/gpl.txt). However, it is
+ | common practice in the scientific literature, to acknowledge the
+ | efforts of people that have made the research possible. In this
+ | spirit, please find below the reference we kindly ask you to use
+ | in order to acknowledge YAMBO
+ |
+ | Many-body perturbation theory calculations using the yambo code
+ | D. Sangalli, A. Ferretti, H. Miranda, C. Attaccalite, I. Marri, E. Cannuccia, P. Melo,
+ | M Marsili, F Paleari, A Marrazzo, G Prandini, P Bonfà, M O Atambo, F Affinito,
+ | M Palummo, A Molina-Sánchez, C Hogan, M Grüning, D Varsano and A Marini.
+ | J. Phys.: Condens. Matter 31, 325902 (2019).
+ |
+ | Yambo: An ab initio tool for excited state calculations
+ | A. Marini, C. Hogan, M. Grüning, D. Varsano
+ | Computer Physics Communications 180, 1392 (2009).
+ |
+  
+ .-Input file  INPUTS/01_init
+ | setup                            # [R] Initialization
+ | ElecTemp= 0.025861         eV    # Electronic Temperature
+ | BoseTemp= 0.025861         eV    # Bosonic Temperature
+ | MaxGvecs= 229              RL    # [INI] Max number of G-vectors planned to use
+ | K_grids= "X B S"                 # [KPT] Select the grids (X=response, S=sigma, C=collisions, B=bse) [default X S C B]

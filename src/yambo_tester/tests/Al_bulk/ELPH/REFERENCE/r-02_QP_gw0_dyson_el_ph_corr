@@ -1,0 +1,393 @@
+     __      __   ______   __       __  _______    ______                 
+    |  \    /  \ /      \ |  \     /  \|       \  /      \                
+     \$$\  /  $$|  $$$$$$\| $$\   /  $$| $$$$$$$\|  $$$$$$\               
+      \$$\/  $$ | $$__| $$| $$$\ /  $$$| $$__/ $$| $$  | $$               
+       \$$  $$  | $$    $$| $$$$\  $$$$| $$    $$| $$  | $$               
+        \$$$$   | $$$$$$$$| $$\$$ $$ $$| $$$$$$$\| $$  | $$               
+        | $$    | $$  | $$| $$ \$$$| $$| $$__/ $$| $$__/ $$               
+        | $$    | $$  | $$| $$  \$ | $$| $$    $$ \$$    $$               
+         \$$     \$$   \$$ \$$      \$$ \$$$$$$$   \$$$$$$                
+                                                                          
+    Version 5.1.1 Revision 21243 Hash (prev commit) a6b626d               
+                      Branch is bug-fixes                                 
+            MPI+OpenMP+SLK+SLEPC+HDF5_MPI_IO Build                        
+                   http://www.yambo-code.org                              
+ 
+ 05/17/2022 at 11:12 yambo_ph @ pc-tsn10
+ ==================================================
+
+ Cores               :  1
+ Threads per core    :  1
+ Threads total       :  1
+ Nodes Computing     :  1
+ Nodes IO            :  1
+
+ Fragmented WFs      : yes
+ CORE databases      : .
+ Additional I/O      : .
+ Communications      : .
+ Input file          : INPUTS/02_QP
+ Report file         : ./r-02_QP_gw0_dyson_el_ph_corr
+ Verbose log/report  : no
+
+ Job   string        : 02_QP
+
+ Precision           : SINGLE
+  
+ [RD./SAVE//ns.db1]--------------------------------------------------------------
+  Bands                                            :  20
+  K-points                                         :   8
+  G-vectors                                        :   941 [RL space]
+  Components                                       :  125 [wavefunctions]
+  Symmetries                                       :   48 [spatial]
+  Spinor components                                :  1
+  Spin polarizations                               :  1
+  Temperature                                      :  0.025852 [eV]
+  Electrons                                        :  3.000000
+  WF G-vectors                                     :  175
+  Max atoms/species                                :  1
+  No. of atom species                              :  1
+  Magnetic symmetries                              : no
+ - S/N 002104 ---------------------------------------------- v.04.01.05 r.14047 -
+
+ [02] CORE Variables Setup
+ =========================
+
+
+  [02.01] Unit cells
+  ==================
+
+  Cell kind             :  FCC
+  Atoms in the cell     :  Al
+  number of Al atoms    :  1
+
+  List of atomic coordinates    : [cc]
+  Al1       :  0.000000  0.000000  0.000000
+
+  Alat factors          :  3.750000  3.750000  3.750000 [a.u.]
+  Direct lattice volume :  105.4688 [a.u.]
+  Direct lattice vectors:  A[ 1 ]  A[ 2 ]  A[ 3 ]
+   A[ 1 ]: -1.000000  0.000000  1.000000  [iru]
+   A[ 2 ]:  0.000000  1.000000  1.000000  [iru]
+   A[ 3 ]: -1.000000  1.000000  0.000000  [iru]
+
+  Recip. lattice volume :  2.351884 [a.u.]
+  Recip. lattice vectors:  B[ 1 ]  B[ 2 ]  B[ 3 ]
+   B[ 1 ]: -0.500000 -0.500000  0.500000  [iku]
+   B[ 2 ]:  0.500000  0.500000  0.500000  [iku]
+   B[ 3 ]: -0.500000  0.500000 -0.500000  [iku]
+   
+
+  [02.02] Symmetries
+  ==================
+
+  Inversion symmetry    : yes
+  Spatial inversion     : yes
+  Inversion index       :  25
+  K-space Time-reversal : no
+  Magnetic symmetries   : no
+  Group table correct   : yes
+  Symmetries units      :  [cc]
+
+   [S  1]:  1.000000  0.000000  0.000000  0.000000  1.000000  0.000000  0.000000  0.000000  1.000000
+   [S  2]: -1.000000  0.000000  0.000000  0.000000 -1.000000  0.000000  0.000000  0.000000  1.000000
+   [S  3]: -1.000000  0.000000  0.000000  0.000000  1.000000  0.000000  0.000000  0.000000 -1.000000
+   [S  4]:  1.000000  0.000000  0.000000  0.000000 -1.000000  0.000000  0.000000  0.000000 -1.000000
+   [S  5]:  0.000000  1.000000  0.000000  1.000000  0.000000  0.000000  0.000000  0.000000 -1.000000
+   [S  6]:  0.000000 -1.000000  0.000000 -1.000000  0.000000  0.000000  0.000000  0.000000 -1.000000
+   [S  7]:  0.000000 -1.000000  0.000000  1.000000  0.000000  0.000000  0.000000  0.000000  1.000000
+   [S  8]:  0.000000  1.000000  0.000000 -1.000000  0.000000  0.000000  0.000000  0.000000  1.000000
+   [S  9]:  0.000000  0.000000  1.000000  0.000000 -1.000000  0.000000  1.000000  0.000000  0.000000
+   [S 10]:  0.000000  0.000000 -1.000000  0.000000 -1.000000  0.000000 -1.000000  0.000000  0.000000
+   [S 11]:  0.000000  0.000000 -1.000000  0.000000  1.000000  0.000000  1.000000  0.000000  0.000000
+   [S 12]:  0.000000  0.000000  1.000000  0.000000  1.000000  0.000000 -1.000000  0.000000  0.000000
+   [S 13]: -1.000000  0.000000  0.000000  0.000000  0.000000  1.000000  0.000000  1.000000  0.000000
+   [S 14]: -1.000000  0.000000  0.000000  0.000000  0.000000 -1.000000  0.000000 -1.000000  0.000000
+   [S 15]:  1.000000  0.000000  0.000000  0.000000  0.000000 -1.000000  0.000000  1.000000  0.000000
+   [S 16]:  1.000000  0.000000  0.000000  0.000000  0.000000  1.000000  0.000000 -1.000000  0.000000
+   [S 17]:  0.000000  0.000000  1.000000  1.000000  0.000000  0.000000  0.000000  1.000000  0.000000
+   [S 18]:  0.000000  0.000000 -1.000000 -1.000000  0.000000  0.000000  0.000000  1.000000  0.000000
+   [S 19]:  0.000000  0.000000 -1.000000  1.000000  0.000000  0.000000  0.000000 -1.000000  0.000000
+   [S 20]:  0.000000  0.000000  1.000000 -1.000000  0.000000  0.000000  0.000000 -1.000000  0.000000
+   [S 21]:  0.000000  1.000000  0.000000  0.000000  0.000000  1.000000  1.000000  0.000000  0.000000
+   [S 22]:  0.000000 -1.000000  0.000000  0.000000  0.000000 -1.000000  1.000000  0.000000  0.000000
+   [S 23]:  0.000000 -1.000000  0.000000  0.000000  0.000000  1.000000 -1.000000  0.000000  0.000000
+   [S 24]:  0.000000  1.000000  0.000000  0.000000  0.000000 -1.000000 -1.000000  0.000000  0.000000
+   [S 25]: -1.000000  0.000000  0.000000  0.000000 -1.000000  0.000000  0.000000  0.000000 -1.000000
+   [S 26]:  1.000000  0.000000  0.000000  0.000000  1.000000  0.000000  0.000000  0.000000 -1.000000
+   [S 27]:  1.000000  0.000000  0.000000  0.000000 -1.000000  0.000000  0.000000  0.000000  1.000000
+   [S 28]: -1.000000  0.000000  0.000000  0.000000  1.000000  0.000000  0.000000  0.000000  1.000000
+   [S 29]:  0.000000 -1.000000  0.000000 -1.000000  0.000000  0.000000  0.000000  0.000000  1.000000
+   [S 30]:  0.000000  1.000000  0.000000  1.000000  0.000000  0.000000  0.000000  0.000000  1.000000
+   [S 31]:  0.000000  1.000000  0.000000 -1.000000  0.000000  0.000000  0.000000  0.000000 -1.000000
+   [S 32]:  0.000000 -1.000000  0.000000  1.000000  0.000000  0.000000  0.000000  0.000000 -1.000000
+   [S 33]:  0.000000  0.000000 -1.000000  0.000000  1.000000  0.000000 -1.000000  0.000000  0.000000
+   [S 34]:  0.000000  0.000000  1.000000  0.000000  1.000000  0.000000  1.000000  0.000000  0.000000
+   [S 35]:  0.000000  0.000000  1.000000  0.000000 -1.000000  0.000000 -1.000000  0.000000  0.000000
+   [S 36]:  0.000000  0.000000 -1.000000  0.000000 -1.000000  0.000000  1.000000  0.000000  0.000000
+   [S 37]:  1.000000  0.000000  0.000000  0.000000  0.000000 -1.000000  0.000000 -1.000000  0.000000
+   [S 38]:  1.000000  0.000000  0.000000  0.000000  0.000000  1.000000  0.000000  1.000000  0.000000
+   [S 39]: -1.000000  0.000000  0.000000  0.000000  0.000000  1.000000  0.000000 -1.000000  0.000000
+   [S 40]: -1.000000  0.000000  0.000000  0.000000  0.000000 -1.000000  0.000000  1.000000  0.000000
+   [S 41]:  0.000000  0.000000 -1.000000 -1.000000  0.000000  0.000000  0.000000 -1.000000  0.000000
+   [S 42]:  0.000000  0.000000  1.000000  1.000000  0.000000  0.000000  0.000000 -1.000000  0.000000
+   [S 43]:  0.000000  0.000000  1.000000 -1.000000  0.000000  0.000000  0.000000  1.000000  0.000000
+   [S 44]:  0.000000  0.000000 -1.000000  1.000000  0.000000  0.000000  0.000000  1.000000  0.000000
+   [S 45]:  0.000000 -1.000000  0.000000  0.000000  0.000000 -1.000000 -1.000000  0.000000  0.000000
+   [S 46]:  0.000000  1.000000  0.000000  0.000000  0.000000  1.000000 -1.000000  0.000000  0.000000
+   [S 47]:  0.000000  1.000000  0.000000  0.000000  0.000000 -1.000000  1.000000  0.000000  0.000000
+   [S 48]:  0.000000 -1.000000  0.000000  0.000000  0.000000  1.000000  1.000000  0.000000  0.000000
+
+  [02.03] Reciprocal space
+  ========================
+
+  nG shells         :  13
+  nG charge         :  229
+  nG WFs            :  175
+  nC WFs            :  125
+  G-vecs. in first 1 shells:  [ Number ]
+   1
+  ...
+  Shell energy in first 1 shells:  [ mHa ]
+   0.000000
+  ...
+
+  [02.04] K-grid lattice
+  ======================
+
+  Compatible Grid is   : 3D
+  Base K vectors       :  K_min[ 1 ]  K_min[ 2 ]  K_min[ 3 ]
+  K_min[ 1 ] :  0.000000  0.250000  0.000000 [rlu]
+  K_min[ 2 ] :  0.000000  0.000000  0.250000 [rlu]
+  K_min[ 3 ] :  0.250000  0.000000  0.000000 [rlu]
+  Grid dimensions      :   4   4   4
+  K lattice UC volume  :  0.036748 [a.u.]
+
+  [02.05] Energies & Occupations
+  ==============================
+
+  [X] === General ===
+  [X] Electronic Temperature                        :  0.100086E-1   116.145    [eV K]
+  [X] Bosonic    Temperature                        :  0.861772E-2   100.004    [eV K]
+  [X] Finite Temperature mode                       : yes
+  [X] El. density                                   :  0.19195E+24 [cm-3]
+  [X] Fermi Level                                   :  7.537690 [eV]
+
+  [X] === Gaps and Widths ===
+  [X] Conduction Band Min                           :  7.537690 [eV]
+  [X] Valence Band Max                              :  7.537690 [eV]
+  [X] Filled Bands                                  :  1
+  [X] Metallic Bands                                :  2  2
+  [X] Empty Bands                                   :   3  20
+   
+  [X] === Metallic Characters ===
+  [X] N of el / N of met el                         :  3.000000  0.947914
+  [X] Average metallic occ.                         :  0.236978
+
+  [WARNING][X] Metallic system
+   
+
+ [03] Transferred momenta grid and indexing
+ ==========================================
+
+ [RD./SAVE//ndb.kindx]-----------------------------------------------------------
+  Fragmentation                                    : no
+  Polarization last K                              :   8
+  QP states                                        :   1   8
+  X grid is uniform                                : yes
+  Grids                                            : X B S
+  BS scattering                                    : yes
+  COLL scattering                                  : no
+  Sigma scattering                                 : yes
+  X scattering                                     : yes
+ - S/N 002104 ---------------------------------------------- v.05.01.01 r.21243 -
+
+ IBZ Q-points :   8
+ BZ  Q-points :   64
+
+ K/Q-points units:
+ rlu = crystal or reduced units; cc = cartesian coordinates; iku = interal k-units
+
+ Q [1]:  0.000000  0.000000  0.000000 [rlu]
+ Q [2]:  0.000000  0.000000  0.250000 [rlu]
+ Q [3]:  0.000000  0.000000 -0.500000 [rlu]
+ Q [4]:  0.000000  0.250000  0.250000 [rlu]
+ Q [5]:  0.000000  0.250000  0.500000 [rlu]
+ Q [6]:  0.000000  0.250000 -0.250000 [rlu]
+ Q [7]:  0.000000 -0.500000 -0.500000 [rlu]
+ Q [8]:  0.250000 -0.500000 -0.250000 [rlu]
+
+ [04] Dyson equation: Newton solver
+ ==================================
+
+ [RD./SAVE//ndb.QP]--------------------------------------------------------------
+  Lattice constants                                :  3.750000  3.750000  3.750000
+  Coulomb cutoff potential                         : none
+  Electronic Temperature                           :  116.1451 [K]
+  Bosonic    Temperature                           :  100.0044 [K]
+  Green`s function   energies                      : Slater exchange(X)+Perdew & Zunger(C)
+  wavefunctions                                    : Slater exchange(X)+Perdew & Zunger(C)
+  QP tot states                                    :   40
+  GWo SC iterations                                : 0
+  GW  SC iterations                                : 0
+  GW solver                                        : Newton
+  GW approximation                                 : Fan + DW
+  [ph] dS/dw steps                                 :  2
+  [ph] dS/dw step                                  :  0.100000 ev
+  [ph] Sc/G damping                                :  0.050000 ev
+  El-Ph correlation                                : yes
+  El-Ph Sc. G bands                                :   1  20
+  El-Ph phonon branches                            :  1  3
+  El-Ph momenta used                               :   8
+  Energy treshold                                  :  0.100000E-5 FAN
+  Energy treshold                                  :  0.100000E-5 DW
+                                                   
+  QP @ state[ 1 ] K range                          :   1   8
+  QP @ state[ 1 ] b range                          :   1   5
+  GF energies kind                                 : Slater exchange(X)+Perdew & Zunger(C)
+  GF WF`s kind                                     : Slater exchange(X)+Perdew & Zunger(C)
+                                                   
+  [ELPH] Phonon modes                              :  3
+  [ELPH] Q points                                  :   8 [avail]
+  [ELPH] K points                                  :   64
+  [ELPH] El-PH bands                               :  20
+  [ELPH] Using the Q-grid                          : yes
+  [ELPH] Bare interaction                          : no
+  PH double-grid                                   : no
+ - S/N 002104 ---------------------------------------------- v.05.01.01 r.21243 -
+
+ [05] QP properties and I/O
+ ==========================
+
+ Legend (energies in eV)
+ - B  : Band       - Eo  : bare energy
+ - E  : QP energy  - Z   : Renormalization factor
+ - Gm : Width [meV]- Gf  : Width [fs]
+ - F  : Fan [eV]  - DW  : DW [eV]
+
+ QP [eV] @ K [1] (iku):  0.000000  0.000000  0.000000
+  B=1 Eo=-10.72 E=-10.76 E-Eo= -0.04 Re(Z)=0.99 Im(Z)=-0.13985E-12 F = 0.11826E-23 DW= 0.12382E-23 Gm= 0.33954E-10 Gf=  0.0000
+  B=2 Eo= 13.65 E= 13.66 E-Eo=  0.01 Re(Z)=0.50 Im(Z)= 0.11656E-08 F = 0.83309E-39 DW= 0.83309E-39 Gm= 0.74567E-07 Gf=  0.0000
+  B=3 Eo= 13.65 E= 13.66 E-Eo=  0.01 Re(Z)=0.50 Im(Z)= 0.116560E-8 F =  0.00000 DW=  0.00000 Gm= 0.745666E-7 Gf=  0.00000
+  B=4 Eo= 13.65 E= 13.66 E-Eo=  0.01 Re(Z)=0.50 Im(Z)= 0.116560E-8 F =  0.00000 DW=  0.00000 Gm= 0.745666E-7 Gf=  0.00000
+  B=5 Eo= 15.02 E= 15.02 E-Eo= -0.00 Re(Z)=0.49 Im(Z)= 0.393513E-2 F =  350.347 DW=  350.347 Gm= 0.106484 Gf=  6181.32
+
+ QP [eV] @ K [2] (iku): -0.125000  0.125000 -0.125000
+  B=1 Eo= -8.96 E= -8.91 E-Eo=  0.05 Re(Z)=0.62 Im(Z)=-0.37415 F = 0.67649E-39 DW= 0.67649E-39 Gm=  54.378 Gf=  12.104
+  B=2 Eo=  4.25 E=  4.16 E-Eo= -0.09 Re(Z)=1.01 Im(Z)= 0.15457 F = 0.47480E-37 DW= 0.47480E-37 Gm=  20.528 Gf=  32.064
+  B=3 Eo= 11.86 E= 11.77 E-Eo= -0.09 Re(Z)=1.16 Im(Z)= 0.10367 F = 0.15993E-36 DW= 0.15993E-36 Gm=  85.176 Gf=  7.7277
+  B=4 Eo= 11.86 E= 11.77 E-Eo= -0.09 Re(Z)=1.16 Im(Z)= 0.10367 F = 0.24990E-38 DW= 0.24990E-38 Gm=  85.176 Gf=  7.7277
+  B=5 Eo= 15.42 E= 15.42 E-Eo= -0.00 Re(Z)=1.25 Im(Z)=  -2.1471 F =   0.0000 DW=   0.0000 Gm= 714.5960 Gf=   0.9211
+
+ QP [eV] @ K [3] (iku):  0.250000 -0.250000  0.250000
+  B=1 Eo= -3.94 E= -3.95 E-Eo= -0.00 Re(Z)=0.59 Im(Z)= 0.23596 F = 0.10897E+27 DW= 0.10897E+27 Gm=  5.9978 Gf=  109.74
+  B=2 Eo= -3.71 E= -3.71 E-Eo=  0.00 Re(Z)=0.81 Im(Z)=-0.45949E-01 F = 0.32989E+27 DW= 0.32989E+27 Gm=  6.4461 Gf=  102.11
+  B=3 Eo= 12.36 E= 12.28 E-Eo= -0.08 Re(Z)=0.08 Im(Z)= 0.63808 F = 0.51889E-17 DW= 0.51889E-17 Gm=  4.6198 Gf=  142.48
+  B=4 Eo= 12.36 E= 12.28 E-Eo= -0.08 Re(Z)=0.08 Im(Z)= 0.638082 F =  6650.36 DW=  6650.36 Gm=  4.61983 Gf=  142.475
+  B=5 Eo= 12.43 E= 12.70 E-Eo=  0.27 Re(Z)=0.31 Im(Z)= -1.5671 F = 0.32181E+24 DW= 0.32181E+24 Gm=  96.083 Gf=  6.8505
+
+ QP [eV] @ K [4] (iku):  0.000000  0.250000  0.000000
+  B=1 Eo= -8.37 E= -8.33 E-Eo=  0.05 Re(Z)=0.71 Im(Z)=-0.31845 F = 0.48303E+30 DW= 0.48303E+30 Gm=  41.544 Gf=  15.844
+  B=2 Eo=  8.25 E=  8.18 E-Eo= -0.07 Re(Z)=0.32 Im(Z)= 0.43969 F = 0.50405E+30 DW= 0.50405E+30 Gm=  14.645 Gf=  44.946
+  B=3 Eo=  8.44 E=  8.45 E-Eo=  0.02 Re(Z)=0.91 Im(Z)=-0.26916 F = 0.21161E+34 DW= 0.21161E+34 Gm=  61.800 Gf=  10.651
+  B=4 Eo=  8.44 E=  8.45 E-Eo=  0.02 Re(Z)=0.91 Im(Z)=-0.26916 F = 0.20648E+34 DW= 0.20648E+34 Gm=  61.800 Gf=  10.651
+  B=5 Eo=  9.15 E=  9.11 E-Eo= -0.04 Re(Z)=1.04 Im(Z)=-0.44602E-01 F = 0.33766E+30 DW= 0.33766E+30 Gm=  19.710 Gf=  33.395
+
+ QP [eV] @ K [5] (iku):  0.375000 -0.125000  0.375000
+  B=1 Eo= -4.40 E= -4.28 E-Eo=  0.11 Re(Z)=0.33 Im(Z)=-0.375242 F =  21274.4 DW=  21274.4 Gm=  31.1310 Gf=  21.1433
+  B=2 Eo= -0.01 E=  0.11 E-Eo=  0.13 Re(Z)=0.39 Im(Z)=-0.50566 F = 0.77216E+22 DW= 0.77216E+22 Gm=  33.699 Gf=  19.532
+  B=3 Eo=  4.50 E=  4.74 E-Eo=  0.24 Re(Z)=-.86 Im(Z)= -1.4208 F = 0.28287E+23 DW= 0.28287E+23 Gm= -33.159
+  B=4 Eo=  7.97 E=  8.09 E-Eo=  0.12 Re(Z)=1.50 Im(Z)= -1.9209 F = 0.40196E-17 DW= 0.40196E-17 Gm=  321.90 Gf=  2.0448
+  B=5 Eo=  9.68 E= 10.01 E-Eo=  0.33 Re(Z)=**** Im(Z)= -1.1270 F = 0.36907E-17 DW= 0.36907E-17 Gm= -12.903
+
+ QP [eV] @ K [6] (iku):  0.250000  0.000000  0.250000
+  B=1 Eo= -6.08 E= -6.00 E-Eo=  0.08 Re(Z)=0.52 Im(Z)=-0.38983 F = 0.36907E-17 DW= 0.36907E-17 Gm=  45.873 Gf=  14.348
+  B=2 Eo=  1.98 E=  3.33 E-Eo=  1.35 Re(Z)=**** Im(Z)= -10.5516 F = 0.354798E-5 DW= 0.354798E-5 Gm=  699.367 Gf= 0.941154
+  B=3 Eo=  3.63 E=  3.50 E-Eo= -0.13 Re(Z)=2.20 Im(Z)= -1.0025 F = 0.49979E-38 DW= 0.49979E-38 Gm=  253.86 Gf=  2.5929
+  B=4 Eo= 10.42 E= 10.46 E-Eo=  0.04 Re(Z)=0.82 Im(Z)=-0.84842E-01 F = 0.34986E-37 DW= 0.34986E-37 Gm=  30.471 Gf=  21.602
+  B=5 Eo= 12.45 E= 12.66 E-Eo=  0.21 Re(Z)=-.08 Im(Z)=-0.68961 F = 0.19992E-37 DW= 0.19992E-37 Gm= -5.5763
+
+ QP [eV] @ K [7] (iku):  0.000000 -0.500000  0.000000
+  B=1 Eo= -2.20 E= -2.22 E-Eo= -0.02 Re(Z)=0.75 Im(Z)= 0.51799E-08 F = 0.19775E+34 DW= 0.19775E+34 Gm=-0.17959E-07
+  B=2 Eo= -0.90 E= -0.93 E-Eo= -0.04 Re(Z)=0.74 Im(Z)= 0.402308E-5 F = 0.583873E-5 DW= 0.583873E-5 Gm=-0.112771E-3
+  B=3 Eo=  5.94 E=  5.93 E-Eo= -0.01 Re(Z)=0.57 Im(Z)= 0.25126E-02 F = 0.48813E+27 DW= 0.48813E+27 Gm= 0.34210E-02 Gf= 0.19240E+06
+  B=4 Eo=  6.52 E=  6.51 E-Eo= -0.01 Re(Z)=0.64 Im(Z)=-0.21776E-03 F = 0.38129E-41 DW= 0.38129E-41 Gm= 0.43490E-01 Gf=  15135.
+  B=5 Eo=  6.52 E=  6.51 E-Eo= -0.01 Re(Z)=0.64 Im(Z)=-0.21776E-03 F = 0.78703E-40 DW= 0.78703E-40 Gm= 0.43490E-01 Gf=  15135.
+
+ QP [eV] @ K [8] (iku): -0.250000 -0.500000  0.000000
+  B=1 Eo= -0.12 E=  0.01 E-Eo=  0.13 Re(Z)=**** Im(Z)= 0.17219 F = 0.15274E-42 DW= 0.15274E-42 Gm= -576.36
+  B=2 Eo= -0.12 E=  0.01 E-Eo=  0.13 Re(Z)=**** Im(Z)= 0.17219 F = 0.79967E-37 DW= 0.79967E-37 Gm= -576.36
+  B=3 Eo=  0.83 E=  0.99 E-Eo=  0.15 Re(Z)=1.87 Im(Z)=  -3.1516 F =   0.0000 DW=   0.0000 Gm= 415.7903 Gf=   1.5830
+  B=4 Eo=  2.11 E=  2.11 E-Eo=  0.01 Re(Z)=0.67 Im(Z)=-0.10377 F = 0.37835E-43 DW= 0.37835E-43 Gm=  20.993 Gf=  31.354
+  B=5 Eo= 16.93 E= 14.18 E-Eo= -2.76 Re(Z)=2.25 Im(Z)=  18.0889 F =  0.00000 DW=  0.00000 Gm= -1820.41
+
+
+ [06] Timing Overview
+ ====================
+
+ Clock: global
+      io_ATMPROJ_pwscf :      0.0000s CPU
+          io_KB_abinit :      0.0000s CPU
+            io_DIPOLES :      0.0000s CPU
+            io_COL_CUT :      0.0000s CPU
+                 io_BS :      0.0000s CPU
+                 io_HF :      0.0000s CPU
+        io_Double_Grid :      0.0000s CPU
+                  io_X :      0.0000s CPU ( 4 calls,   0.011 msec avg)
+                 io_WF :      0.0001s CPU
+           io_KB_pwscf :      0.0001s CPU
+               io_GROT :      0.0035s CPU ( 2 calls,   1.737 msec avg)
+              io_QINDX :      0.0051s CPU ( 2 calls,   2.556 msec avg)
+           io_fragment :      0.0054s CPU ( 8 calls,   0.676 msec avg)
+          io_QP_and_GF :      0.0093s CPU ( 3 calls,   3.113 msec avg)
+               io_ELPH :      0.0141s CPU (12 calls,   1.174 msec avg)
+
+ [07] Game Over & Game summary
+ =============================
+
+ 05/17/2022 at 11:12 yambo_ph @ pc-tsn10 [start]
+ 05/17/2022 at 11:12                     [end]
+
+  
+ .-ACKNOWLEDGMENT
+ |
+ | The users of YAMBO have little formal obligations with respect to
+ | the YAMBO group (those specified in the GNU General Public
+ | License, http://www.gnu.org/copyleft/gpl.txt). However, it is
+ | common practice in the scientific literature, to acknowledge the
+ | efforts of people that have made the research possible. In this
+ | spirit, please find below the reference we kindly ask you to use
+ | in order to acknowledge YAMBO
+ |
+ | Many-body perturbation theory calculations using the yambo code
+ | D. Sangalli, A. Ferretti, H. Miranda, C. Attaccalite, I. Marri, E. Cannuccia, P. Melo,
+ | M Marsili, F Paleari, A Marrazzo, G Prandini, P Bonfà, M O Atambo, F Affinito,
+ | M Palummo, A Molina-Sánchez, C Hogan, M Grüning, D Varsano and A Marini.
+ | J. Phys.: Condens. Matter 31, 325902 (2019).
+ |
+ | Yambo: An ab initio tool for excited state calculations
+ | A. Marini, C. Hogan, M. Grüning, D. Varsano
+ | Computer Physics Communications 180, 1392 (2009).
+ |
+  
+ .-Input file  INPUTS/02_QP
+ | gw0                              # [R] GW approximation
+ | dyson                            # [R] Dyson Equation solver
+ | el_ph_corr                       # [R] Electron-Phonon Correlation
+ | SE_Threads=0                     # [OPENMP/GW] Number of threads for self-energy
+ | DysSolver= "n"                   # [GW] Dyson Equation solver ("n","s","g")
+ | % GphBRnge
+ |   1 | 20 |                           # [ELPH] G[W] bands range
+ | %
+ | % ElPhModes
+ |  1 | 3 |                             # [ELPH] Phonon modes included
+ | %
+ | GDamping= 0.050000         eV    # [GW] G[W] damping
+ | RandQpts=0                       # [RIM] Number of random q-points in the BZ
+ | #WRgFsq                        # [ELPH] Dump on file gFsq coefficients
+ | %QPkrange                        # [GW] QP generalized Kpoint/Band indices
+ | 1|8|1|5|
+ | %
+ | %QPerange                        # [GW] QP generalized Kpoint/Energy indices
+ | 1|8| 0.000000|-1.000000|
+ | %

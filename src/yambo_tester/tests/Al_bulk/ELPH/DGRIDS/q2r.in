@@ -1,0 +1,5 @@
+&input 
+ fildyn='Al.dyn', 
+ zasr='simple', 
+ flfrc='Al.fc' 
+/

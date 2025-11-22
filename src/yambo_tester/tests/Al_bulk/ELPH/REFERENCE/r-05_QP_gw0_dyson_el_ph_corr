@@ -1,0 +1,449 @@
+                                                                          
+     __  __   ________   ___ __ __    _______   ______                    
+    /_/\/_/\ /_______/\ /__//_//_/\ /_______/\ /_____/\                   
+    \ \ \ \ \\::: _  \ \\::\| \| \ \\::: _  \ \\:::_ \ \                  
+     \:\_\ \ \\::(_)  \ \\:.      \ \\::(_)  \/_\:\ \ \ \                 
+      \::::_\/ \:: __  \ \\:.\-/\  \ \\::  _  \ \\:\ \ \ \                
+        \::\ \  \:.\ \  \ \\. \  \  \ \\::(_)  \ \\:\_\ \ \               
+         \__\/   \__\/\__\/ \__\/ \__\/ \_______\/ \_____\/               
+                                                                          
+                                                                          
+    Version 5.1.0 Revision 21560 Hash (prev commit) 4bed53410             
+                  Branch is devel-elph-metal                              
+            MPI+OpenMP+SLK+SLEPC+HDF5_MPI_IO Build                        
+                   http://www.yambo-code.org                              
+ 
+ 05/17/2022 at 16:48 yambo_ph @ attacc-portatile
+ ==================================================
+
+ Cores               :  1
+ Threads per core    :  1
+ Threads total       :  1
+ Nodes Computing     :  1
+ Nodes IO            :  1
+
+ Fragmented WFs      : yes
+ CORE databases      : .
+ Additional I/O      : .
+ Communications      : .
+ Input file          : yambo.in
+ Report file         : ./r-05_QP_gw0_dyson_el_ph_corr
+ Verbose log/report  : no
+ Log files           : ./LOG
+
+ Job   string        : 05_QP
+ Alt#1 string        : 03_ypp-serial-devel-elph-metal
+ Alt#2 string        : R1
+
+ Precision           : SINGLE
+  
+ [RD./SAVE//ns.db1]--------------------------------------------------------------
+  Bands                                            :  20
+  K-points                                         :   8
+  G-vectors                                        :   941 [RL space]
+  Components                                       :  125 [wavefunctions]
+  Symmetries                                       :   48 [spatial]
+  Spinor components                                :  1
+  Spin polarizations                               :  1
+  Temperature                                      :  0.025852 [eV]
+  Electrons                                        :  3.000000
+  WF G-vectors                                     :  175
+  Max atoms/species                                :  1
+  No. of atom species                              :  1
+  Magnetic symmetries                              : no
+ - S/N 002104 ---------------------------------------------- v.04.01.05 r.14047 -
+
+ [02] CORE Variables Setup
+ =========================
+
+
+  [02.01] Unit cells
+  ==================
+
+  Cell kind             :  FCC
+  Atoms in the cell     :  Al
+  number of Al atoms    :  1
+
+  List of atomic coordinates    : [cc]
+  Al1       :  0.000000  0.000000  0.000000
+
+  Alat factors          :  3.750000  3.750000  3.750000 [a.u.]
+  Direct lattice volume :  105.4688 [a.u.]
+  Direct lattice vectors:  A[ 1 ]  A[ 2 ]  A[ 3 ]
+   A[ 1 ]: -1.000000  0.000000  1.000000  [iru]
+   A[ 2 ]:  0.000000  1.000000  1.000000  [iru]
+   A[ 3 ]: -1.000000  1.000000  0.000000  [iru]
+
+  Recip. lattice volume :  2.351884 [a.u.]
+  Recip. lattice vectors:  B[ 1 ]  B[ 2 ]  B[ 3 ]
+   B[ 1 ]: -0.500000 -0.500000  0.500000  [iku]
+   B[ 2 ]:  0.500000  0.500000  0.500000  [iku]
+   B[ 3 ]: -0.500000  0.500000 -0.500000  [iku]
+   
+
+  [02.02] Symmetries
+  ==================
+
+  Inversion symmetry    : yes
+  Spatial inversion     : yes
+  Inversion index       :  25
+  K-space Time-reversal : no
+  Magnetic symmetries   : no
+  Group table correct   : yes
+  Symmetries units      :  [cc]
+
+   [S  1]:  1.000000  0.000000  0.000000  0.000000  1.000000  0.000000  0.000000  0.000000  1.000000
+   [S  2]: -1.000000  0.000000  0.000000  0.000000 -1.000000  0.000000  0.000000  0.000000  1.000000
+   [S  3]: -1.000000  0.000000  0.000000  0.000000  1.000000  0.000000  0.000000  0.000000 -1.000000
+   [S  4]:  1.000000  0.000000  0.000000  0.000000 -1.000000  0.000000  0.000000  0.000000 -1.000000
+   [S  5]:  0.000000  1.000000  0.000000  1.000000  0.000000  0.000000  0.000000  0.000000 -1.000000
+   [S  6]:  0.000000 -1.000000  0.000000 -1.000000  0.000000  0.000000  0.000000  0.000000 -1.000000
+   [S  7]:  0.000000 -1.000000  0.000000  1.000000  0.000000  0.000000  0.000000  0.000000  1.000000
+   [S  8]:  0.000000  1.000000  0.000000 -1.000000  0.000000  0.000000  0.000000  0.000000  1.000000
+   [S  9]:  0.000000  0.000000  1.000000  0.000000 -1.000000  0.000000  1.000000  0.000000  0.000000
+   [S 10]:  0.000000  0.000000 -1.000000  0.000000 -1.000000  0.000000 -1.000000  0.000000  0.000000
+   [S 11]:  0.000000  0.000000 -1.000000  0.000000  1.000000  0.000000  1.000000  0.000000  0.000000
+   [S 12]:  0.000000  0.000000  1.000000  0.000000  1.000000  0.000000 -1.000000  0.000000  0.000000
+   [S 13]: -1.000000  0.000000  0.000000  0.000000  0.000000  1.000000  0.000000  1.000000  0.000000
+   [S 14]: -1.000000  0.000000  0.000000  0.000000  0.000000 -1.000000  0.000000 -1.000000  0.000000
+   [S 15]:  1.000000  0.000000  0.000000  0.000000  0.000000 -1.000000  0.000000  1.000000  0.000000
+   [S 16]:  1.000000  0.000000  0.000000  0.000000  0.000000  1.000000  0.000000 -1.000000  0.000000
+   [S 17]:  0.000000  0.000000  1.000000  1.000000  0.000000  0.000000  0.000000  1.000000  0.000000
+   [S 18]:  0.000000  0.000000 -1.000000 -1.000000  0.000000  0.000000  0.000000  1.000000  0.000000
+   [S 19]:  0.000000  0.000000 -1.000000  1.000000  0.000000  0.000000  0.000000 -1.000000  0.000000
+   [S 20]:  0.000000  0.000000  1.000000 -1.000000  0.000000  0.000000  0.000000 -1.000000  0.000000
+   [S 21]:  0.000000  1.000000  0.000000  0.000000  0.000000  1.000000  1.000000  0.000000  0.000000
+   [S 22]:  0.000000 -1.000000  0.000000  0.000000  0.000000 -1.000000  1.000000  0.000000  0.000000
+   [S 23]:  0.000000 -1.000000  0.000000  0.000000  0.000000  1.000000 -1.000000  0.000000  0.000000
+   [S 24]:  0.000000  1.000000  0.000000  0.000000  0.000000 -1.000000 -1.000000  0.000000  0.000000
+   [S 25]: -1.000000  0.000000  0.000000  0.000000 -1.000000  0.000000  0.000000  0.000000 -1.000000
+   [S 26]:  1.000000  0.000000  0.000000  0.000000  1.000000  0.000000  0.000000  0.000000 -1.000000
+   [S 27]:  1.000000  0.000000  0.000000  0.000000 -1.000000  0.000000  0.000000  0.000000  1.000000
+   [S 28]: -1.000000  0.000000  0.000000  0.000000  1.000000  0.000000  0.000000  0.000000  1.000000
+   [S 29]:  0.000000 -1.000000  0.000000 -1.000000  0.000000  0.000000  0.000000  0.000000  1.000000
+   [S 30]:  0.000000  1.000000  0.000000  1.000000  0.000000  0.000000  0.000000  0.000000  1.000000
+   [S 31]:  0.000000  1.000000  0.000000 -1.000000  0.000000  0.000000  0.000000  0.000000 -1.000000
+   [S 32]:  0.000000 -1.000000  0.000000  1.000000  0.000000  0.000000  0.000000  0.000000 -1.000000
+   [S 33]:  0.000000  0.000000 -1.000000  0.000000  1.000000  0.000000 -1.000000  0.000000  0.000000
+   [S 34]:  0.000000  0.000000  1.000000  0.000000  1.000000  0.000000  1.000000  0.000000  0.000000
+   [S 35]:  0.000000  0.000000  1.000000  0.000000 -1.000000  0.000000 -1.000000  0.000000  0.000000
+   [S 36]:  0.000000  0.000000 -1.000000  0.000000 -1.000000  0.000000  1.000000  0.000000  0.000000
+   [S 37]:  1.000000  0.000000  0.000000  0.000000  0.000000 -1.000000  0.000000 -1.000000  0.000000
+   [S 38]:  1.000000  0.000000  0.000000  0.000000  0.000000  1.000000  0.000000  1.000000  0.000000
+   [S 39]: -1.000000  0.000000  0.000000  0.000000  0.000000  1.000000  0.000000 -1.000000  0.000000
+   [S 40]: -1.000000  0.000000  0.000000  0.000000  0.000000 -1.000000  0.000000  1.000000  0.000000
+   [S 41]:  0.000000  0.000000 -1.000000 -1.000000  0.000000  0.000000  0.000000 -1.000000  0.000000
+   [S 42]:  0.000000  0.000000  1.000000  1.000000  0.000000  0.000000  0.000000 -1.000000  0.000000
+   [S 43]:  0.000000  0.000000  1.000000 -1.000000  0.000000  0.000000  0.000000  1.000000  0.000000
+   [S 44]:  0.000000  0.000000 -1.000000  1.000000  0.000000  0.000000  0.000000  1.000000  0.000000
+   [S 45]:  0.000000 -1.000000  0.000000  0.000000  0.000000 -1.000000 -1.000000  0.000000  0.000000
+   [S 46]:  0.000000  1.000000  0.000000  0.000000  0.000000  1.000000 -1.000000  0.000000  0.000000
+   [S 47]:  0.000000  1.000000  0.000000  0.000000  0.000000 -1.000000  1.000000  0.000000  0.000000
+   [S 48]:  0.000000 -1.000000  0.000000  0.000000  0.000000  1.000000  1.000000  0.000000  0.000000
+
+  [02.03] Reciprocal space
+  ========================
+
+  nG shells         :  13
+  nG charge         :  229
+  nG WFs            :  175
+  nC WFs            :  125
+  G-vecs. in first 1 shells:  [ Number ]
+   1
+  ...
+  Shell energy in first 1 shells:  [ mHa ]
+   0.000000
+  ...
+
+  [02.04] K-grid lattice
+  ======================
+
+  Compatible Grid is   : 3D
+  Base K vectors       :  K_min[ 1 ]  K_min[ 2 ]  K_min[ 3 ]
+  K_min[ 1 ] :  0.436644E-8  0.250000     0.436644E-8 [rlu]
+  K_min[ 2 ] : -0.436644E-8 -0.436644E-8  0.250000    [rlu]
+  K_min[ 3 ] :  0.250000     0.436644E-8 -0.436644E-8 [rlu]
+  Grid dimensions      :   4   4   4
+  K lattice UC volume  :  0.036748 [a.u.]
+
+  [02.05] Energies & Occupations
+  ==============================
+
+  [X] === General ===
+  [X] Electronic Temperature                        :  0.100086E-1   116.145    [eV K]
+  [X] Bosonic    Temperature                        :  0.861772E-2   100.004    [eV K]
+  [X] Finite Temperature mode                       : yes
+  [X] El. density                                   :  0.19195E+24 [cm-3]
+  [X] Fermi Level                                   :  7.537690 [eV]
+
+  [X] === Gaps and Widths ===
+  [X] Conduction Band Min                           :  7.537690 [eV]
+  [X] Valence Band Max                              :  7.537690 [eV]
+  [X] Filled Bands                                  :  1
+  [X] Metallic Bands                                :  2  2
+  [X] Empty Bands                                   :   3  20
+   
+  [X] === Metallic Characters ===
+  [X] N of el / N of met el                         :  3.000000  0.947914
+  [X] Average metallic occ.                         :  0.236978
+
+  [WARNING][X] Metallic system
+   
+
+ [03] Transferred momenta grid and indexing
+ ==========================================
+
+ [RD./SAVE//ndb.kindx]-----------------------------------------------------------
+  Fragmentation                                    : no
+  Polarization last K                              :   8
+  QP states                                        :   1   8
+  X grid is uniform                                : yes
+  Grids                                            : X B S
+  BS scattering                                    : yes
+  COLL scattering                                  : no
+  Sigma scattering                                 : yes
+  X scattering                                     : yes
+ - S/N 002104 ---------------------------------------------- v.05.01.00 r.21560 -
+
+ IBZ Q-points :   8
+ BZ  Q-points :   64
+
+ K/Q-points units:
+ rlu = crystal or reduced units; cc = cartesian coordinates; iku = interal k-units
+
+ Q [1]:  0.000000  0.000000  0.000000 [rlu]
+ Q [2]: -0.436644E-8 -0.436644E-8  0.250000    [rlu]
+ Q [3]:  0.873289E-8  0.873289E-8 -0.500000    [rlu]
+ Q [4]:  0.000000  0.250000  0.250000 [rlu]
+ Q [5]: -0.436644E-8  0.250000     0.500000    [rlu]
+ Q [6]:  0.873289E-8  0.250000    -0.250000    [rlu]
+ Q [7]:  0.000000 -0.500000 -0.500000 [rlu]
+ Q [8]:  0.250000 -0.500000 -0.250000 [rlu]
+
+ [04] Dyson equation: Newton solver
+ ==================================
+
+ [Newton] SC iterations : 0
+
+
+ [05] Correlation: Phonon-mediated Self-energy
+ =============================================
+
+ [GW/El-Ph] Bands range       :   1  20
+ [GW/El-Ph] G damping         :  0.050000 [eV]
+  
+ QP @ state[ 1 ] K range:   1   8
+ QP @ state[ 1 ] b range:   1   5
+  
+ GKKP database/model: gkkp
+
+ [WARNING]Wrong serial number for ./SAVE//ndb.elph_gkkp
+ [RD./SAVE//ndb.elph_gkkp]-------------------------------------------------------
+  Brillouin Zone Q/K grids (IBZ/BZ)                :    8   64    8   64
+  Fragmentation                                    : yes
+  [ELPH] Phonon modes                              :  3
+  [ELPH] Q points                                  :   8 [avail]
+  [ELPH] K points                                  :   64
+  [ELPH] El-PH bands                               :  20
+  [ELPH] Using the Q-grid                          : yes
+  [ELPH] Bare interaction                          : no
+ - S/N 005083 ---------------------------------------------- v.05.01.00 r.21392 -
+ [RD./03_ypp-serial-devel-elph-metal//ndb.PH_Double_Grid]------------------------
+  Brillouin Zone Q/K grids (IBZ/BZ)                :    8   64    8   64
+  Fragmentation                                    : yes
+  [FineGd] Brillouin Symmetry  mode                : mixed
+  [FineGd] Fine Grid  BZ mapped mode               : BZ
+  [FineGd] Fine Grid IBZ mapped mode               : IBZ
+  [FineGd] Bands                                   :  3
+  [FineGd] Number of pts (Energy grid)             :  16
+  [FineGd] Number of pts (fine+coarse, IBZ-map)    :  13
+  [FineGd] Number of pts (fine+coarse, BZ-map)     :  180
+ - S/N 002104 ---------------------------------------------- v.05.01.00 r.21560 -
+  [Ekpq_mode] E(k+q) energy mode                   : interp
+ Using PH-double-grid
+ E(k+q) calculated using a smooth Fourier interpolation
+ [INTERPOLATION] Number of shells:   49
+
+ [WARNING]Fermi Energy is calculated on the Double-Grid E(q_fine)
+ Fermi Energy shift due to the Double-Grid :-0.004475 eV
+
+ [Ph] Debye energy         :  0.039403  9.531155 [ev/ThZ]
+
+ [06] QP properties and I/O
+ ==========================
+
+ Legend (energies in eV)
+ - B  : Band       - Eo  : bare energy
+ - E  : QP energy  - Z   : Renormalization factor
+ - So : Sc(Eo)     - S   : Sc(E)
+ - Gm : Width [meV]- Gf  : Width [fs]
+ - F  : Fan [eV]  - DW  : DW [eV]
+ - dSp: Sc derivative precision
+
+
+ QP [eV] @ K [1] (iku):  0.000000  0.000000  0.000000
+  B=1 Eo=-10.72 E=-10.76 E-Eo= -0.04 Re(Z)=1.00 Im(Z)= 0.41214E-14 So=-0.36956E-01 F =-0.44921E-01 DW= 0.79646E-02 Gm=-0.87569E-13
+  B=2 Eo= 13.65 E= 13.62 E-Eo= -0.02 Re(Z)=0.53 Im(Z)= 0.306732 So=-0.330984E-1 F =-0.101895 DW= 0.687965E-1 Gm=  1.21250 Gf=  542.853
+  B=3 Eo= 13.65 E= 13.62 E-Eo= -0.02 Re(Z)=0.53 Im(Z)= 0.306732 So=-0.330984E-1 F =-0.101895 DW= 0.687965E-1 Gm=  1.21250 Gf=  542.853
+  B=4 Eo= 13.65 E= 13.62 E-Eo= -0.02 Re(Z)=0.53 Im(Z)= 0.306732 So=-0.330984E-1 F =-0.101895 DW= 0.687965E-1 Gm=  1.21250 Gf=  542.853
+  B=5 Eo= 15.02 E= 15.05 E-Eo=  0.03 Re(Z)=0.90 Im(Z)= 0.396649E-1 So= 0.331812E-1 F =-0.616717E-1 DW= 0.948529E-1 Gm=  2.04830 Gf=  321.345
+
+ QP [eV] @ K [2] (iku): -0.125000  0.125000 -0.125000
+  B=1 Eo= -8.96 E= -8.97 E-Eo= -0.02 Re(Z)=0.90 Im(Z)=-0.174522 So=-0.229597E-1 F =-0.379995E-1 DW= 0.150398E-1 Gm=  29.8847 Gf=  22.0250
+  B=2 Eo=  4.25 E=  4.21 E-Eo= -0.05 Re(Z)=0.93 Im(Z)= 0.916788E-1 So=-0.481691E-1 F =-0.734795E-1 DW= 0.253104E-1 Gm=  4.15174 Gf=  158.539
+  B=3 Eo= 11.86 E= 11.85 E-Eo= -0.01 Re(Z)=0.91 Im(Z)= 0.351834E-1 So=-0.102025E-1 F =-0.901899E-1 DW= 0.799874E-1 Gm=  26.2702 Gf=  25.0555
+  B=4 Eo= 11.86 E= 11.85 E-Eo= -0.01 Re(Z)=0.91 Im(Z)= 0.351834E-1 So=-0.102025E-1 F =-0.901899E-1 DW= 0.799874E-1 Gm=  26.2702 Gf=  25.0555
+  B=5 Eo= 15.42 E= 15.21 E-Eo= -0.21 Re(Z)=0.89 Im(Z)= 0.509522 So=-0.208301 F =-0.187520 DW=-0.207810E-1 Gm= -61.4916
+
+ QP [eV] @ K [3] (iku):  0.250000 -0.250000  0.250000
+  B=1 Eo= -3.94 E= -3.95 E-Eo= -0.01 Re(Z)=0.82 Im(Z)= 0.150116 So=-0.128711E-1 F =-0.265909E-1 DW= 0.137198E-1 Gm=  1.87107 Gf=  351.784
+  B=2 Eo= -3.71 E= -3.72 E-Eo= -0.01 Re(Z)=0.91 Im(Z)= 0.343902E-2 So=-0.802101E-2 F =-0.283702E-1 DW= 0.203492E-1 Gm=  1.27941 Gf=  514.465
+  B=3 Eo= 12.36 E= 12.30 E-Eo= -0.07 Re(Z)=0.37 Im(Z)= 0.783431 So=-0.577180E-2 F =-0.103771 DW= 0.979993E-1 Gm=  26.5988 Gf=  24.7459
+  B=4 Eo= 12.36 E= 12.30 E-Eo= -0.07 Re(Z)=0.37 Im(Z)= 0.783431 So=-0.577180E-2 F =-0.103771 DW= 0.979993E-1 Gm=  26.5988 Gf=  24.7459
+  B=5 Eo= 12.43 E= 12.72 E-Eo=  0.30 Re(Z)=0.88 Im(Z)= -2.32188 So= 0.193443E-1 F =-0.443928E-1 DW= 0.637371E-1 Gm=  60.6200 Gf=  10.8580
+
+ QP [eV] @ K [4] (iku):  0.000000  0.250000  0.000000
+  B=1 Eo= -8.37 E= -8.35 E-Eo=  0.03 Re(Z)=0.77 Im(Z)=-0.278853 So= 0.179660E-1 F =-0.115293E-2 DW= 0.191190E-1 Gm=  38.0450 Gf=  17.3009
+  B=2 Eo=  8.25 E=  8.29 E-Eo=  0.03 Re(Z)=1.24 Im(Z)=-0.707465E-1 So= 0.240712E-1 F = 0.356219E-2 DW= 0.205090E-1 Gm=  49.2412 Gf=  13.3671
+  B=3 Eo=  8.44 E=  8.45 E-Eo=  0.02 Re(Z)=1.30 Im(Z)=-0.103728 So= 0.121497E-1 F =-0.553154E-1 DW= 0.674651E-1 Gm=  30.3643 Gf=  21.6771
+  B=4 Eo=  8.44 E=  8.45 E-Eo=  0.02 Re(Z)=1.30 Im(Z)=-0.103728 So= 0.121497E-1 F =-0.553154E-1 DW= 0.674651E-1 Gm=  30.3643 Gf=  21.6771
+  B=5 Eo=  9.15 E=  9.12 E-Eo= -0.04 Re(Z)=0.94 Im(Z)=-0.562585E-2 So=-0.396127E-1 F =-0.727634E-1 DW= 0.331507E-1 Gm=  3.07665 Gf=  213.938
+
+ QP [eV] @ K [5] (iku):  0.375000 -0.125000  0.375000
+  B=1 Eo= -4.40 E= -4.31 E-Eo=  0.09 Re(Z)=0.52 Im(Z)=-0.443576 So= 0.535961E-1 F = 0.297353E-1 DW= 0.238608E-1 Gm=  47.9574 Gf=  13.7249
+  B=2 Eo= -0.01 E=  0.08 E-Eo=  0.09 Re(Z)=0.65 Im(Z)=-0.515223 So= 0.478770E-1 F = 0.219025E-1 DW= 0.259744E-1 Gm=  50.1175 Gf=  13.1334
+  B=3 Eo=  4.50 E=  4.54 E-Eo=  0.04 Re(Z)=1.36 Im(Z)=-0.880644 So=-0.162339E-1 F =-0.476389E-1 DW= 0.314050E-1 Gm=  110.255 Gf=  5.96993
+  B=4 Eo=  7.97 E=  7.92 E-Eo= -0.05 Re(Z)=2.12 Im(Z)=-0.358223 So=-0.340812E-1 F =-0.110238 DW= 0.761568E-1 Gm=  123.608 Gf=  5.32500
+  B=5 Eo=  9.68 E=  9.45 E-Eo= -0.23 Re(Z)=4.38 Im(Z)= -1.56074 So=-0.850332E-1 F =-0.112451 DW= 0.274174E-1 Gm=  519.744 Gf=  1.26642
+
+ QP [eV] @ K [6] (iku):  0.250000  0.000000  0.250000
+  B=1 Eo= -6.08 E= -6.07 E-Eo=  0.00 Re(Z)=0.85 Im(Z)=-0.145436 So=-0.337384E-2 F =-0.251112E-1 DW= 0.217373E-1 Gm=  42.2620 Gf=  15.5745
+  B=2 Eo=  1.98 E=  2.11 E-Eo=  0.13 Re(Z)=1.62 Im(Z)= -1.86564 So=-0.355116E-1 F =-0.635942E-1 DW= 0.280826E-1 Gm=  225.411 Gf=  2.92005
+  B=3 Eo=  3.63 E=  3.52 E-Eo= -0.11 Re(Z)=1.45 Im(Z)=-0.341875E-2 So=-0.727432E-1 F =-0.103563 DW= 0.308199E-1 Gm=  42.5723 Gf=  15.4611
+  B=4 Eo= 10.42 E= 10.47 E-Eo=  0.06 Re(Z)=1.13 Im(Z)= -0.15323 So=  0.04549 F = -0.03505 DW=  0.08054 Gm= 23.06060 Gf= 28.54270
+  B=5 Eo= 12.45 E= 12.64 E-Eo=  0.19 Re(Z)=0.23 Im(Z)= -1.13072 So= 0.536198E-2 F =-0.171539E-1 DW= 0.225159E-1 Gm=  31.7145 Gf=  20.7543
+
+ QP [eV] @ K [7] (iku):  0.000000 -0.500000  0.000000
+  B=1 Eo= -2.20 E= -2.23 E-Eo= -0.03 Re(Z)=0.98 Im(Z)= 0.423701E-7 So=-0.266225E-1 F =-0.402609E-1 DW= 0.136384E-1 Gm=-0.453505E-6
+  B=2 Eo= -0.90 E= -0.92 E-Eo= -0.02 Re(Z)=0.89 Im(Z)=-0.105747 So=-0.244824E-1 F =-0.466215E-1 DW= 0.221391E-1 Gm=  17.2304 Gf=  38.2006
+  B=3 Eo=  5.94 E=  5.91 E-Eo= -0.03 Re(Z)=0.96 Im(Z)= 0.109052E-3 So=-0.307817E-1 F =-0.484587E-1 DW= 0.176770E-1 Gm=-0.174495E-3
+  B=4 Eo=  6.52 E=  6.50 E-Eo= -0.02 Re(Z)=0.95 Im(Z)= 0.008570 So=-0.022887 F =-0.053475 DW= 0.030588 Gm=-0.049911
+  B=5 Eo=  6.52 E=  6.50 E-Eo= -0.02 Re(Z)=0.95 Im(Z)= 0.008570 So=-0.022887 F =-0.053475 DW= 0.030588 Gm=-0.049911
+
+ QP [eV] @ K [8] (iku): -0.250000 -0.500000  0.000000
+  B=1 Eo= -0.12 E= -0.20 E-Eo= -0.08 Re(Z)=-.87 Im(Z)=  1.32373 So=-0.106351 F =-0.131171 DW= 0.248199E-1 Gm= -256.017
+  B=2 Eo= -0.12 E= -0.20 E-Eo= -0.08 Re(Z)=-.87 Im(Z)=  1.32373 So=-0.106351 F =-0.131171 DW= 0.248199E-1 Gm= -256.017
+  B=3 Eo=  0.83 E=  0.82 E-Eo= -0.02 Re(Z)=1.16 Im(Z)=-0.103951 So=-0.162071E-1 F =-0.266661E-1 DW= 0.104590E-1 Gm=  24.9270 Gf=  26.4056
+  B=4 Eo=  2.11 E=  2.10 E-Eo= -0.01 Re(Z)=0.92 Im(Z)=-0.103641 So=-0.778694E-2 F =-0.714561E-1 DW= 0.636691E-1 Gm=  15.0506 Gf=  43.7332
+  B=5 Eo= 16.93 E= 16.77 E-Eo= -0.16 Re(Z)=0.88 Im(Z)=  1.12510 So= -0.08503 F = -0.16093 DW=  0.07589 Gm=-25.93614
+
+ [WR./05_QP//ndb.QP]-------------------------------------------------------------
+  Lattice constants                                :  3.750000  3.750000  3.750000
+  Coulomb cutoff potential                         : none
+  Electronic Temperature                           :  116.2451 [K]
+  Bosonic    Temperature                           :  100.0044 [K]
+  Green`s function   energies                      : Slater exchange(X)+Perdew & Zunger(C)
+  wavefunctions                                    : Slater exchange(X)+Perdew & Zunger(C)
+  QP tot states                                    :   40
+  GWo SC iterations                                : 0
+  GW  SC iterations                                : 0
+  GW solver                                        : Newton
+  GW approximation                                 : Fan + DW
+  [ph] dS/dw steps                                 :  2
+  [ph] dS/dw step                                  :  0.100000 ev
+  [ph] Sc/G damping                                :  0.050000 ev
+  El-Ph correlation                                : yes
+  El-Ph Sc. G bands                                :   1  20
+  El-Ph phonon branches                            :  1  3
+  El-Ph momenta used                               :   8
+  Energy treshold                                  :  0.100000E-5 FAN
+  Energy treshold                                  :  0.100000E-5 DW
+                                                   
+  QP @ state[ 1 ] K range                          :   1   8
+  QP @ state[ 1 ] b range                          :   1   5
+  GF energies kind                                 : Slater exchange(X)+Perdew & Zunger(C)
+  GF WF`s kind                                     : Slater exchange(X)+Perdew & Zunger(C)
+                                                   
+  [ELPH] Phonon modes                              :  3
+  [ELPH] Q points                                  :   8 [avail]
+  [ELPH] K points                                  :   64
+  [ELPH] El-PH bands                               :  20
+  [ELPH] Using the Q-grid                          : yes
+  [ELPH] Bare interaction                          : no
+  PH double-grid                                   : yes
+ - S/N 002104 ---------------------------------------------- v.05.01.00 r.21560 -
+
+ [07] Timing Overview
+ ====================
+
+ Clock: global
+             io_ATMPROJ_pwscf :      0.0000s CPU
+                 io_KB_abinit :      0.0000s CPU
+                   io_DIPOLES :      0.0000s CPU
+      IO_and_Messaging_switch :      0.0000s CPU ( 3 calls,   0.008 msec avg)
+                   io_COL_CUT :      0.0000s CPU
+                        io_HF :      0.0000s CPU
+                         io_X :      0.0001s CPU ( 4 calls,   0.023 msec avg)
+                  io_KB_pwscf :      0.0001s CPU
+               INTERPOLATE bz :      0.0001s CPU (65 calls,   0.002 msec avg)
+                        io_WF :      0.0015s CPU
+                      io_GROT :      0.0030s CPU ( 2 calls,   1.525 msec avg)
+                     io_QINDX :      0.0036s CPU ( 2 calls,   1.783 msec avg)
+               io_Double_Grid :      0.0038s CPU ( 2 calls,   1.895 msec avg)
+                  io_fragment :      0.0084s CPU (16 calls,   0.527 msec avg)
+                 io_QP_and_GF :      0.0094s CPU
+                      io_ELPH :      0.0241s CPU (21 calls,   1.146 msec avg)
+          INTERPOLATE Fourier :      0.6152s CPU (66 calls,   9.321 msec avg)
+                      GW(e-p) :      0.7847s CPU
+
+ [08] Game Over & Game summary
+ =============================
+
+ 05/17/2022 at 16:48 yambo_ph @ attacc-portatile [start]
+ 05/17/2022 at 16:48                             [end]
+
+  
+ .-ACKNOWLEDGMENT
+ |
+ | The users of YAMBO have little formal obligations with respect to
+ | the YAMBO group (those specified in the GNU General Public
+ | License, http://www.gnu.org/copyleft/gpl.txt). However, it is
+ | common practice in the scientific literature, to acknowledge the
+ | efforts of people that have made the research possible. In this
+ | spirit, please find below the reference we kindly ask you to use
+ | in order to acknowledge YAMBO
+ |
+ | Many-body perturbation theory calculations using the yambo code
+ | D. Sangalli, A. Ferretti, H. Miranda, C. Attaccalite, I. Marri, E. Cannuccia, P. Melo,
+ | M Marsili, F Paleari, A Marrazzo, G Prandini, P Bonfà, M O Atambo, F Affinito,
+ | M Palummo, A Molina-Sánchez, C Hogan, M Grüning, D Varsano and A Marini.
+ | J. Phys.: Condens. Matter 31, 325902 (2019).
+ |
+ | Yambo: An ab initio tool for excited state calculations
+ | A. Marini, C. Hogan, M. Grüning, D. Varsano
+ | Computer Physics Communications 180, 1392 (2009).
+ |
+  
+ .-Input file  yambo.in
+ | gw0                              # [R] GW approximation
+ | dyson                            # [R] Dyson Equation solver
+ | el_ph_corr                       # [R] Electron-Phonon Correlation
+ | ElecTemp= 0.010017         eV    # Electronic Temperature
+ | BoseTemp= 100.0000         Kn    # Bosonic Temperature
+ | SE_Threads= 1                    # [OPENMP/GW] Number of threads for self-energy
+ | DysSolver= "n"                   # [GW] Dyson Equation solver ("n","s","g","q")
+ | % GphBRnge
+ |   1 | 20 |                           # [ELPH] G[W] bands range
+ | %
+ | % ElPhModes
+ |  1 | 3 |                             # [ELPH] Phonon modes included
+ | %
+ | GDamping= 0.050000         eV    # [GW] G[W] damping
+ | RandQpts=0                       # [RIM] Number of random q-points in the BZ
+ | #WRgFsq                        # [ELPH] Dump on file gFsq coefficients
+ | %QPkrange                        # [GW] QP generalized Kpoint/Band indices
+ | 1|8|1|5|
+ | %
+ | %QPerange                        # [GW] QP generalized Kpoint/Energy indices
+ | 1|8| 0.000000|-1.000000|
+ | %

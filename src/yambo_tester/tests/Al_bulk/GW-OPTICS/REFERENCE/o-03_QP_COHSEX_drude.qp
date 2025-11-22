@@ -1,0 +1,77 @@
+#                                                           
+#                                                           
+# Y88b    /   e           e    e      888~~\    ,88~-_      
+#  Y88b  /   d8b         d8b  d8b     888   |  d888   \     
+#   Y88b/   /Y88b       d888bdY88b    888 _/  88888    |    
+#    Y8Y   /  Y88b     / Y88Y Y888b   888  \  88888    |    
+#     Y   /____Y88b   /   YY   Y888b  888   |  Y888   /     
+#    /   /      Y88b /          Y888b 888__/    `88_-~      
+#                                                           
+#                                                           
+#       Version 4.3.0 Revision 15169 Hash 3ae439d           
+#                     MPI+SLK Build                         
+#               http://www.yambo-code.org                   
+#
+# GW [Newton Solver]
+#
+#  == COHSEX GW ==
+#  GW SC iterations       :0
+#  X G`s            [used]: 27
+#  X G`s            [disk]: 27
+#  X bands                :  1  20
+#  X poles           [o/o]: 100.0000
+#  X e/h E range      [ev]:-1.000000 -1.000000
+#  X xc-Kernel            : none
+#  X BZ energy Double Grid: no
+#  X BZ Double Grid points:0
+#  Sc bands terminator    : no
+#  Sx RL components       : 229
+#  QP @ K 001 - 008 : b 002 - 003
+#
+#    K-point      Band         Eo           E-Eo         Sc|Eo
+#
+     1.00000      2.00000     13.66062     -1.69509     -8.67904
+     1.00000      3.00000     13.66062     -1.70755     -8.69149
+    2.000000     2.000000     4.266360    -2.029498    -6.697824
+     2.00000      3.00000     11.87399     -1.77788     -8.45754
+    3.000000     2.000000    -3.701095    -2.252254    -0.222536
+     3.00000      3.00000     12.37751     -1.76242     -8.50515
+    4.000000     2.000000     8.266138    -1.937912    -7.591772
+    4.000000     3.000000     8.449463    -1.850415    -7.782762
+    5.000        2.000       -.4671E-3    -2.149       -2.595   
+    5.000000     3.000000     4.508605    -2.008893    -6.778622
+    6.000000     2.000000     1.997152    -2.083326    -5.522512
+    6.000000     3.000000     3.638760    -2.005907    -6.641008
+    7.000000     2.000000    -0.882903    -2.117053    -2.257303
+    7.000000     3.000000     5.954773    -1.990073    -6.736866
+    8.000000     2.000000    -0.102398    -2.151866    -1.554652
+    8.000000     3.000000     0.845618    -2.066992    -5.644874
+# 
+# 07/24/2018 at 07:02 YAMBO @ NewLaptop [start]
+# 07/24/2018 at 07:02                   [end]
+#
+# .-Input file : yambo.in
+# | em1s                           # [R Xs] Static Inverse Dielectric Matrix
+# | HF_and_locXC                   # [R XX] Hartree-Fock Self-energy and Vxc
+# | gw0                            # [R GW] GoWo Quasiparticle energy levels
+# | cohsex                         # [R Xp] COlumb Hole Screened EXchange
+# | ElecTemp=0.3499E-3     eV      # Electronic Temperature
+# | BoseTemp=0.1000E-3     eV      # Bosonic Temperature
+# | FFTGvecs= 229          RL      # [FFT] Plane-waves
+# | EXXRLvcs= 229          RL      # [XX] Exchange RL components
+# | Chimod= "hartree"              # [X] IP/Hartree/ALDA/LRC/BSfxc
+# | % BndsRnXs
+# |   1 | 20 |                     # [Xs] Polarization function bands
+# | %
+# | NGsBlkXs= 27           RL      # [Xs] Response block size
+# | GrFnTpXs= "R"                  # [Xs] Green`s function (T)ordered,(R)etarded,(r)senant,(a)ntiresonant [T, R, r, Ta, Ra]
+# | % DmRngeXs
+# | 0.1000E-2 |0.1000E-2 | eV      # [Xs] Damping range
+# | %
+# | % LongDrXs
+# | 0.1000E-4 | 0.000    | 0.000    |        # [Xs] [cc] Electric Field
+# | %
+# | DrudeWXs= (  0.10000 ,  0.10000 )  eV  # [Xs] Drude plasmon
+# | %QPkrange                    # [GW] QP generalized Kpoint/Band indices
+# |   1|  8|  2|  3|
+# | %

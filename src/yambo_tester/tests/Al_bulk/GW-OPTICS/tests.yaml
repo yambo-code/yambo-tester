@@ -1,0 +1,64 @@
+init:
+    exe: yambo
+    options:
+    input: INPUTS/01_init
+    output: 01_init
+    reference:
+        o-01_init.ndb.gops: [SAVE/ndb.gops, ng_in_shell, E_of_shell]
+        o-01_init.ndb.kindx: [SAVE/ndb.kindx, Qindx, Sindx]
+        r-01_init_setup:
+
+lifetimes:
+    exe: yambo
+    options:
+    input: INPUTS/02_Lifetimes
+    output: 02_Lifetimes
+    reference:
+        o-02_Lifetimes.qp: o-02_Lifetimes.qp
+        r-02_Lifetimes_life:
+                             
+qp_cohsex:                  
+    exe: yambo
+    options:
+    input: INPUTS/03_QP_COHSEX
+    output: 03_QP_COHSEX
+    reference:
+        o-03_QP_COHSEX.ndb.em1s_fragment_1: [03_QP_COHSEX/ndb.em1s_fragment_1, X_Q_1]
+        o-03_QP_COHSEX.ndb.HF_and_locXC: [03_QP_COHSEX/ndb.HF_and_locXC, Sx, Vxc]
+        o-03_QP_COHSEX.ndb.QP: [03_QP_COHSEX/ndb.QP, QP_E]
+        o-03_QP_COHSEX.qp: o-03_QP_COHSEX.qp
+        r-03_QP_COHSEX_em1s_HF_and_locXC_gw0_cohsex:
+
+qp_cohsex_drude:
+    exe: yambo
+    options:
+    input: INPUTS/03_QP_COHSEX_drude
+    output: 03_QP_COHSEX_drude
+    reference:
+        o-03_QP_COHSEX_drude.ndb.em1s_fragment_1: [03_QP_COHSEX_drude/ndb.em1s_fragment_1, X_Q_1]
+        o-03_QP_COHSEX_drude.ndb.HF_and_locXC: [03_QP_COHSEX_drude/ndb.HF_and_locXC, Sx, Vxc]
+        o-03_QP_COHSEX_drude.ndb.QP: [03_QP_COHSEX_drude/ndb.QP, QP_E]
+        o-03_QP_COHSEX_drude.qp: o-03_QP_COHSEX_drude.qp
+        r-03_QP_COHSEX_drude_em1s_HF_and_locXC_gw0_cohsex:
+
+rpa:
+    exe: yambo
+    options:
+    input: INPUTS/05_RPA
+    output: 05_RPA
+    reference:
+        o-05_RPA.eel_q1_inv_rpa_dyson: o-05_RPA.eel_q1_inv_rpa_dyson
+        o-05_RPA.eel_q2_inv_rpa_dyson: o-05_RPA.eel_q2_inv_rpa_dyson
+        o-05_RPA.eps_q1_inv_rpa_dyson: o-05_RPA.eps_q1_inv_rpa_dyson
+        o-05_RPA.eps_q2_inv_rpa_dyson: o-05_RPA.eps_q2_inv_rpa_dyson
+        r-05_RPA_optics_chi:
+
+rpa_drude:
+    exe: yambo
+    options:
+    input: INPUTS/05_RPA_drude
+    output: 05_RPA_drude
+    reference:
+        o-05_RPA_drude.eel_q1_inv_rpa_dyson: o-05_RPA_drude.eel_q1_inv_rpa_dyson
+        o-05_RPA_drude.eps_q1_inv_rpa_dyson: o-05_RPA_drude.eps_q1_inv_rpa_dyson
+        r-05_RPA_drude_optics_chi:

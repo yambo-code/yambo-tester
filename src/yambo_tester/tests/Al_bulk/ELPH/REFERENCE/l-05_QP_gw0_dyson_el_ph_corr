@@ -1,0 +1,38 @@
+
+
+ ___ __  _____  __ __  _____   _____
+|   Y  ||  _  ||  Y  ||  _  \ |  _  |
+|   |  ||. |  ||.    ||. |  / |. |  |
+ \_  _/ |. _  ||.\_/ ||. _  \ |. |  |
+  |: |  |: |  ||: |  ||: |   \|: |  |
+  |::|  |:.|:.||:.|:.||::.   /|::.  |
+  `--"  `-- --"`-- --"`-----" `-----"
+
+
+ <---> [01] MPI/OPENMP structure, Files & I/O Directories
+ <---> [02] CORE Variables Setup
+ <---> [02.01] Unit cells
+ <---> [02.02] Symmetries
+ <---> [02.03] Reciprocal space
+ <---> [02.04] K-grid lattice
+ <---> Grid dimensions      :   4   4   4
+ <---> [02.05] Energies & Occupations
+ <---> [WARNING][X] Metallic system
+ <---> [03] Transferred momenta grid and indexing
+ <---> [04] Dyson equation: Newton solver
+ <---> [05] Correlation: Phonon-mediated Self-energy
+ <---> GKKP database/model: gkkp
+ <---> [WARNING]Wrong serial number for ./SAVE//ndb.elph_gkkp
+ <---> Using PH-double-grid
+ <---> E(k+q) calculated using a smooth Fourier interpolation
+ <---> [INTERPOLATION] Number of shells:   49
+ <---> [INTERPOLATION@E(k+q)] Errors: Max, Avg, Avg_rel =   1.19209290E-06  1.28670948E-07  5.18378897E-07
+ <---> [WARNING]Fermi Energy is calculated on the Double-Grid E(q_fine)
+ <---> Fermi Energy shift due to the Double-Grid :-0.004475 eV
+ <---> El-Ph Sc [coeff] |                                        | [000%] --(E) --(X)
+ <---> El-Ph Sc [coeff] |########################################| [100%] --(E) --(X)
+ <---> El-Ph Sc   [sum] |                                        | [000%] --(E) --(X)
+ <---> El-Ph Sc   [sum] |########################################| [100%] --(E) --(X)
+ <---> [06] QP properties and I/O
+ <---> [07] Timing Overview
+ <---> [08] Game Over & Game summary

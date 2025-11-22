@@ -1,0 +1,121 @@
+
+
+
+_|      _|   _|_|   _|      _|  _|_|_|     _|_|
+  _|  _|   _|    _| _|_|  _|_| _|    _| _|    _|
+    _|     _|_|_|_| _|  _|  _| _|_|_|   _|    _|
+    _|     _|    _| _|      _| _|    _| _|    _|
+    _|     _|    _| _|      _| _|_|_|     _|_|
+
+
+
+ <---> [01] CPU structure, Files & I/O Directories
+ <---> [02] CORE Variables Setup
+ <---> [02.01] Unit cells
+ <---> [02.02] Symmetries
+ <---> [02.03] RL shells
+ <---> [02.04] K-grid lattice
+ <---> [02.05] Energies [ev] & Occupations
+ <---> [WARNING][X] Metallic system
+ <---> [03] Transferred momenta grid
+ <---> [04] Static Dielectric Matrix
+ <---> [LA] SERIAL linear algebra
+ <---> [DIP] Checking dipoles header
+ <---> [x,Vnl] computed using 4 projectors
+ <---> [WF] Performing Wave-Functions I/O from ./SAVE
+ <---> Dipoles: P and iR (T): |                                        | [000%] --(E) --(X)
+ <---> Dipoles: P and iR (T): |########################################| [100%] --(E) --(X)
+ <---> [DIP] Writing dipoles header
+ <---> [X/K] Drude contribution @[ev]:  0.10000   0.10000
+ <---> [WF] Performing Wave-Functions I/O from ./SAVE
+ <---> [FFT-X] Mesh size:  9   9   9
+ <---> [X-CG] R(p) Tot o/o(of R)  :  160  1893   100
+ <---> [X] Upper matrix triangle filled
+ <---> Xo@q[1] |                                        | [000%] --(E) --(X)
+ <---> Xo@q[1] |########################################| [100%] --(E) --(X)
+ <---> X@q[1] |                                        | [000%] --(E) --(X)
+ <---> X@q[1] |########################################| [100%] --(E) --(X)
+ <---> [X-CG] R(p) Tot o/o(of R)  :  399  1894   100
+ <---> Xo@q[2] |                                        | [000%] --(E) --(X)
+ <---> Xo@q[2] |########################################| [100%] --(E) --(X)
+ <---> X@q[2] |                                        | [000%] --(E) --(X)
+ <---> X@q[2] |########################################| [100%] --(E) --(X)
+ <---> [X-CG] R(p) Tot o/o(of R)  :  247  1900   100
+ <---> Xo@q[3] |                                        | [000%] --(E) --(X)
+ <---> Xo@q[3] |########################################| [100%] --(E) --(X)
+ <---> X@q[3] |                                        | [000%] --(E) --(X)
+ <---> X@q[3] |########################################| [100%] --(E) --(X)
+ <---> [X-CG] R(p) Tot o/o(of R)  :  322  1902   100
+ <---> Xo@q[4] |                                        | [000%] --(E) --(X)
+ <---> Xo@q[4] |########################################| [100%] --(E) --(X)
+ <---> X@q[4] |                                        | [000%] --(E) --(X)
+ <---> X@q[4] |########################################| [100%] --(E) --(X)
+ <---> [X-CG] R(p) Tot o/o(of R)  :  479  1897   100
+ <---> Xo@q[5] |                                        | [000%] --(E) --(X)
+ <---> Xo@q[5] |########################################| [100%] --(E) --(X)
+ <---> X@q[5] |                                        | [000%] --(E) --(X)
+ <---> X@q[5] |########################################| [100%] --(E) --(X)
+ <---> [X-CG] R(p) Tot o/o(of R)  :  336  1900   100
+ <---> Xo@q[6] |                                        | [000%] --(E) --(X)
+ <---> Xo@q[6] |########################################| [100%] --(E) --(X)
+ <---> X@q[6] |                                        | [000%] --(E) --(X)
+ <---> X@q[6] |########################################| [100%] --(E) --(X)
+ <---> [X-CG] R(p) Tot o/o(of R)  :  245  1898   100
+ <---> Xo@q[7] |                                        | [000%] --(E) --(X)
+ <---> Xo@q[7] |########################################| [100%] --(E) --(X)
+ <---> X@q[7] |                                        | [000%] --(E) --(X)
+ <---> X@q[7] |########################################| [100%] --(E) --(X)
+ <---> [X-CG] R(p) Tot o/o(of R)  :  308  1904   100
+ <---> Xo@q[8] |                                        | [000%] --(E) --(X)
+ <---> Xo@q[8] |########################################| [100%] --(E) --(X)
+ <---> X@q[8] |                                        | [000%] --(E) --(X)
+ <---> X@q[8] |########################################| [100%] --(E) --(X)
+ <---> [MEMORY]TOTAL not deallocated :  144.3840Mb
+ <---> [05] Bare local and non-local Exchange-Correlation
+ <---> [WF] Performing Wave-Functions I/O from ./SAVE
+ <---> [FFT-HF/Rho] Mesh size: 14  14  14
+ <---> EXS |                                        | [000%] --(E) --(X)
+ <---> EXS |########################################| [100%] --(E) --(X)
+ <---> [xc] Functional Slater exchange(X)+Perdew & Zunger(C)
+ <---> [xc] LIBXC used to calculate xc functional
+ <---> [05.01] HF occupations report
+ <---> [WARNING][HF] Metallic system
+ <---> [MEMORY]TOTAL not deallocated :  155.6480Mb
+ <---> [06] Dyson equation: Newton solver
+ <---> [06.01] G0W0 (COHSEX)
+ <---> [WF] Performing Wave-Functions I/O from ./SAVE
+ <---> [FFT-GW] Mesh size: 14  14  14
+ <---> G0W0 (COHSEX) |                                        | [000%] --(E) --(X)
+ <---> G0W0 (COHSEX) |########################################| [100%] --(E) --(X)
+ <---> [06.02] QP properties and I/O
+ <---> [MEMORY]TOTAL not deallocated :  152.5760Mb
+ <---> [07] Timing Overview
+ <---> [TIMING]                              io_WF :     0.00s CPU (      41 calls,   0.000 s avg)
+ <---> [TIMING]                            io_GROT :     0.00s CPU (       2 calls,   0.000 s avg)
+ <---> [TIMING]                           io_QINDX :     0.00s CPU (       2 calls,   0.000 s avg)
+ <---> [TIMING]                         io_COL_CUT :     0.00s CPU
+ <---> [TIMING]                     io_Double_Grid :     0.00s CPU
+ <---> [TIMING]                              io_HF :     0.00s CPU (       3 calls,   0.001 s avg)
+ <---> [TIMING]                         io_DIPOLES :     0.00s CPU (      11 calls,   0.000 s avg)
+ <---> [TIMING]                        io_KB_pwscf :     0.00s CPU (      10 calls,   0.000 s avg)
+ <---> [TIMING]                       io_KB_abinit :     0.00s CPU
+ <---> [TIMING]                               io_X :     0.00s CPU (      22 calls,   0.000 s avg)
+ <---> [TIMING]                              io_BS :     0.00s CPU
+ <---> [TIMING]                     eval_G_minus_G :     0.00s CPU
+ <---> [TIMING]            IO_and_Messaging_switch :     0.00s CPU (       8 calls,   0.000 s avg)
+ <---> [TIMING]                            Dipoles :     0.00s CPU
+ <---> [TIMING]                  DIPOLE_transverse :     0.00s CPU
+ <---> [TIMING]                        io_fragment :     0.00s CPU (      65 calls,   0.000 s avg)
+ <---> [TIMING]                     Xo (procedure) :     0.00s CPU (       8 calls,   0.024 s avg)
+ <---> [TIMING]                         Xo (REDUX) :     0.00s CPU (       8 calls,   0.000 s avg)
+ <---> [TIMING]                      X (procedure) :     0.00s CPU (       8 calls,   0.001 s avg)
+ <---> [TIMING]                     LINEAR ALGEBRA :     0.00s CPU (       8 calls,   0.001 s avg)
+ <---> [TIMING]                  SERIAL_lin_system :     0.00s CPU (       8 calls,   0.001 s avg)
+ <---> [TIMING]                          X (REDUX) :     0.00s CPU (       8 calls,   0.000 s avg)
+ <---> [TIMING]                                 HF :     0.00s CPU
+ <---> [TIMING]                          HF(REDUX) :     0.00s CPU
+ <---> [TIMING]                            GW(ppa) :     0.00s CPU
+ <---> [TIMING]                          GW(REDUX) :     0.00s CPU
+ <---> [TIMING]                       io_QP_and_GF :     0.00s CPU
+ <---> [08] Memory Overview
+ <---> [09] Game Over & Game summary
