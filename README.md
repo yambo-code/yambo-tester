@@ -68,3 +68,4 @@ The following features and improvements are planned for future releases of yambo
 - [ ] Support for project-specific executables (e.g., yambo_rt, ypp_rt, etc.).
 - [ ] Publishing the package on PyPI, allowing installation via pip install yambo-tester and integration into CI pipelines without local cloning.
 - [ ] Generation of a final test report suitable for upload to a web portal or dashboard, enabling remote monitoring of test outcomes.
+- [ ] Parallel execution of tests using the `concurrent.futures.ProcessPoolExecutor` module
