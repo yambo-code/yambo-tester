@@ -91,13 +91,8 @@ def check_parameters(parameters, logger):
     for par in ["yambo", "ypp", "p2y", "mpi_launcher"]:
         try:
             parameters[par] = Path(shutil.which(parameters[par]))
-            if parameters[par].exists():
-                logger.info(f'{par}: {parameters[par]}')
-            else:
-                raise FileExistsError(f'{par}: {parameters[par]} do not exist.')
-        except FileExistsError as e:
-            logger.error(e)
-            raise e
+        except TypeError:
+            raise FileNotFoundError(f'{par}: {parameters[par]} do not exist.')
 
     # Checks on nprocs and tollerance
     if isinstance(parameters['nprocs'], int):
