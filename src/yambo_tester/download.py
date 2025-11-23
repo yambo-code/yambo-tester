@@ -3,7 +3,7 @@
 
 import argparse
 import subprocess
-from pathlib import Path, os
+from pathlib import Path
 from .log import setup_logging
 
 
@@ -14,7 +14,7 @@ def get_args():
     parser.add_argument('-cache', help='cache directory', type=str, dest='cache_dir', default=tests_dir)
     parser.add_argument('-link', help='download link', type=str, dest='link', default=download_link)
     args = parser.parse_args()
-    parameters['cache_dir'] = os.path.abspath(args.cache_dir)
+    parameters['cache_dir'] = Path(args.cache_dir).resolve()
     parameters['download_link'] = args.download_link
     return parameters
 

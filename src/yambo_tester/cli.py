@@ -3,7 +3,7 @@
 
 import argparse
 import importlib.resources
-from pathlib import Path, os
+from pathlib import Path
 from .log import setup_logging
 from .config import load_config, check_parameters
 from .runner import setup_rundir, run_test, run_pytest
