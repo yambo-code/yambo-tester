@@ -67,7 +67,7 @@ def check_dir(par, directory, logger):
         if pathdir.is_dir():
             logger.info(f'{par}: {pathdir}')
         else:
-            raise NotADirectoryError(f"{par}: {parameters[directory]} exists but it is not a directory.")
+            raise NotADirectoryError(f"{par}: {directory} exists but it is not a directory.")
     except NotADirectoryError as e:
         if par in ['scratch_dir', 'cache_dir'] and not pathlib.exists():
             logger.warning(f"I'm making the {par} directory!")
