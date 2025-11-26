@@ -56,7 +56,7 @@ def setup_rundir(test, parameters, logger):
     except RuntimeError as e:
         logger.error(e)
         raise e
-    except:
+    except Exception as e:
         logger.error(f"Unable to extract the tarball into {test_dir}")
         raise e
 
