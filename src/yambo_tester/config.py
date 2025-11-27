@@ -41,7 +41,7 @@ def load_config():
             config = tomllib.load(f)
             config['config'] = local_config
     else:
-        with importlib.resources.open_text("yambo_tester.data", "config.toml") as f:
+        with importlib.resources.open_binary("yambo_tester.data", "config.toml") as f:
             config = tomllib.load(f)
             config['config'] = importlib.resources.files("yambo_tester.data") / "config.toml"
 
