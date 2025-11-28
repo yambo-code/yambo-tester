@@ -82,16 +82,27 @@ def check_parameters(parameters, logger):
     """
     Check parameters one by one and report it in the main logger.
     """
-    # Check download_link
-    try:
-        logger.info(f"download_link: {parameters['download_link']}")
-        c = urllib.request.urlopen(parameters['download_link']).getcode()
-    except HTTPError as e:
-        logger.warning(f"Link not reachable: the tests will be performed only if the tarball is available in the cache directory.")
+    if not parameters['init']:
+        # Check download_link
+        try:
+            logger.info(f"download_link: {parameters['download_link']}")
+            c = urllib.request.urlopen(parameters['download_link']).getcode()
+        except HTTPError as e:
+            logger.warning(f"Link not reachable: the tests will be performed only if the tarball is available in the cache directory.")
 
+    # Check only cache directory
     if parameters['donly']:
-        # Check only cache directory
         parameters['cache_dir'] = check_dir('cache_dir', parameters['cache_dir'], logger)
+
+    # Copy the default config.toml
+    elif parameters['init']:
+        if Path('config.toml').exists():
+            logger.error('File config.toml already exists!')
+        else:
+            config_default = importlib.resources.files("yambo_tester.data") / "config.toml"
+            config_template = config_default.copy('config.toml')
+            logger.info("Copied the config.toml template.")
+
     else:
         # Check directories
         for par in ['yambo_bin', 'tests_dir', 'scratch_dir', 'cache_dir']:

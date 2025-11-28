@@ -18,6 +18,8 @@ def set_cl_args(config):
     parser = argparse.ArgumentParser(prog='yambo-tester',
                                      description='A Python-based testing framework for validating Yambo simulations using the official Yambo test suite.',
                                      epilog="Copyright (c) 2025 Nicola Spallanzani")
+    parser.add_argument('-i', '--init',
+                        help='Create a config.toml file to be used as template', dest='init', action='store_true')
     parser.add_argument('-v', '--verbose',
                         help='Verbose mode', dest='verbose', action='store_true')
     parser.add_argument('-l', '--label',
@@ -56,6 +58,7 @@ def set_cl_args(config):
 
     for arg, val in args.__dict__.items():
         if val: config['parameters'][arg] = val
+    if not 'init' in config['parameters']: config['parameters']['init'] = False
     if not 'verbose' in config['parameters']: config['parameters']['verbose'] = False
     if not 'donly' in config['parameters']: config['parameters']['donly'] = False
     if not 'label' in config['parameters']: config['parameters']['label'] = ""
@@ -71,7 +74,7 @@ def main():
     config = load_config()
     config = set_cl_args(config)
     logger = setup_logging(Path(config['parameters']['logger']))
-    logger.info(f"Using {config['config']}")
+    if not parameters['init']: logger.info(f"Using {config['config']}")
     parameters = check_parameters(config['parameters'], logger)
 
     if parameters['donly']:
@@ -79,6 +82,8 @@ def main():
             for test_type in test_types:
                 test = {'name': test_name, 'type': test_type}
                 tar_file, process = download_test(test['name'], test['type'], parameters, logger)
+    elif parameters['init']:
+        pass
     else:
         # Running the tests
         for test_name, test_types in config['tests'].items():
