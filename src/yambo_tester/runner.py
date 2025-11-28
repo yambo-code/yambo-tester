@@ -52,7 +52,7 @@ def setup_rundir(test, parameters, logger):
             if retcode != 0:
                 raise RuntimeError(f"Dawnload of tarball {tar_file} failed.")
         with tarfile.open(tar_file) as tar:
-            tar.extractall(path=test_dir, filter='data')
+            tar.extractall(path=test_dir)
         logger.info(f"Extracted tarball")
     except RuntimeError as e:
         logger.error(e)
