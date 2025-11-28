@@ -1,9 +1,10 @@
 # Copyright (c) 2025 Nicola Spallanzani
 # Licensed under the MIT License. See LICENSE file for details.
 
-import yaml
+import toml
 import shutil
 import pytest
+import tomllib
 import tarfile
 import subprocess
 from pathlib import Path
@@ -51,7 +52,7 @@ def setup_rundir(test, parameters, logger):
             if retcode != 0:
                 raise RuntimeError(f"Dawnload of tarball {tar_file} failed.")
         with tarfile.open(tar_file) as tar:
-            tar.extractall(path=test_dir, filter='data')
+            tar.extractall(path=test_dir)
         logger.info(f"Extracted tarball")
     except RuntimeError as e:
         logger.error(e)
@@ -68,11 +69,11 @@ def run_test(test, parameters, logger, verbose=False):
     logger.info(f"{this_test} Starting test")
     local_logger = setup_logging(test['run_dir'].joinpath('tester.log'))
 
-    local_config = test['run_dir'].joinpath("tests.yaml")
+    local_config = test['run_dir'].joinpath("tests.toml")
     if local_config.exists():
-        logger.info(f"{this_test} Using local tests.yaml")
-        with open(local_config, "r") as f:
-            config = yaml.safe_load(f)
+        logger.info(f"{this_test} Using local tests.toml")
+        with open(local_config, "rb") as f:
+            config = tomllib.load(f)
     else:
         logger.error(f"{local_config} not available")
         raise FileNotFoundError(f"{local_config} not available")
@@ -117,8 +118,8 @@ def run_test(test, parameters, logger, verbose=False):
         }
         results["tollerance"] = parameters['tollerance']
 
-    with open(test['run_dir'].joinpath("results.yaml"), "w") as f:
-        yaml.dump(results, f)
+    with open(test['run_dir'].joinpath("results.toml"), "w") as f:
+        toml.dump(results, f)
         
     return local_logger
 

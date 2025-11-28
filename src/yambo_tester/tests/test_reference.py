@@ -1,8 +1,8 @@
 # Copyright (c) 2025 Nicola Spallanzani
 # Licensed under the MIT License. See LICENSE file for details.
 
-import yaml
 import pytest
+import tomllib
 import numpy as np
 import netCDF4 as nc
 from glob import glob
@@ -14,10 +14,10 @@ def pytest_generate_tests(metafunc):
     Generates sequences usefull to be parsed by pytest test functions.
     """
     rundir = Path(metafunc.config.getoption("--rundir"))
-    with open(rundir / "results.yaml") as f:
-        results = yaml.safe_load(f)
-    with open(rundir / "tests.yaml") as f:
-        tests = yaml.safe_load(f)
+    with open(rundir / "results.toml", 'rb') as f:
+        results = tomllib.load(f)
+    with open(rundir / "tests.toml", 'rb') as f:
+        tests = tomllib.load(f)
     tollerance = results.pop('tollerance', None)
 
     # Sequence for test_runs_ok func

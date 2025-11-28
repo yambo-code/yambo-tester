@@ -14,10 +14,10 @@ maintainers = [
 description = "A Python-based testing framework for validating Yambo simulations using the official Yambo test suite."
 readme = "README.md"
 license = { file = "LICENSE" }
-requires-python = ">=3.12"
+requires-python = ">=3.11"
 dependencies = [
   "pytest",
-  "PyYAML>=6.0.2",
+  "toml",
   "numpy",
   "netCDF4"
 ]
