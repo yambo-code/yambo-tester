@@ -1,7 +1,7 @@
 # Copyright (c) 2025 Nicola Spallanzani
 # Licensed under the MIT License. See LICENSE file for details.
 
-import yaml
+import tomllib
 import shutil
 import string
 import argparse
@@ -31,21 +31,21 @@ PARAMETERS = {
 
 def load_config():
     """
-    Look for a config.yaml file in the current directory.
+    Look for a config.toml file in the current directory.
     If it doesn't find one, use the one included in the package.
     Then overwrite the default parameters with the ones from the file.
     """
-    local_config = Path("config.yaml").resolve()
+    local_config = Path("config.toml").resolve()
     if local_config.exists():
-        with open(local_config, "r") as f:
-            config = yaml.safe_load(f)
+        with open(local_config, "rb") as f:
+            config = tomllib.load(f)
             config['config'] = local_config
     else:
-        with importlib.resources.open_text("yambo_tester.data", "config.yaml") as f:
-            config = yaml.safe_load(f)
-            config['config'] = importlib.resources.files("yambo_tester.data") / "config.yaml"
+        with importlib.resources.open_binary("yambo_tester.data", "config.toml") as f:
+            config = tomllib.load(f)
+            config['config'] = importlib.resources.files("yambo_tester.data") / "config.toml"
 
-    # Overwrites default parameters with those read from the conf.yaml file
+    # Overwrites default parameters with those read from the conf.toml file
     for parameter in PARAMETERS:
         if parameter not in config["parameters"]: config["parameters"][parameter] = PARAMETERS[parameter]
     if not config['parameters']['tests_dir']: config['parameters']['tests_dir'] = PARAMETERS['tests_dir']
