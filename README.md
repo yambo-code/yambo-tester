@@ -34,6 +34,12 @@ The package can then be installed using:
 pip install -e .
 ```
 
+In case of issues with the installation of the netcdf4 module, it is recommended to follow this procedure: after creating the virtual environment, install the netcdf4 module with the following command, then install yambo-tester:
+
+```
+pip install --only-binary=:all: netCDF4
+```
+
 Note: yambo-tester is not yet published on PyPI, but it will become available once the first release is finalized.
 
 ## Usage
