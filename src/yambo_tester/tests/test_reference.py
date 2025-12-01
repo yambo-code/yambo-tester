@@ -16,9 +16,10 @@ def pytest_generate_tests(metafunc):
     rundir = Path(metafunc.config.getoption("--rundir"))
     with open(rundir / "results.toml", 'rb') as f:
         results = tomllib.load(f)
+    tollerance = results.pop('tollerance', None)
     with open(rundir / "tests.toml", 'rb') as f:
         tests = tomllib.load(f)
-    tollerance = results.pop('tollerance', None)
+    sha256 = tests.pop('sha256', None)
 
     # Sequence for test_runs_ok func
     if "run_item" in metafunc.fixturenames:
@@ -132,7 +133,7 @@ def test_reference_ok(ref_item):
     # Check report files
     if ref[:2] == 'r-':
         report = False
-        with open(str(out_file)) as f:
+        with open(str(out_file), 'rb') as f:
             for line in f:
-                if "Game Over & Game summary" in line: report = True
+                if b"Game Over & Game summary" in line: report = True
         assert report, f"{ref}: report file incomplete!"
