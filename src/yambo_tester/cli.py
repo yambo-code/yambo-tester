@@ -46,13 +46,29 @@ def set_cl_args(config):
                         help='Number of MPI tasks', type=int, dest='nprocs')
     parser.add_argument('--yambo',
                         help='Yambo executable', type=str, dest='yambo')
-    parser.add_argument('--ypp ',
+    parser.add_argument('--ypp',
                         help='Y(ambo) P(ost)/(re) P(rocessor) exectuable', type=str, dest='ypp')
-    parser.add_argument('--p2y ',
+    parser.add_argument('--yambo_ph',
+                        help='Yambo Electron-phonon coupling project executable', type=str, dest='yambo_ph')
+    parser.add_argument('--ypp_ph',
+                        help='Y(ambo) P(ost)/(re) P(rocessor) Electron-phonon coupling project exectuable', type=str, dest='ypp_ph')
+    parser.add_argument('--yambo_sc',
+                        help='Yambo Self-consistent (COHSEX, HF, DFT) project executable', type=str, dest='yambo_sc')
+    parser.add_argument('--ypp_sc',
+                        help='Y(ambo) P(ost)/(re) P(rocessor) Self-consistent (COHSEX, HF, DFT) project exectuable', type=str, dest='ypp_sc')
+    parser.add_argument('--yambo_rt',
+                        help='Yambo Real-time dynamics project executable', type=str, dest='yambo_rt')
+    parser.add_argument('--ypp_rt',
+                        help='Y(ambo) P(ost)/(re) P(rocessor) Real-time dynamics project exectuable', type=str, dest='ypp_rt')
+    parser.add_argument('--yambo_nl',
+                        help='Yambo Non-linear optics project executable', type=str, dest='yambo_nl')
+    parser.add_argument('--ypp_nl',
+                        help='Y(ambo) P(ost)/(re) P(rocessor) Non-linear optics project exectuable', type=str, dest='ypp_nl')
+    parser.add_argument('--p2y',
                         help='P(Wscf) 2 Y(ambo) interface exectuable', type=str, dest='p2y')
-    parser.add_argument('--a2y ',
+    parser.add_argument('--a2y',
                         help='A(binit) 2 Y(ambo) interface exectuable', type=str, dest='a2y')
-    parser.add_argument('--c2y ',
+    parser.add_argument('--c2y',
                         help='C(pmd) 2 Y(ambo) interface exectuable', type=str, dest='c2y')
     args = parser.parse_args()
 
@@ -74,7 +90,7 @@ def main():
     config = load_config()
     config = set_cl_args(config)
     logger = setup_logging(Path(config['parameters']['logger']))
-    if not parameters['init']: logger.info(f"Using {config['config']}")
+    if not config['parameters']['init']: logger.info(f"Using {config['config']}")
     parameters = check_parameters(config['parameters'], logger)
 
     if parameters['donly']:

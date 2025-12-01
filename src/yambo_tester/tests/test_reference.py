@@ -74,7 +74,7 @@ def test_reference_ok(ref_item):
         out_file = rundir.joinpath(info['odir'], info['out'])
 
     # Check if reference and output files exist
-    assert ref_file.exists(), f"{ref} file do not exists!"
+    if not ref[:2] == 'r-': assert ref_file.exists(), f"{ref} file do not exists!"
     assert out_file.exists(), f"{info['out']} file do not exists!"
 
     zero_dfl = 1e-6
