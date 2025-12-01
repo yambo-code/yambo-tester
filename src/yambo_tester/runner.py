@@ -10,7 +10,7 @@ import subprocess
 from pathlib import Path
 import importlib.resources
 from .log import setup_logging
-from .download import download_test
+from .download import download_test, sha256sum
 
 
 def setup_rundir(test, parameters, logger):
@@ -26,6 +26,7 @@ def setup_rundir(test, parameters, logger):
     :param logger: main logger instance.
     :return: tuple containing the Path to the created test directory and run directory.
     """
+    this_test = f"[{test['name']}/{test['type']}]"
     tar_file, process = download_test(test['name'], test['type'], parameters, logger)
 
     try:
@@ -46,11 +47,24 @@ def setup_rundir(test, parameters, logger):
         logger.error(f"Copying input and reference files from {src_dir} to {run_dir}")
         raise
 
+    local_config = run_dir.joinpath("tests.toml")
+    if local_config.exists():
+        logger.info(f"{this_test} Using local tests.toml")
+        with open(local_config, "rb") as f:
+            config = tomllib.load(f)
+    else:
+        logger.error(f"{local_config} not available")
+        raise FileNotFoundError(f"{local_config} not available") 
+
     try:
         if process != None:
             retcode = process.wait()
             if retcode != 0:
                 raise RuntimeError(f"Dawnload of tarball {tar_file} failed.")
+        if not parameters['nochecksum']:
+            if not config['sha256'] == sha256sum(tar_file):
+                logger.error(f"SHA-256 mismatch for file '{tar_file.name}'.")
+                raise ValueError(f"SHA-256 mismatch for file '{tar_file.name}'.")
         with tarfile.open(tar_file) as tar:
             tar.extractall(path=test_dir)
         logger.info(f"Extracted tarball")
@@ -70,13 +84,9 @@ def run_test(test, parameters, logger, verbose=False):
     local_logger = setup_logging(test['run_dir'].joinpath('tester.log'))
 
     local_config = test['run_dir'].joinpath("tests.toml")
-    if local_config.exists():
-        logger.info(f"{this_test} Using local tests.toml")
-        with open(local_config, "rb") as f:
-            config = tomllib.load(f)
-    else:
-        logger.error(f"{local_config} not available")
-        raise FileNotFoundError(f"{local_config} not available")
+    with open(local_config, "rb") as f:
+        config = tomllib.load(f)
+    sha256 = config.pop('sha256', None)
 
     SAVE_converted = test['run_dir'].joinpath('SAVE_converted')
     SAVE = test['run_dir'].joinpath('SAVE')

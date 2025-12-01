@@ -71,7 +71,8 @@ The following features and improvements are planned for future releases of yambo
 
 - [ ] Integration of additional tests from the official Yambo test suite and other validated sources, expanding the coverage of physical scenarios and computational workflows.
 - [ ] Support for auxiliary executables such as p2y, a2y, and c2y, enabling full preparation and conversion workflows prior to Yambo runs.
-- [ ] Support for project-specific executables (e.g., yambo_rt, ypp_rt, etc.).
+- [x] Support for project-specific executables (e.g., yambo_rt, ypp_rt, etc.).
 - [ ] Publishing the package on PyPI, allowing installation via pip install yambo-tester and integration into CI pipelines without local cloning.
-- [ ] Generation of a final test report suitable for upload to a web portal or dashboard, enabling remote monitoring of test outcomes.
+- [x] Generation of a final test report suitable for upload to a web portal or dashboard, enabling remote monitoring of test outcomes.
 - [ ] Parallel execution of tests using the `concurrent.futures.ProcessPoolExecutor` module
+- [ ] Definition of keys in tests.toml files for specific selections of tests types

@@ -28,6 +28,8 @@ def set_cl_args(config):
                         help='Download link', type=str, dest='link')
     parser.add_argument('--download_only',
                         help="Download only the tests' tarballs", dest='donly', action='store_true')
+    parser.add_argument('--nochecksum',
+                        help='Disable checksum on tarballs', dest='nochecksum', action='store_false')
     parser.add_argument('-t', '--tollerance',
                         help='Tollerance (between 0 - 100%%)', type=float, dest='tollerance')
     parser.add_argument('-s', '--scratch',
@@ -77,6 +79,7 @@ def set_cl_args(config):
     if not 'init' in config['parameters']: config['parameters']['init'] = False
     if not 'verbose' in config['parameters']: config['parameters']['verbose'] = False
     if not 'donly' in config['parameters']: config['parameters']['donly'] = False
+    if not 'nochecksum' in config['parameters']: config['parameters']['nochecksum'] = False
     if not 'label' in config['parameters']: config['parameters']['label'] = ""
 
     return config
