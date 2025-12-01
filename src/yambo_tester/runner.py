@@ -100,39 +100,50 @@ def run_test(test, parameters, logger, verbose=False):
 
     # Loop that launches the subtests
     for name, run in subtests:
-        cmd = []
-        if parameters['mpi_launcher']: cmd.extend([str(parameters['mpi_launcher']), '-np', str(parameters['nprocs'])])
-        cmd.append(str(parameters[run['exe']]))
-        if 'actions' in run:
-            if run['actions']: pass # TODO
-        if run['input']: cmd.extend(['-F', str(run['input'])])
-        flags = ""
-        if 'flags' in run:
-            if run['flags']: flags = f",{run['flags']}"
-        if run['output']: cmd.extend(['-J', str(run['output'])+flags, '-C', str(run['output'])])
-
-        logger.info(f"{this_test} Launching {name}")
-        if verbose: local_logger.info(f"{' '.join(cmd)}")
-        process = subprocess.Popen(
-            cmd,
-            cwd = str(test['run_dir']),
-            stdout = subprocess.PIPE,
-            stderr = subprocess.PIPE,
-            text = True,
-            shell = False
-        )
-        std_out, std_err = process.communicate()
-        if verbose: local_logger.info(std_out.strip())
-        if std_err: local_logger.error(std_err)
-
-        # Run info
-        results[name] = {
-            "returncode": process.returncode,
-            "cmd": ' '.join(cmd),
-            "stdout": std_out,
-            "stderr": std_err,
-            "run_dir": str(test['run_dir']),
-        }
+        if parameters[run['exe']]:
+            cmd = []
+            if parameters['mpi_launcher']: cmd.extend([str(parameters['mpi_launcher']), '-np', str(parameters['nprocs'])])
+            cmd.append(str(parameters[run['exe']]))
+            if 'actions' in run:
+                if run['actions']: pass # TODO
+            if run['input']: cmd.extend(['-F', str(run['input'])])
+            flags = ""
+            if 'flags' in run:
+                if run['flags']: flags = f",{run['flags']}"
+            if run['output']: cmd.extend(['-J', str(run['output'])+flags, '-C', str(run['output'])])
+    
+            logger.info(f"{this_test} Launching {name}")
+            if verbose: local_logger.info(f"{' '.join(cmd)}")
+            process = subprocess.Popen(
+                cmd,
+                cwd = str(test['run_dir']),
+                stdout = subprocess.PIPE,
+                stderr = subprocess.PIPE,
+                text = True,
+                shell = False
+            )
+            std_out, std_err = process.communicate()
+            if verbose: local_logger.info(std_out.strip())
+            if std_err: local_logger.error(std_err)
+    
+            # Run info
+            results[name] = {
+                "returncode": process.returncode,
+                "cmd": ' '.join(cmd),
+                "stdout": std_out,
+                "stderr": std_err,
+                "run_dir": str(test['run_dir']),
+            }
+            
+        else:
+            # Run skipped
+            results[name] = {
+                "returncode": -9999,
+                "cmd": '',
+                "stdout": None,
+                "stderr": None,
+                "run_dir": str(test['run_dir']),
+            }
 
     with open(test['run_dir'].joinpath("results.toml"), "w") as f:
         toml.dump(results, f)
