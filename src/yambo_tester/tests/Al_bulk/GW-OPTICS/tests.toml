@@ -1,6 +1,6 @@
 [init]
 exe = "yambo"
-options = ""
+actions = ""
 input = "INPUTS/01_init"
 output = "01_init"
 [init.reference]
@@ -10,7 +10,7 @@ output = "01_init"
 
 [lifetimes]
 exe = "yambo"
-options = ""
+actions = ""
 input = "INPUTS/02_Lifetimes"
 output = "02_Lifetimes"
 [lifetimes.reference]
@@ -19,7 +19,7 @@ output = "02_Lifetimes"
 
 [qp_cohsex]
 exe = "yambo"
-options = ""
+actions = ""
 input = "INPUTS/03_QP_COHSEX"
 output = "03_QP_COHSEX"
 [qp_cohsex.reference]
@@ -31,7 +31,7 @@ output = "03_QP_COHSEX"
 
 [qp_cohsex_drude]
 exe = "yambo"
-options = ""
+actions = ""
 input = "INPUTS/03_QP_COHSEX_drude"
 output = "03_QP_COHSEX_drude"
 [qp_cohsex_drude.reference]
@@ -43,7 +43,7 @@ output = "03_QP_COHSEX_drude"
 
 [rpa]
 exe = "yambo"
-options = ""
+actions = ""
 input = "INPUTS/05_RPA"
 output = "05_RPA"
 [rpa.reference]
@@ -55,7 +55,7 @@ output = "05_RPA"
 
 [rpa_drude]
 exe = "yambo"
-options = ""
+actions = ""
 input = "INPUTS/05_RPA_drude"
 output = "05_RPA_drude"
 [rpa_drude.reference]

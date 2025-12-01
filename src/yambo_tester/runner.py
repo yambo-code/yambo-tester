@@ -30,9 +30,9 @@ def setup_rundir(test, parameters, logger):
 
     try:
         if not parameters['scratch_test'].exists():
-            parameters['scratch_test'].mkdir()
+            parameters['scratch_test'].mkdir(exist_ok=True)
         test_dir = parameters['scratch_test'].joinpath(test['name'])
-        test_dir.mkdir()
+        test_dir.mkdir(exist_ok=True)
         logger.info(f"Working in {test_dir}")
     except:
         logger.error(f"Not able to create runtest folder into {parameters['scratch_test']}")
@@ -84,16 +84,22 @@ def run_test(test, parameters, logger, verbose=False):
         oldSAVE = SAVE.rename(test['run_dir'].joinpath('oldSAVE'))
         SAVE = SAVE_converted.rename(SAVE)
 
-    results = {}
+    results = {"tollerance": parameters['tollerance']} # collect info about a run
     subtests = list(config.items())
-    subtests.sort(key=lambda x: x[1]['input'])
+    subtests.sort(key=lambda x: x[1]['input']) # input sorting
+
+    # Loop that launches the subtests
     for name, run in subtests:
         cmd = []
         if parameters['mpi_launcher']: cmd.extend([str(parameters['mpi_launcher']), '-np', str(parameters['nprocs'])])
         cmd.append(str(parameters[run['exe']]))
-        if run['options']: cmd.extend(split(str(run['options']).strip()))
+        if 'actions' in run:
+            if run['actions']: pass # TODO
         if run['input']: cmd.extend(['-F', str(run['input'])])
-        if run['output']: cmd.extend(['-J', str(run['output']), '-C', str(run['output'])])
+        flags = ""
+        if 'flags' in run:
+            if run['flags']: flags = f",{run['flags']}"
+        if run['output']: cmd.extend(['-J', str(run['output'])+flags, '-C', str(run['output'])])
 
         logger.info(f"{this_test} Launching {name}")
         if verbose: local_logger.info(f"{' '.join(cmd)}")
@@ -108,7 +114,8 @@ def run_test(test, parameters, logger, verbose=False):
         std_out, std_err = process.communicate()
         if verbose: local_logger.info(std_out.strip())
         if std_err: local_logger.error(std_err)
-        
+
+        # Run info
         results[name] = {
             "returncode": process.returncode,
             "cmd": ' '.join(cmd),
@@ -116,7 +123,6 @@ def run_test(test, parameters, logger, verbose=False):
             "stderr": std_err,
             "run_dir": str(test['run_dir']),
         }
-        results["tollerance"] = parameters['tollerance']
 
     with open(test['run_dir'].joinpath("results.toml"), "w") as f:
         toml.dump(results, f)
@@ -136,10 +142,13 @@ def run_pytest(test, local_logger, verbose=False):
     #validation_tests_dir = Path(__file__).parent / "tests"
     validation_tests_dir = importlib.resources.files("yambo_tester") / "tests"
 
-
     if not validation_tests_dir.exists():
         local_logger.error(f"Validation tests directory not found: {validation_tests_dir}")
         raise FileNotFoundError(validation_tests_dir)
+
+    # Pytest report in JUnit XML
+    report_path = Path(test['run_dir']) / "pytest-report.xml"
+    args.append(f"--junitxml={report_path}")
 
     args.append(f"--rundir={test['run_dir']}")
     # Run pytest in the tests folder of the package

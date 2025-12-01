@@ -19,6 +19,14 @@ PARAMETERS = {
     'cache_dir': "cache",
     'yambo': "yambo",
     'ypp': "ypp",
+    'yambo_ph': "yambo_ph",
+    'ypp_ph': "ypp_ph",
+    'yambo_sc': "yambo_sc",
+    'ypp_sc': "ypp_sc",
+    'yambo_rt': "yambo_rt",
+    'ypp_rt': "ypp_rt",
+    'yambo_nl': "yambo_nl",
+    'ypp_nl': "ypp_nl",
     'p2y': "p2y",
     'a2y': "a2y",
     'c2y': "c2y",
@@ -115,14 +123,19 @@ def check_parameters(parameters, logger):
         )
     
         # Checks on executables
-        for par in ["yambo", "ypp", "p2y", 'a2y', 'c2y']:
+        for par in ["yambo", "ypp", "p2y", 'a2y', 'c2y', 'yambo_ph', 'ypp_ph',
+                    'yambo_sc', 'ypp_sc', 'yambo_rt', 'ypp_rt', 'yambo_nl', 'ypp_nl']:
             if parameters['yambo_bin']:
                 parameters[par] = parameters['yambo_bin'].joinpath(parameters[par])
             try:
                 parameters[par] = Path(shutil.which(parameters[par]))
                 logger.info(f"{par}: {parameters[par]}")
             except TypeError:
-                raise FileNotFoundError(f"{par}: {parameters[par]} do not exist.")
+                if '_' in parameters[par]:
+                    parameters[par] = None # Project's tests deactivated
+                    logger.warning(f"{par}: {parameters[par]} project's tests deactivated!")
+                else:
+                    raise FileNotFoundError(f"{par}: {parameters[par]} do not exist.")
     
         if parameters['mpi_launcher']:
             try:

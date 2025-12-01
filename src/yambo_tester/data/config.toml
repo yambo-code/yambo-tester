@@ -7,13 +7,23 @@ cache_dir = "cache"
 yambo_bin = ""
 yambo = "yambo"
 ypp = "ypp"
+yambo_ph = "yambo_ph"
+ypp_ph = "ypp_ph"
+yambo_rt = "yambo_rt"
+ypp_rt = "ypp_rt"
+yambo_sc = "yambo_sc"
+ypp_sc = "ypp_sc"
+yambo_nl = "yambo_nl"
+ypp_nl = "ypp_nl"
 p2y = "p2y"
+a2y = "a2y"
+c2y = "c2y"
 mpi_launcher = "mpirun"
 nprocs = 2
 tollerance = 0.1
 
 [tests]
-Al_bulk = ["GW-OPTICS"]
+Al_bulk = ["GW-OPTICS", "ELPH"]
 #Si_bulk = ["GW-OPTICS"]
 #hBN = ["GW-OPTICS"]
 #LiF = ["GW-OPTICS"]
