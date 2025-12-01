@@ -44,7 +44,50 @@ Note: yambo-tester is not yet published on PyPI, but it will become available on
 
 ## Usage
 
-(*A full usage guide will be added soon.*)
+The simplest way to run **yambo-tester** is:
+
+```bash
+yambo-tester
+```
+
+This command uses all default parameters and automatically runs all currently available tests.
+
+A complete list of command-line arguments can be displayed with:
+
+```bash
+yambo-tester -h
+```
+
+You can generate a template configuration file (`config.toml`) using:
+
+```bash
+yambo-tester -i
+```
+
+### Parameter Hierarchy
+
+When a parameter is not explicitly provided, **yambo-tester** resolves it using the following hierarchical system:
+
+1. **Command-line arguments** (highest priority)
+2. **User’s local `config.toml` file**
+3. **Package-provided `config.toml`**
+4. **Internal default values** (lowest priority)
+
+In typical usage, the user should set parameters either on the command line or in a local configuration file.
+
+### Executable Discovery
+
+- If the parameter `yambo_bin` is not defined, Yambo executables are searched in the system `PATH`.
+- If the program cannot find the **core executables**, execution stops with an error.
+- If **project executables** (e.g., `yambo_rt`, `ypp_rt`, etc.) are missing, the corresponding tests are simply skipped.
+
+### Scratch and Cache Directories
+
+If the `scratch` and `cache` directories specified in the configuration do **not** already exist, they will be **automatically created** by `yambo-tester`.
+
+### Documentation
+
+A detailed documentation — including usage examples, launch configurations, and a tutorial on how to add new tests — will be available soon.
 
 ## Authors and Acknowledgments
 
