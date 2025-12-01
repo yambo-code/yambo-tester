@@ -1,3 +1,5 @@
+sha256 = "28c9c09b3967df61514fa9027d1d4117ffdae95f6da3f356851b87d09c647528"
+
 [01_init]
 exe = "yambo_ph"
 actions = ""
