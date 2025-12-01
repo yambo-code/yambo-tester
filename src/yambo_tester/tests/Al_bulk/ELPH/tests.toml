@@ -1,0 +1,38 @@
+[01_init]
+exe = "yambo_ph"
+actions = ""
+input = "INPUTS/01_init"
+output = "01_init"
+[01_init.reference]
+"o-01_init.ndb.gops" = ["SAVE/ndb.gops", "ng_in_shell", "E_of_shell"]
+"o-01_init.ndb.kindx" = ["SAVE/ndb.kindx", "Qindx", "Sindx"]
+"r-01_init_setup" = ""
+
+[02_QP]
+exe = "yambo_ph"
+actions = ""
+input = "INPUTS/02_QP"
+output = "02_QP"
+[02_QP.reference]
+"o-02_QP.qp" = "o-02_QP.qp"
+"o-02_QP.ndb.QP" = ["02_QP/ndb.QP", "QP_Z"]
+"r-02_QP_gw0_dyson_el_ph_corr" = ""
+
+[03_ypp]
+exe = "ypp_ph"
+actions = ""
+input = "INPUTS/03_ypp"
+output = "03_ypp"
+[03_ypp.reference]
+"r-03_ypp" = ""
+
+[05_QP]
+exe = "yambo_ph"
+actions = ""
+input = "INPUTS/05_QP"
+output = "05_QP"
+flags = "03_ypp"
+[05_QP.reference]
+"o-05_QP.qp" = "o-05_QP.qp"
+"o-05_QP.ndb.QP" = ["05_QP/ndb.QP", "QP_Z"]
+"r-02_QP_gw0_dyson_el_ph_corr" = ""
