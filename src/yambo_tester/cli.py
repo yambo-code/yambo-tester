@@ -46,6 +46,8 @@ def set_cl_args(config):
                         help='MPI launcher', type=str, dest='mpi_launcher')
     parser.add_argument('--np',
                         help='Number of MPI tasks', type=int, dest='nprocs')
+    parser.add_argument('--thrs',
+                        help='Number of OpenMP threads per task', type=int, dest='thrs')
     parser.add_argument('--yambo',
                         help='Yambo executable', type=str, dest='yambo')
     parser.add_argument('--ypp',

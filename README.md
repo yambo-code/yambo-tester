@@ -119,3 +119,5 @@ The following features and improvements are planned for future releases of yambo
 - [x] Generation of a final test report suitable for upload to a web portal or dashboard, enabling remote monitoring of test outcomes.
 - [ ] Parallel execution of tests using the `concurrent.futures.ProcessPoolExecutor` module
 - [ ] Definition of keys in tests.toml files for specific selections of tests types
+- [ ] Add support for different Yambo versions
+- [x] Add support for internal definition of OMP_NUM_THREADS variable

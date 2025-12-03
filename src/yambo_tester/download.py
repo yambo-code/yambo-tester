@@ -48,7 +48,10 @@ def download_test(name, run_type, parameters, logger):
     """
     Check if the test tarball exists in the cache directory and download it if it is missing.
     """
-    tar_name = name + "_" + run_type + ".tar.gz"
+    if name != run_type:
+        tar_name = name + "_" + run_type + ".tar.gz"
+    else:
+        tar_name = name + ".tar.gz"
     process = None
 
     try:
@@ -77,10 +80,8 @@ if __name__ == '__main__':
     logger = setup_logging(Path('download_tests.log'))
 
     tests = {
-	"Al_bulk": ["GW-OPTICS"],
-	"Si_bulk": ["GW-OPTICS"],
-	"hBN": ["GW-OPTICS"],
-	"LiF": ["GW-OPTICS"]
+	"Al_bulk": ["GW-OPTICS", "ELPH"],
+	"PA_chain": ["PA_chain"],
     }
 
     for name, runs in tests.items():

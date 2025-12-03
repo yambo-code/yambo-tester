@@ -1,10 +1,11 @@
 # Copyright (c) 2025 Nicola Spallanzani
 # Licensed under the MIT License. See LICENSE file for details.
 
-import tomllib
 import shutil
 import string
+import tomllib
 import argparse
+import subprocess
 import urllib.request
 from pathlib import Path
 import importlib.resources
@@ -32,6 +33,7 @@ PARAMETERS = {
     'c2y': "c2y",
     'mpi_launcher': "mpirun",
     'nprocs': 2,
+    'thrs': 1,
     'tollerance': 0.1,
     'download_link': "https://media.yambo-code.eu/robots/databases/tests",
     }
@@ -86,6 +88,49 @@ def check_dir(par, directory, logger):
     return pathdir
 
 
+def get_yambo_info(yambo: str) -> dict:
+    """
+    Retrieve version and compilation configuration information from a Yambo executable.
+
+    This function takes the path to the **yambo** executable, runs it with the
+    '-h' options, and extracts useful metadata such as the software version and
+    build configuration. The returned data is provided as a dictionary for easy
+    programmatic access.
+
+    Parameters
+    ----------
+    yambo : str
+        Path to the Yambo executable.
+
+    Returns
+    -------
+    info : dict
+        A dictionary containing extracted properties of the Yambo installation.
+        Typical keys include:
+
+        * ``version`` — Yambo version: a list like [magior, minor, patch].
+        * ``compilation`` — Details about configuration options.
+    """
+    process = subprocess.run([str(yambo), "-h"], capture_output=True, text=True)
+    info = {}
+    for line in process.stderr.split('\n'):
+        if 'Version' in line:
+            tmp = line.split(':')[1].strip().split()
+            info['version'] = tmp[0].split('.')
+            info['revision'] = tmp[2]
+            info['hash'] = tmp[4]
+        if 'Configuration' in line:
+            info['compilation'] = line.split(':')[1].strip().split('+')
+            tmp = [x.lower() for x in info['compilation']]
+            info['mpi'] = True if 'mpi' in tmp else False
+            info['omp'] = True if 'openmp' in tmp else False
+            info['dp'] = True if 'dp' in tmp else False
+            info['slk'] = True if 'slk' in tmp else False
+            info['slepc'] = True if 'slepc' in tmp else False
+            info['par_io'] = True if 'hdf5_mpi_io' in tmp else False
+    return info
+
+
 def check_parameters(parameters, logger):
     """
     Check parameters one by one and report it in the main logger.
@@ -136,20 +181,29 @@ def check_parameters(parameters, logger):
                     logger.warning(f"{par}: {parameters[par]} project's tests deactivated!")
                 else:
                     raise FileNotFoundError(f"{par}: {parameters[par]} do not exist.")
-    
+            # Extract info from "yambo -h"
+            if par == 'yambo': parameters.update(get_yambo_info(parameters['yambo']))
+        
         if parameters['mpi_launcher']:
             try:
                 parameters['mpi_launcher'] = Path(shutil.which(parameters['mpi_launcher']))
                 logger.info(f"mpi_launcher: {parameters['mpi_launcher']}")
             except TypeError:
                 raise FileNotFoundError(f"mpi_launcher: {parameters['mpi_launcher']} do not exist.")
-    
-        # Checks on nprocs and tollerance
-        if parameters["mpi_launcher"]:
+        
+        # Checks on nprocs, omp and tollerance
+        if parameters['mpi'] and parameters["mpi_launcher"]:
             if isinstance(parameters['nprocs'], int):
                 logger.info(f"nprocs: {parameters['nprocs']}")
             else:
                 msg = f"nprocs: {parameters['nprocs']} not an int."
+                logger.error(msg)
+                raise TypeError(msg)
+        if parameters['omp']:
+            if isinstance(parameters['thrs'], int):
+                logger.info(f"thrs: {parameters['thrs']}")
+            else:
+                msg = f"thrs: {parameters['thrs']} not an int."
                 logger.error(msg)
                 raise TypeError(msg)
         if isinstance(parameters['tollerance'], float):

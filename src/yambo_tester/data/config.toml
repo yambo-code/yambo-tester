@@ -20,10 +20,13 @@ a2y = "a2y"
 c2y = "c2y"
 mpi_launcher = "mpirun"
 nprocs = 2
+thrs = 1
 tollerance = 0.1
+download_link = "https://media.yambo-code.eu/robots/databases/tests"
 
 [tests]
 Al_bulk = ["GW-OPTICS", "ELPH"]
+PA_chain = ["PA_chain"]
 #Si_bulk = ["GW-OPTICS"]
 #hBN = ["GW-OPTICS"]
 #LiF = ["GW-OPTICS"]
