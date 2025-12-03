@@ -1,6 +1,7 @@
 # Copyright (c) 2025 Nicola Spallanzani
 # Licensed under the MIT License. See LICENSE file for details.
 
+import os
 import toml
 import shutil
 import pytest
@@ -98,11 +99,16 @@ def run_test(test, parameters, logger, verbose=False):
     subtests = list(config.items())
     subtests.sort(key=lambda x: x[1]['input']) # input sorting
 
+    # For OpenMP pralallelization
+    env = os.environ.copy()
+    if parameters['omp']: env["OMP_NUM_THREADS"] = str(parameters['thrs'])
+
     # Loop that launches the subtests
     for name, run in subtests:
         if parameters[run['exe']]:
             cmd = []
-            if parameters['mpi_launcher']: cmd.extend([str(parameters['mpi_launcher']), '-np', str(parameters['nprocs'])])
+            if parameters['mpi'] and parameters['mpi_launcher']:
+                cmd.extend([str(parameters['mpi_launcher']), '-np', str(parameters['nprocs'])])
             cmd.append(str(parameters[run['exe']]))
             if 'actions' in run:
                 if run['actions']: pass # TODO
@@ -120,7 +126,8 @@ def run_test(test, parameters, logger, verbose=False):
                 stdout = subprocess.PIPE,
                 stderr = subprocess.PIPE,
                 text = True,
-                shell = False
+                shell = False,
+                env = env
             )
             std_out, std_err = process.communicate()
             if verbose: local_logger.info(std_out.strip())

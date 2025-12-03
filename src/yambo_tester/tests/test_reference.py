@@ -86,7 +86,7 @@ def test_reference_ok(ref_item):
         if not ref[:2] == 'r-': assert ref_file.exists(), f"{ref} file do not exists!"
         assert out_file.exists(), f"{info['out']} file do not exists!"
     
-        zero_dfl = 1e-6
+        zero_dfl = 1e-5
         too_large = 10e99
     
         # Check text output files
@@ -94,49 +94,34 @@ def test_reference_ok(ref_item):
             # Read reference and output files
             ref_data = np.genfromtxt(str(ref_file))
             out_data = np.genfromtxt(str(out_file))
-            
-            # Renormalize data to have 1 as maximum
-            maxval=np.amax(ref_data[:,1:])
-            if maxval == 0.0: maxval = 1.0
-            
+            #ref_data[np.abs(ref_data) < zero_dfl] = 0.0
+            #out_data[np.abs(out_data) < zero_dfl] = 0.0
+
             # Compare data column by column
             for col in range(1,ref_data.shape[1]):
-                assert np.any(abs(out_data[:,col])<too_large) and not np.any(np.isnan(out_data[:,col])), f"{info['out']}: NaN or too large number!"
-                
-                diff = abs(ref_data[:,col]-out_data[:,col]) / maxval
-                for row in range(ref_data.shape[0]):
-                    if abs(ref_data[row,col] / maxval) > zero_dfl:
-                        diff[row] = diff[row] / (ref_data[row,col] / maxval)
-                
-                assert np.any(diff<tol), f"{ref}: Difference larger than {tol}!"
+                assert np.all(abs(out_data[:,col])<too_large) and not np.all(np.isnan(out_data[:,col])), f"{info['out']}: NaN or too large number!"
+                assert np.allclose(out_data[:,col], ref_data[:,col], rtol=tol, atol=zero_dfl), f"{ref}: Difference larger than {tol}!"
     
         # Check output DBs
         if '.ndb' in ref:
-            # Read reference and output files
+            # Read reference file
             ref_data = np.genfromtxt(str(ref_file))
             variables = info['out'][1:]
-            #if info['out'] == 'SAVE/ndb.gops': variables = ['ng_in_shell', 'E_of_shell']
-            #if info['out'] == 'SAVE/ndb.kindx': variables = ['Qindx', 'Sindx']
             nvars = len(variables)
             ndata = len(ref_data) // nvars
+            #ref_data[np.abs(ref_data) < zero_dfl] = 0.0
+
             # Read DB
             ds = nc.Dataset(str(out_file))
             for i in range(nvars):
                 # Extract data
                 out_data = ds[variables[i]]
-                assert np.any(abs(out_data[:])<too_large) and not np.any(np.isnan(out_data[:])), f"{info['out']}: NaN or too large number!"
+                #out_data[np.abs(out_data) < zero_dfl] = 0.0
+                assert np.all(abs(out_data[:])<too_large) and not np.all(np.isnan(out_data[:])), f"{info['out']}: NaN or too large number!"
                 
                 # Renormalize data to have 1 as maximum
                 start, stop = i*ndata, i*ndata+ndata
-                maxval=np.amax(ref_data[start:stop])
-                if maxval == 0.0: maxval = 1.0
-    
-                diff = abs(ref_data[start:stop]-out_data[:].ravel()) / maxval
-                for row in range(ndata):
-                    if abs(ref_data[start+row] / maxval) > zero_dfl:
-                        diff[row] = diff[row] / (ref_data[start+row] / maxval)
-    
-                assert np.any(diff<tol), f"{ref}: Difference larger than {tol}!" 
+                assert np.allclose(out_data[:].ravel(), ref_data[start:stop], rtol=tol, atol=zero_dfl), f"{ref}: Difference larger than {tol}!"
     
         # Check report files
         if ref[:2] == 'r-':
