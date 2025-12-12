@@ -1,0 +1,4 @@
+mkdir 03_QP_PPA_terminator_REF-DBs 2>>/dev/null
+cp 02_QP_PPA/dip_iR_and_P*    03_QP_PPA_terminator_REF-DBs/ 2>>/dev/null
+cp 02_QP_PPA/ndb.pp*          03_QP_PPA_terminator_REF-DBs/ 2>>/dev/null
+cp 02_QP_PPA/ndb.HF_and_locXC 03_QP_PPA_terminator_REF-DBs/ 2>>/dev/null

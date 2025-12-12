@@ -1,0 +1,85 @@
+
+
+ __    __ ______           ____     _____
+/\ \  /\ \\  _  \  /"\_/`\/\  _`\ /\  __`\
+\ `\`\\/"/ \ \L\ \/\      \ \ \L\ \ \ \/\ \
+ `\ `\ /" \ \  __ \ \ \__\ \ \  _ <" \ \ \ \
+   `\ \ \  \ \ \/\ \ \ \_/\ \ \ \L\ \ \ \_\ \
+     \ \_\  \ \_\ \_\ \_\\ \_\ \____/\ \_____\
+      \/_/   \/_/\/_/\/_/ \/_/\/___/  \/_____/
+
+
+ <---> [01] MPI/OPENMP structure, Files & I/O Directories
+ <---> [02] CORE Variables Setup
+ <---> [02.01] Unit cells
+ <---> [02.02] Symmetries
+ <---> [02.03] Reciprocal space
+ <---> [02.04] K-grid lattice
+ <---> Grid dimensions      :  10
+ <---> [02.05] Energies & Occupations
+ <---> [03] Transferred momenta grid and indexing
+ <---> [04] Coloumb potential Random Integration (RIM)
+ <---> [04.01] RIM initialization
+ <---> Random points |                                        | [000%] --(E) --(X)
+ <02s> Random points |########################################| [100%] 02s(E) 02s(X)
+ <02s> [04.02] RIM integrals
+ <02s> Momenta loop |                                        | [000%] --(E) --(X)
+ <02s> Momenta loop |########################################| [100%] --(E) --(X)
+ <02s> [05] Coloumb potential CutOff box xy
+ <02s> [06] Dipoles
+ <02s> [DIP] Checking dipoles header
+ <03s> [WARNING][DIP] Database not correct or missing. To be computed
+ <03s> [x,Vnl] computed using 2 projectors
+ <03s> Dipoles: P, V and iR (T) |                                        | [000%] --(E) --(X)
+ <04s> Dipoles: P, V and iR (T) |########################################| [100%] --(E) --(X)
+ <04s> [DIP] Writing dipoles header
+ <04s> [07] Dynamic Dielectric Matrix (PPA)
+ <04s> [LA] SERIAL linear algebra
+ <04s> [DIP] Checking dipoles header
+ <04s> [FFT-X] Mesh size:   39   39    7
+ <04s> [X-CG] R(p) Tot o/o(of R):  149  250  100
+ <04s> Xo@q[1] |                                        | [000%] --(E) --(X)
+ <04s> Xo@q[1] |########################################| [100%] --(E) --(X)
+ <04s> X@q[1] |                                        | [000%] --(E) --(X)
+ <04s> X@q[1] |########################################| [100%] --(E) --(X)
+ <04s> [X-CG] R(p) Tot o/o(of R):  249  250  100
+ <04s> Xo@q[2] |                                        | [000%] --(E) --(X)
+ <04s> Xo@q[2] |########################################| [100%] --(E) --(X)
+ <04s> X@q[2] |                                        | [000%] --(E) --(X)
+ <04s> X@q[2] |########################################| [100%] --(E) --(X)
+ <04s> [X-CG] R(p) Tot o/o(of R):  249  250  100
+ <04s> Xo@q[3] |                                        | [000%] --(E) --(X)
+ <04s> Xo@q[3] |########################################| [100%] --(E) --(X)
+ <04s> X@q[3] |                                        | [000%] --(E) --(X)
+ <04s> X@q[3] |########################################| [100%] --(E) --(X)
+ <04s> [X-CG] R(p) Tot o/o(of R):  250  250  100
+ <04s> Xo@q[4] |                                        | [000%] --(E) --(X)
+ <04s> Xo@q[4] |########################################| [100%] --(E) --(X)
+ <04s> X@q[4] |                                        | [000%] --(E) --(X)
+ <04s> X@q[4] |########################################| [100%] --(E) --(X)
+ <04s> [X-CG] R(p) Tot o/o(of R):  250  250  100
+ <04s> Xo@q[5] |                                        | [000%] --(E) --(X)
+ <04s> Xo@q[5] |########################################| [100%] --(E) --(X)
+ <04s> X@q[5] |                                        | [000%] --(E) --(X)
+ <04s> X@q[5] |########################################| [100%] --(E) --(X)
+ <04s> [X-CG] R(p) Tot o/o(of R):  150  250  100
+ <04s> Xo@q[6] |                                        | [000%] --(E) --(X)
+ <04s> Xo@q[6] |########################################| [100%] --(E) --(X)
+ <04s> X@q[6] |                                        | [000%] --(E) --(X)
+ <04s> X@q[6] |########################################| [100%] --(E) --(X)
+ <04s> [08] Local Exchange-Correlation + Non-Local Fock
+ <04s> [FFT-HF/Rho] Mesh size:   51   51    9
+ <04s> EXS |                                        | [000%] --(E) --(X)
+ <04s> EXS |########################################| [100%] --(E) --(X)
+ <04s> [xc] Functional : Slater exchange(X)+Perdew & Zunger(C)
+ <04s> [xc] LIBXC used to calculate xc functional
+ <04s> [08.01] Hartree-Fock occupations report
+ <04s> [09] Dyson equation: full Green`s function
+ <04s> [09.01] G0W0 (W PPA)
+ <04s> [FFT-GW] Mesh size:   39   39    7
+ <04s> G0W0 (W PPA) |                                        | [000%] --(E) --(X)
+ <05s> G0W0 (W PPA) |########################################| [100%] --(E) --(X)
+ <05s> [10] Timing Overview
+ <05s> [11] Memory Overview
+ <05s> [12] Game Over & Game summary
+ <05s> [TIMING]            [Time-Profile]: 05s

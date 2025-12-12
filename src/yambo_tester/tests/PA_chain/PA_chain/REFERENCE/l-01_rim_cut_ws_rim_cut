@@ -1,0 +1,42 @@
+
+
+ __   __  _______  __   __  _______  _______
+|  | |  ||   _   ||  |_|  ||  _    ||       |
+|  |_|  ||  |_|  ||       || |_|   ||   _   |
+|       ||       ||       ||       ||  | |  |
+|_     _||       ||       ||  _   | |  |_|  |
+  |   |  |   _   || ||_|| || |_|   ||       |
+  |___|  |__| |__||_|   |_||_______||_______|
+
+
+ <---> [01] CPU structure, Files & I/O Directories
+ <---> [02] CORE Variables Setup
+ <---> [02.01] Unit cells
+ <---> [02.02] Symmetries
+ <---> [02.03] RL shells
+ <---> [02.04] K-grid lattice
+ <---> [02.05] Energies [ev] & Occupations
+ <---> [03] Transferred momenta grid
+ <---> [04] Coloumb potential CutOff :ws
+ <---> WS setup |                                        | [000%] --(E) --(X)
+ <---> WS setup |########################################| [100%] --(E) --(X)
+ <---> WS components |                                        | [000%] --(E) --(X)
+ <---> WS-cutoff |
+ <---> WS-cutoff |                                        | [000%] --(E) --(X)
+ <---> WS-cutoff |                                        |                                        | [001%] --(E) --(X) [001%] --(E) --(X)
+ <---> WS-cutoff |                                        | [001%] --(E) --(X)
+ <---> WS-cutoff |########################################| [100%] --(E) --(X)
+ <---> [05] Timing Overview
+ <---> [TIMING]                                   io_WF :     0.00s CPU
+ <---> [TIMING]                                 io_GROT :     0.00s CPU (         2 calls,   0.353 millisec avg)
+ <---> [TIMING]                                io_QINDX :     0.00s CPU (         2 calls,   0.291 millisec avg)
+ <---> [TIMING]                              io_COL_CUT :     0.00s CPU (         4 calls,   0.429 millisec avg)
+ <---> [TIMING]                          io_Double_Grid :     0.00s CPU
+ <---> [TIMING]                                   io_HF :     0.00s CPU
+ <---> [TIMING]                              io_DIPOLES :     0.00s CPU
+ <---> [TIMING]                             io_KB_pwscf :     0.00s CPU
+ <---> [TIMING]                            io_KB_abinit :     0.00s CPU
+ <---> [TIMING]                                    io_X :     0.00s CPU (         4 calls,   0.024 millisec avg)
+ <---> [TIMING]                                   io_BS :     0.00s CPU
+ <---> [TIMING]                          Coulomb Cutoff :     0.00s CPU
+ <---> [06] Game Over & Game summary

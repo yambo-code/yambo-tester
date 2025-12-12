@@ -1,0 +1,37 @@
+
+
+  __ __  ____ ___ ___ ____   ___
+ |  |  |/    |   |   |    \ /   \
+ |  |  |  o  | _   _ |  o  )     |
+ |  ~  |     |  \_/  |     |  O  |
+ |___, |  _  |   |   |  O  |     |
+ |     |  |  |   |   |     |     |
+ |____/|__|__|___|___|_____|\___/
+
+
+ <---> [01] CPU structure, Files & I/O Directories
+ <---> [02] CORE Variables Setup
+ <---> [02.01] Unit cells
+ <---> [02.02] Symmetries
+ <---> [02.03] RL shells
+ <---> [02.04] K-grid lattice
+ <---> [02.05] Energies [ev] & Occupations
+ <---> [03] Transferred momenta grid
+ <---> [04] Coloumb potential CutOff :box
+ <---> Box |                                        | [000%] --(E) --(X)
+ <02s> Box |########################################| [100%] 02s(E) 02s(X)
+ <02s> [05] Timing Overview
+ <02s> [TIMING]                                   io_WF :     0.00s CPU
+ <02s> [TIMING]                                 io_GROT :     0.00s CPU (         2 calls,   0.341 millisec avg)
+ <02s> [TIMING]                                io_QINDX :     0.00s CPU (         2 calls,   0.306 millisec avg)
+ <02s> [TIMING]                              io_COL_CUT :     0.00s CPU (         4 calls,   8.760 millisec avg)
+ <02s> [TIMING]                          io_Double_Grid :     0.00s CPU
+ <02s> [TIMING]                                   io_HF :     0.00s CPU
+ <02s> [TIMING]                              io_DIPOLES :     0.00s CPU
+ <02s> [TIMING]                             io_KB_pwscf :     0.00s CPU
+ <02s> [TIMING]                            io_KB_abinit :     0.00s CPU
+ <02s> [TIMING]                                    io_X :     0.00s CPU (         4 calls,   0.028 millisec avg)
+ <02s> [TIMING]                                   io_BS :     0.00s CPU
+ <02s> [TIMING]                          Coulomb Cutoff :     2.00s CPU
+ <02s> [06] Game Over & Game summary
+ <02s> [TIMING]            [Time-Profile]: 03s

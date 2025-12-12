@@ -1,0 +1,53 @@
+
+
+  __ __  ____ ___ ___ ____   ___
+ |  |  |/    |   |   |    \ /   \
+ |  |  |  o  | _   _ |  o  )     |
+ |  ~  |     |  \_/  |     |  O  |
+ |___, |  _  |   |   |  O  |     |
+ |     |  |  |   |   |     |     |
+ |____/|__|__|___|___|_____|\___/
+
+
+ <---> [01] CPU structure, Files & I/O Directories
+ <---> [02] CORE Variables Setup
+ <---> [02.01] Unit cells
+ <---> [02.02] Symmetries
+ <---> [02.03] RL shells
+ <---> [02.04] K-grid lattice
+ <---> [02.05] Energies [ev] & Occupations
+ <---> [03] Transferred momenta grid
+ <---> [04] Coloumb potential CutOff :box xy
+ <---> [05] Dynamic Dielectric Matrix (PPA)
+ <---> [06] Bare local and non-local Exchange-Correlation
+ <---> [06.01] HF occupations report
+ <---> [07] Dyson equation: Newton solver
+ <---> [07.01] G0W0 (W PPA)
+ <---> [WF-GW] Performing Wave-Functions I/O from ./SAVE
+ <---> [FFT-GW] Mesh size:  39   39    7
+ <---> G0W0 (W PPA) |                                        | [000%] --(E) --(X)
+ <---> G0W0 (W PPA) |########################################| [100%] --(E) --(X)
+ <---> [07.02] QP properties and I/O
+ <01s> [08] Timing Overview
+ <01s> [TIMING]                                   io_WF :     0.00s CPU (         9 calls,   0.490 millisec avg)
+ <01s> [TIMING]                                 io_GROT :     0.00s CPU (         2 calls,   0.378 millisec avg)
+ <01s> [TIMING]                                io_QINDX :     0.00s CPU (         2 calls,   0.284 millisec avg)
+ <01s> [TIMING]                              io_COL_CUT :     0.00s CPU (         3 calls,   0.327 millisec avg)
+ <01s> [TIMING]                          io_Double_Grid :     0.00s CPU
+ <01s> [TIMING]                                   io_HF :     0.00s CPU (         2 calls,   0.338 millisec avg)
+ <01s> [TIMING]                              io_DIPOLES :     0.00s CPU
+ <01s> [TIMING]                             io_KB_pwscf :     0.00s CPU
+ <01s> [TIMING]                            io_KB_abinit :     0.00s CPU
+ <01s> [TIMING]                                    io_X :     0.00s CPU (        18 calls,   0.307 millisec avg)
+ <01s> [TIMING]                             io_fragment :     0.00s CPU (        20 calls,   0.126 millisec avg)
+ <01s> [TIMING]                                   io_BS :     0.00s CPU
+ <01s> [TIMING]                          eval_G_minus_G :     0.00s CPU
+ <01s> [TIMING]                 IO_and_Messaging_switch :     0.00s CPU (         2 calls,   0.004 millisec avg)
+ <01s> [TIMING]                               FFT_setup :     0.00s CPU
+ <01s> [TIMING]                            PP_uspp_init :     0.00s CPU
+ <01s> [TIMING]                             WF_load_FFT :     0.00s CPU
+ <01s> [TIMING]                                 GW(ppa) :     0.00s CPU
+ <01s> [TIMING]                               GW(REDUX) :     0.00s CPU
+ <01s> [TIMING]                            io_QP_and_GF :     0.00s CPU
+ <01s> [09] Game Over & Game summary
+ <01s> [TIMING]            [Time-Profile]: 01s

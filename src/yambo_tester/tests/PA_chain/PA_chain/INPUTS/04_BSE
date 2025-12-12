@@ -1,0 +1,65 @@
+#                                                           
+# ooooo   oooo ..     ooo        ooo ooooooooo.    .oooo.   
+#  `88.   .8" .88.    `88.       .88 `88"   `Y8b  dP"  `Yb  
+#   `88. .8" .8"88.    888b     d"88  88     888 88      88 
+#    `88.8" .8" `88.   8 Y88. .P  88  88oooo888" 88      88 
+#     `88" .88ooo888.  8  `888"   88  88    `88b 88      88 
+#      88 .8"     `88. 8    Y     88  88    .88P `8b    d8" 
+#     o88o88o      888o8          88 o88bood8P"   `Ybod8P"  
+#                                                           
+#                                                           
+#        Version 4.4.0 Revision 16217 Hash e249a91b6        
+#                   MPI+SLK+OpenMP Build                    
+#                 http://www.yambo-code.org                 
+#
+em1s                           # [R Xs] Static Inverse Dielectric Matrix
+optics                         # [R OPT] Optics
+bss                            # [R BSS] Bethe Salpeter Equation solver
+bse                            # [R BSE] Bethe Salpeter Equation.
+bsk                            # [R BSK] Bethe Salpeter Equation kernel
+Chimod= "HARTREE"              # [X] IP/Hartree/ALDA/LRC/PF/BSfxc
+BSEmod= "retarded"             # [BSE] resonant/retarded/coupling
+BSKmod= "SEX"                  # [BSE] IP/Hartree/HF/ALDA/SEX/BSfxc
+BSSmod= "hdi"                  # [BSS] (h)aydock/(d)iagonalization/(i)nversion/(t)ddft`
+BSENGexx=  4999        RL      # [BSK] Exchange components
+BSENGBlk= 15           RL      # [BSK] Screened interaction block size
+#WehCpl                        # [BSK] eh interaction included also in coupling
+#EvalKerr                      # [BSE] Compute the Kerr effect
+#AnHall                        # [BSE] Add the anomalous Hall effect to eps if using length gauge
+% BEnRange
+  0.00000 | 10.00000 | eV      # [BSS] Energy range
+%
+% BDmRange
+  0.10000 |  0.10000 | eV      # [BSS] Damping range
+%
+BEnSteps= 100                  # [BSS] Energy steps
+% BLongDir
+ 1.000000 | 0.000000 | 0.000000 |        # [BSS] [cc] Electric Field
+%
+% BSEBands
+  5 | 8 |                     # [BSK] Bands range
+%
+BSSInvMode= "pf"               # [BSS] Inversion solver modality `(f)ull/(p)erturbative`
+BSEPSInvTrs=   0.0100          # [BSS EPS] Inversion treshold. Relative[o/o](>0)/Absolute(<0)
+BSSInvPFratio= 1.000000        # [BSS] Inversion solver. Ratio between the number of frequencies solved pert/full
+BSHayTrs=  0.0200             # [BSS] Relative [o/o] Haydock threshold. Strict(>0)/Average(<0)
+% BndsRnXs
+  1 | 25 |                     # [Xs] Polarization function bands
+%
+NGsBlkXs= 15           RL      # [Xs] Response block size
+% DmRngeXs
+  0.0010000 |  0.0010000 | eV      # [Xs] Damping range
+%
+% LongDrXs
+ 1.000000 | 1.000000 | 1.000000 |        # [Xs] [cc] Electric Field
+%
+
+rim_cut
+FFTGvecs= 10000        RL    # [FFT] Plane-waves
+CUTGeo= "box xy"             # [CUT] Coulomb Cutoff geometry: box/cylinder/sphere
+% CUTBox
+ 19.00000 | 19.00000 |  0.00000 |        # [CUT] [au] Box sides
+%
+
+KfnQPdb= "E < 02_QP_PPA/ndb.QP"                # [EXTQP BSK BSS] Database
+BSEprop= "abs jdos"

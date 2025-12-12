@@ -1,0 +1,107 @@
+#                                                           
+#  /$$     /$$ /$$$$$$  /$$      /$$ /$$$$$$$   /$$$$$$     
+# |  $$   /$$//$$__  $$| $$$    /$$$| $$__  $$ /$$__  $$    
+#  \  $$ /$$/| $$  \ $$| $$$$  /$$$$| $$  \ $$| $$  \ $$    
+#   \  $$$$/ | $$$$$$$$| $$ $$/$$ $$| $$$$$$$ | $$  | $$    
+#    \  $$/  | $$__  $$| $$  $$$| $$| $$__  $$| $$  | $$    
+#     | $$   | $$  | $$| $$\  $ | $$| $$  \ $$| $$  | $$    
+#     | $$   | $$  | $$| $$ \/  | $$| $$$$$$$/|  $$$$$$/    
+#     |__/   |__/  |__/|__/     |__/|_______/  \______/     
+#                                                           
+#      Version 4.4.0 Revision 16392 Hash b15dff1b5          
+#                  MPI+SLK+OpenMP Build                     
+#               http://www.yambo-code.org                   
+#
+#
+# GW solver              : Newton
+# == PPA-GN GW ==
+#
+# PPA imaginary pt   [ev]: 27.21138
+# GW SC iterations       :0
+# dS/dw steps            : 2
+# dS/dw step         [ev]:  0.10000
+# X G`s            [used]: 21
+# X G`s            [disk]: 21
+# X bands                :  1  10
+# X poles           [o/o]: 100.0000
+# X e/h E range      [ev]:-1.000000 -1.000000
+# X xc-Kernel            : none
+# X BZ energy Double Grid: no
+# X BZ Double Grid points:0
+# Sc/G bands             :  1  20
+# Sc/G damping       [ev]:  0.10000
+# Sc bands terminator    : no
+# Sx RL components       :  4999
+#
+# QP @ K 1 - 4 : b 5 - 6
+#
+#    Eo [eV]      DeltaE [eV]
+#
+   -6.887571    -2.503065
+   -4.346346    -1.738730
+   -1.120167    -0.866770
+    0.000000    -0.866341
+    0.737129     1.788191
+    1.402023     1.706012
+    2.992495     2.797297
+    5.327169     3.088044
+# 
+# 01/16/2019 at 12:33 YAMBO @ narro [start]
+# 01/16/2019 at 12:34               [end]
+#  
+# Timing   [Min/Max/Average]: 05s/05s/05s
+#
+# .-Input file : yambo.in
+# | optics                         # [R OPT] Optics
+# | bse                            # [R BSE] Bethe Salpeter Equation.
+# | bsk                            # [R BSK] Bethe Salpeter Equation kernel
+# | bss                            # [R BSS] Bethe Salpeter Equation solver
+# | em1s                           # [R Xs] Static Inverse Dielectric Matrix
+# | rim_cut                        # [R RIM CUT] Coulomb potential
+# | X_Threads= 1                   # [OPENMP/X] Number of threads for response functions
+# | DIP_Threads= 1                 # [OPENMP/X] Number of threads for dipoles
+# | K_Threads= 1                   # [OPENMP/BSK] Number of threads for response functions
+# | RandQpts=0                     # [RIM] Number of random q-points in the BZ
+# | RandGvec= 1            RL      # [RIM] Coulomb interaction RS components
+# | CUTGeo= "box xy"               # [CUT] Coulomb Cutoff geometry: box/cylinder/sphere/ws X/Y/Z/XY..
+# | % CUTBox
+# |  19.00000 | 19.00000 |  0.00000 |        # [CUT] [au] Box sides
+# | %
+# | CUTRadius= 0.000000            # [CUT] [au] Sphere/Cylinder radius
+# | CUTCylLen= 0.000000            # [CUT] [au] Cylinder length
+# | CUTwsGvec= 0.700000            # [CUT] WS cutoff: number of G to be modified
+# | Chimod= "HARTREE"              # [X] IP/Hartree/ALDA/LRC/PF/BSfxc
+# | BSEmod= "retarded"             # [BSE] resonant/retarded/coupling
+# | BSKmod= "SEX"                  # [BSE] IP/Hartree/HF/ALDA/SEX/BSfxc
+# | BSSmod= "hdi"                  # [BSS] (h)aydock/(d)iagonalization/(i)nversion/(t)ddft`
+# | BSENGexx=  4999        RL      # [BSK] Exchange components
+# | BSENGBlk= 21           RL      # [BSK] Screened interaction block size
+# | #WehCpl                        # [BSK] eh interaction included also in coupling
+# | KfnQPdb= "E < 02_QP_PPA/ndb.QP" # [EXTQP BSK BSS] Database
+# | % BEnRange
+# |   0.00000 | 10.00000 | eV      # [BSS] Energy range
+# | %
+# | % BDmRange
+# |   0.10000 |  0.10000 | eV      # [BSS] Damping range
+# | %
+# | BEnSteps= 100                  # [BSS] Energy steps
+# | % BLongDir
+# | 0.1000E-4 | 0.000    | 0.000    |        # [BSS] [cc] Electric Field
+# | %
+# | % BSEBands
+# |   5 |  8 |                     # [BSK] Bands range
+# | %
+# | BSSInvMode= "pf"               # [BSS] Inversion solver modality `(f)ull/(p)erturbative`
+# | BSEPSInvTrs=   0.0100          # [BSS EPS] Inversion treshold. Relative[o/o](>0)/Absolute(<0)
+# | BSSInvPFratio= 1.000000        # [BSS] Inversion solver. Ratio between the number of frequencies solved pert/full
+# | BSHayTrs=  0.02000             # [BSS] Relative [o/o] Haydock threshold. Strict(>0)/Average(<0)
+# | % BndsRnXs
+# |   1 | 25 |                     # [Xs] Polarization function bands
+# | %
+# | NGsBlkXs= 21           RL      # [Xs] Response block size
+# | % DmRngeXs
+# | 0.1000E-2 |0.1000E-2 | eV      # [Xs] Damping range
+# | %
+# | % LongDrXs
+# | 0.5774E-5 |0.5774E-5 |0.5774E-5 |        # [Xs] [cc] Electric Field
+# | %

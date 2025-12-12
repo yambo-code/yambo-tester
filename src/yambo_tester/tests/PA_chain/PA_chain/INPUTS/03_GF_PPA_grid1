@@ -1,0 +1,50 @@
+#                                                                     
+#   __   __     _        __  __       ____      U  ___  u             
+#   \ \ / / U  /"\  U u |" \/ "| u U | __") u    \/"_ \/              
+#    \ V /   \/ _ \/   \| |\/| |/   \|  _ \/     | | | |              
+#   U_|"|_u  / ___ \    | |  | |     | |_) | .-,_| |_| |              
+#     |_|   /_/   \_\   |_|  |_|     |____/   \_)-\___/               
+# .-,//|(_   \\    >>  <<,-,,-.     _|| \\_        \\                 
+#  \_) (__) (__)  (__)  (./  \.)   (__) (__)      (__)                
+#                                                                     
+#                                                                     
+# Version 5.1.0 Revision 20493 Hash (prev commit) 883f433ad           
+#               Branch is devel-fullfreqGW                            
+#                MPI+OpenMP+HDF5_IO Build                             
+#                http://www.yambo-code.org                            
+#
+gw0                              # [R] GW approximation
+ppa                              # [R][Xp] Plasmon Pole Approximation for the Screened Interaction
+rim_cut                          # [R] Coulomb potential
+HF_and_locXC                     # [R] Hartree-Fock
+em1d                             # [R][X] Dynamically Screened Interaction
+
+RandQpts=3000000                 # [RIM] Number of random q-points in the BZ
+RandGvec= 1                RL    # [RIM] Coulomb interaction RS components
+CUTGeo= "box xy"                 # [CUT] Coulomb Cutoff geometry: box/cylinder/sphere/ws/slab X/Y/Z/XY..
+% CUTBox
+ 19.00000 | 19.00000 | 0.000000 |        # [CUT] [au] Box sides
+%
+EXXRLvcs=  5000            RL    # [XX] Exchange    RL components
+VXCRLvcs=  5000            RL    # [XC] XCpotential RL components
+Chimod= "HARTREE"                # [X] IP/Hartree/ALDA/LRC/PF/BSfxc
+% BndsRnXp
+  1 | 10 |                       # [Xp] Polarization function bands
+%
+NGsBlkXp= 21               RL    # [Xp] Response block size
+% LongDrXp
+ 1.000000 | 0.000000 | 0.000000 |        # [Xp] [cc] Electric Field
+%
+PPAPntXp= 1.000000         Ha    # [Xp] PPA imaginary energy
+% GbndRnge
+  1 | 20 |                       # [GW] G[W] bands range
+%
+GTermKind= "none"                # [GW] GW terminator ("none","BG" Bruneval-Gonze,"BRS" Berger-Reining-Sottile)
+DysSolver= "g"                   # [GW] Dyson Equation solver ("n","s","g")
+GEnSteps= 15                     # [GW] Green`s Function (GF) energy steps
+% GEnRnge
+ -1.00000 | 1.00000 |      eV    # [GW] GF energy range
+%
+%QPkrange                        # [GW] QP generalized Kpoint/Band indices
+6|6|5|6|
+%
