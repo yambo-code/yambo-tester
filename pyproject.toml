@@ -22,11 +22,13 @@ dependencies = [
   "netCDF4"
 ]
 
-[project.scripts]
-yambo-tester = "yambo_tester.cli:main"
-
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[project.scripts]
+yambo-tester = "yambo_tester.cli:main"
+tester = "scripts.test_reference:main"
+
 
 [tool.setuptools.package-data]
 "yambo_tester" = ["data/config.yaml", "tests/**/*"]

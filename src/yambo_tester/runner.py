@@ -106,18 +106,36 @@ def run_test(test, parameters, logger, verbose=False):
     # Loop that launches the subtests
     for name, run in subtests:
         if parameters[run['exe']]:
+            
+            # Execution of any actions
+            if run.get('actions', False):
+                for action in run["actions"]:
+                    cmd = action.strip().split()
+                    if cmd[0] == "mkdir":
+                        assert len(cmd) == 2, f"Action 'mkdir' require 2 elements, {len(cmd)} provided."
+                        ret_action = test['run_dir'].joinpath(cmd[1])
+                        ret_action.mkdir(exist_ok=True)
+                    elif cmd[0] == "cp":
+                        assert len(cmd) == 3, f"Action 'cp' require 3 elements, {len(cmd)} provided."
+                        for f in test['run_dir'].glob(cmd[1]):
+                            ret_action = Path(f).copy_into(test['run_dir'].joinpath(cmd[2]))
+                    else:
+                        ret_action = subprocess.run(cmd, shell=False, cwd=str(test['run_dir']))
+                        if ret_action.returncode != 0:
+                            logger.warning(f"{this_test} action failed: {cmd}")
+
+            # Generation of the command line for the test
             cmd = []
             if parameters['mpi'] and parameters['mpi_launcher']:
                 cmd.extend([str(parameters['mpi_launcher']), '-np', str(parameters['nprocs'])])
             cmd.append(str(parameters[run['exe']]))
-            if 'actions' in run:
-                if run['actions']: pass # TODO
             if run['input']: cmd.extend(['-F', str(run['input'])])
             flags = ""
             if 'flags' in run:
                 if run['flags']: flags = f",{run['flags']}"
             if run['output']: cmd.extend(['-J', str(run['output'])+flags, '-C', str(run['output'])])
-    
+
+            # Launching the test
             logger.info(f"{this_test} Launching {name}")
             if verbose: local_logger.info(f"{' '.join(cmd)}")
             process = subprocess.Popen(

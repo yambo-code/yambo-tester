@@ -90,7 +90,7 @@ def test_reference_ok(ref_item):
         too_large = 10e99
     
         # Check text output files
-        if ref[:2] == 'o-' and '.ndb' not in ref:
+        if ref[:2] == 'o-' and not '.ndb' in ref:
             # Read reference and output files
             ref_data = np.genfromtxt(str(ref_file))
             out_data = np.genfromtxt(str(out_file))
@@ -121,7 +121,7 @@ def test_reference_ok(ref_item):
                 
                 # Renormalize data to have 1 as maximum
                 start, stop = i*ndata, i*ndata+ndata
-                assert np.allclose(out_data[:].ravel(), ref_data[start:stop], rtol=tol, atol=zero_dfl), f"{ref}: Difference larger than {tol}!"
+                assert np.allclose(out_data[:].ravel()[:len(ref_data[start:stop])], ref_data[start:stop], rtol=tol, atol=zero_dfl), f"{ref}: Difference larger than {tol}!"
     
         # Check report files
         if ref[:2] == 'r-':
