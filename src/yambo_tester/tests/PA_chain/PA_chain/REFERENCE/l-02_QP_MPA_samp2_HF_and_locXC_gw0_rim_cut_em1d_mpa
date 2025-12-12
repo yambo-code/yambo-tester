@@ -1,0 +1,89 @@
+
+
+  __ __  ____ ___ ___ ____   ___
+ |  |  |/    |   |   |    \ /   \
+ |  |  |  o  | _   _ |  o  )     |
+ |  ~  |     |  \_/  |     |  O  |
+ |___, |  _  |   |   |  O  |     |
+ |     |  |  |   |   |     |     |
+ |____/|__|__|___|___|_____|\___/
+
+
+ <02s> [01] MPI/OPENMP structure, Files & I/O Directories
+ <02s> [02] CORE Variables Setup
+ <02s> [02.01] Unit cells
+ <02s> [02.02] Symmetries
+ <02s> [02.03] Reciprocal space
+ <02s> [02.04] K-grid lattice
+ <02s> Grid dimensions      :  10
+ <02s> [02.05] Energies & Occupations
+ <02s> [03] Transferred momenta grid
+ <02s> [04] Coloumb potential CutOff box xy
+ <02s> [05] Dipoles
+ <02s> [DIP] Checking dipoles header
+ <02s> [WARNING] DIPOLES database not correct or missing
+ <03s> [x,Vnl] computed using 2 projectors
+ <03s> Dipoles: P, V and iR (T) |                                        | [000%] --(E) --(X)
+ <03s> [WF] Copying WF data from GPU device
+ <03s> Dipoles: P, V and iR (T) |########################################| [100%] --(E) --(X)
+ <03s> [DIP] Writing dipoles header
+ <03s> [06] Dynamic Dielectric Matrix (MPA)
+ <03s> [LA] SERIAL linear algebra
+ <03s> [DIP] Checking dipoles header
+ <03s> [FFT-X] Mesh size:   39   39    7
+ <04s> [WF] Copying WF data from GPU device
+ <04s> [X-CG] R(p) Tot o/o(of R):  149  250  100
+ <04s> Xo@q[1] |                                        | [000%] --(E) --(X)
+ <04s> Xo@q[1] |########################################| [100%] --(E) --(X)
+ <04s> [LA] X compute_on_gpu : yes
+ <04s> X@q[1] |                                        | [000%] --(E) --(X)
+ <05s> X@q[1] |########################################| [100%] --(E) --(X)
+ <05s> [X-CG] R(p) Tot o/o(of R):  249  250  100
+ <05s> Xo@q[2] |                                        | [000%] --(E) --(X)
+ <05s> Xo@q[2] |########################################| [100%] --(E) --(X)
+ <05s> [LA] X compute_on_gpu : yes
+ <05s> X@q[2] |                                        | [000%] --(E) --(X)
+ <05s> X@q[2] |########################################| [100%] --(E) --(X)
+ <05s> [X-CG] R(p) Tot o/o(of R):  249  250  100
+ <05s> Xo@q[3] |                                        | [000%] --(E) --(X)
+ <05s> Xo@q[3] |########################################| [100%] --(E) --(X)
+ <05s> [LA] X compute_on_gpu : yes
+ <05s> X@q[3] |                                        | [000%] --(E) --(X)
+ <05s> X@q[3] |########################################| [100%] --(E) --(X)
+ <05s> [X-CG] R(p) Tot o/o(of R):  250  250  100
+ <05s> Xo@q[4] |                                        | [000%] --(E) --(X)
+ <05s> Xo@q[4] |########################################| [100%] --(E) --(X)
+ <05s> [LA] X compute_on_gpu : yes
+ <05s> X@q[4] |                                        | [000%] --(E) --(X)
+ <05s> X@q[4] |########################################| [100%] --(E) --(X)
+ <05s> [X-CG] R(p) Tot o/o(of R):  250  250  100
+ <05s> Xo@q[5] |                                        | [000%] --(E) --(X)
+ <05s> Xo@q[5] |########################################| [100%] --(E) --(X)
+ <05s> [LA] X compute_on_gpu : yes
+ <05s> X@q[5] |                                        | [000%] --(E) --(X)
+ <05s> X@q[5] |########################################| [100%] --(E) --(X)
+ <05s> [X-CG] R(p) Tot o/o(of R):  150  250  100
+ <05s> Xo@q[6] |                                        | [000%] --(E) --(X)
+ <05s> Xo@q[6] |########################################| [100%] --(E) --(X)
+ <05s> [LA] X compute_on_gpu : yes
+ <05s> X@q[6] |                                        | [000%] --(E) --(X)
+ <05s> X@q[6] |########################################| [100%] --(E) --(X)
+ <05s> [07] Local Exchange-Correlation + Non-Local Fock
+ <06s> [FFT-HF/Rho] Mesh size:   51   51    9
+ <06s> [WF] Copying WF data from GPU device
+ <06s> EXS |                                        | [000%] --(E) --(X)
+ <06s> EXS |########################################| [100%] --(E) --(X)
+ <06s> [xc] Functional : Slater exchange(X)+Perdew & Zunger(C)
+ <06s> [xc] LIBXC used to calculate xc functional
+ <06s> [07.01] Hartree-Fock occupations report
+ <06s> [08] Dyson equation: Newton solver
+ <06s> [08.01] G0W0 (W MPA)
+ <06s> [FFT-GW] Mesh size:   39   39    7
+ <06s> [WF] Copying WF data from GPU device
+ <06s> G0W0 (W MPA) |                                        | [000%] --(E) --(X)
+ <07s> G0W0 (W MPA) |########################################| [100%] --(E) --(X)
+ <07s> [08.02] QP properties and I/O
+ <07s> [09] Timing Overview
+ <07s> [10] Memory Overview
+ <07s> [11] Game Over & Game summary
+ <07s> [TIMING]            [Time-Profile]: 07s

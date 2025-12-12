@@ -1,0 +1,95 @@
+
+
+
+_|      _|   _|_|   _|      _|  _|_|_|     _|_|
+  _|  _|   _|    _| _|_|  _|_| _|    _| _|    _|
+    _|     _|_|_|_| _|  _|  _| _|_|_|   _|    _|
+    _|     _|    _| _|      _| _|    _| _|    _|
+    _|     _|    _| _|      _| _|_|_|     _|_|
+
+
+
+ <---> [01] MPI/OPENMP structure, Files & I/O Directories
+ <---> [02] CORE Variables Setup
+ <---> [02.01] Unit cells
+ <---> [02.02] Symmetries
+ <---> [02.03] Reciprocal space
+ <---> [02.04] K-grid lattice
+ <---> Grid dimensions      :  10
+ <---> [02.05] Energies & Occupations
+ <---> [03] Transferred momenta grid
+ <---> [04] Coloumb potential CutOff box xy
+ <---> [05] Dipoles
+ <---> [DIP] Checking dipoles header
+ <---> [DIP] Checking overlaps header
+ <---> [WARNING] DIPOLES database not correct or missing
+ <--->  Index g0 smallest positive vectors in each direction:   5  4139
+ <--->  Index g0 smallest negative vectors in each direction:   2  3138
+ <---> Number of k-point in each direction:    1   1  10
+ <--->  Index g0 smallest positive vectors in each direction:   5  4139
+ <--->  Index g0 smallest negative vectors in each direction:   2  3138
+ <---> [WARNING] Forced lowering on cutoff on WFs
+ <---> Overlaps: |                                        | [000%] --(E) --(X)
+ <---> Overlaps: |########################################| [100%] --(E) --(X)
+ <---> [WARNING] Covariant Dipoles not in 3d. Assuming non periodic system.
+ <---> Using forth order approximation for covariant dipoles
+ <---> Covariant Dipoles |                                        | [000%] --(E) --(X)
+ <---> Covariant Dipoles |########################################| [100%] --(E) --(X)
+ <---> Dipoles in real space |                                        | [000%] --(E) --(X)
+ <---> Dipoles in real space |########################################| [100%] --(E) --(X)
+ <---> Dipoles: P (T) |                                        | [000%] --(E) --(X)
+ <---> Dipoles: P (T) |########################################| [100%] --(E) --(X)
+ <---> [DIP] Writing dipoles header
+ <---> [DIP] Writing overlaps header
+ <---> [06] Dynamic Dielectric Matrix (PPA)
+ <---> [LA] SERIAL linear algebra
+ <---> [DIP] Checking dipoles header
+ <---> [DIP] Checking overlaps header
+ <---> [FFT-X] Mesh size:   39   39    7
+ <---> [X-CG] R(p) Tot o/o(of R):  149  250  100
+ <---> Xo@q[1] |                                        | [000%] --(E) --(X)
+ <---> Xo@q[1] |########################################| [100%] --(E) --(X)
+ <---> X@q[1] |                                        | [000%] --(E) --(X)
+ <---> X@q[1] |########################################| [100%] --(E) --(X)
+ <---> [X-CG] R(p) Tot o/o(of R):  249  250  100
+ <---> Xo@q[2] |                                        | [000%] --(E) --(X)
+ <---> Xo@q[2] |########################################| [100%] --(E) --(X)
+ <---> X@q[2] |                                        | [000%] --(E) --(X)
+ <---> X@q[2] |########################################| [100%] --(E) --(X)
+ <---> [X-CG] R(p) Tot o/o(of R):  249  250  100
+ <---> Xo@q[3] |                                        | [000%] --(E) --(X)
+ <---> Xo@q[3] |########################################| [100%] --(E) --(X)
+ <---> X@q[3] |                                        | [000%] --(E) --(X)
+ <---> X@q[3] |########################################| [100%] --(E) --(X)
+ <---> [X-CG] R(p) Tot o/o(of R):  250  250  100
+ <---> Xo@q[4] |                                        | [000%] --(E) --(X)
+ <---> Xo@q[4] |########################################| [100%] --(E) --(X)
+ <---> X@q[4] |                                        | [000%] --(E) --(X)
+ <---> X@q[4] |########################################| [100%] --(E) --(X)
+ <---> [X-CG] R(p) Tot o/o(of R):  250  250  100
+ <---> Xo@q[5] |                                        | [000%] --(E) --(X)
+ <02s> Xo@q[5] |########################################| [100%] --(E) --(X)
+ <02s> X@q[5] |                                        | [000%] --(E) --(X)
+ <02s> X@q[5] |########################################| [100%] --(E) --(X)
+ <02s> [X-CG] R(p) Tot o/o(of R):  150  250  100
+ <02s> Xo@q[6] |                                        | [000%] --(E) --(X)
+ <02s> Xo@q[6] |########################################| [100%] --(E) --(X)
+ <02s> X@q[6] |                                        | [000%] --(E) --(X)
+ <02s> X@q[6] |########################################| [100%] --(E) --(X)
+ <02s> [07] Local Exchange-Correlation + Non-Local Fock
+ <02s> [FFT-HF/Rho] Mesh size:   51   51    9
+ <02s> EXS |                                        | [000%] --(E) --(X)
+ <03s> EXS |########################################| [100%] --(E) --(X)
+ <03s> [xc] Functional : Slater exchange(X)+Perdew & Zunger(C)
+ <03s> [xc] LIBXC used to calculate xc functional
+ <03s> [07.01] Hartree-Fock occupations report
+ <03s> [08] Dyson equation: Newton solver
+ <03s> [08.01] G0W0 (W PPA)
+ <03s> [FFT-GW] Mesh size:   39   39    7
+ <03s> G0W0 (W PPA) |                                        | [000%] --(E) --(X)
+ <04s> G0W0 (W PPA) |########################################| [100%] --(E) --(X)
+ <04s> [08.02] QP properties and I/O
+ <04s> [09] Timing Overview
+ <04s> [10] Memory Overview
+ <04s> [11] Game Over & Game summary
+ <04s> [TIMING]            [Time-Profile]: 04s

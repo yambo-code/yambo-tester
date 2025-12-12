@@ -1,0 +1,111 @@
+
+
+
+_|      _|   _|_|   _|      _|  _|_|_|     _|_|
+  _|  _|   _|    _| _|_|  _|_| _|    _| _|    _|
+    _|     _|_|_|_| _|  _|  _| _|_|_|   _|    _|
+    _|     _|    _| _|      _| _|    _| _|    _|
+    _|     _|    _| _|      _| _|_|_|     _|_|
+
+
+
+ <---> [01] CPU structure, Files & I/O Directories
+ <---> [02] CORE Variables Setup
+ <---> [02.01] Unit cells
+ <---> [02.02] Symmetries
+ <---> [02.03] RL shells
+ <---> [02.04] K-grid lattice
+ <---> [02.05] Energies [ev] & Occupations
+ <---> [03] Transferred momenta grid
+ <---> [04] Coloumb potential CutOff :ws xy
+ <---> [05] Dynamic Dielectric Matrix (PPA)
+ <---> [LA] SERIAL linear algebra
+ <---> [DIP] Checking dipoles header
+ <---> [x,Vnl] computed using 2 projectors
+ <---> [WF-Oscillators/G space] Performing Wave-Functions I/O from ./SAVE
+ <---> Dipoles: P and iR (T): |                                        | [000%] --(E) --(X)
+ <---> Dipoles: P and iR (T): |########################################| [100%] --(E) --(X)
+ <---> [DIP] Writing dipoles header
+ <---> [WF-X] Performing Wave-Functions I/O from ./SAVE
+ <---> [FFT-X] Mesh size:  38   38    5
+ <---> [X-CG] R(p) Tot o/o(of R)  : 149  250  100
+ <---> Xo@q[1] |                                        | [000%] --(E) --(X)
+ <---> Xo@q[1] |########################################| [100%] --(E) --(X)
+ <---> X@q[1] |                                        | [000%] --(E) --(X)
+ <---> X@q[1] |########################################| [100%] --(E) --(X)
+ <---> [X-CG] R(p) Tot o/o(of R)  : 249  250  100
+ <---> Xo@q[2] |                                        | [000%] --(E) --(X)
+ <---> Xo@q[2] |########################################| [100%] --(E) --(X)
+ <---> X@q[2] |                                        | [000%] --(E) --(X)
+ <---> X@q[2] |########################################| [100%] --(E) --(X)
+ <---> [X-CG] R(p) Tot o/o(of R)  : 249  250  100
+ <---> Xo@q[3] |                                        | [000%] --(E) --(X)
+ <01s> Xo@q[3] |########################################| [100%] --(E) --(X)
+ <01s> X@q[3] |                                        | [000%] --(E) --(X)
+ <01s> X@q[3] |########################################| [100%] --(E) --(X)
+ <01s> [X-CG] R(p) Tot o/o(of R)  : 250  250  100
+ <01s> Xo@q[4] |                                        | [000%] --(E) --(X)
+ <01s> Xo@q[4] |########################################| [100%] --(E) --(X)
+ <01s> X@q[4] |                                        | [000%] --(E) --(X)
+ <01s> X@q[4] |########################################| [100%] --(E) --(X)
+ <01s> [X-CG] R(p) Tot o/o(of R)  : 250  250  100
+ <01s> Xo@q[5] |                                        | [000%] --(E) --(X)
+ <01s> Xo@q[5] |########################################| [100%] --(E) --(X)
+ <01s> X@q[5] |                                        | [000%] --(E) --(X)
+ <01s> X@q[5] |########################################| [100%] --(E) --(X)
+ <01s> [X-CG] R(p) Tot o/o(of R)  : 150  250  100
+ <01s> Xo@q[6] |                                        | [000%] --(E) --(X)
+ <02s> Xo@q[6] |########################################| [100%] --(E) --(X)
+ <02s> X@q[6] |                                        | [000%] --(E) --(X)
+ <02s> X@q[6] |########################################| [100%] --(E) --(X)
+ <02s> [06] Bare local and non-local Exchange-Correlation
+ <02s> [WF-HF/Rho] Performing Wave-Functions I/O from ./SAVE
+ <02s> [FFT-HF/Rho] Mesh size:  51   51    9
+ <02s> EXS |                                        | [000%] --(E) --(X)
+ <02s> EXS |########################################| [100%] --(E) --(X)
+ <02s> [xc] Functional Slater exchange(X)+Perdew & Zunger(C)
+ <02s> [xc] LIBXC used to calculate xc functional
+ <02s> [06.01] HF occupations report
+ <02s> [07] Dyson equation: Newton solver
+ <02s> [07.01] G0W0 (W PPA)
+ <03s> [WF-GW] Performing Wave-Functions I/O from ./SAVE
+ <03s> [FFT-GW] Mesh size:  38   38    5
+ <03s> G0W0 (W PPA) |                                        | [000%] --(E) --(X)
+ <03s> G0W0 (W PPA) |########################################| [100%] --(E) --(X)
+ <03s> [07.02] QP properties and I/O
+ <03s> [08] Timing Overview
+ <03s> [TIMING]                                   io_WF :     0.00s CPU (        33 calls,   0.291 millisec avg)
+ <03s> [TIMING]                                 io_GROT :     0.00s CPU (         2 calls,   0.325 millisec avg)
+ <03s> [TIMING]                                io_QINDX :     0.00s CPU (         2 calls,   0.272 millisec avg)
+ <03s> [TIMING]                              io_COL_CUT :     0.00s CPU (         3 calls,   0.324 millisec avg)
+ <03s> [TIMING]                          io_Double_Grid :     0.00s CPU
+ <03s> [TIMING]                                   io_HF :     0.00s CPU (         3 calls,   0.565 millisec avg)
+ <03s> [TIMING]                              io_DIPOLES :     0.00s CPU (         9 calls,   0.288 millisec avg)
+ <03s> [TIMING]                             io_KB_pwscf :     0.00s CPU (         8 calls,   0.270 millisec avg)
+ <03s> [TIMING]                            io_KB_abinit :     0.00s CPU
+ <03s> [TIMING]                                    io_X :     0.00s CPU (        18 calls,   0.402 millisec avg)
+ <03s> [TIMING]                                   io_BS :     0.00s CPU
+ <03s> [TIMING]                 IO_and_Messaging_switch :     0.00s CPU (         8 calls,   0.003 millisec avg)
+ <03s> [TIMING]                                 Dipoles :     0.00s CPU
+ <03s> [TIMING]                       DIPOLE_transverse :     0.00s CPU
+ <03s> [TIMING]                            PP_uspp_init :     0.00s CPU (         4 calls,   0.039 millisec avg)
+ <03s> [TIMING]                             WF_load_FFT :     0.00s CPU (         4 calls,  20.024 millisec avg)
+ <03s> [TIMING]                             io_fragment :     0.00s CPU (        49 calls,   0.120 millisec avg)
+ <03s> [TIMING]                               FFT_setup :     2.00s CPU (         8 calls,   0.260 sec avg)
+ <03s> [TIMING]                          Xo (procedure) :     0.00s CPU (         6 calls,  68.766 millisec avg)
+ <03s> [TIMING]                              Xo (REDUX) :     0.00s CPU (         6 calls,   0.001 millisec avg)
+ <03s> [TIMING]                           X (procedure) :     0.00s CPU (         6 calls,   0.266 millisec avg)
+ <03s> [TIMING] MATRIX transfer (X_G_all_q_X_redux_1_1) :     0.00s CPU (        12 calls,   0.004 millisec avg)
+ <03s> [TIMING]                          LINEAR ALGEBRA :     0.00s CPU (        12 calls,   0.049 millisec avg)
+ <03s> [TIMING]                       SERIAL_lin_system :     0.00s CPU (        12 calls,   0.048 millisec avg)
+ <03s> [TIMING]                               X (REDUX) :     0.00s CPU (         6 calls,   0.010 millisec avg)
+ <03s> [TIMING] MATRIX transfer (X_G_all_q_X_redux_2_1) :     0.00s CPU (        12 calls,   0.002 millisec avg)
+ <03s> [TIMING]                                      HF :     0.00s CPU
+ <03s> [TIMING]                               HF(REDUX) :     0.00s CPU
+ <03s> [TIMING]                               XCo_local :     0.00s CPU
+ <03s> [TIMING]                     XC_potential_driver :     0.00s CPU (         2 calls,  31.362 millisec avg)
+ <03s> [TIMING]                                 GW(ppa) :     0.00s CPU
+ <03s> [TIMING]                               GW(REDUX) :     0.00s CPU
+ <03s> [TIMING]                            io_QP_and_GF :     0.00s CPU
+ <03s> [09] Game Over & Game summary
+ <03s> [TIMING]            [Time-Profile]: 03s

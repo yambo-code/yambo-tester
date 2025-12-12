@@ -1,0 +1,117 @@
+#                                                                     
+#  **    **    **     ****     ****  ******     *******               
+# //**  **    ****   /**/**   **/** /*////**   **/////**              
+#  //****    **//**  /**//** ** /** /*   /**  **     //**             
+#   //**    **  //** /** //***  /** /******  /**      /**             
+#    /**   **********/**  //*   /** /*//// **/**      /**             
+#    /**  /**//////**/**   /    /** /*    /**//**     **              
+#    /**  /**     /**/**        /** /*******  //*******               
+#    //   //      // //         //  ///////    ///////                
+#                                                                     
+#       Version 5.0.1 Revision 18802 Hash 6d95de8f4                   
+#               Branch is devel-fullfreqGW                            
+#            MPI+OpenMP+CUDA+SLK+HDF5_IO Build                        
+#                http://www.yambo-code.org                            
+#
+#
+# GW solver                                       : Newton
+# GW approximation                                : MPA
+# MPA number of poles                             :   0.00000000   
+# GW SC iterations                                : 0
+# dS/dw steps                                     :  2
+# dS/dw step                                      :  0.100000001    [ev]
+# X G`s                                           :  21 [used]
+# X G`s                                           :  21 [disk]
+# X bands                                         :   1  10
+# X poles                                         :   100.000000    [o/o]
+# X e/h E range                                   :  -1.00000000     -1.00000000    [ev]
+# X xc-Kernel                                     : none
+# X damping range                                 :   0.00000000      2.72113848    [ev]
+# X Steps                                         :   4
+# X BZ energy Double Grid                         : no
+# Sc/G bands                                      :   1  20
+# Sc/G damping                                    :  0.100000001    [ev]
+# Sc bands terminator                             : no
+# Sx RL components                                :   4999
+#                                                 
+# QP @ state[ 1 ] K range                         :   1   4
+# QP @ state[ 1 ] b range                         :   5   6
+# GF energies kind                                : Slater exchange(X)+Perdew & Zunger(C)
+# GF WF`s kind                                    : Slater exchange(X)+Perdew & Zunger(C)
+# Xs energies kind                                : Slater exchange(X)+Perdew & Zunger(C)
+# Xs WF`s kind                                    : Slater exchange(X)+Perdew & Zunger(C)
+#
+#
+#    K-point            Band               Eo                 E-Eo               Sc|Eo
+#
+     1.00000000         5.00000000         0.00000000       -0.810213089       -0.585687935   
+     1.00000000         6.00000000        0.737129092         1.78254628       -0.338270396   
+     2.00000000         5.00000000        -1.12016749       -0.834492028        0.299009413   
+     2.00000000         6.00000000         1.40202320         1.69924736       -0.639672041   
+     3.00000000         5.00000000        -4.34634590        -1.48283184         1.59973526   
+     3.00000000         6.00000000         2.99249506         2.74573636        -1.54284453   
+     4.00000000         5.00000000        -6.88757133        -2.48163009         2.14265966   
+     4.00000000         6.00000000         5.32716942         2.94563532        -1.70261645   
+# 
+# 02/10/2021 at 17:15 yambo @ corvina [start]
+# 02/10/2021 at 17:15                 [end]
+#  
+# Timing   [Min/Max/Average]: 07s/07s/07s
+#
+# .-Input file  yambo.in
+# | HF_and_locXC                     # [R] Hartree-Fock
+# | gw0                              # [R] GW approximation
+# | rim_cut                          # [R] Coulomb potential
+# | em1d                             # [R][X] Dynamically Screened Interaction
+# | mpa                              # [R][Xm] Multi Pole Approximation for the Screened Interaction
+# | BoseTemp= 0.000000         eV    # Bosonic Temperature
+# | X_and_IO_nCPU_LinAlg_INV= 1      # [PARALLEL] CPUs for Linear Algebra (if -1 it is automatically set)
+# | X_Threads= 1                     # [OPENMP/X] Number of threads for response functions
+# | DIP_Threads= 1                   # [OPENMP/X] Number of threads for dipoles
+# | SE_Threads= 1                    # [OPENMP/GW] Number of threads for self-energy
+# | RandQpts=0                       # [RIM] Number of random q-points in the BZ
+# | RandGvec= 1                RL    # [RIM] Coulomb interaction RS components
+# | CUTGeo= "box xy"                 # [CUT] Coulomb Cutoff geometry: box/cylinder/sphere/ws X/Y/Z/XY..
+# | % CUTBox
+# |  19.00000 | 19.00000 |  0.00000 |        # [CUT] [au] Box sides
+# | %
+# | CUTRadius= 0.000000              # [CUT] [au] Sphere/Cylinder radius
+# | CUTCylLen= 0.000000              # [CUT] [au] Cylinder length
+# | CUTwsGvec= 0.700000              # [CUT] WS cutoff: number of G to be modified
+# | EXXRLvcs=  4999            RL    # [XX] Exchange    RL components
+# | VXCRLvcs=  4999            RL    # [XC] XCpotential RL components
+# | Chimod= "HARTREE"                # [X] IP/Hartree/ALDA/LRC/PF/BSfxc
+# | % QpntsRXm
+# |   1 |  6 |                           # [Xm] Transferred momenta
+# | %
+# | % BndsRnXm
+# |   1 | 10 |                           # [Xm] Polarization function bands
+# | %
+# | NGsBlkXm= 21               RL    # [Xm] Response block size
+# | % LongDrXm
+# |  0.100000E-4 |  0.00000    |  0.00000    # [Xm] [cc] Electric Field
+# | %
+# | EnSampXm= "2l"                   # [Xm] Frequency sampling in the complex plane ("1l" one line, "2l" two lines)
+# | % EnRngeXm
+# |  0.000000 | 2.000000 |         Ry    # [Xm] Energy range
+# | %
+# | % ImRngeXm
+# |  2.000000 | 2.000000 |         Ry    # [Xm] Imaginary range
+# | %
+# | % DmRngeXm
+# |  0.000000 | 0.200000 |         Ry    # [Xm] Damping range
+# | %
+# | ETStpsXm=  4                     # [Xm] Total Energy steps
+# | % GbndRnge
+# |   1 | 20 |                           # [GW] G[W] bands range
+# | %
+# | GTermKind= "none"                # [GW] GW terminator ("none","BG" Bruneval-Gonze)
+# | DysSolver= "n"                   # [GW] Dyson Equation solver ("n","s","g")
+# | GWoIter=0                        # [GW] GWo self-consistent (evGWo) iterations on eigenvalues
+# | GWIter=0                         # [GW] GW  self-consistent (evGW)  iterations on eigenvalues
+# | %QPkrange                        # [GW] QP generalized Kpoint/Band indices
+# | 1|4|5|6|
+# | %
+# | %QPerange                        # [GW] QP generalized Kpoint/Energy indices
+# | 1|6| 0.000000|-1.000000|
+# | %

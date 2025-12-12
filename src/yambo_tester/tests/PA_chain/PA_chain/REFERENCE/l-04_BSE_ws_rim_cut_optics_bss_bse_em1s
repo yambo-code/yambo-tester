@@ -1,0 +1,140 @@
+
+
+ __   __  _______  __   __  _______  _______
+|  | |  ||   _   ||  |_|  ||  _    ||       |
+|  |_|  ||  |_|  ||       || |_|   ||   _   |
+|       ||       ||       ||       ||  | |  |
+|_     _||       ||       ||  _   | |  |_|  |
+  |   |  |   _   || ||_|| || |_|   ||       |
+  |___|  |__| |__||_|   |_||_______||_______|
+
+
+ <---> [01] MPI/OPENMP structure, Files & I/O Directories
+ <---> [02] CORE Variables Setup
+ <---> [02.01] Unit cells
+ <---> [02.02] Symmetries
+ <---> [02.03] Reciprocal space
+ <---> [02.04] K-grid lattice
+ <---> Grid dimensions      :  10
+ <---> [02.05] Energies & Occupations
+ <---> [03] Transferred momenta grid and indexing
+ <---> [04] Coloumb potential CutOff ws xy
+ <---> [05] External/Internal QP corrections
+ <---> E<02_QP_PPA_ws/ndb.QP[ PPA@E  27.21138 * XG 21 * Xb 1-10 * Scb 1-20]
+ <---> [dE_from_DB-Nearest K] Exact matches       :  66.66667 [o/o]
+ <---> [dE_from_DB-Nearest K] Neighbours    [user]:  1
+ <---> [dE_from_DB-Nearest K]               [real]:  1
+ <---> [dE_from_DB-Nearest K] Interpolations      :  33.33334 [o/o]
+ <---> [05.01] FIT on E < 02_QP_PPA_ws/ndb.QP
+ <---> [QP_apply] Action to be applied: E<02_QP_PPA_ws/ndb.QP[ PPA@E  27.21138 * XG 21 * Xb 1-10 * Scb 1-20]
+ <---> [06.01]  QP corrections report
+ <---> [01] Dipoles
+ <---> [DIP] Checking dipoles header
+ <---> [WARNING][DIP] Database not correct or missing. To be computed
+ <---> [x,Vnl] computed using 2 projectors
+ <---> Dipoles: P, V and iR (T) |                                        | [000%] --(E) --(X)
+ <---> Dipoles: P, V and iR (T) |########################################| [100%] --(E) --(X)
+ <---> [DIP] Writing dipoles header
+ <---> [WARNING] [r,Vnl^pseudo] included in position and velocity dipoles.
+ <---> [WARNING] In case H contains other non local terms, these are neglected
+ <---> [02] Static Dielectric Matrix
+ <---> [LA] SERIAL linear algebra
+ <---> [DIP] Checking dipoles header
+ <---> [FFT-X] Mesh size:   38   38    5
+ <---> [X-CG] R(p) Tot o/o(of R):   597  1000   100
+ <---> [X] Upper matrix triangle filled
+ <---> Xo@q[1] |                                        | [000%] --(E) --(X)
+ <---> Xo@q[1] |########################################| [100%] --(E) --(X)
+ <---> X@q[1] |                                        | [000%] --(E) --(X)
+ <---> X@q[1] |########################################| [100%] --(E) --(X)
+ <---> [X-CG] R(p) Tot o/o(of R):   988  1000   100
+ <---> Xo@q[2] |                                        | [000%] --(E) --(X)
+ <---> Xo@q[2] |########################################| [100%] --(E) --(X)
+ <---> X@q[2] |                                        | [000%] --(E) --(X)
+ <---> X@q[2] |########################################| [100%] --(E) --(X)
+ <---> [X-CG] R(p) Tot o/o(of R):   991  1000   100
+ <---> Xo@q[3] |                                        | [000%] --(E) --(X)
+ <---> Xo@q[3] |########################################| [100%] --(E) --(X)
+ <---> X@q[3] |                                        | [000%] --(E) --(X)
+ <---> X@q[3] |########################################| [100%] --(E) --(X)
+ <---> [X-CG] R(p) Tot o/o(of R):   994  1000   100
+ <---> Xo@q[4] |                                        | [000%] --(E) --(X)
+ <---> Xo@q[4] |########################################| [100%] --(E) --(X)
+ <---> X@q[4] |                                        | [000%] --(E) --(X)
+ <---> X@q[4] |########################################| [100%] --(E) --(X)
+ <---> [X-CG] R(p) Tot o/o(of R):   992  1000   100
+ <---> Xo@q[5] |                                        | [000%] --(E) --(X)
+ <---> Xo@q[5] |########################################| [100%] --(E) --(X)
+ <---> X@q[5] |                                        | [000%] --(E) --(X)
+ <---> X@q[5] |########################################| [100%] --(E) --(X)
+ <---> [X-CG] R(p) Tot o/o(of R):   595  1000   100
+ <---> Xo@q[6] |                                        | [000%] --(E) --(X)
+ <---> Xo@q[6] |########################################| [100%] --(E) --(X)
+ <---> X@q[6] |                                        | [000%] --(E) --(X)
+ <---> X@q[6] |########################################| [100%] --(E) --(X)
+ <---> [03] Bethe Salpeter Equation driver
+ <---> [04] Bethe Salpeter Equation @q1
+ <---> [04.01] Transition pre-analysis @q1
+ <---> [04.01.01] Transition Groups build-up @q1
+ <---> [BSK] Size (resonant):  30
+ <---> [BSK]         (total):  30
+ <---> [BSK] N. of matrices :  1
+ <---> [04.01.02] Loading Dipoles @q1
+ <---> [DIP] Checking dipoles header
+ <---> BSE dipoles |                                        | [000%] --(E) --(X)
+ <---> BSE dipoles |########################################| [100%] --(E) --(X)
+ <---> [04.01.03] Independent Particles properties @q1
+ <---> IP properties |                                        | [000%] --(E) --(X)
+ <---> IP properties |########################################| [100%] --(E) --(X)
+ <---> [04.01.04] BSE Kernel @q1 (Resonant CORRRELATION EXCHANGE)
+ <---> [WARNING] Exchange Kernel FFT size is too big. NG_X reduced 4999 --> 4337 (17765   mHa)
+ <---> [WARNING] Bigger FFT discarded to avoid slow computation for corr part of Kernel
+ <---> [04.01.04.01] Screened interaction header I/O
+ <---> [FFT-BSK] Mesh size:   38   38    5
+ <---> [04.01.04.02] Wave-Function Phases
+ <---> [04.01.04.03] Main kernel loop
+ <---> Kernel |                                        | [000%] --(E) --(X)
+ <---> Kernel |########################################| [100%] --(E) --(X)
+ <---> [04.01.05] BSE solver(s) @q1
+ <---> [LA] SERIAL linear algebra
+ <---> [04.01.05.01] Diago Solver @q1
+ <---> Folding BSE Kernel |                                        | [000%] --(E) --(X)
+ <---> Folding BSE Kernel |########################################| [100%] --(E) --(X)
+ <---> BSK diagonalize |                                        | [000%] --(E) --(X)
+ <---> BSK diagonalize |########################################| [100%] --(E) --(X)
+ <---> EPS R residuals |                                        | [000%] --(E) --(X)
+ <---> EPS R residuals |########################################| [100%] --(E) --(X)
+ <---> BSK resp. funct |                                        | [000%] --(E) --(X)
+ <---> BSK resp. funct |########################################| [100%] --(E) --(X)
+ <---> [LA] SERIAL linear algebra
+ <---> [04.01.05.02] Inversion Solver @q1
+ <---> IP Absorption |                                        | [000%] --(E) --(X)
+ <---> IP Absorption |########################################| [100%] --(E) --(X)
+ <---> Shifted GF and Absorption |                                        | [000%] --(E) --(X)
+ <---> Shifted GF and Absorption |########################################| [100%] --(E) --(X)
+ <---> Perturbative inversion |                                        | [000%] --(E) --(X)
+ <---> Perturbative inversion |########################################| [100%] --(E) --(X)
+ <---> [PERTURBATIVE INV@EPS] Converged frequencies :   75
+ <---> [FULL INV@EPS] Frequencies TODO :  25
+ <---> [EPS] Exact inversion |                                        | [000%] --(E) --(X)
+ <---> [EPS] Exact inversion |########################################| [100%] --(E) --(X)
+ <---> [FULL INV@EPS] Frequencies DONE      :  100
+ <---> [FULL INV@EPS]                       :  100.0000 [o/o]
+ <---> [04.01.05.03] Haydock Solver for abs @q1, scheme hermitian
+ <---> [Haydock] Iteration 1
+ <---> [Haydock] Iteration 2
+ <---> [Haydock] Iteration 3 Accuracy  59.11002| 0.020000
+ <---> [Haydock] Iteration 4 Accuracy  130.8339| 0.020000
+ <---> [Haydock] Iteration 5 Accuracy  41.82637| 0.020000
+ <---> [Haydock] Iteration 6 Accuracy  21.25014| 0.020000
+ <---> [Haydock] Iteration 7 Accuracy  232.7100| 0.020000
+ <---> [Haydock] Iteration 8 Accuracy  5.766499| 0.020000
+ <---> [Haydock] Iteration 9 Accuracy  2.207682| 0.020000
+ <---> [Haydock] Iteration 10 Accuracy  3.299590| 0.020000
+ <---> [Haydock] Iteration 11 Accuracy  0.108475| 0.020000
+ <---> [Haydock] Iteration 12 Accuracy  0.025688| 0.020000
+ <---> [Haydock] Iteration 13 Accuracy  0.257218E-4| 0.020000
+ <---> [Haydock] Iteration 14 Accuracy  0.136942E-4| 0.020000
+ <---> [05] Timing Overview
+ <---> [06] Memory Overview
+ <---> [07] Game Over & Game summary

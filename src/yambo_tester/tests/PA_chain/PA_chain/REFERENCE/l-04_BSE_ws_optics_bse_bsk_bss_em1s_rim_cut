@@ -1,0 +1,163 @@
+
+
+ ___ __  _____  __ __  _____   _____
+|   Y  ||  _  ||  Y  ||  _  \ |  _  |
+|   |  ||. |  ||.    ||. |  / |. |  |
+ \_  _/ |. _  ||.\_/ ||. _  \ |. |  |
+  |: |  |: |  ||: |  ||: |   \|: |  |
+  |::|  |:.|:.||:.|:.||::.   /|::.  |
+  `--"  `-- --"`-- --"`-----" `-----"
+
+
+ <---> [01] CPU structure, Files & I/O Directories
+ <---> [02] CORE Variables Setup
+ <---> [02.01] Unit cells
+ <---> [02.02] Symmetries
+ <---> [02.03] RL shells
+ <---> [02.04] K-grid lattice
+ <---> [02.05] Energies [ev] & Occupations
+ <---> [03] Transferred momenta grid
+ <---> [04] Coloumb potential CutOff :ws xy
+ <---> [04.01] External/Internal QP corrections
+ <---> E<02_QP_PPA_ws/ndb.QP[ E-E PPA E-E PPA: 27.21138 XG: 21 Xb:  1  10 Scb:  1  20]
+ <---> [dE_from_DB-Nearest K] Exact matches  [o/o]: 100.0000
+ <---> [05] Dipoles
+ <---> [DIP] Checking dipoles header
+ <---> [x,Vnl] computed using 2 projectors
+ <---> Dipoles: P and iR (T): |                                        | [000%] --(E) --(X)
+ <---> Dipoles: P and iR (T): |########################################| [100%] --(E) --(X)
+ <---> [DIP] Writing dipoles header
+ <---> [06] Static Dielectric Matrix
+ <---> [LA] SERIAL linear algebra
+ <---> [DIP] Checking dipoles header
+ <---> [WF-X] Performing Wave-Functions I/O from ./SAVE
+ <---> [FFT-X] Mesh size:  38   38    5
+ <---> [X-CG] R(p) Tot o/o(of R)  :  597  1000   100
+ <---> [X] Upper matrix triangle filled
+ <---> Xo@q[1] |                                        | [000%] --(E) --(X)
+ <---> Xo@q[1] |########################################| [100%] --(E) --(X)
+ <---> X@q[1] |                                        | [000%] --(E) --(X)
+ <---> X@q[1] |########################################| [100%] --(E) --(X)
+ <---> [X-CG] R(p) Tot o/o(of R)  :  988  1000   100
+ <---> Xo@q[2] |                                        | [000%] --(E) --(X)
+ <01s> Xo@q[2] |########################################| [100%] --(E) --(X)
+ <01s> X@q[2] |                                        | [000%] --(E) --(X)
+ <01s> X@q[2] |########################################| [100%] --(E) --(X)
+ <01s> [X-CG] R(p) Tot o/o(of R)  :  991  1000   100
+ <01s> Xo@q[3] |                                        | [000%] --(E) --(X)
+ <01s> Xo@q[3] |########################################| [100%] --(E) --(X)
+ <01s> X@q[3] |                                        | [000%] --(E) --(X)
+ <01s> X@q[3] |########################################| [100%] --(E) --(X)
+ <02s> [X-CG] R(p) Tot o/o(of R)  :  994  1000   100
+ <02s> Xo@q[4] |                                        | [000%] --(E) --(X)
+ <02s> Xo@q[4] |########################################| [100%] --(E) --(X)
+ <02s> X@q[4] |                                        | [000%] --(E) --(X)
+ <02s> X@q[4] |########################################| [100%] --(E) --(X)
+ <02s> [X-CG] R(p) Tot o/o(of R)  :  992  1000   100
+ <02s> Xo@q[5] |                                        | [000%] --(E) --(X)
+ <02s> Xo@q[5] |########################################| [100%] --(E) --(X)
+ <02s> X@q[5] |                                        | [000%] --(E) --(X)
+ <02s> X@q[5] |########################################| [100%] --(E) --(X)
+ <03s> [X-CG] R(p) Tot o/o(of R)  :  595  1000   100
+ <03s> Xo@q[6] |                                        | [000%] --(E) --(X)
+ <03s> Xo@q[6] |########################################| [100%] --(E) --(X)
+ <03s> X@q[6] |                                        | [000%] --(E) --(X)
+ <03s> X@q[6] |########################################| [100%] --(E) --(X)
+ <03s> [07] Response Functions in Transition space
+ <03s> [07.01] Transition Groups build-up
+ <03s> [07.02] CPU-dependent Block structure
+ <03s> [BSK] Size (resonant) 30
+ <03s> [BSK]         (total) 30
+ <03s> [07.03] Independent Particles absorption
+ <03s> [DIP] Checking dipoles header
+ <03s> [07.04] Bethe-Salpeter (Resonant CORRRELATION EXCHANGE)
+ <03s> [WARNING] Hartree S/K FFT size is too big. NG_H reduced: 4999 --> 4337
+ <03s> [WARNING] Bigger FFT discarded to avoid slow XC S/K computation.
+ <03s> [07.04.01] Screened interaction header I/O
+ <03s> [WF-BSK] Performing Wave-Functions I/O from ./SAVE
+ <03s> [FFT-BSK] Mesh size:  38   38    5
+ <03s> [07.04.02] Wave-Function Phases
+ <03s> [07.04.03] Kernel loop
+ <03s> Kernel |                                        | [000%] --(E) --(X)
+ <03s> Kernel |########################################| [100%] --(E) --(X)
+ <03s> [08] BSE solver(s)
+ <03s> [LA] SERIAL linear algebra
+ <03s> [08.01] Diago solver
+ <03s> BSK diagonalize |                                        | [000%] --(E) --(X)
+ <03s> BSK diagonalize |########################################| [100%] --(E) --(X)
+ <03s> EPS   residuals |                                        | [000%] --(E) --(X)
+ <03s> EPS   residuals |########################################| [100%] --(E) --(X)
+ <03s> BSK     epsilon |                                        | [000%] --(E) --(X)
+ <03s> BSK     epsilon |########################################| [100%] --(E) --(X)
+ <03s> [LA] SERIAL linear algebra
+ <03s> [08.02] Inversion solver
+ <03s> IP Absorption |                                        | [000%] --(E) --(X)
+ <03s> IP Absorption |########################################| [100%] --(E) --(X)
+ <03s> Shifted GF and Absorption |                                        | [000%] --(E) --(X)
+ <03s> Shifted GF and Absorption |########################################| [100%] --(E) --(X)
+ <03s> Perturbative inversion |                                        | [000%] --(E) --(X)
+ <03s> Perturbative inversion |########################################| [100%] --(E) --(X)
+ <03s> [PERTURBATIVE INV@EPS] Converged frequencies :  75
+ <03s> [FULL INV@EPS] Frequencies TODO : 25
+ <03s> [EPS] Exact inversion |                                        | [000%] --(E) --(X)
+ <03s> [EPS] Exact inversion |########################################| [100%] --(E) --(X)
+ <03s> [FULL INV@EPS] Frequencies DONE      : 100
+ <03s> [FULL INV@EPS]                  [o/o]: 100.0000
+ <03s> [08.03] Haydock solver
+ <03s> [Haydock] Iteration 1
+ <03s> [Haydock] Iteration 2
+ <03s> [Haydock] Iteration 3 Accuracy : 1.990723|  0.02000
+ <03s> [Haydock] Iteration 4 Accuracy : 1.972408|  0.02000
+ <03s> [Haydock] Iteration 5 Accuracy : 1.988784|  0.02000
+ <04s> [Haydock] Iteration 6 Accuracy : 1.968105|  0.02000
+ <04s> [Haydock] Iteration 7 Accuracy : 1.682496|  0.02000
+ <04s> [Haydock] Iteration 8 Accuracy : 1.939486|  0.02000
+ <04s> [Haydock] Iteration 9 Accuracy : 0.851846|  0.02000
+ <04s> [Haydock] Iteration 10 Accuracy : 0.325193|  0.02000
+ <04s> [Haydock] Iteration 11 Accuracy : 0.302788|  0.02000
+ <04s> [Haydock] Iteration 12 Accuracy :  0.05746|  0.02000
+ <04s> [Haydock] Iteration 13 Accuracy :  0.03480|  0.02000
+ <04s> [Haydock] Iteration 14 Accuracy :0.7375E-3|  0.02000
+ <04s> [09] Timing Overview
+ <04s> [TIMING]                                   io_WF :     0.00s CPU (        35 calls,   0.310 millisec avg)
+ <04s> [TIMING]                                 io_GROT :     0.00s CPU (         2 calls,   0.350 millisec avg)
+ <04s> [TIMING]                                io_QINDX :     0.00s CPU (         2 calls,   0.242 millisec avg)
+ <04s> [TIMING]                              io_COL_CUT :     0.00s CPU (         3 calls,   0.355 millisec avg)
+ <04s> [TIMING]                          io_Double_Grid :     0.00s CPU
+ <04s> [TIMING]                                   io_HF :     0.00s CPU
+ <04s> [TIMING]                            io_QP_and_GF :     0.00s CPU (         2 calls,   0.646 millisec avg)
+ <04s> [TIMING]                              io_DIPOLES :     0.00s CPU (        23 calls,   0.283 millisec avg)
+ <04s> [TIMING]                             io_KB_pwscf :     0.00s CPU (         8 calls,   0.330 millisec avg)
+ <04s> [TIMING]                            io_KB_abinit :     0.00s CPU
+ <04s> [TIMING]                                    io_X :     0.00s CPU (        20 calls,   0.365 millisec avg)
+ <04s> [TIMING]                             io_fragment :     0.00s CPU (        56 calls,   0.099 millisec avg)
+ <04s> [TIMING]                                   io_BS :     0.00s CPU (        24 calls,   0.232 millisec avg)
+ <04s> [TIMING]                 IO_and_Messaging_switch :     0.00s CPU (        19 calls,   0.004 millisec avg)
+ <04s> [TIMING]                                 Dipoles :     0.00s CPU
+ <04s> [TIMING]                       DIPOLE_transverse :     0.00s CPU
+ <04s> [TIMING]                            PP_uspp_init :     0.00s CPU (         8 calls,   0.019 millisec avg)
+ <04s> [TIMING]                             WF_load_FFT :     0.00s CPU (         8 calls,   6.682 millisec avg)
+ <04s> [TIMING]                               FFT_setup :     1.00s CPU (        45 calls,   0.035 sec avg)
+ <04s> [TIMING]                          Xo (procedure) :     1.00s CPU (         6 calls,   0.264 sec avg)
+ <04s> [TIMING]                              Xo (REDUX) :     0.00s CPU (         6 calls,   0.001 millisec avg)
+ <04s> [TIMING]                           X (procedure) :     0.00s CPU (         6 calls,   0.310 millisec avg)
+ <04s> [TIMING] MATRIX transfer (X_G_all_q_X_redux_1_1) :     0.00s CPU (         6 calls,   0.006 millisec avg)
+ <04s> [TIMING]                          LINEAR ALGEBRA :     0.00s CPU (        57 calls,   0.051 millisec avg)
+ <04s> [TIMING]                       SERIAL_lin_system :     0.00s CPU (         6 calls,   0.054 millisec avg)
+ <04s> [TIMING]                               X (REDUX) :     0.00s CPU (         6 calls,   0.005 millisec avg)
+ <04s> [TIMING] MATRIX transfer (X_G_all_q_X_redux_2_1) :     0.00s CPU (         6 calls,   0.002 millisec avg)
+ <04s> [TIMING]                          eval_G_minus_G :     0.00s CPU
+ <04s> [TIMING]                              T_space IP :     0.00s CPU
+ <04s> [TIMING]                        X T_space Kernel :     0.00s CPU
+ <04s> [TIMING]                        T_space EXX Osc. :     0.00s CPU (         6 calls,   1.062 millisec avg)
+ <04s> [TIMING]                       T_space CORR Osc. :     0.00s CPU (        21 calls,   4.771 millisec avg)
+ <04s> [TIMING]                            Diago Solver :     0.00s CPU
+ <04s> [TIMING]                            io_BSS_diago :     0.00s CPU (         2 calls,   0.845 millisec avg)
+ <04s> [TIMING]        SERIAL_HERMITIAN_diagonalization :     0.00s CPU
+ <04s> [TIMING]                        Inversion Solver :     0.00s CPU
+ <04s> [TIMING]                           io_BSS_invert :     0.00s CPU (         3 calls,   0.582 millisec avg)
+ <04s> [TIMING]                        SERIAL_inversion :     0.00s CPU (        50 calls,   0.045 millisec avg)
+ <04s> [TIMING]                          Haydock Solver :     0.00s CPU
+ <04s> [TIMING]                          io_BSS_Haydock :     0.00s CPU (         2 calls,   0.414 millisec avg)
+ <04s> [10] Game Over & Game summary
+ <04s> [TIMING]            [Time-Profile]: 04s
