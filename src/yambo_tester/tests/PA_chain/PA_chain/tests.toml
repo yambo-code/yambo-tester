@@ -1,0 +1,191 @@
+sha256 = "d43f2e7865da516d3d6ee939bd5a1e5674b346575711eded48c5f60ac310d573"
+
+[01_init]
+exe = "yambo"
+input = "INPUTS/01_init"
+output = "01_init"
+[01_init.reference]
+"o-01_init.ndb.gops" = ["SAVE/ndb.gops", "ng_in_shell", "E_of_shell"]
+"o-01_init.ndb.kindx" = ["SAVE/ndb.kindx", "Qindx", "Sindx"]
+"r-01_init_setup" = ""
+
+[01_rim_cut]
+exe = "yambo"
+input = "INPUTS/01_rim_cut"
+output = "01_rim_cut"
+[01_rim_cut.reference]
+"o-01_rim_cut.ndb.cutoff" = ["01_rim_cut/ndb.cutoff", "CUT_BARE_QPG"]
+"r-01_rim_cut_rim_cut" = ""
+
+[01_rim_cut_ws]
+exe = "yambo"
+input = "INPUTS/01_rim_cut_ws"
+output = "01_rim_cut_ws"
+[01_rim_cut_ws.reference]
+"o-01_rim_cut_ws.ndb.cutoff" = ["01_rim_cut_ws/ndb.cutoff", "CUT_BARE_QPG"]
+"r-01_rim_cut_rim_cut_ws" = ""
+
+[02_GF_MPA_samp1-grid1]
+exe = "yambo"
+input = "INPUTS/02_GF_MPA_samp1-grid1"
+output = "02_GF_MPA_samp1-grid1"
+falgs = "01_rim_cut"
+[02_GF_MPA_samp1-grid1.reference]
+"o-02_GF_MPA_samp1-grid1.G_Sc_band_5_k_6" = "o-02_GF_MPA_samp1-grid1.G_Sc_band_5_k_6"
+"o-02_GF_MPA_samp1-grid1.G_Sc_band_6_k_6" = "o-02_GF_MPA_samp1-grid1.G_Sc_band_6_k_6"
+"o-02_GF_MPA_samp1-grid1.ndb.HF_and_locXC" = ["02_GF_MPA_samp1-grid1/ndb.HF_and_locXC", "Sx", "Vxc"]
+"o-02_GF_MPA_samp1-grid1.ndb.RIM" = ["02_GF_MPA_samp1-grid1/ndb.RIM", "RIM_qpg"]
+"r-02_GF_MPA_samp1-grid1-grid1_HF_and_locXC_gw0_rim_cut_em1d_mpa" = ""
+
+[02_GF_MPA_samp3-grid1]
+exe = "yambo"
+input = "INPUTS/02_GF_MPA_samp3-grid1"
+output = "02_GF_MPA_samp3-grid1"
+falgs = "01_rim_cut"
+[02_GF_MPA_samp3-grid1.reference]
+"o-02_GF_MPA_samp3-grid1.G_Sc_band_5_k_6" = "o-02_GF_MPA_samp3-grid1.G_Sc_band_5_k_6"
+"o-02_GF_MPA_samp3-grid1.G_Sc_band_6_k_6" = "o-02_GF_MPA_samp3-grid1.G_Sc_band_6_k_6"
+"o-02_GF_MPA_samp3-grid1.ndb.HF_and_locXC" = ["02_GF_MPA_samp3-grid1/ndb.HF_and_locXC", "Sx", "Vxc"]
+"o-02_GF_MPA_samp3-grid1.ndb.RIM" = ["02_GF_MPA_samp3-grid1/ndb.RIM", "RIM_qpg"]
+"r-02_GF_MPA_samp3-grid1-grid1_HF_and_locXC_gw0_rim_cut_em1d_mpa" = ""
+
+[02_GF_PPA_grid1]
+exe = "yambo"
+input = "INPUTS/02_GF_PPA_grid1"
+output = "02_GF_PPA_grid1"
+falgs = "01_rim_cut"
+[02_GF_PPA_grid1.reference]
+"o-02_GF_PPA_grid1.G_Sc_band_5_k_6" = "o-02_GF_PPA_grid1.G_Sc_band_5_k_6"
+"o-02_GF_PPA_grid1.G_Sc_band_6_k_6" = "o-02_GF_PPA_grid1.G_Sc_band_6_k_6"
+"o-02_GF_PPA_grid1.ndb.HF_and_locXC" = ["02_GF_PPA_grid1/ndb.HF_and_locXC", "Sx", "Vxc"]
+"o-02_GF_PPA_grid1.ndb.RIM" = ["02_GF_PPA_grid1/ndb.RIM", "RIM_qpg"]
+"o-02_GF_PPA_grid1.ndb.pp_fragment_1" = ["02_GF_PPA_grid1/ndb.pp_fragment_1", "X_Q_1"]
+"r-02_GF_PPA_grid1_HF_and_locXC_gw0_rim_cut_em1d_mpa" = ""
+
+[02_QP_MPA_samp1]
+exe = "yambo"
+input = "INPUTS/02_QP_MPA_samp1"
+output = "02_QP_MPA_samp1"
+falgs = "01_rim_cut"
+[02_QP_MPA_samp1.reference]
+"o-02_QP_MPA_samp1.qp" = "o-02_QP_MPA_samp1.qp"
+"o-02_QP_MPA_samp1.ndb.QP" = ["02_QP_MPA_samp1/ndb.QP", "QP_Z"]
+"o-02_QP_MPA_samp1.ndb.HF_and_locXC" = ["02_QP_MPA_samp1/ndb.HF_and_locXC", "Sx", "Vxc"]
+"r-02_QP_MPA_samp1_HF_and_locXC_gw0_rim_cut_em1d_mpa" = ""
+
+[02_QP_MPA_samp2]
+exe = "yambo"
+input = "INPUTS/02_QP_MPA_samp2"
+output = "02_QP_MPA_samp2"
+falgs = "01_rim_cut"
+[02_QP_MPA_samp2.reference]
+"o-02_QP_MPA_samp2.qp" = "o-02_QP_MPA_samp2.qp"
+"o-02_QP_MPA_samp2.ndb.QP" = ["02_QP_MPA_samp2/ndb.QP", "QP_Z"]
+"o-02_QP_MPA_samp2.ndb.HF_and_locXC" = ["02_QP_MPA_samp2/ndb.HF_and_locXC", "Sx", "Vxc"]
+"r-02_QP_MPA_samp2_HF_and_locXC_gw0_rim_cut_em1d_mpa" = ""
+
+[02_QP_MPA_samp3]
+exe = "yambo"
+input = "INPUTS/02_QP_MPA_samp3"
+output = "02_QP_MPA_samp3"
+falgs = "01_rim_cut"
+[02_QP_MPA_samp3.reference]
+"o-02_QP_MPA_samp3.qp" = "o-02_QP_MPA_samp3.qp"
+"o-02_QP_MPA_samp3.ndb.QP" = ["02_QP_MPA_samp3/ndb.QP", "QP_Z"]
+"o-02_QP_MPA_samp3.ndb.HF_and_locXC" = ["02_QP_MPA_samp3/ndb.HF_and_locXC", "Sx", "Vxc"]
+"r-02_QP_MPA_samp3_HF_and_locXC_gw0_rim_cut_em1d_mpa" = ""
+
+[02_QP_PPA]
+exe = "yambo"
+input = "INPUTS/02_QP_PPA"
+output = "02_QP_PPA"
+falgs = "01_rim_cut"
+[02_QP_PPA.reference]
+"o-02_QP_PPA.qp" = "o-02_QP_PPA.qp"
+"o-02_QP_PPA.ndb.HF_and_locXC" = ["02_QP_PPA/ndb.HF_and_locXC", "Sx", "Vxc"]
+"o-02_QP_PPA.ndb.QP" = ["02_QP_PPA/ndb.QP", "QP_Z"]
+"o-02_QP_PPA.ndb.pp_fragment_1" = ["02_QP_PPA/ndb.pp_fragment_1", "X_Q_1"]
+"r-02_QP_PPA_em1d_ppa_HF_and_locXC_gw0_rim_cut" = ""
+
+[02_QP_PPA_covariant]
+exe = "yambo"
+input = "INPUTS/02_QP_PPA_covariant"
+output = "02_QP_PPA_covariant"
+falgs = "01_rim_cut"
+[02_QP_PPA_covariant.reference]
+"o-02_QP_PPA_covariant.qp" = "o-02_QP_PPA_covariant.qp"
+"o-02_QP_PPA_covariant.ndb.HF_and_locXC" = ["02_QP_PPA_covariant/ndb.HF_and_locXC", "Sx", "Vxc"]
+"o-02_QP_PPA_covariant.ndb.QP" = ["02_QP_PPA_covariant/ndb.QP", "QP_Z"]
+"o-02_QP_PPA_covariant.ndb.pp_fragment_1" = ["02_QP_PPA_covariant/ndb.pp_fragment_1", "X_Q_1"]
+"r-02_QP_PPA_covariant_em1d_ppa_HF_and_locXC_gw0_rim_cut" = ""
+
+[02_QP_PPA_ws]
+exe = "yambo"
+input = "INPUTS/02_QP_PPA_ws"
+output = "02_QP_PPA_ws"
+falgs = "01_rim_cut_ws"
+[02_QP_PPA_ws.reference]
+"o-02_QP_PPA_ws.qp" = "o-02_QP_PPA_ws.qp"
+"o-02_QP_PPA_ws.ndb.HF_and_locXC" = ["02_QP_PPA_ws/ndb.HF_and_locXC", "Sx", "Vxc"]
+"o-02_QP_PPA_ws.ndb.QP" = ["02_QP_PPA_ws/ndb.QP", "QP_Z"]
+"o-02_QP_PPA_ws.ndb.pp_fragment_1" = ["02_QP_PPA_ws/ndb.pp_fragment_1", "X_Q_1"]
+"r-02_QP_PPA_ws_em1d_ppa_HF_and_locXC_gw0_rim_cut" = ""
+
+[03_GF_PPA_grid1]
+exe = "yambo"
+input = "INPUTS/03_GF_PPA_grid1"
+output = "03_GF_PPA_grid1"
+[03_GF_PPA_grid1.reference]
+"o-03_GF_PPA_grid1.G_Sc_band_5_k_6" = "o-03_GF_PPA_grid1.G_Sc_band_5_k_6"
+"o-03_GF_PPA_grid1.G_Sc_band_6_k_6" = "o-03_GF_PPA_grid1.G_Sc_band_6_k_6"
+"o-03_GF_PPA_grid1.ndb.HF_and_locXC" = ["03_GF_PPA_grid1/ndb.HF_and_locXC", "Sx", "Vxc"]
+"o-03_GF_PPA_grid1.ndb.RIM" = ["03_GF_PPA_grid1/ndb.RIM", "RIM_qpg"]
+"o-03_GF_PPA_grid1.ndb.pp_fragment_1" = ["03_GF_PPA_grid1/ndb.pp_fragment_1", "X_Q_1"]
+"o-03_GF_PPA_grid1.ndb.cutoff" = ["03_GF_PPA_grid1/ndb.cutoff", "CUT_BARE_QPG"]
+"r-03_GF_PPA_grid1_HF_and_locXC_gw0_rim_cut_em1d_mpa" = ""
+
+[03_QP_PPA_terminator]
+exe = "yambo"
+input = "INPUTS/03_QP_PPA_terminator"
+output = "03_QP_PPA_terminator"
+falgs = "03_QP_PPA_terminator_REF-DBs,01_rim_cut"
+actions = [
+    "mkdir 03_QP_PPA_terminator_REF-DBs",
+    "cp 02_QP_PPA/dip_iR_and_P* 03_QP_PPA_terminator_REF-DBs/",
+    "cp 02_QP_PPA/ndb.pp* 03_QP_PPA_terminator_REF-DBs/",
+    "cp 02_QP_PPA/ndb.HF_and_locXC 03_QP_PPA_terminator_REF-DBs/"
+    ]
+[03_QP_PPA_terminator.reference]
+"o-03_QP_PPA_terminator.qp" = "o-03_QP_PPA_terminator.qp"
+"o-03_QP_PPA_terminator.ndb.QP" = ["03_QP_PPA_terminator/ndb.QP", "QP_Z"]
+"r-03_QP_PPA_terminator_em1d_ppa_HF_and_locXC_gw0_rim_cut" = ""
+
+[04_BSE]
+exe = "yambo"
+input = "INPUTS/04_BSE"
+output = "04_BSE"
+flags = "01_rim_cut,02_QP_PPA"
+[04_BSE.reference]
+"o-04_BSE.02_QP_PPA.data" = "o-04_BSE.02_QP_PPA.data"
+"o-04_BSE.02_QP_PPA.fit" = "o-04_BSE.02_QP_PPA.fit"
+"o-04_BSE.alpha_q1_diago_bse" = "o-04_BSE.alpha_q1_diago_bse"
+"o-04_BSE.alpha_q1_haydock_bse" = "o-04_BSE.alpha_q1_haydock_bse"
+"o-04_BSE.alpha_q1_inv_bse" = "o-04_BSE.alpha_q1_inv_bse"
+"o-04_BSE.jdos_q1_diago_bse" = "o-04_BSE.jdos_q1_diago_bse"
+"o-04_BSE.ndb.em1s_fragment_1" = ["04_BSE/ndb.em1s_fragment_1", "X_Q_1"]
+"r-04_BSE_rim_cut_optics_bss_bse_em1s" = ""
+
+[04_BSE_ws]
+exe = "yambo"
+input = "INPUTS/04_BSE_ws"
+output = "04_BSE_ws"
+flags = "01_rim_cut_ws,02_QP_PPA_ws"
+[04_BSE_ws.reference]
+"o-04_BSE_ws.02_QP_PPA.data" = "o-04_BSE_ws.02_QP_PPA.data"
+"o-04_BSE_ws.02_QP_PPA.fit" = "o-04_BSE_ws.02_QP_PPA.fit"
+"o-04_BSE_ws.alpha_q1_diago_bse" = "o-04_BSE_ws.alpha_q1_diago_bse"
+"o-04_BSE_ws.alpha_q1_haydock_bse" = "o-04_BSE_ws.alpha_q1_haydock_bse"
+"o-04_BSE_ws.alpha_q1_inv_bse" = "o-04_BSE_ws.alpha_q1_inv_bse"
+"o-04_BSE_ws.jdos_q1_diago_bse" = "o-04_BSE_ws.jdos_q1_diago_bse"
+"o-04_BSE_ws.ndb.em1s_fragment_1" = ["04_BSE_ws/ndb.em1s_fragment_1", "X_Q_1"]
+"r-04_BSE_ws_rim_cut_optics_bss_bse_em1s" = ""
