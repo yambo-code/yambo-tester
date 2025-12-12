@@ -93,7 +93,7 @@ def get_yambo_info(yambo: str) -> dict:
     Retrieve version and compilation configuration information from a Yambo executable.
 
     This function takes the path to the **yambo** executable, runs it with the
-    '-h' options, and extracts useful metadata such as the software version and
+    '-h' option, and extracts useful metadata such as the software version and
     build configuration. The returned data is provided as a dictionary for easy
     programmatic access.
 
