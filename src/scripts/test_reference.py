@@ -14,10 +14,10 @@ def test_reference_ok(out, ref, var, rundir, tol):
     """
     _rundir = Path(rundir).resolve()
 
-    if 'REFERENCE' in str(ref):
-        ref_file = _rundir.joinpath(ref)
-    else:
-        ref_file = _rundir.joinpath('REFERENCE', str(ref))
+    #if 'REFERENCE' in str(ref):
+    ref_file = _rundir.joinpath(ref)
+    #else:
+    #    ref_file = _rundir.joinpath('REFERENCE', str(ref))
     out_file = _rundir.joinpath(out)
 
     out_name = out_file.name

@@ -6,7 +6,7 @@ import sys
 from pathlib import Path
 
 
-def setup_logging(logfile: Path = None, level=logging.INFO):
+def setup_logging(logfile: Path = None, level=logging.INFO, console=True):
     """
     Configure logging to output both to a log file and to the console.
     
@@ -50,7 +50,7 @@ def setup_logging(logfile: Path = None, level=logging.INFO):
     file_handler.setFormatter(file_format)
 
     # Attach both handlers to the root logger
-    logger.addHandler(console_handler)
+    if console: logger.addHandler(console_handler)
     logger.addHandler(file_handler)
 
     # Log the initialization message
