@@ -82,7 +82,7 @@ def setup_rundir(test, parameters, logger):
 def run_test(test, parameters, logger, verbose=False):
     this_test = f"[{test['name']}/{test['type']}]"
     logger.info(f"{this_test} Starting test")
-    local_logger = setup_logging(test['run_dir'].joinpath('tester.log'))
+    local_logger = setup_logging(test['run_dir'].joinpath('tester.log'), console=False)
 
     local_config = test['run_dir'].joinpath("tests.toml")
     with open(local_config, "rb") as f:
@@ -137,7 +137,7 @@ def run_test(test, parameters, logger, verbose=False):
 
             # Launching the test
             logger.info(f"{this_test} Launching {name}")
-            if verbose: local_logger.info(f"{' '.join(cmd)}")
+            local_logger.info(f"{' '.join(cmd)}")
             process = subprocess.Popen(
                 cmd,
                 cwd = str(test['run_dir']),
