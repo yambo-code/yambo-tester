@@ -179,6 +179,9 @@ def check_parameters(parameters, logger):
                 if '_' in parameters[par]:
                     parameters[par] = None # Project's tests deactivated
                     logger.warning(f"{par}: {parameters[par]} project's tests deactivated!")
+                elif parameters[par] in ["p2y", 'a2y', 'c2y', 'ypp']:
+                    parameters[par] = None # pre/post processing tests deactivated
+                    logger.warning(f"{par}: {parameters[par]} tests deactivated!")
                 else:
                     raise FileNotFoundError(f"{par}: {parameters[par]} do not exist.")
             # Extract info from "yambo -h"

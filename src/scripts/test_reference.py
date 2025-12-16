@@ -69,14 +69,19 @@ def test_reference_ok(out, ref, var, rundir, tol):
         for i in range(nvars):
             # Extract data
             out_data = ds[variables[i]]
+            out_data = out_data[:].ravel()
             #out_data[np.abs(out_data) < zero_dfl] = 0.0
-            assert np.all(abs(out_data[:])<too_large) and not np.all(np.isnan(out_data[:])), f"{out_file.name}: NaN or too large number!"
+            assert np.all(abs(out_data)<too_large) and not np.all(np.isnan(out_data)), f"{out_file.name}: NaN or too large number!"
             print("LOG: not NaN or too large numbers in output file")
             
             # Renormalize data to have 1 as maximum
             start, stop = i*ndata, i*ndata+ndata
-            assert np.allclose(out_data[:].ravel()[:len(ref_data[start:stop])], ref_data[start:stop], rtol=tol, atol=zero_dfl), f"{out_file.name}: Difference larger than {tol}!"
-            print(f"LOG: no difference larger than {tol}!")
+            try:
+                assert np.allclose(out_data[:len(ref_data[start:stop])], ref_data[start:stop], rtol=tol, atol=zero_dfl), f"{out_file.name}: Difference larger than {tol}!"
+                print(f"LOG: no difference larger than {tol}!")
+            except AssertionError as e:
+                print(np.isclose(out_data[:len(ref_data[start:stop])], ref_data[start:stop], rtol=tol, atol=zero_dfl))
+                raise e
     
     # Check report files
     if out_type == 'report':
