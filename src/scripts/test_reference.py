@@ -49,7 +49,8 @@ def test_reference_ok(out, ref, var, rundir, tol):
             max_abs = np.max(np.abs(ref_data[:,col]))
             threshold = max_abs * 1e-3
             mask = (np.abs(ref_data[:,col]) >= threshold) | (np.abs(out_data[:,col]) >= threshold)
-            print('len:', len(ref_data[:,col]), 'thr:', threshold)
+            print('len:', len(ref_data[:,col]), 'thr:', threshold, 'max_abs:', max_abs)
+            
             try:
                 assert np.allclose(out_data[:,col][mask], ref_data[:,col][mask], rtol=tol, atol=zero_dfl), f"{out_file.name}: Difference larger than {tol} in column {col}!"
                 print(f"LOG: no difference larger than {tol} in column {col}!")
