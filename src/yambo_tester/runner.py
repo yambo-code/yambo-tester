@@ -118,7 +118,8 @@ def run_test(test, parameters, logger, verbose=False):
                     elif cmd[0] == "cp":
                         assert len(cmd) == 3, f"Action 'cp' require 3 elements, {len(cmd)} provided."
                         for f in test['run_dir'].glob(cmd[1]):
-                            ret_action = Path(f).copy_into(test['run_dir'].joinpath(cmd[2]))
+                            shutil.copy(Path(f), test['run_dir'].joinpath(cmd[2]))
+                            #ret_action = Path(f).copy_into(test['run_dir'].joinpath(cmd[2]))
                     else:
                         ret_action = subprocess.run(cmd, shell=False, cwd=str(test['run_dir']))
                         if ret_action.returncode != 0:

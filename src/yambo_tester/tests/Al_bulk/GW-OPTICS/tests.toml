@@ -2,7 +2,6 @@ sha256 = "94694929d9414ba4dd4dccf65d2c113f17ed9d73c44db25eede0b800efd1f1d8"
 
 [01_init]
 exe = "yambo"
-actions = ""
 input = "INPUTS/01_init"
 output = "01_init"
 [01_init.reference]
@@ -12,7 +11,6 @@ output = "01_init"
 
 [02_lifetimes]
 exe = "yambo"
-actions = ""
 input = "INPUTS/02_Lifetimes"
 output = "02_Lifetimes"
 [02_lifetimes.reference]
@@ -21,7 +19,6 @@ output = "02_Lifetimes"
 
 [03a_qp_cohsex]
 exe = "yambo"
-actions = ""
 input = "INPUTS/03_QP_COHSEX"
 output = "03_QP_COHSEX"
 [03a_qp_cohsex.reference]
@@ -33,7 +30,6 @@ output = "03_QP_COHSEX"
 
 [03b_qp_cohsex_drude]
 exe = "yambo"
-actions = ""
 input = "INPUTS/03_QP_COHSEX_drude"
 output = "03_QP_COHSEX_drude"
 [03b_qp_cohsex_drude.reference]
@@ -45,7 +41,6 @@ output = "03_QP_COHSEX_drude"
 
 [05a_rpa]
 exe = "yambo"
-actions = ""
 input = "INPUTS/05_RPA"
 output = "05_RPA"
 [05a_rpa.reference]
@@ -57,7 +52,6 @@ output = "05_RPA"
 
 [05b_rpa_drude]
 exe = "yambo"
-actions = ""
 input = "INPUTS/05_RPA_drude"
 output = "05_RPA_drude"
 [05b_rpa_drude.reference]
