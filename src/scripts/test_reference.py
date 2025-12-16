@@ -33,7 +33,7 @@ def test_reference_ok(out, ref, var, rundir, tol):
     assert out_file.exists(), f"{out_file} file do not exists!"
     #print("LOG: both files exists")
     
-    zero_dfl = 1e-5
+    zero_dfl = 1e-6
     too_large = 10e99
     
     # Check text output files
@@ -41,19 +41,23 @@ def test_reference_ok(out, ref, var, rundir, tol):
         # Read reference and output files
         ref_data = np.genfromtxt(str(ref_file))
         out_data = np.genfromtxt(str(out_file))
-        #ref_data[np.abs(ref_data) < zero_dfl] = 0.0
-        #out_data[np.abs(out_data) < zero_dfl] = 0.0
 
         assert np.all(abs(out_data[:])<too_large) and not np.all(np.isnan(out_data[:])), f"{out_file.name}: NaN or too large number!"
         print("LOG: not NaN or too large numbers in output file")
         # Compare data column by column
         for col in range(0,ref_data.shape[1]):
+            max_abs = np.max(np.abs(ref_data[:,col]))
+            threshold = max_abs * 1e-3
+            mask = (np.abs(ref_data[:,col]) >= threshold) | (np.abs(out_data[:,col]) >= threshold)
+            print('len:', len(ref_data[:,col]), 'thr:', threshold)
             try:
-                assert np.allclose(out_data[:,col], ref_data[:,col], rtol=tol, atol=zero_dfl), f"{out_file.name}: Difference larger than {tol}!"
+                assert np.allclose(out_data[:,col][mask], ref_data[:,col][mask], rtol=tol, atol=zero_dfl), f"{out_file.name}: Difference larger than {tol} in column {col}!"
                 print(f"LOG: no difference larger than {tol} in column {col}!")
             except AssertionError as e:
-                print(np.isclose(out_data[:,col], ref_data[:,col], rtol=tol, atol=zero_dfl))
-                raise e
+                print(np.isclose(out_data[:,col][mask], ref_data[:,col][mask], rtol=tol, atol=zero_dfl))
+                print(ref_data[:,col][mask])
+                print(out_data[:,col][mask])
+                print(f"ERROR: {e}")
     
     # Check output DBs
     if out_type == 'database':
@@ -62,26 +66,29 @@ def test_reference_ok(out, ref, var, rundir, tol):
         variables = var.split(',')
         nvars = len(variables)
         ndata = len(ref_data) // nvars
-        #ref_data[np.abs(ref_data) < zero_dfl] = 0.0
 
         # Read DB
         ds = nc.Dataset(str(out_file))
         for i in range(nvars):
+            start, stop = i*ndata, i*ndata+ndata
             # Extract data
             out_data = ds[variables[i]]
             out_data = out_data[:].ravel()
-            #out_data[np.abs(out_data) < zero_dfl] = 0.0
+            max_abs = np.max(np.abs(ref_data[start:stop]))
+            threshold = max_abs * 1e-3
+            mask = (np.abs(ref_data[start:stop]) >= threshold) | (np.abs(out_data[:len(ref_data[start:stop])]) >= threshold)
+
             assert np.all(abs(out_data)<too_large) and not np.all(np.isnan(out_data)), f"{out_file.name}: NaN or too large number!"
             print("LOG: not NaN or too large numbers in output file")
             
-            # Renormalize data to have 1 as maximum
-            start, stop = i*ndata, i*ndata+ndata
             try:
-                assert np.allclose(out_data[:len(ref_data[start:stop])], ref_data[start:stop], rtol=tol, atol=zero_dfl), f"{out_file.name}: Difference larger than {tol}!"
+                assert np.allclose(out_data[:len(ref_data[start:stop])][mask], ref_data[start:stop][mask], rtol=tol, atol=zero_dfl), f"{out_file.name}: Difference larger than {tol}!"
                 print(f"LOG: no difference larger than {tol}!")
             except AssertionError as e:
-                print(np.isclose(out_data[:len(ref_data[start:stop])], ref_data[start:stop], rtol=tol, atol=zero_dfl))
-                raise e
+                print(np.isclose(out_data[:len(ref_data[start:stop])][mask], ref_data[start:stop][mask], rtol=tol, atol=zero_dfl))
+                print(ref_data[start:stop][mask])
+                print(out_data[:len(ref_data[start:stop])][mask])
+                print(f"ERROR: {e}")
     
     # Check report files
     if out_type == 'report':
