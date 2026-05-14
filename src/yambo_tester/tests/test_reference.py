@@ -71,14 +71,14 @@ def test_reference_ok(ref_item):
         rundir = Path(info['dir'])
         tol = float(info['tol'])
         ref_file = rundir.joinpath('REFERENCE', ref)
-        if isinstance(info['out'], list):
-            out_file = rundir.joinpath(info['out'][0])
-        elif ref[:2] == 'r-':
+        if ref[:2] == 'r-':
             tmp = glob(str(rundir.joinpath(info['odir'])) + '/r-*')
             if tmp:
                 out_file = Path(tmp[0])
             else:
                 out_file = rundir.joinpath(info['odir'], ref)
+        elif isinstance(info['out'], list):
+            out_file = rundir.joinpath(info['out'][0])
         else:
             out_file = rundir.joinpath(info['odir'], info['out'])
     
@@ -86,7 +86,7 @@ def test_reference_ok(ref_item):
         if not ref[:2] == 'r-': assert ref_file.exists(), f"{ref} file do not exists!"
         assert out_file.exists(), f"{info['out']} file do not exists!"
     
-        zero_dfl = 1e-5
+        zero_dfl = 1e-6
         too_large = 10e99
     
         # Check text output files
@@ -94,8 +94,6 @@ def test_reference_ok(ref_item):
             # Read reference and output files
             ref_data = np.genfromtxt(str(ref_file))
             out_data = np.genfromtxt(str(out_file))
-            #ref_data[np.abs(ref_data) < zero_dfl] = 0.0
-            #out_data[np.abs(out_data) < zero_dfl] = 0.0
 
             # Compare data column by column
             for col in range(1,ref_data.shape[1]):
@@ -109,14 +107,12 @@ def test_reference_ok(ref_item):
             variables = info['out'][1:]
             nvars = len(variables)
             ndata = len(ref_data) // nvars
-            #ref_data[np.abs(ref_data) < zero_dfl] = 0.0
 
             # Read DB
             ds = nc.Dataset(str(out_file))
             for i in range(nvars):
                 # Extract data
                 out_data = ds[variables[i]]
-                #out_data[np.abs(out_data) < zero_dfl] = 0.0
                 assert np.all(abs(out_data[:])<too_large) and not np.all(np.isnan(out_data[:])), f"{info['out']}: NaN or too large number!"
                 
                 # Renormalize data to have 1 as maximum
