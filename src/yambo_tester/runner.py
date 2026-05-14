@@ -117,13 +117,14 @@ def run_test(test, parameters, logger, verbose=False):
                         ret_action.mkdir(exist_ok=True)
                     elif cmd[0] == "cp":
                         assert len(cmd) == 3, f"Action 'cp' require 3 elements, {len(cmd)} provided."
+                        if not test['run_dir'].glob(cmd[1]): local_logger.warning(f"No files found for action: {action}")
                         for f in test['run_dir'].glob(cmd[1]):
                             shutil.copy(Path(f), test['run_dir'].joinpath(cmd[2]))
                             #ret_action = Path(f).copy_into(test['run_dir'].joinpath(cmd[2]))
                     else:
                         ret_action = subprocess.run(cmd, shell=False, cwd=str(test['run_dir']))
                         if ret_action.returncode != 0:
-                            logger.warning(f"{this_test} action failed: {cmd}")
+                            local_logger.warning(f"{this_test} action failed: {cmd}")
 
             # Generation of the command line for the test
             cmd = []
