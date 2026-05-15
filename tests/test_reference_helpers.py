@@ -5,7 +5,9 @@ from yambo_tester.tests.test_reference import (
     assert_close_significant,
     normalize_reference,
     resolve_output_file,
+    test_runs_ok as reference_test_runs_ok,
 )
+from yambo_tester.selection import RUNLEVEL_FILTER_RETURNCODE
 
 
 def test_normalize_reference_preserves_legacy_list_syntax():
@@ -58,3 +60,8 @@ def test_resolve_output_file_uses_output_directory_for_bare_paths(tmp_path):
 
 def test_resolve_output_file_preserves_explicit_relative_paths(tmp_path):
     assert resolve_output_file(tmp_path, "02_QP", "o-02_QP.qp", "02_QP/o-02_QP.qp") == tmp_path / "02_QP" / "o-02_QP.qp"
+
+
+def test_runs_ok_skips_runlevel_filtered_steps():
+    with pytest.raises(pytest.skip.Exception):
+        reference_test_runs_ok(("02_qp", {"returncode": RUNLEVEL_FILTER_RETURNCODE}))

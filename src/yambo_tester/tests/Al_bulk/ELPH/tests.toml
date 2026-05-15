@@ -4,6 +4,8 @@ sha256 = "28c9c09b3967df61514fa9027d1d4117ffdae95f6da3f356851b87d09c647528"
 exe = "yambo_ph"
 input = "INPUTS/01_init"
 output = "01_init"
+runlevel = "init"
+dependencies = []
 [01_init.reference]
 "o-01_init.ndb.gops" = ["SAVE/ndb.gops", "ng_in_shell", "E_of_shell"]
 "o-01_init.ndb.kindx" = ["SAVE/ndb.kindx", "Qindx", "Sindx"]
@@ -13,6 +15,8 @@ output = "01_init"
 exe = "yambo_ph"
 input = "INPUTS/02_QP"
 output = "02_QP"
+runlevel = "qp"
+dependencies = ["01_init"]
 [02_QP.reference]
 "o-02_QP.qp" = ["02_QP/o-02_QP.qp"]
 "o-02_QP.ndb.QP" = ["02_QP/ndb.QP", "QP_Z"]
@@ -22,6 +26,8 @@ output = "02_QP"
 exe = "ypp_ph"
 input = "INPUTS/03_ypp"
 output = "03_ypp"
+runlevel = "ypp"
+dependencies = ["01_init"]
 [03_ypp.reference]
 "r-03_ypp" = [""]
 
@@ -30,6 +36,8 @@ exe = "yambo_ph"
 input = "INPUTS/05_QP"
 output = "05_QP"
 flags = "03_ypp"
+runlevel = "qp"
+dependencies = ["01_init", "03_ypp"]
 [05_QP.reference]
 "o-05_QP.qp" = ["05_QP/o-05_QP.qp"]
 "o-05_QP.ndb.QP" = ["05_QP/ndb.QP", "QP_Z"]

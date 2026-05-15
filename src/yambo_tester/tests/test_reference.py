@@ -7,6 +7,10 @@ import numpy as np
 import netCDF4 as nc
 from glob import glob
 from pathlib import Path
+from yambo_tester.selection import (
+    MISSING_EXECUTABLE_RETURNCODE,
+    RUNLEVEL_FILTER_RETURNCODE,
+)
 
 ZERO_DFL = 1e-6
 TOO_LARGE = 10e99
@@ -147,7 +151,10 @@ def pytest_generate_tests(metafunc):
         for key, val in tests.items():
             if key in METADATA_KEYS:
                 continue
-            skip = True if results[key]['returncode']==-9999 else False
+            skip = results[key]['returncode'] in {
+                MISSING_EXECUTABLE_RETURNCODE,
+                RUNLEVEL_FILTER_RETURNCODE,
+            }
             for r, o in val['reference'].items():
                 ref_spec = normalize_reference(o)
                 items.append((r,{'out': o,
@@ -172,8 +179,10 @@ def test_runs_ok(run_item):
     Checks if the returncode of the run is 0.
     """
     name, info = run_item
-    if info["returncode"] == -9999:
+    if info["returncode"] == MISSING_EXECUTABLE_RETURNCODE:
         pytest.skip("Test skipped due to missing executable")
+    elif info["returncode"] == RUNLEVEL_FILTER_RETURNCODE:
+        pytest.skip("Test skipped by runlevel selection")
     else:
         assert info["returncode"] == 0, f"Subtest {name} failed: {info['stderr']}"
 
@@ -184,7 +193,7 @@ def test_reference_ok(ref_item):
     """
     ref, info = ref_item
     if info['skip']:
-        pytest.skip("Test skipped due to missing executable")
+        pytest.skip("Test skipped before reference validation")
     else:
         rundir = Path(info['dir'])
         tol = float(info['tol'])

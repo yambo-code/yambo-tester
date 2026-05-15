@@ -4,6 +4,8 @@ sha256 = "d43f2e7865da516d3d6ee939bd5a1e5674b346575711eded48c5f60ac310d573"
 exe = "yambo"
 input = "INPUTS/01_init"
 output = "01_init"
+runlevel = "init"
+dependencies = []
 [01_init.reference]
 "o-01_init.ndb.gops" = ["SAVE/ndb.gops", "ng_in_shell", "E_of_shell"]
 "o-01_init.ndb.kindx" = ["SAVE/ndb.kindx", "Qindx", "Sindx"]
@@ -13,6 +15,8 @@ output = "01_init"
 exe = "yambo"
 input = "INPUTS/01_rim_cut"
 output = "01_rim_cut"
+runlevel = "rim_cut"
+dependencies = ["01_init"]
 [01_rim_cut.reference]
 "o-01_rim_cut.ndb.cutoff" = ["01_rim_cut/ndb.cutoff", "CUT_BARE_QPG"]
 "r-01_rim_cut_rim_cut" = [""]
@@ -21,6 +25,8 @@ output = "01_rim_cut"
 exe = "yambo"
 input = "INPUTS/01_rim_cut_ws"
 output = "01_rim_cut_ws"
+runlevel = "rim_cut"
+dependencies = ["01_init"]
 [01_rim_cut_ws.reference]
 "o-01_rim_cut_ws.ndb.cutoff" = ["01_rim_cut_ws/ndb.cutoff", "CUT_BARE_QPG"]
 "r-01_rim_cut_rim_cut_ws" = [""]
@@ -31,6 +37,8 @@ input = "INPUTS/02_GF_MPA_samp1-grid1"
 output = "02_GF_MPA_samp1-grid1"
 flags = "01_rim_cut"
 nprocs = 1
+runlevel = "gf"
+dependencies = ["01_rim_cut"]
 [02_GF_MPA_samp1-grid1.reference]
 "o-02_GF_MPA_samp1-grid1.G_Sc_band_5_k_6" = ["o-02_GF_MPA_samp1-grid1.G_Sc_band_5_k_6"]
 "o-02_GF_MPA_samp1-grid1.G_Sc_band_6_k_6" = ["o-02_GF_MPA_samp1-grid1.G_Sc_band_6_k_6"]
@@ -44,6 +52,8 @@ input = "INPUTS/02_GF_MPA_samp3-grid1"
 output = "02_GF_MPA_samp3-grid1"
 flags = "01_rim_cut"
 nprocs = 1
+runlevel = "gf"
+dependencies = ["01_rim_cut"]
 [02_GF_MPA_samp3-grid1.reference]
 "o-02_GF_MPA_samp3-grid1.G_Sc_band_5_k_6" = ["o-02_GF_MPA_samp3-grid1.G_Sc_band_5_k_6"]
 "o-02_GF_MPA_samp3-grid1.G_Sc_band_6_k_6" = ["o-02_GF_MPA_samp3-grid1.G_Sc_band_6_k_6"]
@@ -56,6 +66,8 @@ exe = "yambo"
 input = "INPUTS/02_GF_PPA_grid1"
 output = "02_GF_PPA_grid1"
 flags = "01_rim_cut"
+runlevel = "gf"
+dependencies = ["01_rim_cut"]
 [02_GF_PPA_grid1.reference]
 "o-02_GF_PPA_grid1.G_Sc_band_5_k_6" = ["o-02_GF_PPA_grid1.G_Sc_band_5_k_6"]
 "o-02_GF_PPA_grid1.G_Sc_band_6_k_6" = ["o-02_GF_PPA_grid1.G_Sc_band_6_k_6"]
@@ -69,6 +81,8 @@ exe = "yambo"
 input = "INPUTS/02_QP_MPA_samp1"
 output = "02_QP_MPA_samp1"
 flags = "01_rim_cut"
+runlevel = "qp"
+dependencies = ["01_rim_cut"]
 [02_QP_MPA_samp1.reference]
 "o-02_QP_MPA_samp1.qp" = ["o-02_QP_MPA_samp1.qp"]
 "o-02_QP_MPA_samp1.ndb.QP" = ["02_QP_MPA_samp1/ndb.QP", "QP_Z"]
@@ -80,6 +94,8 @@ exe = "yambo"
 input = "INPUTS/02_QP_MPA_samp2"
 output = "02_QP_MPA_samp2"
 flags = "01_rim_cut"
+runlevel = "qp"
+dependencies = ["01_rim_cut"]
 [02_QP_MPA_samp2.reference]
 "o-02_QP_MPA_samp2.qp" = ["o-02_QP_MPA_samp2.qp"]
 "o-02_QP_MPA_samp2.ndb.QP" = ["02_QP_MPA_samp2/ndb.QP", "QP_Z"]
@@ -91,6 +107,8 @@ exe = "yambo"
 input = "INPUTS/02_QP_MPA_samp3"
 output = "02_QP_MPA_samp3"
 flags = "01_rim_cut"
+runlevel = "qp"
+dependencies = ["01_rim_cut"]
 [02_QP_MPA_samp3.reference]
 "o-02_QP_MPA_samp3.qp" = ["o-02_QP_MPA_samp3.qp"]
 "o-02_QP_MPA_samp3.ndb.QP" = ["02_QP_MPA_samp3/ndb.QP", "QP_Z"]
@@ -102,6 +120,8 @@ exe = "yambo"
 input = "INPUTS/02_QP_PPA"
 output = "02_QP_PPA"
 flags = "01_rim_cut"
+runlevel = "qp"
+dependencies = ["01_rim_cut"]
 [02_QP_PPA.reference]
 "o-02_QP_PPA.qp" = ["o-02_QP_PPA.qp"]
 "o-02_QP_PPA.ndb.HF_and_locXC" = ["02_QP_PPA/ndb.HF_and_locXC", "Sx", "Vxc"]
@@ -114,6 +134,8 @@ exe = "yambo"
 input = "INPUTS/02_QP_PPA_covariant"
 output = "02_QP_PPA_covariant"
 flags = "01_rim_cut"
+runlevel = "qp"
+dependencies = ["01_rim_cut"]
 [02_QP_PPA_covariant.reference]
 "o-02_QP_PPA_covariant.qp" = ["o-02_QP_PPA_covariant.qp"]
 "o-02_QP_PPA_covariant.ndb.HF_and_locXC" = ["02_QP_PPA_covariant/ndb.HF_and_locXC", "Sx", "Vxc"]
@@ -126,6 +148,8 @@ exe = "yambo"
 input = "INPUTS/02_QP_PPA_ws"
 output = "02_QP_PPA_ws"
 flags = "01_rim_cut_ws"
+runlevel = "qp"
+dependencies = ["01_rim_cut_ws"]
 [02_QP_PPA_ws.reference]
 "o-02_QP_PPA_ws.qp" = ["o-02_QP_PPA_ws.qp"]
 "o-02_QP_PPA_ws.ndb.HF_and_locXC" = ["02_QP_PPA_ws/ndb.HF_and_locXC", "Sx", "Vxc"]
@@ -137,6 +161,8 @@ flags = "01_rim_cut_ws"
 exe = "yambo"
 input = "INPUTS/03_GF_PPA_grid1"
 output = "03_GF_PPA_grid1"
+runlevel = "gf"
+dependencies = ["01_rim_cut"]
 [03_GF_PPA_grid1.reference]
 "o-03_GF_PPA_grid1.G_Sc_band_5_k_6" = ["o-03_GF_PPA_grid1.G_Sc_band_5_k_6"]
 "o-03_GF_PPA_grid1.G_Sc_band_6_k_6" = ["o-03_GF_PPA_grid1.G_Sc_band_6_k_6"]
@@ -151,6 +177,8 @@ exe = "yambo"
 input = "INPUTS/03_QP_PPA_terminator"
 output = "03_QP_PPA_terminator"
 flags = "03_QP_PPA_terminator_REF-DBs,01_rim_cut"
+runlevel = "qp"
+dependencies = ["01_rim_cut", "02_QP_PPA"]
 actions = [
     "mkdir 03_QP_PPA_terminator_REF-DBs",
     "cp 02_QP_PPA/dip_iR_and_P* 03_QP_PPA_terminator_REF-DBs/",
@@ -167,6 +195,8 @@ exe = "yambo"
 input = "INPUTS/04_BSE"
 output = "04_BSE"
 flags = "01_rim_cut,02_QP_PPA"
+runlevel = "bse"
+dependencies = ["01_rim_cut", "02_QP_PPA"]
 [04_BSE.reference]
 "o-04_BSE.02_QP_PPA.data" = ["o-04_BSE.02_QP_PPA.data"]
 "o-04_BSE.02_QP_PPA.fit" = ["o-04_BSE.02_QP_PPA.fit"]
@@ -182,6 +212,8 @@ exe = "yambo"
 input = "INPUTS/04_BSE_ws"
 output = "04_BSE_ws"
 flags = "01_rim_cut_ws,02_QP_PPA_ws"
+runlevel = "bse"
+dependencies = ["01_rim_cut_ws", "02_QP_PPA_ws"]
 [04_BSE_ws.reference]
 "o-04_BSE_ws.02_QP_PPA_ws.data" = ["o-04_BSE_ws.02_QP_PPA_ws.data"]
 "o-04_BSE_ws.02_QP_PPA_ws.fit" = ["o-04_BSE_ws.02_QP_PPA_ws.fit"]

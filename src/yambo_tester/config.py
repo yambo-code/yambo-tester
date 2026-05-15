@@ -35,6 +35,7 @@ PARAMETERS = {
     'nprocs': 2,
     'thrs': 1,
     'tollerance': 0.1,
+    'runlevels': [],
     'download_link': "https://media.yambo-code.eu/robots/databases/tests",
     }
 

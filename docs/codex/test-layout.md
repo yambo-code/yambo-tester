@@ -32,6 +32,8 @@ Each workflow step is a TOML table such as:
 exe = "yambo"
 input = "INPUTS/03_QP_COHSEX"
 output = "03_QP_COHSEX"
+runlevel = "qp"
+dependencies = ["01_init"]
 
 [03_qp_cohsex.reference]
 "o-03_QP_COHSEX.ndb.QP" = ["03_QP_COHSEX/ndb.QP", "QP_Z"]
@@ -45,6 +47,9 @@ Important fields:
 - `exe`: key into validated executable parameters, for example `yambo`, `ypp`, `yambo_ph`.
 - `input`: input file passed with `-F`; also used for step ordering.
 - `output`: output directory/name passed with `-J` and `-C`.
+- `runlevel`: primary Yambo runlevel represented by the step.
+- `dependencies`: prerequisite step table names used for runlevel-based
+  selection.
 - `flags`: optional suffix appended to the `-J` target.
 - `nprocs`: optional per-step MPI-rank override; otherwise the global configured `nprocs` is used.
 - `actions`: optional pre-run actions such as simple `mkdir` or `cp` steps.
@@ -58,3 +63,12 @@ Reference entries support two forms:
 Bare output filenames resolve relative to the step `output` directory. `skip_columns` values are 1-based, matching Yambo text headers.
 
 `SAVE/` and `SAVE_converted/` may be empty in the source tree. They are populated from private tarballs during setup.
+
+## Runlevel Selection
+
+`yambo-tester --runlevel <name>` runs all steps whose `runlevel` matches
+`<name>`, plus the transitive closure of their `dependencies`. Steps outside
+that selected set are still written to `results.toml` with an intentional skip
+marker so pytest reports them as skipped instead of failing on missing outputs.
+
+With no selected runlevel, every workflow step runs as before.
