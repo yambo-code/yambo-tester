@@ -129,7 +129,8 @@ def run_test(test, parameters, logger, verbose=False):
             # Generation of the command line for the test
             cmd = []
             if parameters['mpi'] and parameters['mpi_launcher']:
-                cmd.extend([str(parameters['mpi_launcher']), '-np', str(parameters['nprocs'])])
+                nprocs = run.get('nprocs', parameters['nprocs'])
+                cmd.extend([str(parameters['mpi_launcher']), '-np', str(nprocs)])
             cmd.append(str(parameters[run['exe']]))
             if run['input']: cmd.extend(['-F', str(run['input'])])
             flags = ""
@@ -205,4 +206,3 @@ def run_pytest(test, local_logger, verbose=False):
 
 if __name__ == '__main__':
     pass
-
