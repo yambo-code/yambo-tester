@@ -64,6 +64,19 @@ You can generate a template configuration file (`config.toml`) using:
 yambo-tester -i
 ```
 
+To run only workflow steps for one or more Yambo runlevels, use the repeatable
+`--runlevel` option:
+
+```bash
+yambo-tester --runlevel qp
+yambo-tester --runlevel qp --runlevel bse
+```
+
+When a runlevel is selected, `yambo-tester` also runs the dependency steps
+declared in each workflow's `tests.toml` and intentionally skips unrelated
+steps during validation. The same selection can be configured with
+`runlevels = ["qp", "bse"]` under `[parameters]` in `config.toml`.
+
 ### Parameter Hierarchy
 
 When a parameter is not explicitly provided, **yambo-tester** resolves it using the following hierarchical system:
@@ -118,6 +131,6 @@ The following features and improvements are planned for future releases of yambo
 - [ ] Publishing the package on PyPI, allowing installation via pip install yambo-tester and integration into CI pipelines without local cloning.
 - [x] Generation of a final test report suitable for upload to a web portal or dashboard, enabling remote monitoring of test outcomes.
 - [ ] Parallel execution of tests using the `concurrent.futures.ProcessPoolExecutor` module
-- [ ] Definition of keys in tests.toml files for specific selections of tests types
+- [x] Definition of keys in tests.toml files for specific selections of tests types
 - [ ] Add support for different Yambo versions
 - [x] Add support for internal definition of OMP_NUM_THREADS variable

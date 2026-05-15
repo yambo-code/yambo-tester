@@ -12,6 +12,13 @@ from pathlib import Path
 import importlib.resources
 from .log import setup_logging
 from .download import download_test, sha256sum
+from .selection import (
+    MISSING_EXECUTABLE_REASON,
+    MISSING_EXECUTABLE_RETURNCODE,
+    RUNLEVEL_FILTER_REASON,
+    RUNLEVEL_FILTER_RETURNCODE,
+    selected_step_names,
+)
 
 
 def setup_rundir(test, parameters, logger):
@@ -98,6 +105,7 @@ def run_test(test, parameters, logger, verbose=False):
     results = {"tollerance": parameters['tollerance']} # collect info about a run
     subtests = list(config.items())
     subtests.sort(key=lambda x: x[1]['input']) # input sorting
+    selected_names = selected_step_names(config, parameters.get('runlevels', []))
 
     # For OpenMP pralallelization
     env = os.environ.copy()
@@ -105,7 +113,18 @@ def run_test(test, parameters, logger, verbose=False):
 
     # Loop that launches the subtests
     for name, run in subtests:
-        if parameters[run['exe']]:
+        if name not in selected_names:
+            results[name] = {
+                "returncode": RUNLEVEL_FILTER_RETURNCODE,
+                "cmd": '',
+                "stdout": None,
+                "stderr": None,
+                "run_dir": str(test['run_dir']),
+                "skip_reason": RUNLEVEL_FILTER_REASON,
+                "runlevel": run.get("runlevel", ""),
+            }
+            local_logger.info(f"{name} skipped by runlevel selection")
+        elif parameters[run['exe']]:
             
             # Execution of any actions
             if run.get('actions', False):
@@ -161,16 +180,19 @@ def run_test(test, parameters, logger, verbose=False):
                 "stdout": std_out,
                 "stderr": std_err,
                 "run_dir": str(test['run_dir']),
+                "runlevel": run.get("runlevel", ""),
             }
             
         else:
             # Run skipped
             results[name] = {
-                "returncode": -9999,
+                "returncode": MISSING_EXECUTABLE_RETURNCODE,
                 "cmd": '',
                 "stdout": None,
                 "stderr": None,
                 "run_dir": str(test['run_dir']),
+                "skip_reason": MISSING_EXECUTABLE_REASON,
+                "runlevel": run.get("runlevel", ""),
             }
 
     with open(test['run_dir'].joinpath("results.toml"), "w") as f:

@@ -48,6 +48,9 @@ def set_cl_args(config):
                         help='Number of MPI tasks', type=int, dest='nprocs')
     parser.add_argument('--thrs',
                         help='Number of OpenMP threads per task', type=int, dest='thrs')
+    parser.add_argument('--runlevel',
+                        help='Run only workflow steps matching this runlevel and their dependencies. May be repeated.',
+                        type=str, action='append', dest='runlevels')
     parser.add_argument('--yambo',
                         help='Yambo executable', type=str, dest='yambo')
     parser.add_argument('--ypp',

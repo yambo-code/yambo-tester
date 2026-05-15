@@ -4,6 +4,8 @@ sha256 = "94694929d9414ba4dd4dccf65d2c113f17ed9d73c44db25eede0b800efd1f1d8"
 exe = "yambo"
 input = "INPUTS/01_init"
 output = "01_init"
+runlevel = "init"
+dependencies = []
 [01_init.reference]
 "o-01_init.ndb.gops" = ["SAVE/ndb.gops", "ng_in_shell", "E_of_shell"]
 "o-01_init.ndb.kindx" = ["SAVE/ndb.kindx", "Qindx", "Sindx"]
@@ -13,6 +15,8 @@ output = "01_init"
 exe = "yambo"
 input = "INPUTS/02_Lifetimes"
 output = "02_Lifetimes"
+runlevel = "lifetimes"
+dependencies = ["01_init"]
 [02_lifetimes.reference]
 "o-02_Lifetimes.qp" = { path = "02_Lifetimes/o-02_Lifetimes.qp", skip_columns = [5] }
 "r-02_Lifetimes_life" = [""]
@@ -21,6 +25,8 @@ output = "02_Lifetimes"
 exe = "yambo"
 input = "INPUTS/03_QP_COHSEX"
 output = "03_QP_COHSEX"
+runlevel = "qp"
+dependencies = ["01_init"]
 [03_qp_cohsex.reference]
 "o-03_QP_COHSEX.ndb.em1s_fragment_1" = ["03_QP_COHSEX/ndb.em1s_fragment_1", "X_Q_1"]
 "o-03_QP_COHSEX.ndb.HF_and_locXC" = ["03_QP_COHSEX/ndb.HF_and_locXC", "Sx", "Vxc"]
@@ -32,6 +38,8 @@ output = "03_QP_COHSEX"
 exe = "yambo"
 input = "INPUTS/03_QP_COHSEX_drude"
 output = "03_QP_COHSEX_drude"
+runlevel = "qp"
+dependencies = ["01_init"]
 [03_qp_cohsex_drude.reference]
 "o-03_QP_COHSEX_drude.ndb.em1s_fragment_1" = { path = "03_QP_COHSEX_drude/ndb.em1s_fragment_1", variables = ["X_Q_1"], whitelist = true }
 "o-03_QP_COHSEX_drude.ndb.HF_and_locXC" = ["03_QP_COHSEX_drude/ndb.HF_and_locXC", "Sx", "Vxc"]
@@ -43,6 +51,8 @@ output = "03_QP_COHSEX_drude"
 exe = "yambo"
 input = "INPUTS/05_RPA"
 output = "05_RPA"
+runlevel = "optics"
+dependencies = ["01_init"]
 [05_rpa.reference]
 "o-05_RPA.eel_q1_inv_rpa_dyson" = ["05_RPA/o-05_RPA.eel_q1_inv_rpa_dyson"]
 "o-05_RPA.eel_q2_inv_rpa_dyson" = ["05_RPA/o-05_RPA.eel_q2_inv_rpa_dyson"]
@@ -54,6 +64,8 @@ output = "05_RPA"
 exe = "yambo"
 input = "INPUTS/05_RPA_drude"
 output = "05_RPA_drude"
+runlevel = "optics"
+dependencies = ["01_init"]
 [05_rpa_drude.reference]
 "o-05_RPA_drude.eel_q1_inv_rpa_dyson" = ["05_RPA_drude/o-05_RPA_drude.eel_q1_inv_rpa_dyson"]
 "o-05_RPA_drude.eps_q1_inv_rpa_dyson" = ["05_RPA_drude/o-05_RPA_drude.eps_q1_inv_rpa_dyson"]

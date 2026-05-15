@@ -131,6 +131,8 @@ output = "01_init"
 exe = "yambo"
 input = "INPUTS/02_QP"
 output = "02_QP"
+runlevel = "qp"
+dependencies = ["01_init"]
 [02_qp.reference]
 "o-02_QP.qp" = { path = "02_QP/o-02_QP.qp", skip_columns = [5] }
 "o-02_QP.ndb.QP" = { path = "02_QP/ndb.QP", variables = ["QP_Z"] }
@@ -143,6 +145,10 @@ Required step fields:
   `yambo_ph`, or `ypp_ph`.
 - `input`: input file passed with `-F`.
 - `output`: output name used with `-J` and `-C`.
+- `runlevel`: primary Yambo runlevel covered by the step, such as `init`,
+  `qp`, `bse`, `optics`, `lifetimes`, `gf`, `rim_cut`, or `ypp`.
+- `dependencies`: list of prerequisite step table names needed when this step
+  is selected by runlevel.
 - `reference`: mapping from files in `REFERENCE/` to generated outputs.
 
 Optional step fields:
@@ -195,3 +201,13 @@ yambo-tester --tests src/yambo_tester/tests --cache cache
 The runner copies the test to scratch, extracts the tarball from the cache,
 executes the steps in `tests.toml`, writes `results.toml`, and validates the
 generated files with pytest.
+
+To run only a runlevel and its declared dependencies:
+
+```bash
+yambo-tester --runlevel qp
+```
+
+Steps whose `runlevel` does not match and are not dependencies are marked as
+intentional skips in `results.toml`, so their references are skipped during
+pytest validation.

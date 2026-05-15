@@ -64,3 +64,18 @@ yambo-tester -i
 ```
 
 Full `yambo-tester` runs require valid Yambo executables and access to cached or downloadable SAVE tarballs.
+
+Standard procedure for full imported-test runs:
+
+1. Create or reuse an isolated `/home/nicola/tmp/yambo-tester-<target>` directory.
+2. Generate `config.toml` there with `/home/nicola/src/yambo-tester/.env/bin/yambo-tester -i`.
+3. Select only the target workflow in `[tests]` when debugging a specific imported workflow; leave the default `[tests]` table for combined checks.
+4. Load the Yambo module stack before running:
+
+```bash
+module load spack/1.0
+module load yambo/5.3.0--gcc-14.3.0--openmpi-5.0.8-projects-omp-pario-slk-slepc-27vuyas
+/home/nicola/src/yambo-tester/.env/bin/yambo-tester
+```
+
+5. Inspect `pytest-report.xml`, `tester.log`, and `results.toml` in the generated scratch workflow directory.

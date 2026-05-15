@@ -31,4 +31,4 @@ tester = "scripts.test_reference:main"
 
 
 [tool.setuptools.package-data]
-"yambo_tester" = ["data/config.yaml", "tests/**/*"]
+"yambo_tester" = ["data/config.toml", "tests/**/*"]
