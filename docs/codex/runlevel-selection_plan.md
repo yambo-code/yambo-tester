@@ -35,6 +35,12 @@ Maintain task progress in `docs/codex/runlevel-selection_progress.md`.
 - Run `.env/bin/pytest -q`.
 - Run `.env/bin/yambo-tester -h`.
 
+## Deferred Follow-Up
+
+- Review and standardize the runlevel vocabulary with Yambo developers so names like `qp`, `bse`, `gf`, `rim_cut`, `optics`, `lifetimes`, and `ypp` become stable conventions.
+- Add a README table listing supported runlevels after the vocabulary is settled.
+- Decide what to do with the unrelated untracked `doc/` directory.
+
 ## Assumptions
 
 - Dependency values reference step table names.

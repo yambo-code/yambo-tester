@@ -23,3 +23,4 @@
   - `Al_bulk/ELPH`: 14 passed
   - `PA_chain/PA_chain`: 47 passed, 45 skipped
 - Confirmed `results.toml` uses `returncode = -9998` and `skip_reason = "runlevel-filter"` for runlevel-filtered steps.
+- Added next-week follow-up items to the plan file: runlevel vocabulary review, README runlevel table, and handling the unrelated `doc/` directory.
