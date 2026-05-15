@@ -14,7 +14,7 @@ exe = "yambo_ph"
 input = "INPUTS/02_QP"
 output = "02_QP"
 [02_QP.reference]
-"o-02_QP.qp" = ["o-02_QP.qp"]
+"o-02_QP.qp" = ["02_QP/o-02_QP.qp"]
 "o-02_QP.ndb.QP" = ["02_QP/ndb.QP", "QP_Z"]
 "r-02_QP_gw0_dyson_el_ph_corr" = [""]
 
@@ -31,6 +31,6 @@ input = "INPUTS/05_QP"
 output = "05_QP"
 flags = "03_ypp"
 [05_QP.reference]
-"o-05_QP.qp" = ["o-05_QP.qp"]
+"o-05_QP.qp" = ["05_QP/o-05_QP.qp"]
 "o-05_QP.ndb.QP" = ["05_QP/ndb.QP", "QP_Z"]
 "r-02_QP_gw0_dyson_el_ph_corr" = [""]

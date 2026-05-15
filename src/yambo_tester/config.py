@@ -153,7 +153,7 @@ def check_parameters(parameters, logger):
             logger.error('File config.toml already exists!')
         else:
             config_default = importlib.resources.files("yambo_tester.data") / "config.toml"
-            config_template = config_default.copy('config.toml')
+            shutil.copyfile(config_default, 'config.toml')
             logger.info("Copied the config.toml template.")
 
     else:
