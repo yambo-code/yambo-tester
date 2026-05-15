@@ -87,7 +87,7 @@ If the `scratch` and `cache` directories specified in the configuration do **not
 
 ### Documentation
 
-A detailed documentation — including usage examples, launch configurations, and a tutorial on how to add new tests — will be available soon.
+- [Adding new tests](ADDING_TESTS.md): how to organize input and reference files, prepare the SAVE tarball, place it in the cache, and write `tests.toml`.
 
 ## Authors and Acknowledgments
 
