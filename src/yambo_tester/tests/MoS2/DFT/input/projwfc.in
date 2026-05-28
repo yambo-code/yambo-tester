@@ -1,0 +1,8 @@
+&PROJWFC
+  outdir       = './'
+  prefix       = 'mos2'
+  ngauss       = 0
+  degauss      = 0.00743
+  deltae       = 0.02
+  lwrite_overlaps = .true.
+/

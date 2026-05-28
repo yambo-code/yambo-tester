@@ -1,0 +1,45 @@
+ndtset 2
+#accesswff 3
+
+#Dataset 1 : usual self-consistent calculation
+kptopt 1          # Option for the automatic generation of k points,
+ngkpt  1 1 1
+nshiftk 1 
+shiftk 0.0 0.0 0.0
+diemac1 12.0       # Although this is not mandatory, it is worth to
+tolvrs1 1.0d-8
+istwfk2 1*1
+# Definition of the SCF procedure
+iscf2    -2             # Non self-consistent calculation
+getden2  -1             # Read previous density file
+getwfk2 -1 
+tolwfr2  1.0d-12        # Still get it converged
+nstep2 2000
+nband2  50
+nbandkss2 50
+kssform2 3
+#Definition of the unit cell
+acell 10.00 6.00 10.00 Angstrom
+rprim 1.0000 0.0000 0.0000
+      0.0000 1.0000 0.0000
+      0.0000 0.0000 1.0000
+#Definition of the atom types
+ntypat 3          
+znucl 6 1 17   
+#Definition of the atoms
+natom 12           
+typat 3 3 3 1 1 1 1 1 1 2 2 2  
+xangst -0.4870    0.2310   -0.3358
+    4.2846   -2.2832   -0.1429
+    1.9074   -0.6523    4.4196
+    0.8324   -0.3948    0.5751
+    2.9683   -1.5204    0.6618
+    1.9042   -0.7896    2.7040
+    1.8991   -1.0135   -0.0768
+    0.8349   -0.2829    1.9655
+    2.9708   -1.4085    2.0522
+    1.8972   -1.1006   -1.1612
+    0.0029    0.1996    2.4739
+    3.8048   -1.8039    2.6282
+#Definition of the planewave basis set
+ecut 20.0

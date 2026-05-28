@@ -1,0 +1,44 @@
+ &control
+          wf_collect = .true.,
+         calculation = "nscf",
+           verbosity = 'high',
+          pseudo_dir = '.',
+              prefix = "mos2_s2",
+              outdir = '.',
+ /&end
+ &system
+    force_symmorphic = .true.,
+                nbnd = 32,
+             ecutwfc = 60.0,
+         occupations = 'fixed',
+           celldm(1) = 5.877207636,
+               ibrav = 4,
+           celldm(3) = 5.1044648850,
+            lspinorb = .true.,
+                 nat = 3,
+            noncolin = .true.,
+                ntyp = 2,
+ /&end
+ &electrons
+     diagonalization = "cg",
+      diago_full_acc = .true.,
+    electron_maxstep = 200,
+         mixing_beta = 0.7,
+            conv_thr = 1.0d-12,
+ /&end
+  ATOMIC_SPECIES
+  Mo   95.940  Mo_RL_withPS_PZ.UPF
+   S   32.065         S.pz-hgh.UPF
+  ATOMIC_POSITIONS { crystal }
+  Mo 0.333333333 0.666666667 0.000000000
+   S 0.666666667 0.333333333 0.097783324
+   S 0.666666667 0.333333333 -0.097783324
+  K_POINTS {alat}
+  7
+     0.0000000    0.0000408    0.0000000    1.0000000
+     0.1666667    0.0000408    0.0000000    1.0000000
+     0.3333333    0.0000408    0.0000000    1.0000000
+     0.4999999    0.0000408    0.0000000    1.0000000
+     0.1666667    0.1667074    0.0000000    1.0000000
+     0.3333333    0.1667075    0.0000000    1.0000000
+     0.3333333    0.3333741    0.0000000    1.0000000

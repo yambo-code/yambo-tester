@@ -1,0 +1,17 @@
+phonons
+&inputph
+  amass(1)=95.940,
+  amass(2)=32.065,
+   prefix = 'mos2',
+   tr2_ph =  1.0d-3 ,
+   fildyn = "mos2.dyn" ,
+   fildvscf =  "dvscf" ,
+   iverbosity =  1 ,
+   ldisp = .TRUE,
+   trans = .TRUE.,
+   qplot = .FALSE.,
+   nq1=3,
+   nq2=3,
+   nq3=1,
+   electron_phonon='yambo',
+/

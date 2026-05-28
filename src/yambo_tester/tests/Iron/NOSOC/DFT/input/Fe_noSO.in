@@ -1,0 +1,169 @@
+#Fe in FCC structure
+
+ iomode 3
+ prtkbff 1
+ ndtset  6
+
+
+# Common variables
+####################
+# system
+ acell   3*5.42
+ natom   1
+ fband1  8
+ ntypat  1
+ typat   1
+ znucl   26.0
+ rprim   -0.5  0.5  0.5
+          0.5 -0.5  0.5
+          0.5  0.5 -0.5
+ xred    0.0  0.0  0.0
+ occopt  7
+ tsmear  0.005
+
+# convergence parameters
+ ecut       50
+ toldfe1  1.0d-10
+ nstep   100
+
+# kpts
+ kptopt1     4
+ ngkpt1      8  8  8
+ nshiftk1    1
+ shiftk1     0.5  0.5  0.5
+
+# Magnetism and so
+ nspinor    1
+ nsppol     2
+ nspden     2
+ spinat     0.0  0.0  5.0 
+ so_psp     0
+
+
+# other
+ ixc     1    # xc approximation (should be consistent with psp)
+ enunit  1    # in which format eigenvalues are printed 0 (Ha), 1 (eV), 2 (both)
+
+ nsym2       0
+ symmorphi2  0
+
+#WFK GENERATION
+#===============
+
+# 2 Regular grid
+ kptopt2     4
+ ngkpt2      4  4  4
+ nshiftk2    1
+ shiftk2     0.5  0.5  0.5
+
+ iscf2        -2               # Non self-consistent calculation
+ getden2       1               # Read previous density file
+ tolwfr2       1.0d-16         # Still get it converged
+ nstep2      300
+ nband2      15
+ nbandkss2   13
+ kssform2     3
+ nbdbuf2     10
+
+
+# 3 Shift x
+ kptopt3     0
+ nkpt3       6
+ kpt3             0.1249784380 0.1250215620 0.1250215769 
+                  0.3749784231 0.1250215620 0.1250215769 
+                  -.1250215620 0.1250215620 0.1250215620 
+                  -.3750215769 0.3750215769 0.1250215769 
+                  -.3750215769 -.3749784231 0.1250215769 
+                  -.3750215769 0.3750215769 0.3750215769 
+
+#                  0.1250215620 0.1250000000 0.1250000000
+#                  0.1250215620 0.2500000000 0.2500000000
+#                  0.1250215620 -.0000000000 -.0000000000
+#                  0.2500215620 -.1250000000 -.0000000000
+#                  -.1249784380 -.1250000000 -.3750000000
+#                  0.3750215620 -.0000000000 -.0000000000
+
+ kptnrm3      *1
+ wtk3         *1
+
+ iscf3        -2               # Non self-consistent calculation
+ getden3       1               # Read previous density file
+ tolwfr3       1.0d-16         # Still get it converged
+ nstep3      300
+ nband3      15
+ nbandkss3   13
+ kssform3     3
+ nbdbuf3     10
+
+# 4 Shift y
+ kptopt4     0
+ nkpt4       6
+ kpt4            0.1250215620 0.1249784380 0.1250215769 
+                 0.3750215769 0.1249784231 0.1250215769 
+                 -.1249784455 0.1249784455 0.1250215620 
+                 -.3749784231 0.3749784231 0.1250215769 
+                 -.3749784231 -.3750215769 0.1250215769 
+                 -.3749784231 0.3749784231 0.3750215769 
+
+#                0.1250000000 0.1250215620 0.1250000000
+#                0.1250000000 0.2500215620 0.2500000000
+#                0.1250000000 0.0000215620 -.0000000000
+#                0.2500000000 -.1249784380 -.0000000000
+#                -.1250000000 -.1249784380 -.3750000000
+#                0.3750000000 0.0000215620 -.0000000000
+
+ kptnrm4      *1
+ wtk4         *1
+
+ iscf4        -2               # Non self-consistent calculation
+ getden4       1               # Read previous density file
+ tolwfr4       1.0d-16         # Still get it converged
+ nstep4      300
+ nband4      15
+ nbandkss4   13
+ kssform4     3
+ nbdbuf4     10
+
+# 5 Shift z
+ kptopt5     0
+ nkpt5       6
+ kpt5             0.1250215620 0.1250215620 0.1249784380 
+                  0.3750215769 0.1250215769 0.1249784231 
+                  -.1249784455 0.1250215620 0.1249784455 
+                  -.3749784231 0.3750215769 0.1249784306 
+                  -.3749784231 -.3749784231 0.1249784231 
+                  -.3749784231 0.3750215769 0.3749784231 
+
+#                  0.1250000000 0.1250000000 0.1250215620
+#                  0.1250000000 0.2500000000 0.2500215620
+#                  0.1250000000 -.0000000000 0.0000215620
+#                  0.2500000000 -.1250000000 0.0000215620
+#                  -.1250000000 -.1250000000 -.3749784380
+#                  0.3750000000 -.0000000000 0.0000215620
+
+ kptnrm5      *1
+ wtk5         *1
+
+ iscf5        -2               # Non self-consistent calculation
+ getden5       1               # Read previous density file
+ tolwfr5       1.0d-16         # Still get it converged
+ nstep5      300
+ nband5      15
+ nbandkss5   13
+ kssform5     3
+ nbdbuf5     10
+
+# 6 Fine grid
+ kptopt6     4
+ ngkpt6      16  16  16
+ nshiftk6    1
+ shiftk6     0.5  0.5  0.5
+
+ iscf6        -2               # Non self-consistent calculation
+ getden6       1               # Read previous density file
+ tolwfr6       1.0d-16         # Still get it converged
+ nstep6      300
+ nband6      15
+ nbandkss6   13
+ kssform6     3
+ nbdbuf6     10

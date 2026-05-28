@@ -1,0 +1,58 @@
+#h-BN
+#Ground state calculation (self consistent part)
+ 
+ndtset 2
+accesswff 3
+ 
+#Ground state calculation (self consistent part)
+toldfe1 1.0d-10
+prtden1   1       # Print the density, for use by dataset 2
+kptopt1  1        # Option for the automatic generation of k points
+nshiftk1 1
+shiftk1  0 0 0
+ngkpt1 2 2 2
+nband1 10
+ 
+#non-self consistent calculation
+getden2 1
+nband2 60
+nbandkss2 60
+iscf2 -2
+tolwfr2 1.0d-8
+kssform2 3
+kptopt2 1
+nshiftk2 1
+shiftk2 0 0 0
+ngkpt2 2 2 2
+istwfk2 4*1
+ 
+#######################################################################
+#Common input variables
+#######################################################################
+ 
+acell  4.7163728  4.7163728 12.1758362
+rprim    1.0000000000E+00  0.0000000000E+00  0.0000000000E+00
+        -5.0000000000E-01  8.6602540378E-01  0.0000000000E+00
+         0.0000000000E+00  0.0000000000E+00  1.0000000000E+00
+ 
+#Definition of the atom types
+ntypat 2           # There are two types of atoms
+znucl 5 7        # The keyword "zatnum" refers to the atomic number of the
+                  # possible type(s) of atom. The pseudopotential(s)
+                  # mentioned in the "files" file must correspond
+                  # to the type(s) of atom.
+#Definition of the atoms
+natom 4           # There are four  atoms
+typat  1 2 1 2
+     xcart    2.3581864000E+00  1.3614995528E+00  0.0000000000E+00
+             -2.3581864000E+00 -1.3614995528E+00  0.0000000000E+00
+             -2.3581864000E+00 -1.3614995528E+00  6.0879181000E+00
+              2.3581864000E+00  1.3614995528E+00  6.0879181000E+00
+
+#Definition of the planewave basis set
+ecut   40.0        # Minimal kinetic energy cut-off, in Hartree
+symmorphi 0
+ 
+#Definition of the SCF procedure
+nstep 100          # Maximal number of SCF cycles
+diemac 4.50
