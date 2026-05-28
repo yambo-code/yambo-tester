@@ -1,0 +1,34 @@
+
+.Version 10.4.5-d of ABINIT, released Jul 2025.
+.(MPI version, prepared for a x86_64_linux_gnu14.2 computer) 
+
+.Copyright (C) 1998-2025 ABINIT group . 
+ ABINIT comes with ABSOLUTELY NO WARRANTY.
+ It is free software, and you are welcome to redistribute it
+ under certain conditions (GNU General Public License,
+ see ~abinit/COPYING or http://www.gnu.org/copyleft/gpl.txt).
+
+ ABINIT is a project of the Universite Catholique de Louvain,
+ Corning Inc. and other collaborators, see ~abinit/doc/developers/contributors.txt .
+ Please read https://docs.abinit.org/theory/acknowledgments for suggested
+ acknowledgments of the ABINIT effort.
+ For more information, see https://www.abinit.org .
+
+.Starting date : Thu 28 May 2026.
+- ( at 19h19 )
+  
+- input  file    -> input/C6H3Cl3.in
+- output file    -> output/C6H3Cl3.out
+- root for input  files -> DB/C6H3Cl3_i
+- root for output files -> DB/C6H3Cl3_o
+
+
+--- !ERROR
+src_file: m_ingeo.F90
+src_line: 427
+mpi_rank: 0
+message: |
+    Neither xred nor xcart are present in input file. 
+    Action: define one of these in your input file.
+...
+

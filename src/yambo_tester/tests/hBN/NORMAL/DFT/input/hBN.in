@@ -2,7 +2,7 @@
 #Ground state calculation (self consistent part)
  
 ndtset 2
-accesswff 3
+iomode 3
  
 #Ground state calculation (self consistent part)
 toldfe1 1.0d-10
@@ -14,12 +14,16 @@ ngkpt1 2 2 2
 nband1 10
  
 #non-self consistent calculation
-getden2 1
-nband2 60
-nbandkss2 60
-iscf2 -2
-tolwfr2 1.0d-8
-kssform2 3
+iscf2    -2
+getden2  -1
+tolwfr2  1.0d-10
+prtwf2   1
+prtkbff2 1
+#getden2 1
+#nband2 60
+#nbandkss2 60
+#tolwfr2 1.0d-8
+#kssform2 3
 kptopt2 1
 nshiftk2 1
 shiftk2 0 0 0
