@@ -9,7 +9,7 @@ dependencies = []
 [01_init.reference]
 "o-01_init.ndb.gops" = ["SAVE/ndb.gops", "ng_in_shell", "E_of_shell"]
 "o-01_init.ndb.kindx" = ["SAVE/ndb.kindx", "Qindx", "Sindx"]
-"r-01_init_setup" = [""]
+"r-01_init_setup" = ["Game Over & Game summary"]
 
 [02_QP]
 exe = "yambo_ph"
@@ -20,7 +20,7 @@ dependencies = ["01_init"]
 [02_QP.reference]
 "o-02_QP.qp" = ["02_QP/o-02_QP.qp"]
 "o-02_QP.ndb.QP" = ["02_QP/ndb.QP", "QP_Z"]
-"r-02_QP_gw0_dyson_el_ph_corr" = [""]
+"r-02_QP_gw0_dyson_el_ph_corr" = ["Game Over & Game summary"]
 
 [03_ypp]
 exe = "ypp_ph"
@@ -29,7 +29,7 @@ output = "03_ypp"
 runlevel = "ypp"
 dependencies = ["01_init"]
 [03_ypp.reference]
-"r-03_ypp" = [""]
+"r-03_ypp" = ["Game Over & Game summary"]
 
 [05_QP]
 exe = "yambo_ph"
@@ -41,4 +41,4 @@ dependencies = ["01_init", "03_ypp"]
 [05_QP.reference]
 "o-05_QP.qp" = ["05_QP/o-05_QP.qp"]
 "o-05_QP.ndb.QP" = ["05_QP/ndb.QP", "QP_Z"]
-"r-02_QP_gw0_dyson_el_ph_corr" = [""]
+"r-02_QP_gw0_dyson_el_ph_corr" = ["Game Over & Game summary"]
