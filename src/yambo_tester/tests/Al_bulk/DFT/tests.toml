@@ -1,0 +1,10 @@
+sha256 = "aae9624a099352b466360da5cd9ae2730e4757f34885e2d479ce784bd372ce9e"
+
+[01_p2y]
+exe = "p2y"
+input_dir = "Al.save"
+runlevel = "p2y"
+nprocs = 1
+dependencies = []
+[01_p2y.reference]
+"STDOUT" = ["== P2Y completed =="]
