@@ -10,7 +10,7 @@ import tarfile
 import subprocess
 from pathlib import Path
 import importlib.resources
-from .log import setup_logging
+from .log import setup_test_logger
 from .download import download_test, sha256sum
 from .selection import (
     MISSING_EXECUTABLE_REASON,
@@ -19,6 +19,37 @@ from .selection import (
     RUNLEVEL_FILTER_RETURNCODE,
     selected_step_names,
 )
+
+
+def step_sort_key(item):
+    name, run = item
+    return run.get('input', name)
+
+
+def stdout_filename(step_name):
+    return f"{step_name}.stdout"
+
+
+def build_run_command(run, parameters):
+    cmd = []
+    if parameters['mpi'] and parameters['mpi_launcher']:
+        nprocs = run.get('nprocs', parameters['nprocs'])
+        cmd.extend([str(parameters['mpi_launcher']), '-np', str(nprocs)])
+    cmd.append(str(parameters[run['exe']]))
+    if run.get('input'):
+        cmd.extend(['-F', str(run['input'])])
+    if run.get('input_dir'):
+        cmd.extend(['-I', str(run['input_dir'])])
+    flags = ""
+    if run.get('flags'):
+        flags = f",{run['flags']}"
+    if run.get('output'):
+        cmd.extend(['-J', str(run['output']) + flags, '-C', str(run['output'])])
+    return cmd
+
+
+def command_reference_output(std_out, run, run_dir):
+    return std_out
 
 
 def setup_rundir(test, parameters, logger):
@@ -88,8 +119,7 @@ def setup_rundir(test, parameters, logger):
 
 def run_test(test, parameters, logger, verbose=False):
     this_test = f"[{test['name']}/{test['type']}]"
-    logger.info(f"{this_test} Starting test")
-    local_logger = setup_logging(test['run_dir'].joinpath('tester.log'), console=False)
+    local_logger = setup_test_logger(test['run_dir'])
 
     local_config = test['run_dir'].joinpath("tests.toml")
     with open(local_config, "rb") as f:
@@ -104,7 +134,7 @@ def run_test(test, parameters, logger, verbose=False):
 
     results = {"tollerance": parameters['tollerance']} # collect info about a run
     subtests = list(config.items())
-    subtests.sort(key=lambda x: x[1]['input']) # input sorting
+    subtests.sort(key=step_sort_key) # input sorting when available
     selected_names = selected_step_names(config, parameters.get('runlevels', []))
 
     # For OpenMP pralallelization
@@ -146,16 +176,7 @@ def run_test(test, parameters, logger, verbose=False):
                             local_logger.warning(f"{this_test} action failed: {cmd}")
 
             # Generation of the command line for the test
-            cmd = []
-            if parameters['mpi'] and parameters['mpi_launcher']:
-                nprocs = run.get('nprocs', parameters['nprocs'])
-                cmd.extend([str(parameters['mpi_launcher']), '-np', str(nprocs)])
-            cmd.append(str(parameters[run['exe']]))
-            if run['input']: cmd.extend(['-F', str(run['input'])])
-            flags = ""
-            if 'flags' in run:
-                if run['flags']: flags = f",{run['flags']}"
-            if run['output']: cmd.extend(['-J', str(run['output'])+flags, '-C', str(run['output'])])
+            cmd = build_run_command(run, parameters)
 
             # Launching the test
             logger.info(f"{this_test} Launching {name}")
@@ -170,6 +191,8 @@ def run_test(test, parameters, logger, verbose=False):
                 env = env
             )
             std_out, std_err = process.communicate()
+            stdout_file = test['run_dir'].joinpath(stdout_filename(name))
+            stdout_file.write_text(command_reference_output(std_out, run, test['run_dir']))
             if verbose: local_logger.info(std_out.strip())
             if std_err: local_logger.error(std_err)
     
@@ -178,6 +201,7 @@ def run_test(test, parameters, logger, verbose=False):
                 "returncode": process.returncode,
                 "cmd": ' '.join(cmd),
                 "stdout": std_out,
+                "stdout_file": stdout_file.name,
                 "stderr": std_err,
                 "run_dir": str(test['run_dir']),
                 "runlevel": run.get("runlevel", ""),

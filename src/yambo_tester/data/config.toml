@@ -26,8 +26,6 @@ runlevels = []
 download_link = "https://media.yambo-code.eu/robots/databases/tests"
 
 [tests]
-Al_bulk = ["GW-OPTICS", "ELPH"]
+Al_bulk = ["DFT", "GW-OPTICS", "ELPH"]
+He = ["DFT"]
 PA_chain = ["PA_chain"]
-#Si_bulk = ["GW-OPTICS"]
-#hBN = ["GW-OPTICS"]
-#LiF = ["GW-OPTICS"]

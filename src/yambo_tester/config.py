@@ -63,10 +63,11 @@ def load_config():
 
     if not "tests" in config:
         config['tests'] = {
-	    "Al_bulk": ["GW-OPTICS"],
-	    "Si_bulk": ["GW-OPTICS"],
-	    "hBN": ["GW-OPTICS"],
-	    "LiF": ["GW-OPTICS"]
+            "Al_bulk": ["DFT", "GW-OPTICS"],
+            "He": ["DFT"],
+            "Si_bulk": ["GW-OPTICS"],
+            "hBN": ["GW-OPTICS"],
+            "LiF": ["GW-OPTICS"]
         }
 
     return config
