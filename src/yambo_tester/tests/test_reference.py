@@ -35,6 +35,7 @@ def normalize_reference(reference):
             "skip_columns": {int(col) - 1 for col in skip_columns},
             "whitelist": bool(reference.get("whitelist", False)),
             "tolerance": reference.get("tolerance", reference.get("tollerance")),
+            "contains": reference.get("contains", reference.get("string")),
         }
 
     if isinstance(reference, list):
@@ -45,6 +46,7 @@ def normalize_reference(reference):
             "skip_columns": set(),
             "whitelist": False,
             "tolerance": None,
+            "contains": None,
         }
 
     return {
@@ -53,6 +55,7 @@ def normalize_reference(reference):
         "skip_columns": set(),
         "whitelist": False,
         "tolerance": None,
+        "contains": None,
     }
 
 
@@ -99,7 +102,12 @@ def compare_database(out_file, ref_file, variables, ref, tol):
 
 
 def resolve_output_file(rundir, odir, ref, path):
+    if ref == "STDOUT":
+        return rundir.joinpath(path)
+
     if ref[:2] == 'r-':
+        if path:
+            return rundir.joinpath(path)
         tmp = glob(str(rundir.joinpath(odir)) + '/r-*')
         if tmp:
             return Path(tmp[0])
@@ -112,6 +120,49 @@ def resolve_output_file(rundir, odir, ref, path):
         return rundir.joinpath(out_path)
 
     return rundir.joinpath(odir, ref)
+
+
+def string_check_spec(ref, ref_spec, result):
+    if ref == "STDOUT":
+        return {
+            "path": result.get("stdout_file", ""),
+            "contains": ref_spec["contains"] or ref_spec["path"],
+        }
+
+    if ref[:2] == "r-" and ref_spec["contains"] is None and ref_spec["path"]:
+        return {
+            "path": "",
+            "contains": ref_spec["path"],
+        }
+
+    return {
+        "path": ref_spec["path"],
+        "contains": ref_spec["contains"],
+    }
+
+
+def assert_file_contains(path, expected, label):
+    if not expected:
+        return
+    text = path.read_text(errors="replace")
+    assert expected in text, f"{label}: expected string not found: {expected}"
+
+
+def assert_stdout_or_log_contains(stdout_text, run_dir, exe, expected, label):
+    if not expected:
+        return
+
+    stdout_text = stdout_text or ""
+    candidates = [stdout_text]
+    log_file = Path(run_dir).joinpath(f"l_{exe}")
+    if log_file.exists():
+        candidates.append(log_file.read_text(errors="replace"))
+
+    if any(expected in text for text in candidates):
+        return
+
+    log_label = log_file.name if log_file.exists() else "log file"
+    raise AssertionError(f"{label}: expected string not found in stdout or {log_label}: {expected}")
 
 
 def pytest_generate_tests(metafunc):
@@ -157,14 +208,19 @@ def pytest_generate_tests(metafunc):
             }
             for r, o in val['reference'].items():
                 ref_spec = normalize_reference(o)
+                string_spec = string_check_spec(r, ref_spec, results[key])
                 items.append((r,{'out': o,
-                                 'path': ref_spec["path"],
+                                 'path': string_spec["path"],
                                  'variables': ref_spec["variables"],
                                  'skip_columns': ref_spec["skip_columns"],
                                  'whitelist': ref_spec["whitelist"],
+                                 'exe': val["exe"],
                                  'dir': str(rundir),
+                                 'run_dir': results[key]["run_dir"],
+                                 'stdout': results[key].get("stdout", ""),
                                  'tol': ref_spec["tolerance"] or tollerance,
-                                 'odir': val['output'],
+                                 'odir': val.get('output', ''),
+                                 'contains': string_spec["contains"],
                                  'skip': skip,
                                  }))
         metafunc.parametrize(
@@ -201,8 +257,17 @@ def test_reference_ok(ref_item):
         out_file = resolve_output_file(rundir, info['odir'], ref, info['path'])
     
         # Check if reference and output files exist
-        if not ref[:2] == 'r-': assert ref_file.exists(), f"{ref} file do not exists!"
+        if ref != "STDOUT" and not ref[:2] == 'r-': assert ref_file.exists(), f"{ref} file do not exists!"
         assert out_file.exists(), f"{info['out']} file do not exists!"
+
+        if ref == "STDOUT":
+            assert_stdout_or_log_contains(
+                info['stdout'],
+                info['run_dir'],
+                info['exe'],
+                info['contains'],
+                ref,
+            )
 
         # Check text output files
         if ref[:2] == 'o-' and not '.ndb' in ref:
@@ -229,3 +294,4 @@ def test_reference_ok(ref_item):
                 for line in f:
                     if b"Game Over & Game summary" in line: report = True
             assert report, f"{ref}: report file incomplete!"
+            assert_file_contains(out_file, info['contains'], ref)

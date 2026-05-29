@@ -19,7 +19,7 @@ Examples currently include `Al_bulk/GW-OPTICS`, `Al_bulk/ELPH`, and `PA_chain/PA
 
 1. `cli.py` loads configuration, applies CLI overrides, validates parameters, then loops over selected tests.
 2. `runner.setup_rundir()` downloads or reuses the test tarball, copies the imported fixture tree to scratch, extracts SAVE data, and returns the run directory.
-3. `runner.run_test()` sorts workflow steps by their `input` field, runs each Yambo-related executable, and writes `results.toml`.
+3. `runner.run_test()` sorts workflow steps by their `input` field when present, runs each Yambo-related executable, and writes `results.toml`.
 4. `runner.run_pytest()` invokes pytest with `--rundir=<run_dir>`.
 5. `src/yambo_tester/tests/test_reference.py` reads `results.toml` plus `tests.toml` and validates runs and references.
 
@@ -39,7 +39,7 @@ dependencies = ["01_init"]
 "o-03_QP_COHSEX.ndb.QP" = ["03_QP_COHSEX/ndb.QP", "QP_Z"]
 "o-03_QP_COHSEX.qp" = ["o-03_QP_COHSEX.qp"]
 "o-example.qp" = { path = "o-example.qp", skip_columns = [5], tolerance = 0.11, whitelist = false }
-"r-03_QP_COHSEX_em1s_HF_and_locXC_gw0_cohsex" = [""]
+"r-03_QP_COHSEX_em1s_HF_and_locXC_gw0_cohsex" = ["Game Over & Game summary"]
 ```
 
 Important fields:
@@ -47,6 +47,7 @@ Important fields:
 - `exe`: key into validated executable parameters, for example `yambo`, `ypp`, `yambo_ph`.
 - `input`: input file passed with `-F`; also used for step ordering.
 - `output`: output directory/name passed with `-J` and `-C`.
+- `input_dir`: input directory passed with `-I`, used by conversion tools such as `p2y`.
 - `runlevel`: primary Yambo runlevel represented by the step.
 - `dependencies`: prerequisite step table names used for runlevel-based
   selection.
@@ -61,6 +62,14 @@ Reference entries support two forms:
 - Metadata table form: `{ path = "output", variables = ["var"], skip_columns = [5], tolerance = 0.11, whitelist = true }`.
 
 Bare output filenames resolve relative to the step `output` directory. `skip_columns` values are 1-based, matching Yambo text headers.
+
+Conversion-tool steps may omit `input` and `output`. A `STDOUT` reference key
+checks that the expected string is present in the captured command stdout or,
+if present, the step's `l_<exe>` log file. For example,
+`STDOUT = ["== P2Y completed =="]`. Report references whose keys start with
+`r-` still check report completeness; a non-empty string value additionally
+checks that the string is present in the resolved report file, so avoid empty
+placeholder strings in imported fixtures.
 
 `SAVE/` and `SAVE_converted/` may be empty in the source tree. They are populated from private tarballs during setup.
 

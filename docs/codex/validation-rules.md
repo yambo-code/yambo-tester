@@ -10,9 +10,9 @@ Use those files to understand behavior, not as implementation templates.
 
 ## Output Types
 
-- `r-*`: Yambo report files. Validate existence and a successful-run marker near the end. Current Python checks for `Game Over & Game summary`.
+- `r-*`: Yambo report files. Validate existence and a successful-run marker near the end. Current Python checks for `Game Over & Game summary`, and imported fixtures should use that string explicitly rather than `[""]`.
 - `o-*`: text output files with numerical columns. Compare generated data against `REFERENCE/o-*`.
-- `l_*`: log files, often in `LOG/` for parallel runs. No validation is currently required.
+- `l_*`: log files, often in `LOG/` for parallel runs. No standalone validation is currently required, but `STDOUT` checks may fall back to `l_<exe>` when validating conversion tools like `p2y`.
 - `ndb.*`: NetCDF/HDF5-compatible databases. Read with `netCDF4`; compare only variables listed in `tests.toml`.
 
 ## Legacy Concepts To Preserve
