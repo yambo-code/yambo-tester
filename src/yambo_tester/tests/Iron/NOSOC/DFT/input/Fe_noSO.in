@@ -2,8 +2,7 @@
 
  iomode 3
  prtkbff 1
- ndtset  6
-
+ ndtset  2
 
 # Common variables
 ####################
