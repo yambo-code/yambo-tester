@@ -113,9 +113,11 @@ def main():
         for test_name, test_types in config['tests'].items():
             for test_type in test_types:
                 test = {'name': test_name, 'type': test_type}
+                logger.info(f"[{test_name}/{test_type}] Starting test")
                 test['test_dir'], test['run_dir']  = setup_rundir(test, parameters, logger)
                 local_logger = run_test(test, parameters, logger, verbose=parameters['verbose'])
                 run_pytest(test, local_logger, verbose=parameters['verbose'])
+                logger.info(f"[{test_name}/{test_type}] Finished test")
 
 
 if __name__ == '__main__':

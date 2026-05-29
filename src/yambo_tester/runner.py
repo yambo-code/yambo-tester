@@ -10,7 +10,7 @@ import tarfile
 import subprocess
 from pathlib import Path
 import importlib.resources
-from .log import setup_logging
+from .log import setup_test_logger
 from .download import download_test, sha256sum
 from .selection import (
     MISSING_EXECUTABLE_REASON,
@@ -88,8 +88,7 @@ def setup_rundir(test, parameters, logger):
 
 def run_test(test, parameters, logger, verbose=False):
     this_test = f"[{test['name']}/{test['type']}]"
-    logger.info(f"{this_test} Starting test")
-    local_logger = setup_logging(test['run_dir'].joinpath('tester.log'), console=False)
+    local_logger = setup_test_logger(test['run_dir'])
 
     local_config = test['run_dir'].joinpath("tests.toml")
     with open(local_config, "rb") as f:
