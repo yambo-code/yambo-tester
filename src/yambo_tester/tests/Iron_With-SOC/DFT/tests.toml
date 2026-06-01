@@ -1,0 +1,10 @@
+sha256 = "b3613253432adeda62c2917e3f4ddfeac37cebe42634b8ff169e60ed2beddae3"
+
+[01_a2y]
+exe = "a2y"
+input = "DB/Fe_o_DS2_WFK.nc"
+runlevel = "dft"
+nprocs = 1
+dependencies = []
+[01_a2y.reference]
+"STDOUT" = ["== Writing DB2 (wavefunctions) + nlPP ..."]

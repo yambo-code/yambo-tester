@@ -99,9 +99,11 @@ In typical usage, the user should set parameters either on the command line or i
 ### Executable Discovery
 
 - Core executables are `yambo`, `p2y`, and `a2y`. If any of them cannot be found, execution stops with an error.
-- `ypp` and the project executables such as `yambo_rt`, `ypp_rt`, and `yambo_ph` are optional. If they are missing, the corresponding workflow steps are skipped.
+- `ypp` and the project executables such as `yambo_rt`, `ypp_rt`, `yambo_ph`, and `ypp_ph` are optional. They are only checked if you register them under `[executables]` or with `--exe KEY=VALUE`; otherwise, the corresponding workflow steps are skipped.
 - If `yambo_bin` is set, executable lookup starts there; otherwise, executables are searched in the system `PATH`.
 - Additional executables can be registered under `[executables]` or with `--exe KEY=VALUE`.
+- To inspect the packaged workflow keyword inventory without running tests, use `yambo-tester --list-executables` or `yambo-tester --list-runlevels`.
+- The listed values come from `src/yambo_tester/data/workflow_keywords.toml`, which is kept in sync with the imported `tests.toml` files.
 
 ### Scratch and Cache Directories
 

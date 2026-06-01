@@ -1,0 +1,28 @@
+ &control
+    calculation='scf'
+    restart_mode='from_scratch',
+    pseudo_dir = './',
+    outdir='./'
+    prefix='Ni'
+    tprnfor = .true.,
+    tstress = .true.
+    wf_collect = .true. 
+ /
+ &system
+    ibrav=2, celldm(1) =6.65, nat=1, ntyp=1,
+    starting_magnetization(1)=0.7, nbnd=20,
+    ecutwfc = 90.0, lspinorb= .true., noncolin=.TRUE.,
+    occupations='smearing', smearing='methfessel-paxton', degauss=0.02
+ /
+ &electrons
+    diagonalization='david',
+    conv_thr = 1.0e-8,
+    mixing_beta = 0.7,
+    diago_full_acc = .true. ,
+ /
+ATOMIC_SPECIES
+ Ni 58.69 Nirel_10.RRKJ3.UPF
+ATOMIC_POSITIONS
+ Ni 0.0 0.0 0.0
+K_POINTS {automatic}
+   8 8 8 1 1 1

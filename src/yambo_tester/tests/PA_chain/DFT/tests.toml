@@ -1,0 +1,10 @@
+sha256 = "0f5b664114c3a5bdbd3837372bcf8a80ffdb01b0b83d5717968c55b85b8d4e0b"
+
+[01_p2y]
+exe = "p2y"
+input_dir = "chain.save"
+runlevel = "dft"
+nprocs = 1
+dependencies = []
+[01_p2y.reference]
+"STDOUT" = ["== P2Y completed =="]

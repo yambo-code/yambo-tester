@@ -11,6 +11,8 @@ Complete.
 - Confirmed `ypp` should be optional.
 - Confirmed `c2y` should be removed.
 - Implemented the initial registry-based config and runner wiring.
+- Removed implicit optional executable probing from the packaged config and
+  ignored legacy executable fields under `[parameters]`.
 - Added focused tests for registry migration, generic CLI overrides, and optional-executable skips.
 - Audited the imported workflow fixtures and confirmed they already use per-step `exe` keys rather than flat executable config fields.
 

@@ -45,7 +45,7 @@ dependencies = ["01_init"]
 Important fields:
 
 - `exe`: key into the executable registry, for example `yambo`, `ypp`,
-  `yambo_ph`, or a custom key declared under `[executables]`.
+  `yambo_ph`, `ypp_ph`, or a custom key declared under `[executables]`.
 - `input`: input file passed with `-F`; also used for step ordering.
 - `output`: output directory/name passed with `-J` and `-C`.
 - `input_dir`: input directory passed with `-I`, used by conversion tools such as `p2y`.
@@ -73,8 +73,12 @@ checks that the string is present in the resolved report file, so avoid empty
 placeholder strings in imported fixtures.
 
 Executable discovery happens through the registry in `config.toml`, with
-`yambo`, `p2y`, and `a2y` required at startup and `ypp` plus project-specific
-tools treated as optional.
+`yambo`, `p2y`, and `a2y` required at startup and optional tools checked only
+when they are explicitly registered in `[executables]` or via `--exe KEY=VALUE`.
+
+The packaged keyword inventory used by `--list-executables` and
+`--list-runlevels` lives in `src/yambo_tester/data/workflow_keywords.toml` and
+is kept in sync with the imported workflow `tests.toml` files.
 
 `SAVE/` and `SAVE_converted/` may be empty in the source tree. They are populated from private tarballs during setup.
 

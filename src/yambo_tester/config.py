@@ -27,22 +27,26 @@ PARAMETERS = {
     'download_link': "https://media.yambo-code.eu/robots/databases/tests",
     }
 
-DEFAULT_EXECUTABLES = {
+REQUIRED_EXECUTABLES = {
     'yambo': 'yambo',
     'p2y': 'p2y',
     'a2y': 'a2y',
-    'ypp': 'ypp',
-    'yambo_ph': 'yambo_ph',
-    'ypp_ph': 'ypp_ph',
-    'yambo_sc': 'yambo_sc',
-    'ypp_sc': 'ypp_sc',
-    'yambo_rt': 'yambo_rt',
-    'ypp_rt': 'ypp_rt',
-    'yambo_nl': 'yambo_nl',
-    'ypp_nl': 'ypp_nl',
 }
 
-REQUIRED_EXECUTABLES = {'yambo', 'p2y', 'a2y'}
+LEGACY_PARAMETER_EXECUTABLES = {
+    'yambo',
+    'p2y',
+    'a2y',
+    'ypp',
+    'yambo_ph',
+    'ypp_ph',
+    'yambo_sc',
+    'ypp_sc',
+    'yambo_rt',
+    'ypp_rt',
+    'yambo_nl',
+    'ypp_nl',
+}
 
 
 def load_config():
@@ -71,15 +75,12 @@ def load_config():
     if not config['parameters']['tests_dir']:
         config['parameters']['tests_dir'] = PARAMETERS['tests_dir']
 
-    # Migrate legacy top-level executable fields from [parameters] into the new registry.
-    for name in list(DEFAULT_EXECUTABLES):
-        if name in config["parameters"]:
-            if name not in config["executables"]:
-                config["executables"][name] = config["parameters"][name]
-            del config["parameters"][name]
+    # Drop legacy top-level executable fields. The executable registry lives in [executables].
+    for name in LEGACY_PARAMETER_EXECUTABLES:
+        config["parameters"].pop(name, None)
 
-    # Fill any missing executable entries from the default registry.
-    for name, value in DEFAULT_EXECUTABLES.items():
+    # Fill any missing executable entries from the required registry.
+    for name, value in REQUIRED_EXECUTABLES.items():
         if name not in config["executables"]:
             config["executables"][name] = value
 
