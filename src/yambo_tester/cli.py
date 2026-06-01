@@ -4,6 +4,7 @@
 import argparse
 from pathlib import Path
 import importlib.resources
+import tomllib
 from .log import setup_logging
 from .download import download_test
 from .config import load_config, check_parameters
@@ -23,6 +24,22 @@ def parse_executable_override(value):
     if not key or not executable:
         raise argparse.ArgumentTypeError("Executable overrides must use KEY=VALUE syntax.")
     return key, executable
+
+
+def load_workflow_keywords():
+    keywords_file = importlib.resources.files("yambo_tester.data") / "workflow_keywords.toml"
+    with keywords_file.open("rb") as f:
+        keywords = tomllib.load(f)
+
+    return {
+        "executables": list(keywords.get("executables", [])),
+        "runlevels": list(keywords.get("runlevels", [])),
+    }
+
+
+def print_keywords(keywords):
+    for keyword in keywords:
+        print(keyword)
 
 
 def set_cl_args(config):
@@ -67,6 +84,15 @@ def set_cl_args(config):
     parser.add_argument('--runlevel',
                         help='Run only workflow steps matching this runlevel and their dependencies. May be repeated.',
                         type=str, action='append', dest='runlevels')
+    list_group = parser.add_mutually_exclusive_group()
+    list_group.add_argument('--list-executables',
+                            help='List the executable keywords known to the tester and exit.',
+                            dest='list_executables',
+                            action='store_true')
+    list_group.add_argument('--list-runlevels',
+                            help='List the runlevel keywords known to the tester and exit.',
+                            dest='list_runlevels',
+                            action='store_true')
     parser.add_argument('--exe',
                         help='Executable override in KEY=VALUE form. May be repeated.',
                         type=parse_executable_override,
@@ -99,6 +125,13 @@ def main():
     # Setup
     config = load_config()
     config = set_cl_args(config)
+    if config['parameters'].get('list_executables') or config['parameters'].get('list_runlevels'):
+        keywords = load_workflow_keywords()
+        if config['parameters'].get('list_executables'):
+            print_keywords(keywords["executables"])
+        if config['parameters'].get('list_runlevels'):
+            print_keywords(keywords["runlevels"])
+        return
     logger = setup_logging(Path(config['parameters']['logger']))
     if not config['parameters']['init']: logger.info(f"Using {config['config']}")
     parameters = check_parameters(config['parameters'], config['executables'], logger)

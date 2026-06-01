@@ -216,6 +216,6 @@ pytest validation.
 
 The main configuration file now stores executables under `[executables]`
 instead of top-level `[parameters]` fields. Core executables are `yambo`,
-`p2y`, and `a2y`. `ypp` and project executables such as `yambo_ph` are
-optional. You can override any registry entry on the command line with
-`--exe KEY=VALUE`.
+`p2y`, and `a2y`. Optional executables such as `ypp` and project tools such
+as `yambo_ph` are only checked when you register them explicitly in
+`[executables]` or override them on the command line with `--exe KEY=VALUE`.

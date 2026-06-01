@@ -10,7 +10,7 @@ Track implementation progress in `docs/codex/executables-refactor_progress.md`.
 
 ## Current State
 
-- `src/yambo_tester/config.py` uses a registry-oriented executable model and resolves required and optional tools separately.
+- `src/yambo_tester/config.py` uses a registry-oriented executable model and resolves required tools automatically while only checking optional tools when they are explicitly registered.
 - `src/yambo_tester/cli.py` accepts generic `--exe KEY=VALUE` overrides instead of one flag per executable.
 - `src/yambo_tester/runner.py` resolves each step's `exe` through the executable registry.
 - `src/yambo_tester/data/config.toml`, `README.md`, `ADDING_TESTS.md`, and `docs/codex/test-layout.md` document the registry model.
@@ -27,6 +27,7 @@ p2y = "p2y"
 a2y = "a2y"
 ypp = "ypp"
 yambo_ph = "yambo_ph"
+ypp_ph = "ypp_ph"
 custom_tool = "my_custom_executable"
 ```
 

@@ -17,18 +17,14 @@ download_link = "https://media.yambo-code.eu/robots/databases/tests"
 yambo = "yambo"
 p2y = "p2y"
 a2y = "a2y"
-# optional executables
-ypp = "ypp"
-yambo_ph = "yambo_ph"
-ypp_ph = "ypp_ph"
-yambo_rt = "yambo_rt"
-ypp_rt = "ypp_rt"
-yambo_sc = "yambo_sc"
-ypp_sc = "ypp_sc"
-yambo_nl = "yambo_nl"
-ypp_nl = "ypp_nl"
+# Optional executables are registered explicitly in a local config.toml or with --exe KEY=VALUE.
 
 [tests]
 Al_bulk = ["DFT", "GW-OPTICS", "ELPH"]
+PA_chain = ["DFT", "PA_chain"]
 He = ["DFT"]
-PA_chain = ["PA_chain"]
+Nickel = ["DFT"]
+AlAs = ["DFT"]
+hBN = ["DFT"]
+Iron_With-SOC = ["DFT"]
+Iron_Without-SOC = ["DFT"]

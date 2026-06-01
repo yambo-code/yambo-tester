@@ -1,11 +1,12 @@
 import argparse
 import logging
 import os
+import sys
 import urllib.request
 
 import pytest
 
-from yambo_tester.cli import parse_executable_override
+from yambo_tester.cli import parse_executable_override, set_cl_args
 from yambo_tester.config import check_parameters, load_config
 
 
@@ -20,25 +21,41 @@ def _write_executable(path, stderr_text="", stdout_text=""):
     os.chmod(path, 0o755)
 
 
-def test_load_config_migrates_legacy_executable_fields(monkeypatch, tmp_path):
+def test_load_config_ignores_legacy_executable_fields_and_only_injects_required_defaults(monkeypatch, tmp_path):
     monkeypatch.chdir(tmp_path)
     (tmp_path / "config.toml").write_text(
         "[parameters]\n"
         "tests_dir = \"\"\n"
         "yambo = \"legacy-yambo\"\n"
         "p2y = \"legacy-p2y\"\n"
+        "ypp = \"legacy-ypp\"\n"
         "\n"
         "[executables]\n"
         "a2y = \"table-a2y\"\n"
+        "custom_tool = \"table-custom\"\n"
     )
 
     config = load_config()
 
     assert "yambo" not in config["parameters"]
     assert "p2y" not in config["parameters"]
-    assert config["executables"]["yambo"] == "legacy-yambo"
-    assert config["executables"]["p2y"] == "legacy-p2y"
+    assert "ypp" not in config["parameters"]
+    assert config["executables"]["yambo"] == "yambo"
+    assert config["executables"]["p2y"] == "p2y"
     assert config["executables"]["a2y"] == "table-a2y"
+    assert config["executables"]["custom_tool"] == "table-custom"
+    assert "ypp" not in config["executables"]
+
+
+def test_set_cl_args_registers_executable_overrides(monkeypatch):
+    monkeypatch.setattr(sys, "argv", ["yambo-tester", "--exe", "ypp=/opt/ypp", "--exe", "custom_tool=/opt/custom"])
+
+    config = {"parameters": {}, "executables": {}}
+
+    updated = set_cl_args(config)
+
+    assert updated["executables"]["ypp"] == "/opt/ypp"
+    assert updated["executables"]["custom_tool"] == "/opt/custom"
 
 
 def test_parse_executable_override_accepts_key_value_pairs():
@@ -50,7 +67,7 @@ def test_parse_executable_override_rejects_malformed_values():
         parse_executable_override("missing-separator")
 
 
-def test_check_parameters_resolves_optional_and_custom_executables(monkeypatch, tmp_path):
+def test_check_parameters_ignores_unconfigured_optional_executables(monkeypatch, tmp_path):
     monkeypatch.setattr(urllib.request, "urlopen", lambda *_args, **_kwargs: type("Resp", (), {"getcode": lambda self: 200})())
 
     yambo_bin = tmp_path / "bin"
@@ -88,7 +105,6 @@ def test_check_parameters_resolves_optional_and_custom_executables(monkeypatch, 
         "yambo": "yambo",
         "p2y": "p2y",
         "a2y": "a2y",
-        "ypp": "ypp",
         "custom_tool": "custom_tool",
     }
 
@@ -97,8 +113,8 @@ def test_check_parameters_resolves_optional_and_custom_executables(monkeypatch, 
     assert resolved["executables"]["yambo"] == yambo_bin / "yambo"
     assert resolved["executables"]["p2y"] == yambo_bin / "p2y"
     assert resolved["executables"]["a2y"] == yambo_bin / "a2y"
-    assert resolved["executables"]["ypp"] is None
     assert resolved["executables"]["custom_tool"] == yambo_bin / "custom_tool"
+    assert "ypp" not in resolved["executables"]
     assert resolved["mpi"] is True
     assert resolved["omp"] is True
 

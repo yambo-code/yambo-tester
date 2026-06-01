@@ -23,6 +23,24 @@ def test_build_run_command_accepts_p2y_without_input_or_output():
     assert build_run_command(run, parameters) == ["/usr/bin/p2y", "-I", "Al.save"]
 
 
+def test_build_run_command_maps_a2y_input_to_file_flag():
+    run = {
+        "exe": "a2y",
+        "input": "DB/file.nc",
+        "nprocs": 1,
+    }
+    parameters = {
+        "mpi": False,
+        "mpi_launcher": None,
+        "nprocs": 2,
+        "executables": {
+            "a2y": "/usr/bin/a2y",
+        },
+    }
+
+    assert build_run_command(run, parameters) == ["/usr/bin/a2y", "-F", "DB/file.nc"]
+
+
 def test_run_test_p2y_step_writes_stdout_file_and_uses_input_dir(tmp_path):
     executable = tmp_path / "fake_p2y.py"
     executable.write_text(

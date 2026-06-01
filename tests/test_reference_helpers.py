@@ -114,6 +114,29 @@ def test_stdout_reference_checks_expected_string_from_log_when_stdout_missing(tm
     }))
 
 
+def test_a2y_stdout_reference_checks_completion_marker_from_log_when_stdout_empty(tmp_path):
+    marker = "== Writing DB2 (wavefunctions) + nlPP ..."
+    stdout_file = tmp_path / "01_a2y.stdout"
+    stdout_file.write_text("")
+    (tmp_path / "l_a2y").write_text(f"<--->  {marker}\n")
+
+    reference_test_reference_ok(("STDOUT", {
+        "out": [marker],
+        "path": "01_a2y.stdout",
+        "variables": [],
+        "skip_columns": set(),
+        "whitelist": False,
+        "exe": "a2y",
+        "stdout": "",
+        "run_dir": str(tmp_path),
+        "dir": str(tmp_path),
+        "tol": 0.1,
+        "odir": "",
+        "contains": marker,
+        "skip": False,
+    }))
+
+
 def test_stdout_reference_fails_when_string_is_missing_from_both_sources(tmp_path):
     stdout_file = tmp_path / "01_p2y.stdout"
     stdout_file.write_text("setup\n")
