@@ -77,6 +77,14 @@ declared in each workflow's `tests.toml` and intentionally skips unrelated
 steps during validation. The same selection can be configured with
 `runlevels = ["qp", "bse"]` under `[parameters]` in `config.toml`.
 
+Executable names are configured under `[executables]` in `config.toml`. The
+same values can be overridden on the command line with repeated
+`--exe KEY=VALUE` arguments, for example:
+
+```bash
+yambo-tester --exe yambo=/opt/yambo/bin/yambo --exe custom_tool=/opt/tools/custom_tool
+```
+
 ### Parameter Hierarchy
 
 When a parameter is not explicitly provided, **yambo-tester** resolves it using the following hierarchical system:
@@ -90,9 +98,10 @@ In typical usage, the user should set parameters either on the command line or i
 
 ### Executable Discovery
 
-- If the parameter `yambo_bin` is not defined, Yambo executables are searched in the system `PATH`.
-- If the program cannot find the **core executables**, execution stops with an error.
-- If **project executables** (e.g., `yambo_rt`, `ypp_rt`, etc.) are missing, the corresponding tests are simply skipped.
+- Core executables are `yambo`, `p2y`, and `a2y`. If any of them cannot be found, execution stops with an error.
+- `ypp` and the project executables such as `yambo_rt`, `ypp_rt`, and `yambo_ph` are optional. If they are missing, the corresponding workflow steps are skipped.
+- If `yambo_bin` is set, executable lookup starts there; otherwise, executables are searched in the system `PATH`.
+- Additional executables can be registered under `[executables]` or with `--exe KEY=VALUE`.
 
 ### Scratch and Cache Directories
 
@@ -126,7 +135,7 @@ For details, see the **LICENSE** file included in this repository.
 The following features and improvements are planned for future releases of yambo-tester:
 
 - [ ] Integration of additional tests from the official Yambo test suite and other validated sources, expanding the coverage of physical scenarios and computational workflows.
-- [ ] Support for auxiliary executables such as p2y, a2y, and c2y, enabling full preparation and conversion workflows prior to Yambo runs.
+- [x] Support for auxiliary executables such as p2y and a2y, enabling full preparation and conversion workflows prior to Yambo runs.
 - [x] Support for project-specific executables (e.g., yambo_rt, ypp_rt, etc.).
 - [ ] Publishing the package on PyPI, allowing installation via pip install yambo-tester and integration into CI pipelines without local cloning.
 - [x] Generation of a final test report suitable for upload to a web portal or dashboard, enabling remote monitoring of test outcomes.

@@ -5,7 +5,19 @@ tests_dir = ""
 scratch_dir = "scratch"
 cache_dir = "cache"
 yambo_bin = ""
+mpi_launcher = "mpirun"
+nprocs = 2
+thrs = 1
+tollerance = 0.1
+runlevels = []
+download_link = "https://media.yambo-code.eu/robots/databases/tests"
+
+[executables]
+# required executables
 yambo = "yambo"
+p2y = "p2y"
+a2y = "a2y"
+# optional executables
 ypp = "ypp"
 yambo_ph = "yambo_ph"
 ypp_ph = "ypp_ph"
@@ -15,15 +27,6 @@ yambo_sc = "yambo_sc"
 ypp_sc = "ypp_sc"
 yambo_nl = "yambo_nl"
 ypp_nl = "ypp_nl"
-p2y = "p2y"
-a2y = "a2y"
-c2y = "c2y"
-mpi_launcher = "mpirun"
-nprocs = 2
-thrs = 1
-tollerance = 0.1
-runlevels = []
-download_link = "https://media.yambo-code.eu/robots/databases/tests"
 
 [tests]
 Al_bulk = ["DFT", "GW-OPTICS", "ELPH"]

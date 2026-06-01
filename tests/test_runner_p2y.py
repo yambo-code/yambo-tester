@@ -15,7 +15,9 @@ def test_build_run_command_accepts_p2y_without_input_or_output():
         "mpi": False,
         "mpi_launcher": None,
         "nprocs": 2,
-        "p2y": "/usr/bin/p2y",
+        "executables": {
+            "p2y": "/usr/bin/p2y",
+        },
     }
 
     assert build_run_command(run, parameters) == ["/usr/bin/p2y", "-I", "Al.save"]
@@ -53,7 +55,9 @@ def test_run_test_p2y_step_writes_stdout_file_and_uses_input_dir(tmp_path):
         "thrs": 1,
         "tollerance": 0.1,
         "runlevels": [],
-        "p2y": executable,
+        "executables": {
+            "p2y": executable,
+        },
     }
     test = {"name": "Al_bulk", "type": "DFT", "run_dir": run_dir}
 
@@ -75,3 +79,39 @@ def test_command_reference_output_preserves_stdout_only(tmp_path):
     text = command_reference_output("== P2Y completed ==\n", {"exe": "p2y"}, tmp_path)
 
     assert text == "== P2Y completed ==\n"
+
+
+def test_run_test_skips_missing_optional_executable(tmp_path):
+    run_dir = tmp_path / "run"
+    run_dir.mkdir()
+    (run_dir / "tests.toml").write_text(
+        "[01_custom]\n"
+        "exe = \"custom_tool\"\n"
+        "input_dir = \"Al.save\"\n"
+        "runlevel = \"custom\"\n"
+        "dependencies = []\n"
+        "[01_custom.reference]\n"
+        "\"STDOUT\" = [\"unused\"]\n"
+    )
+
+    parameters = {
+        "mpi": False,
+        "mpi_launcher": None,
+        "nprocs": 2,
+        "omp": False,
+        "thrs": 1,
+        "tollerance": 0.1,
+        "runlevels": [],
+        "executables": {
+            "yambo": tmp_path / "fake_yambo",
+        },
+    }
+    test = {"name": "Al_bulk", "type": "DFT", "run_dir": run_dir}
+
+    run_test(test, parameters, logging.getLogger("test-runner-custom"))
+
+    with open(run_dir / "results.toml", "rb") as f:
+        results = tomllib.load(f)
+
+    assert results["01_custom"]["returncode"] == -9999
+    assert results["01_custom"]["skip_reason"] == "missing-executable"
