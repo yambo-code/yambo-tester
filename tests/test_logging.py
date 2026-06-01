@@ -66,6 +66,9 @@ def test_cli_logs_setup_and_test_lifecycle(monkeypatch, tmp_path):
 
     config = {
         "config": tmp_path / "config.toml",
+        "executables": {
+            "yambo": tmp_path / "fake_yambo",
+        },
         "parameters": {
             "logger": str(main_log),
             "init": False,
@@ -83,7 +86,7 @@ def test_cli_logs_setup_and_test_lifecycle(monkeypatch, tmp_path):
     def fake_set_cl_args(config):
         return config
 
-    def fake_check_parameters(parameters, logger):
+    def fake_check_parameters(parameters, executables, logger):
         logger.info("setup complete")
         return parameters
 

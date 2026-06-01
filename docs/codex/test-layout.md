@@ -44,7 +44,8 @@ dependencies = ["01_init"]
 
 Important fields:
 
-- `exe`: key into validated executable parameters, for example `yambo`, `ypp`, `yambo_ph`.
+- `exe`: key into the executable registry, for example `yambo`, `ypp`,
+  `yambo_ph`, or a custom key declared under `[executables]`.
 - `input`: input file passed with `-F`; also used for step ordering.
 - `output`: output directory/name passed with `-J` and `-C`.
 - `input_dir`: input directory passed with `-I`, used by conversion tools such as `p2y`.
@@ -70,6 +71,10 @@ if present, the step's `l_<exe>` log file. For example,
 `r-` still check report completeness; a non-empty string value additionally
 checks that the string is present in the resolved report file, so avoid empty
 placeholder strings in imported fixtures.
+
+Executable discovery happens through the registry in `config.toml`, with
+`yambo`, `p2y`, and `a2y` required at startup and `ypp` plus project-specific
+tools treated as optional.
 
 `SAVE/` and `SAVE_converted/` may be empty in the source tree. They are populated from private tarballs during setup.
 

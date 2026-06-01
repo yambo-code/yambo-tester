@@ -11,6 +11,7 @@ import subprocess
 from pathlib import Path
 import importlib.resources
 from .log import setup_test_logger
+from .config import get_executable
 from .download import download_test, sha256sum
 from .selection import (
     MISSING_EXECUTABLE_REASON,
@@ -35,7 +36,10 @@ def build_run_command(run, parameters):
     if parameters['mpi'] and parameters['mpi_launcher']:
         nprocs = run.get('nprocs', parameters['nprocs'])
         cmd.extend([str(parameters['mpi_launcher']), '-np', str(nprocs)])
-    cmd.append(str(parameters[run['exe']]))
+    executable = get_executable(parameters, run['exe'])
+    if executable is None:
+        raise FileNotFoundError(f"{run['exe']}: executable not available.")
+    cmd.append(str(executable))
     if run.get('input'):
         cmd.extend(['-F', str(run['input'])])
     if run.get('input_dir'):
@@ -154,7 +158,7 @@ def run_test(test, parameters, logger, verbose=False):
                 "runlevel": run.get("runlevel", ""),
             }
             local_logger.info(f"{name} skipped by runlevel selection")
-        elif parameters[run['exe']]:
+        elif get_executable(parameters, run['exe']):
             
             # Execution of any actions
             if run.get('actions', False):
