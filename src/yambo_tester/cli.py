@@ -4,16 +4,49 @@
 import argparse
 from pathlib import Path
 import importlib.resources
+import tomllib
 from .log import setup_logging
 from .download import download_test
 from .config import load_config, check_parameters
 from .runner import setup_rundir, run_test, run_pytest
 
 
+def parse_executable_override(value):
+    """
+    Parse a generic executable override of the form KEY=VALUE.
+    """
+    if "=" not in value:
+        raise argparse.ArgumentTypeError("Executable overrides must use KEY=VALUE syntax.")
+
+    key, executable = value.split("=", 1)
+    key = key.strip()
+    executable = executable.strip()
+    if not key or not executable:
+        raise argparse.ArgumentTypeError("Executable overrides must use KEY=VALUE syntax.")
+    return key, executable
+
+
+def load_workflow_keywords():
+    keywords_file = importlib.resources.files("yambo_tester.data") / "workflow_keywords.toml"
+    with keywords_file.open("rb") as f:
+        keywords = tomllib.load(f)
+
+    return {
+        "executables": list(keywords.get("executables", [])),
+        "runlevels": list(keywords.get("runlevels", [])),
+    }
+
+
+def print_keywords(keywords):
+    for keyword in keywords:
+        print(keyword)
+
+
 def set_cl_args(config):
     """
     Collects command line arguments and overrides parameters.
     """
+    config.setdefault('executables', {})
     # Parsing command line
     parser = argparse.ArgumentParser(prog='yambo-tester',
                                      description='A Python-based testing framework for validating Yambo simulations using the official Yambo test suite.',
@@ -51,36 +84,31 @@ def set_cl_args(config):
     parser.add_argument('--runlevel',
                         help='Run only workflow steps matching this runlevel and their dependencies. May be repeated.',
                         type=str, action='append', dest='runlevels')
-    parser.add_argument('--yambo',
-                        help='Yambo executable', type=str, dest='yambo')
-    parser.add_argument('--ypp',
-                        help='Y(ambo) P(ost)/(re) P(rocessor) exectuable', type=str, dest='ypp')
-    parser.add_argument('--yambo_ph',
-                        help='Yambo Electron-phonon coupling project executable', type=str, dest='yambo_ph')
-    parser.add_argument('--ypp_ph',
-                        help='Y(ambo) P(ost)/(re) P(rocessor) Electron-phonon coupling project exectuable', type=str, dest='ypp_ph')
-    parser.add_argument('--yambo_sc',
-                        help='Yambo Self-consistent (COHSEX, HF, DFT) project executable', type=str, dest='yambo_sc')
-    parser.add_argument('--ypp_sc',
-                        help='Y(ambo) P(ost)/(re) P(rocessor) Self-consistent (COHSEX, HF, DFT) project exectuable', type=str, dest='ypp_sc')
-    parser.add_argument('--yambo_rt',
-                        help='Yambo Real-time dynamics project executable', type=str, dest='yambo_rt')
-    parser.add_argument('--ypp_rt',
-                        help='Y(ambo) P(ost)/(re) P(rocessor) Real-time dynamics project exectuable', type=str, dest='ypp_rt')
-    parser.add_argument('--yambo_nl',
-                        help='Yambo Non-linear optics project executable', type=str, dest='yambo_nl')
-    parser.add_argument('--ypp_nl',
-                        help='Y(ambo) P(ost)/(re) P(rocessor) Non-linear optics project exectuable', type=str, dest='ypp_nl')
-    parser.add_argument('--p2y',
-                        help='P(Wscf) 2 Y(ambo) interface exectuable', type=str, dest='p2y')
-    parser.add_argument('--a2y',
-                        help='A(binit) 2 Y(ambo) interface exectuable', type=str, dest='a2y')
-    parser.add_argument('--c2y',
-                        help='C(pmd) 2 Y(ambo) interface exectuable', type=str, dest='c2y')
+    list_group = parser.add_mutually_exclusive_group()
+    list_group.add_argument('--list-executables',
+                            help='List the executable keywords known to the tester and exit.',
+                            dest='list_executables',
+                            action='store_true')
+    list_group.add_argument('--list-runlevels',
+                            help='List the runlevel keywords known to the tester and exit.',
+                            dest='list_runlevels',
+                            action='store_true')
+    parser.add_argument('--exe',
+                        help='Executable override in KEY=VALUE form. May be repeated.',
+                        type=parse_executable_override,
+                        action='append',
+                        dest='executables')
     args = parser.parse_args()
 
     for arg, val in args.__dict__.items():
-        if val: config['parameters'][arg] = val
+        if arg == 'executables':
+            continue
+        if val:
+            config['parameters'][arg] = val
+    if args.executables:
+        config.setdefault('executables', {})
+        for key, executable in args.executables:
+            config['executables'][key] = executable
     if not 'init' in config['parameters']: config['parameters']['init'] = False
     if not 'verbose' in config['parameters']: config['parameters']['verbose'] = False
     if not 'donly' in config['parameters']: config['parameters']['donly'] = False
@@ -97,9 +125,16 @@ def main():
     # Setup
     config = load_config()
     config = set_cl_args(config)
+    if config['parameters'].get('list_executables') or config['parameters'].get('list_runlevels'):
+        keywords = load_workflow_keywords()
+        if config['parameters'].get('list_executables'):
+            print_keywords(keywords["executables"])
+        if config['parameters'].get('list_runlevels'):
+            print_keywords(keywords["runlevels"])
+        return
     logger = setup_logging(Path(config['parameters']['logger']))
     if not config['parameters']['init']: logger.info(f"Using {config['config']}")
-    parameters = check_parameters(config['parameters'], logger)
+    parameters = check_parameters(config['parameters'], config['executables'], logger)
 
     if parameters['donly']:
         for test_name, test_types in config['tests'].items():

@@ -141,8 +141,8 @@ dependencies = ["01_init"]
 
 Required step fields:
 
-- `exe`: executable key from the configuration, such as `yambo`, `ypp`,
-  `yambo_ph`, or `ypp_ph`.
+- `exe`: executable key from the configuration registry, such as `yambo`,
+  `ypp`, `yambo_ph`, `ypp_ph`, or a custom key defined under `[executables]`.
 - `input`: input file passed with `-F`.
 - `output`: output name used with `-J` and `-C`.
 - `runlevel`: primary Yambo runlevel covered by the step, such as `init`,
@@ -211,3 +211,11 @@ yambo-tester --runlevel qp
 Steps whose `runlevel` does not match and are not dependencies are marked as
 intentional skips in `results.toml`, so their references are skipped during
 pytest validation.
+
+## Executable Registry
+
+The main configuration file now stores executables under `[executables]`
+instead of top-level `[parameters]` fields. Core executables are `yambo`,
+`p2y`, and `a2y`. Optional executables such as `ypp` and project tools such
+as `yambo_ph` are only checked when you register them explicitly in
+`[executables]` or override them on the command line with `--exe KEY=VALUE`.

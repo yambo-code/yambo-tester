@@ -7,6 +7,7 @@ import tomllib
 import argparse
 import subprocess
 import urllib.request
+from urllib.error import HTTPError
 from pathlib import Path
 import importlib.resources
 from datetime import datetime
@@ -18,19 +19,6 @@ PARAMETERS = {
     'tests_dir': importlib.resources.files("yambo_tester") / "tests",
     'scratch_dir': "scratch",
     'cache_dir': "cache",
-    'yambo': "yambo",
-    'ypp': "ypp",
-    'yambo_ph': "yambo_ph",
-    'ypp_ph': "ypp_ph",
-    'yambo_sc': "yambo_sc",
-    'ypp_sc': "ypp_sc",
-    'yambo_rt': "yambo_rt",
-    'ypp_rt': "ypp_rt",
-    'yambo_nl': "yambo_nl",
-    'ypp_nl': "ypp_nl",
-    'p2y': "p2y",
-    'a2y': "a2y",
-    'c2y': "c2y",
     'mpi_launcher': "mpirun",
     'nprocs': 2,
     'thrs': 1,
@@ -38,6 +26,27 @@ PARAMETERS = {
     'runlevels': [],
     'download_link': "https://media.yambo-code.eu/robots/databases/tests",
     }
+
+REQUIRED_EXECUTABLES = {
+    'yambo': 'yambo',
+    'p2y': 'p2y',
+    'a2y': 'a2y',
+}
+
+LEGACY_PARAMETER_EXECUTABLES = {
+    'yambo',
+    'p2y',
+    'a2y',
+    'ypp',
+    'yambo_ph',
+    'ypp_ph',
+    'yambo_sc',
+    'ypp_sc',
+    'yambo_rt',
+    'ypp_rt',
+    'yambo_nl',
+    'ypp_nl',
+}
 
 
 def load_config():
@@ -56,10 +65,24 @@ def load_config():
             config = tomllib.load(f)
             config['config'] = importlib.resources.files("yambo_tester.data") / "config.toml"
 
-    # Overwrites default parameters with those read from the conf.toml file
+    config.setdefault("parameters", {})
+    config.setdefault("executables", {})
+
+    # Overwrite default parameters with those read from the config file.
     for parameter in PARAMETERS:
-        if parameter not in config["parameters"]: config["parameters"][parameter] = PARAMETERS[parameter]
-    if not config['parameters']['tests_dir']: config['parameters']['tests_dir'] = PARAMETERS['tests_dir']
+        if parameter not in config["parameters"]:
+            config["parameters"][parameter] = PARAMETERS[parameter]
+    if not config['parameters']['tests_dir']:
+        config['parameters']['tests_dir'] = PARAMETERS['tests_dir']
+
+    # Drop legacy top-level executable fields. The executable registry lives in [executables].
+    for name in LEGACY_PARAMETER_EXECUTABLES:
+        config["parameters"].pop(name, None)
+
+    # Fill any missing executable entries from the required registry.
+    for name, value in REQUIRED_EXECUTABLES.items():
+        if name not in config["executables"]:
+            config["executables"][name] = value
 
     if not "tests" in config:
         config['tests'] = {
@@ -71,6 +94,30 @@ def load_config():
         }
 
     return config
+
+
+def _resolve_candidate_executable(executable, yambo_bin=None):
+    if not executable:
+        return None
+
+    candidate = Path(executable)
+    if yambo_bin and not candidate.is_absolute() and len(candidate.parts) == 1:
+        candidate = Path(yambo_bin).joinpath(candidate)
+
+    resolved = shutil.which(str(candidate))
+    if resolved is None:
+        return None
+    return Path(resolved)
+
+
+def get_executable(parameters, name):
+    """
+    Return the resolved executable path stored in the runtime registry.
+    """
+    executables = parameters.get('executables', {})
+    if name in executables:
+        return executables[name]
+    return parameters.get(name)
 
 
 def check_dir(par, directory, logger):
@@ -133,10 +180,16 @@ def get_yambo_info(yambo: str) -> dict:
     return info
 
 
-def check_parameters(parameters, logger):
+def check_parameters(parameters, executables=None, logger=None):
     """
     Check parameters one by one and report it in the main logger.
     """
+    if logger is None:
+        logger = executables
+        executables = {}
+    if executables is None:
+        executables = {}
+
     if not parameters['init']:
         # Check download_link
         try:
@@ -170,24 +223,22 @@ def check_parameters(parameters, logger):
         )
     
         # Checks on executables
-        for par in ["yambo", "ypp", "p2y", 'a2y', 'c2y', 'yambo_ph', 'ypp_ph',
-                    'yambo_sc', 'ypp_sc', 'yambo_rt', 'ypp_rt', 'yambo_nl', 'ypp_nl']:
-            if parameters['yambo_bin']:
-                parameters[par] = parameters['yambo_bin'].joinpath(parameters[par])
-            try:
-                parameters[par] = Path(shutil.which(parameters[par]))
-                logger.info(f"{par}: {parameters[par]}")
-            except TypeError:
-                if '_' in parameters[par]:
-                    parameters[par] = None # Project's tests deactivated
-                    logger.warning(f"{par}: {parameters[par]} project's tests deactivated!")
-                elif parameters[par] in ["p2y", 'a2y', 'c2y', 'ypp']:
-                    parameters[par] = None # pre/post processing tests deactivated
-                    logger.warning(f"{par}: {parameters[par]} tests deactivated!")
-                else:
-                    raise FileNotFoundError(f"{par}: {parameters[par]} do not exist.")
-            # Extract info from "yambo -h"
-            if par == 'yambo': parameters.update(get_yambo_info(parameters['yambo']))
+        resolved_executables = {}
+        for name, executable in executables.items():
+            resolved = _resolve_candidate_executable(executable, parameters['yambo_bin'])
+            if resolved is not None:
+                resolved_executables[name] = resolved
+                logger.info(f"{name}: {resolved}")
+            elif name in REQUIRED_EXECUTABLES:
+                raise FileNotFoundError(f"{name}: {executable} do not exist.")
+            else:
+                resolved_executables[name] = None
+                logger.warning(f"{name}: {executable} tests deactivated!")
+
+        parameters['executables'] = resolved_executables
+
+        # Extract info from "yambo -h"
+        parameters.update(get_yambo_info(parameters['executables']['yambo']))
         
         if parameters['mpi_launcher']:
             try:

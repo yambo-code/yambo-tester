@@ -1,7 +1,7 @@
 sha256 = "28c9c09b3967df61514fa9027d1d4117ffdae95f6da3f356851b87d09c647528"
 
 [01_init]
-exe = "yambo_ph"
+exe = "elph"
 input = "INPUTS/01_init"
 output = "01_init"
 runlevel = "init"
@@ -12,7 +12,7 @@ dependencies = []
 "r-01_init_setup" = ["Game Over & Game summary"]
 
 [02_QP]
-exe = "yambo_ph"
+exe = "elph"
 input = "INPUTS/02_QP"
 output = "02_QP"
 runlevel = "qp"
@@ -23,16 +23,16 @@ dependencies = ["01_init"]
 "r-02_QP_gw0_dyson_el_ph_corr" = ["Game Over & Game summary"]
 
 [03_ypp]
-exe = "ypp_ph"
+exe = "elph_pp"
 input = "INPUTS/03_ypp"
 output = "03_ypp"
-runlevel = "ypp"
+runlevel = "pp"
 dependencies = ["01_init"]
 [03_ypp.reference]
 "r-03_ypp" = ["Game Over & Game summary"]
 
 [05_QP]
-exe = "yambo_ph"
+exe = "elph"
 input = "INPUTS/05_QP"
 output = "05_QP"
 flags = "03_ypp"

@@ -1,8 +1,8 @@
-sha256 = "5cee9dad2338d05ca0cdf6996e4f8a3293406496cf244c2b82ab3a49116a49e4"
+sha256 = "0f5b664114c3a5bdbd3837372bcf8a80ffdb01b0b83d5717968c55b85b8d4e0b"
 
 [01_p2y]
 exe = "p2y"
-input_dir = "si-hf.save"
+input_dir = "chain.save"
 runlevel = "dft"
 nprocs = 1
 dependencies = []

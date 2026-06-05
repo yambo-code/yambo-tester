@@ -121,9 +121,48 @@ module load yambo/5.3.0--gcc-14.3.0--openmpi-5.0.8-projects-omp-pario-slk-slepc-
 # 92 passed
 ```
 
+## Completed: `a2y` DFT Smoke Workflows
+
+Validated workflows:
+
+```text
+AlAs/DFT
+hBN/DFT
+Iron_With-SOC/DFT
+Iron_Without-SOC/DFT
+```
+
+Implemented fixes:
+
+- Removed duplicate `STDOUT` keys from each imported `tests.toml`.
+- Used the stable Yambo `5.3.0` completion marker from `l_a2y`:
+  `== Writing DB2 (wavefunctions) + nlPP ...`
+- Kept each conversion step at `nprocs = 1`.
+- Added focused coverage for `a2y -F <WFK.nc>` command construction and
+  `l_a2y` fallback validation when captured stdout is empty.
+
+This is smoke validation: successful conversion plus the stable log marker.
+Numerical comparison of generated `SAVE/ns.db1` and wavefunction fragments is
+deferred until the validator has first-class support for those database files.
+
+Verification:
+
+```bash
+cd /home/nicola/tmp/yambo-tester-a2y
+module load spack/1.0
+module load yambo/5.3.0--gcc-14.3.0--openmpi-5.0.8-projects-omp-pario-slk-slepc-27vuyas
+/home/nicola/src/yambo-tester/.env/bin/yambo-tester
+# AlAs/DFT: 2 passed
+# hBN/DFT: 2 passed
+# Iron_With-SOC/DFT: 2 passed
+# Iron_Without-SOC/DFT: 2 passed
+```
+
 ## Next Targets
 
-The currently imported workflows `Al_bulk/GW-OPTICS`, `Al_bulk/ELPH`, and `PA_chain/PA_chain` have been reproduced and fixed with the module stack above.
+The currently imported workflows `Al_bulk/GW-OPTICS`, `Al_bulk/ELPH`,
+`PA_chain/PA_chain`, and the four `a2y` DFT smoke workflows above have been
+reproduced and fixed with the module stack above.
 
 Combined default-run verification:
 
