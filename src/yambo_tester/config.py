@@ -24,7 +24,7 @@ PARAMETERS = {
     'thrs': 1,
     'tollerance': 0.1,
     'runlevels': [],
-    'download_link': "https://media.yambo-code.eu/robots/databases/tests",
+    'download_link': "https://media.yambo-code.eu/robots/databases/y6",
     }
 
 REQUIRED_EXECUTABLES = {
