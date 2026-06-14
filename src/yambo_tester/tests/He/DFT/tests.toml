@@ -1,10 +1,11 @@
 sha256 = "5cee9dad2338d05ca0cdf6996e4f8a3293406496cf244c2b82ab3a49116a49e4"
 
-[01_p2y]
+[00_p2y]
 exe = "p2y"
 input_dir = "si-hf.save"
 runlevel = "dft"
 nprocs = 1
 dependencies = []
-[01_p2y.reference]
-"STDOUT" = ["== P2Y completed =="]
+[00_p2y.reference]
+#"STDOUT" = ["== P2Y completed =="]
+"STDOUT" = ["Game Over"]

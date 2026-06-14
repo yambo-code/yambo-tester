@@ -1,10 +1,11 @@
 sha256 = "6efc5c888d0c52df11ab51c534eb51a56e5ddc00e7bf3f40ad92bad562183b27"
 
-[01_p2y]
+[00_p2y]
 exe = "p2y"
 input_dir = "Ni.save"
 runlevel = "dft"
 nprocs = 1
 dependencies = []
-[01_p2y.reference]
-"STDOUT" = ["== P2Y completed =="]
+[00_p2y.reference]
+#"STDOUT" = ["== P2Y completed =="]
+"STDOUT" = ["Game Over"]

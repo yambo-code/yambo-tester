@@ -10,7 +10,7 @@ from .log import setup_logging
 
 def get_args():
     tests_dir = './'
-    download_link = 'https://media.yambo-code.eu/robots/databases/tests'
+    download_link = 'https://media.yambo-code.eu/robots/databases/y6'
     parser = argparse.ArgumentParser()
     parser.add_argument('-cache', help='cache directory', type=str, dest='cache_dir', default=tests_dir)
     parser.add_argument('-link', help='download link', type=str, dest='link', default=download_link)
