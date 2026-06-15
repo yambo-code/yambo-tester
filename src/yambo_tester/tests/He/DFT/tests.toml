@@ -9,3 +9,26 @@ dependencies = []
 [00_p2y.reference]
 #"STDOUT" = ["== P2Y completed =="]
 "STDOUT" = ["Game Over"]
+
+[01_init]
+exe = "yambo"
+input = "INPUTS/01_init"
+output = "01_init"
+runlevel = "init"
+dependencies = ["00_p2y"]
+[01_init.reference]
+"o-01_init.ndb.gops" = ["SAVE/ndb.gops", "ng_in_shell", "E_of_shell"]
+"o-01_init.ndb.kindx" = ["SAVE/ndb.kindx", "Qindx", "Sindx"]
+"r-01_init_setup" = ["Game Over & Game summary"]
+
+[02_HF]
+exe = "yambo"
+input = "INPUTS/02_HF"
+output = "02_HF"
+runlevel = "hf"
+dependencies = ["01_init"]
+[02_HF.reference]
+"o-02_HF.hf" = ["o-02_HF.hf"]
+"o-02_HF.ndb.cutoff" = ["02_HF/ndb.cutoff", "CUT_BARE_QPG"]
+"o-02_HF.ndb.HF_and_locXC" = ["02_HF/ndb.HF_and_locXC", "Sx", "Vxc"]
+"r-02_HF_HF_and_locXC_rim_cut" = ["Game Over & Game summary"]

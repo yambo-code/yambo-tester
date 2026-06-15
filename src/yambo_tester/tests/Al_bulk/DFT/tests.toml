@@ -12,12 +12,12 @@ dependencies = []
 
 [01_init]
 exe = "yambo"
-#input = "INPUTS/01_init"
+input = "INPUTS/01_init"
 output = "01_init"
 runlevel = "init"
 dependencies = []
 [01_init.reference]
-#"o-01_init.ndb.gops" = ["SAVE/ndb.gops", "ng_in_shell", "E_of_shell"]
-#"o-01_init.ndb.kindx" = ["SAVE/ndb.kindx", "Qindx", "Sindx"]
+"o-01_init.ndb.gops" = ["SAVE/ndb.gops", "ng_in_shell", "E_of_shell"]
+"o-01_init.ndb.kindx" = ["SAVE/ndb.kindx", "Qindx", "Sindx"]
 "r-01_init_setup" = ["Game Over & Game summary"]
 

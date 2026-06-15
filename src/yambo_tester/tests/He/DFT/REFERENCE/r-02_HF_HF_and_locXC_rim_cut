@@ -1,0 +1,375 @@
+                                                                
+     /$$     /$$ /$$$$$$  /$$      /$$ /$$$$$$$   /$$$$$$       
+    |  $$   /$$//$$__  $$| $$$    /$$$| $$__  $$ /$$__  $$      
+     \  $$ /$$/| $$  \ $$| $$$$  /$$$$| $$  \ $$| $$  \ $$      
+      \  $$$$/ | $$$$$$$$| $$ $$/$$ $$| $$$$$$$ | $$  | $$      
+       \  $$/  | $$__  $$| $$  $$$| $$| $$__  $$| $$  | $$      
+        | $$   | $$  | $$| $$\  $ | $$| $$  \ $$| $$  | $$      
+        | $$   | $$  | $$| $$ \/  | $$| $$$$$$$/|  $$$$$$/      
+        |__/   |__/  |__/|__/     |__/|_______/  \______/       
+                                                                
+         Version 4.4.0 Revision 16869 Hash 1be972252            
+                     MPI+SLK+OpenMP Build                       
+                  http://www.yambo-code.org                     
+ 
+ 07/11/2019 at 18:03 YAMBO @ VivoBook
+
+ [01] CPU structure, Files & I/O Directories
+ ===========================================
+
+ * CPU             : 1
+ * THREADS    (max): 1
+ * THREADS TOT(max): 1
+ * NODES(computing): 1
+ *            (I/O): 1
+ * Fragmented WFs  :yes
+
+ CORE databases in   .
+ Additional I/O in   .
+ Communications in   .
+ Input file     is   yambo.in
+ Report file    is   ./r-02_HF_HF_and_locXC_rim_cut
+ Precision      is   SINGLE
+ Log files      in   ./LOG
+
+ Job string(s)-dir(s) (main): 02_HF
+                     (alt#1): R9
+  
+ [RD./SAVE//ns.db1]------------------------------------------
+  Bands                           :  4
+  K-points                        : 1
+  G-vectors             [RL space]: 257
+  Components       [wavefunctions]:  33
+  Symmetries             [spatial]:  48
+  Spinor components               : 1
+  Spin polarizations              : 1
+  Temperature                 [ev]: 0.000000
+  Electrons                       : 2.000000
+  WF G-vectors                    :  33
+  Max atoms/species               : 1
+  No. of atom species             : 1
+  Exact exchange fraction in XC   : 0.240000
+  Exact exchange screening in XC  : 0.150000
+  Magnetic symmetries             : no
+ - S/N 006617 -------------------------- v.04.04.00 r.16869 -
+
+ [02] CORE Variables Setup
+ =========================
+
+
+  [02.01] Unit cells
+  ==================
+
+  Unit cell is CUB
+
+  ... containing 1He atoms
+
+  ... with scaling factors [a.u.]: 4.000000  4.000000  4.000000
+
+  Direct Lattice(DL) unit cell [iru  /  cc(a.u.)]
+  A1 = 1.000000  0.000000  0.000000      4.000000  0.000000  0.000000
+  A2 = 0.000000  1.000000  0.000000      0.000000  4.000000  0.000000
+  A3 = 0.000000  0.000000  1.000000      0.000000  0.000000  4.000000
+
+  DL volume [au]: 64.00000
+
+  Reciprocal Lattice(RL) unit cell [iku  /  cc]
+  B1 = 1.000000  0.000000  0.000000      1.570796  0.000000  0.000000
+  B2 = 0.000000  1.000000  0.000000      0.000000  1.570796  0.000000
+  B3 = 0.000000  0.000000  1.000000      0.000000  0.000000  1.570796
+
+
+  [02.02] Symmetries
+  ==================
+
+  DL (S)ymmetries [cc]
+  [S1] 1.000000  0.000000  0.000000  0.000000  1.000000  0.000000  0.000000  0.000000  1.000000
+  [S2]-1.000000  0.000000  0.000000  0.000000 -1.000000  0.000000  0.000000  0.000000  1.000000
+  [S3]-1.000000  0.000000  0.000000  0.000000  1.000000  0.000000  0.000000  0.000000 -1.000000
+  [S4] 1.000000  0.000000  0.000000  0.000000 -1.000000  0.000000  0.000000  0.000000 -1.000000
+  [S5] 0.000000  1.000000  0.000000  1.000000  0.000000  0.000000  0.000000  0.000000 -1.000000
+  [S6] 0.000000 -1.000000  0.000000 -1.000000  0.000000  0.000000  0.000000  0.000000 -1.000000
+  [S7] 0.000000 -1.000000  0.000000  1.000000  0.000000  0.000000  0.000000  0.000000  1.000000
+  [S8] 0.000000  1.000000  0.000000 -1.000000  0.000000  0.000000  0.000000  0.000000  1.000000
+  [S9] 0.000000  0.000000  1.000000  0.000000 -1.000000  0.000000  1.000000  0.000000  0.000000
+  [S10] 0.000000  0.000000 -1.000000  0.000000 -1.000000  0.000000 -1.000000  0.000000  0.000000
+  [S11] 0.000000  0.000000 -1.000000  0.000000  1.000000  0.000000  1.000000  0.000000  0.000000
+  [S12] 0.000000  0.000000  1.000000  0.000000  1.000000  0.000000 -1.000000  0.000000  0.000000
+  [S13]-1.000000  0.000000  0.000000  0.000000  0.000000  1.000000  0.000000  1.000000  0.000000
+  [S14]-1.000000  0.000000  0.000000  0.000000  0.000000 -1.000000  0.000000 -1.000000  0.000000
+  [S15] 1.000000  0.000000  0.000000  0.000000  0.000000 -1.000000  0.000000  1.000000  0.000000
+  [S16] 1.000000  0.000000  0.000000  0.000000  0.000000  1.000000  0.000000 -1.000000  0.000000
+  [S17] 0.000000  0.000000  1.000000  1.000000  0.000000  0.000000  0.000000  1.000000  0.000000
+  [S18] 0.000000  0.000000 -1.000000 -1.000000  0.000000  0.000000  0.000000  1.000000  0.000000
+  [S19] 0.000000  0.000000 -1.000000  1.000000  0.000000  0.000000  0.000000 -1.000000  0.000000
+  [S20] 0.000000  0.000000  1.000000 -1.000000  0.000000  0.000000  0.000000 -1.000000  0.000000
+  [S21] 0.000000  1.000000  0.000000  0.000000  0.000000  1.000000  1.000000  0.000000  0.000000
+  [S22] 0.000000 -1.000000  0.000000  0.000000  0.000000 -1.000000  1.000000  0.000000  0.000000
+  [S23] 0.000000 -1.000000  0.000000  0.000000  0.000000  1.000000 -1.000000  0.000000  0.000000
+  [S24] 0.000000  1.000000  0.000000  0.000000  0.000000 -1.000000 -1.000000  0.000000  0.000000
+  [S25]-1.000000  0.000000  0.000000  0.000000 -1.000000  0.000000  0.000000  0.000000 -1.000000
+  [S26] 1.000000  0.000000  0.000000  0.000000  1.000000  0.000000  0.000000  0.000000 -1.000000
+  [S27] 1.000000  0.000000  0.000000  0.000000 -1.000000  0.000000  0.000000  0.000000  1.000000
+  [S28]-1.000000  0.000000  0.000000  0.000000  1.000000  0.000000  0.000000  0.000000  1.000000
+  [S29] 0.000000 -1.000000  0.000000 -1.000000  0.000000  0.000000  0.000000  0.000000  1.000000
+  [S30] 0.000000  1.000000  0.000000  1.000000  0.000000  0.000000  0.000000  0.000000  1.000000
+  [S31] 0.000000  1.000000  0.000000 -1.000000  0.000000  0.000000  0.000000  0.000000 -1.000000
+  [S32] 0.000000 -1.000000  0.000000  1.000000  0.000000  0.000000  0.000000  0.000000 -1.000000
+  [S33] 0.000000  0.000000 -1.000000  0.000000  1.000000  0.000000 -1.000000  0.000000  0.000000
+  [S34] 0.000000  0.000000  1.000000  0.000000  1.000000  0.000000  1.000000  0.000000  0.000000
+  [S35] 0.000000  0.000000  1.000000  0.000000 -1.000000  0.000000 -1.000000  0.000000  0.000000
+  [S36] 0.000000  0.000000 -1.000000  0.000000 -1.000000  0.000000  1.000000  0.000000  0.000000
+  [S37] 1.000000  0.000000  0.000000  0.000000  0.000000 -1.000000  0.000000 -1.000000  0.000000
+  [S38] 1.000000  0.000000  0.000000  0.000000  0.000000  1.000000  0.000000  1.000000  0.000000
+  [S39]-1.000000  0.000000  0.000000  0.000000  0.000000  1.000000  0.000000 -1.000000  0.000000
+  [S40]-1.000000  0.000000  0.000000  0.000000  0.000000 -1.000000  0.000000  1.000000  0.000000
+  [S41] 0.000000  0.000000 -1.000000 -1.000000  0.000000  0.000000  0.000000 -1.000000  0.000000
+  [S42] 0.000000  0.000000  1.000000  1.000000  0.000000  0.000000  0.000000 -1.000000  0.000000
+  [S43] 0.000000  0.000000  1.000000 -1.000000  0.000000  0.000000  0.000000  1.000000  0.000000
+  [S44] 0.000000  0.000000 -1.000000  1.000000  0.000000  0.000000  0.000000  1.000000  0.000000
+  [S45] 0.000000 -1.000000  0.000000  0.000000  0.000000 -1.000000 -1.000000  0.000000  0.000000
+  [S46] 0.000000  1.000000  0.000000  0.000000  0.000000  1.000000 -1.000000  0.000000  0.000000
+  [S47] 0.000000  1.000000  0.000000  0.000000  0.000000 -1.000000  1.000000  0.000000  0.000000
+  [S48] 0.000000 -1.000000  0.000000  0.000000  0.000000  1.000000  1.000000  0.000000  0.000000
+
+  [SYMs] K-space Time-reversal not included
+  [SYMs] Spatial inversion 25 is a symmetry
+  [SYMs] Group table built correctly
+
+  [02.03] RL shells
+  =================
+
+  Shells, format: [S#] G_RL(mHa)
+
+   [S15]:257(0.1974E+5) [S14]:251(0.1727E+5) [S13]:203(0.1604E+5) [S12]:179(0.1480E+5)
+   [S11]:171(0.1357E+5) [S10]:147(0.1234E+5) [S9]:123(0.1110E+5) [S8]:93( 9870.)
+   [S7]:81( 7402.) [S6]:57( 6169.) [S5]:33( 4935.) [S4]:27( 3701.)
+   [S3]:19( 2467.) [S2]:7( 1234.) [S1]:1( 0.000000)
+   ...
+   [S12]:179(0.1480E+5) [S11]:171(0.1357E+5) [S10]:147(0.1234E+5) [S9]:123(0.1110E+5)
+   [S8]:93( 9870.) [S7]:81( 7402.) [S6]:57( 6169.) [S5]:33( 4935.)
+   [S4]:27( 3701.) [S3]:19( 2467.) [S2]:7( 1234.) [S1]:1( 0.000000)
+
+  [02.04] K-grid lattice
+  ======================
+
+  Compatible Grid is 0D
+  K lattice UC volume       [au]: 3.875785
+
+  [02.05] Energies [ev] & Occupations
+  ===================================
+
+  [X]Fermi Level        [ev]: -19.32899
+  [X]VBM / CBm          [ev]:   0.00000  30.93411
+  [X]Electronic Temp. [ev K]:  0.00      0.00    
+  [X]Bosonic    Temp. [ev K]:  0.00      0.00    
+  [X]Finite Temperature mode: no
+  [X]El. density      [cm-3]: 0.211E+24
+  [X]States summary         : Full        Metallic    Empty
+                                 0001-0001               0002-0004
+  [X]Indirect Gaps      [ev]: 30.93411  30.93411
+  [X]Direct Gaps        [ev]: 30.93411  30.93411
+  X BZ K-points : 1
+
+  Energy unit is electronVolt [eV]
+
+  *X* K [1] : 0.000000  0.000000  0.000000 ( cc) * Comp.s 33 * weight  1.000000
+              0.000000  0.000000  0.000000 (rlu)
+  E   0.00000  30.93411  45.38815  45.38815
+
+ [03] Transferred momenta grid
+ =============================
+
+ [RD./SAVE//ndb.kindx]---------------------------------------
+  Fragmentation                    :no
+  Polarization last K   : 1
+  QP states             : 1  1
+  X grid is uniform     :yes
+  BS scattering         :no
+  COLL scattering       :no
+ - S/N 006617 -------------------------- v.04.04.00 r.16869 -
+
+ IBZ Q-points : 1
+ BZ  Q-points : 1
+
+ Q [00001] : 0.00      0.00      0.00     (iku) * weight  1.000000
+  
+ Q [00001] : 0.00      0.00      0.00     (cc ) * weight  1.000000
+
+ [04] Coloumb potential CutOff :ws
+ =================================
+
+ Cut directions       :XYZ
+ WS Cutoff   [units to be defined]: 1.700000
+ Symmetry test passed :yes
+
+ Cutoff: 1.700000
+ n grid: 2  2  2
+
+ WS Direct Lattice(DL) unit cell [iru  /  cc(a.u.)]
+ A1 = 1.000000  0.000000  0.000000      4.000000  0.000000  0.000000
+ A2 = 0.000000  1.000000  0.000000      0.000000  4.000000  0.000000
+ A3 = 0.000000  0.000000  1.000000      0.000000  0.000000  4.000000
+
+ [WR./02_HF//ndb.cutoff]-------------------------------------
+  Brillouin Zone Q/K grids (IBZ/BZ): 1  1  1  1
+  CutOff Geometry                 :ws xyz
+  Coulomb cutoff potential        :ws xyz  1.700
+  Box sides length            [au]: 0.00      0.00      0.00    
+  Sphere/Cylinder radius      [au]: 0.000000
+  Cylinder length             [au]: 0.000000
+  RL components                   :  33
+  RL components used in the sum   : 257
+  RIM corrections included        :no
+  RIM RL components               :0
+  RIM random points               :0
+ - S/N 006617 -------------------------- v.04.04.00 r.16869 -
+
+ [05] Bare local and non-local Exchange-Correlation
+ ==================================================
+
+ [VXC] Plane waves : 257
+ [EXS] Plane waves : 257
+  
+ QP @ K 1 - 1 : b 1 - 1
+  
+ [WF-HF/Rho] Performing Wave-Functions I/O from ./SAVE
+
+ [FFT-HF/Rho] Mesh size:  9   9   9
+
+ [WF-HF/Rho loader] Normalization (few states)  min/max  : 1.000002  1.000002
+
+ [VXC] Plane waves : 257
+ [EXS] Plane waves : 257
+  
+ QP @ K 1 - 1 : b 1 - 1
+  
+ [WF-HF/Rho] Performing Wave-Functions I/O from ./SAVE
+
+ [FFT-HF/Rho] Mesh size:  9   9   9
+
+ [xc] Functional GAUPBE(XC)
+ [xc] LIBXC used to calculate xc functional
+ [xc] Hybrid functional. EXX fraction:  0.240000
+ [xc] Hybrid functional. EXX GAUPBE parameter:  0.150000
+ [xc] Hybrid functional. EXX screening:  0.150000
+ [xc] Hybrid functional. EXX fraction:  0.240000
+ [xc] Hybrid functional. EXX GAUPBE parameter:  0.150000
+ [xc] Hybrid functional. EXX screening:  0.150000
+
+ [xc] E_xc :  -0.635300 [Ha]
+      E_xc :  -1.270601 [Ry]
+
+ XC HF and DFT [eV] @ K [1] (iku): 0.00      0.00      0.00    
+ <1|HF|1> = -20.77930 -.140E-19 <1|DFT|1> = -21.58052 -.4898E-7
+
+ [WR./02_HF//ndb.HF_and_locXC]-------------------------------
+  Brillouin Zone Q/K grids (IBZ/BZ): 1  1  1  1
+  RL vectors                   (WF):  33
+  Coulomb cutoff potential         :ws xyz  1.700
+  Fragmentation                    :no
+  Electronic Temperature        [K]: 0.000000
+  Bosonic    Temperature        [K]: 0.000000
+  Green`s function   wavefunctions :GAUPBE(XC)
+  Total number of QP states       : 1
+  Exchange RL vectors             : 257
+  Exchange summation bands        : 1
+  RIM RL components               :0
+  RIM random points               :0
+ - S/N 006617 -------------------------- v.04.04.00 r.16869 -
+
+  [05.01] HF occupations report
+  =============================
+
+  [HF]Fermi Level        [ev]: -19.32899
+  [HF]VBM / CBm          [ev]:   0.80122  30.93411
+  [HF]Electronic Temp. [ev K]:  0.00      0.00    
+  [HF]Bosonic    Temp. [ev K]:  0.00      0.00    
+  [HF]Finite Temperature mode: no
+  [HF]El. density      [cm-3]: 0.211E+24
+  [HF]States summary         : Full        Metallic    Empty
+                                   0001-0001               0002-0004
+  [HF]Indirect Gaps      [ev]: 30.13288  30.13288
+  [HF]Direct Gaps        [ev]: 30.13288  30.13288
+
+ [06] Timing Overview
+ ====================
+
+ Routines: global (Only MASTER cpu here)
+                                    io_WF :     0.00s CPU (         7 calls,   0.063 millisec avg)
+                                  io_GROT :     0.00s CPU (         2 calls,   0.193 millisec avg)
+                                 io_QINDX :     0.00s CPU (         2 calls,   0.191 millisec avg)
+                               io_COL_CUT :     0.00s CPU (         4 calls,   0.193 millisec avg)
+                           io_Double_Grid :     0.00s CPU
+                                    io_HF :     0.00s CPU (         3 calls,   0.402 millisec avg)
+                               io_DIPOLES :     0.00s CPU
+                              io_KB_pwscf :     0.00s CPU
+                             io_KB_abinit :     0.00s CPU
+                         io_ATMPROJ_pwscf :     0.00s CPU
+                                     io_X :     0.00s CPU (         4 calls,   0.019 millisec avg)
+                                    io_BS :     0.00s CPU
+                           Coulomb Cutoff :     0.00s CPU
+                  IO_and_Messaging_switch :     0.00s CPU (         4 calls,   0.002 millisec avg)
+                                FFT_setup :     0.00s CPU (         2 calls,   3.149 millisec avg)
+                             PP_uspp_init :     0.00s CPU (         2 calls,   0.016 millisec avg)
+                              WF_load_FFT :     0.00s CPU (         2 calls,   0.190 millisec avg)
+                              io_fragment :     0.00s CPU (         2 calls,   0.040 millisec avg)
+                                       HF :     0.00s CPU (         2 calls,   0.183 millisec avg)
+                                HF(REDUX) :     0.00s CPU (         2 calls,   0.000 millisec avg)
+                                XCo_local :     0.00s CPU
+                      XC_potential_driver :     0.00s CPU (         2 calls,   1.050 millisec avg)
+
+ [07] Memory Overview
+ ====================
+
+ Memory Usage: global (Only MASTER cpu here). [O] stands for group 'O'
+ Memory treshold are: 10.00000Mb (basic treshold)  100.0000Mb (SAVEs treshold)
+
+         TOTAL not deallocated :  132.0000Kb
+
+         Max memory used   :  409.0000Kb
+
+ [08] Game Over & Game summary
+ =============================
+
+ 07/11/2019 at 18:03 YAMBO @ VivoBook [start]
+ 07/11/2019 at 18:03                  [end]
+
+  
+ .-ACKNOWLEDGMENT
+ |
+ | The users of YAMBO have little formal obligations with respect to
+ | the YAMBO group (those specified in the GNU General Public
+ | License, http://www.gnu.org/copyleft/gpl.txt). However, it is
+ | common practice in the scientific literature, to acknowledge the
+ | efforts of people that have made the research possible. In this
+ | spirit, please find below the reference we kindly ask you to use
+ | in order to acknowledge YAMBO:
+ |
+ | Yambo: An ab initio tool for excited state calculations
+ | A. Marini, C. Hogan, M. Gr\"uning, D. Varsano
+ | Computer Physics Communications  180, 1392 (2009).
+ |
+  
+ .-Input file : yambo.in
+ | HF_and_locXC                   # [R XX] Hartree-Fock Self-energy and Vxc
+ | rim_cut                        # [R RIM CUT] Coulomb potential
+ | BoseTemp= 0.000000     eV      # Bosonic Temperature
+ | SE_Threads= 1                  # [OPENMP/GW] Number of threads for self-energy
+ | RandQpts=0                     # [RIM] Number of random q-points in the BZ
+ | RandGvec= 1            RL      # [RIM] Coulomb interaction RS components
+ | CUTGeo= "ws xyz"               # [CUT] Coulomb Cutoff geometry: box/cylinder/sphere/ws X/Y/Z/XY..
+ | % CUTBox
+ |  0.00     | 0.00     | 0.00     |        # [CUT] [au] Box sides
+ | %
+ | CUTRadius= 0.000000            # [CUT] [au] Sphere/Cylinder radius
+ | CUTCylLen= 0.000000            # [CUT] [au] Cylinder length
+ | CUTwsGvec= 1.700000            # [CUT] WS cutoff: number of G to be modified
+ | EXXRLvcs= 257          RL      # [XX] Exchange    RL components
+ | VXCRLvcs= 257          RL      # [XC] XCpotential RL components
+ | %QPkrange                      # # [GW] QP generalized Kpoint/Band indices
+ | 1|1|1|1|
+ | %
+ | %QPerange                      # # [GW] QP generalized Kpoint/Energy indices
+ | 1|1| 0.000000|-1.000000|
+ | %

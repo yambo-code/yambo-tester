@@ -1,0 +1,68 @@
+
+
+ __    __ ______           ____     _____
+/\ \  /\ \\  _  \  /"\_/`\/\  _`\ /\  __`\
+\ `\`\\/"/ \ \L\ \/\      \ \ \L\ \ \ \/\ \
+ `\ `\ /" \ \  __ \ \ \__\ \ \  _ <" \ \ \ \
+   `\ \ \  \ \ \/\ \ \ \_/\ \ \ \L\ \ \ \_\ \
+     \ \_\  \ \_\ \_\ \_\\ \_\ \____/\ \_____\
+      \/_/   \/_/\/_/\/_/ \/_/\/___/  \/_____/
+
+
+ <---> [01] CPU structure, Files & I/O Directories
+ <---> [02] CORE Variables Setup
+ <---> [02.01] Unit cells
+ <---> [02.02] Symmetries
+ <---> [02.03] RL shells
+ <---> [02.04] K-grid lattice
+ <---> [02.05] Energies [ev] & Occupations
+ <---> [03] Transferred momenta grid
+ <---> [04] Coloumb potential CutOff :ws
+ <---> WS setup |                                        | [000%] --(E) --(X)
+ <---> WS setup |########################################| [100%] --(E) --(X)
+ <---> WS-cutoff |                                        | [000%] --(E) --(X)
+ <---> WS-cutoff |########################################| [100%] --(E) --(X)
+ <---> [05] Bare local and non-local Exchange-Correlation
+ <---> [WF-HF/Rho] Performing Wave-Functions I/O from ./SAVE
+ <---> [FFT-HF/Rho] Mesh size:  9   9   9
+ <---> EXS |                                        | [000%] --(E) --(X)
+ <---> EXS |########################################| [100%] --(E) --(X)
+ <---> [WF-HF/Rho] Performing Wave-Functions I/O from ./SAVE
+ <---> [FFT-HF/Rho] Mesh size:  9   9   9
+ <---> EXS |                                        | [000%] --(E) --(X)
+ <---> EXS |########################################| [100%] --(E) --(X)
+ <---> [xc] Functional GAUPBE(XC)
+ <---> [xc] LIBXC used to calculate xc functional
+ <---> [xc] Hybrid functional. EXX fraction:  0.240000
+ <---> [xc] Hybrid functional. EXX GAUPBE parameter:  0.150000
+ <---> [xc] Hybrid functional. EXX screening:  0.150000
+ <---> [xc] Hybrid functional. EXX fraction:  0.240000
+ <---> [xc] Hybrid functional. EXX GAUPBE parameter:  0.150000
+ <---> [xc] Hybrid functional. EXX screening:  0.150000
+ <---> [05.01] HF occupations report
+ <---> [MEMORY]TOTAL not deallocated :  132.0000Kb
+ <---> [06] Timing Overview
+ <---> [TIMING]                                   io_WF :     0.00s CPU (         7 calls,   0.063 millisec avg)
+ <---> [TIMING]                                 io_GROT :     0.00s CPU (         2 calls,   0.193 millisec avg)
+ <---> [TIMING]                                io_QINDX :     0.00s CPU (         2 calls,   0.191 millisec avg)
+ <---> [TIMING]                              io_COL_CUT :     0.00s CPU (         4 calls,   0.193 millisec avg)
+ <---> [TIMING]                          io_Double_Grid :     0.00s CPU
+ <---> [TIMING]                                   io_HF :     0.00s CPU (         3 calls,   0.402 millisec avg)
+ <---> [TIMING]                              io_DIPOLES :     0.00s CPU
+ <---> [TIMING]                             io_KB_pwscf :     0.00s CPU
+ <---> [TIMING]                            io_KB_abinit :     0.00s CPU
+ <---> [TIMING]                        io_ATMPROJ_pwscf :     0.00s CPU
+ <---> [TIMING]                                    io_X :     0.00s CPU (         4 calls,   0.019 millisec avg)
+ <---> [TIMING]                                   io_BS :     0.00s CPU
+ <---> [TIMING]                          Coulomb Cutoff :     0.00s CPU
+ <---> [TIMING]                 IO_and_Messaging_switch :     0.00s CPU (         4 calls,   0.002 millisec avg)
+ <---> [TIMING]                               FFT_setup :     0.00s CPU (         2 calls,   3.149 millisec avg)
+ <---> [TIMING]                            PP_uspp_init :     0.00s CPU (         2 calls,   0.016 millisec avg)
+ <---> [TIMING]                             WF_load_FFT :     0.00s CPU (         2 calls,   0.190 millisec avg)
+ <---> [TIMING]                             io_fragment :     0.00s CPU (         2 calls,   0.040 millisec avg)
+ <---> [TIMING]                                      HF :     0.00s CPU (         2 calls,   0.183 millisec avg)
+ <---> [TIMING]                               HF(REDUX) :     0.00s CPU (         2 calls,   0.000 millisec avg)
+ <---> [TIMING]                               XCo_local :     0.00s CPU
+ <---> [TIMING]                     XC_potential_driver :     0.00s CPU (         2 calls,   1.050 millisec avg)
+ <---> [07] Memory Overview
+ <---> [08] Game Over & Game summary
