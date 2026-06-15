@@ -1,0 +1,32 @@
+#                                                                     
+#                                                                     
+# Y88b    /   e           e    e      888~~\    ,88~-_                
+#  Y88b  /   d8b         d8b  d8b     888   |  d888   \               
+#   Y88b/   /Y88b       d888bdY88b    888 _/  88888    |              
+#    Y8Y   /  Y88b     / Y88Y Y888b   888  \  88888    |              
+#     Y   /____Y88b   /   YY   Y888b  888   |  Y888   /               
+#    /   /      Y88b /          Y888b 888__/    `88_-~                
+#                                                                     
+#                                                                     
+#      Version 5.0.0 Revision 18573 Hash 0115f8b90                    
+#                  Branch is bug-fixes                                
+#             MPI+OpenMP+CUDA+HDF5_IO Build                           
+#               http://www.yambo-code.org                             
+#
+HF_and_locXC                     # [R] Hartree-Fock
+rim_cut
+SE_Threads=0                     # [OPENMP/GW] Number of threads for self-energy
+RandQpts=0                       # [RIM] Number of random q-points in the BZ
+RandGvec= 1                RL    # [RIM] Coulomb interaction RS components
+CUTGeo= "ws x"                   # [CUT] Coulomb Cutoff geometry: box/cylinder/sphere/ws X/Y/Z/XY..
+% CUTBox
+ 0.000000 | 0.000000 | 0.000000 |        # [CUT] [au] Box sides
+%
+CUTRadius= 0.000000              # [CUT] [au] Sphere/Cylinder radius
+CUTCylLen= 0.000000              # [CUT] [au] Cylinder length
+CUTwsGvec= 0.700000              # [CUT] WS cutoff: number of G to be modified
+EXXRLvcs= 257              RL    # [XX] Exchange    RL components
+VXCRLvcs= 257              RL    # [XC] XCpotential RL components
+%QPkrange                        # [GW] QP generalized Kpoint/Band indices
+1|1|1|1|
+%
