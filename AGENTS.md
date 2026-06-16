@@ -20,6 +20,8 @@ Use the legacy `yambo-tests` repository only as a behavioral reference, not as c
 - `src/yambo_tester/download.py`: SAVE tarball download and extraction support.
 - `src/yambo_tester/log.py`: logging setup.
 - `src/yambo_tester/runner.py`: run-directory setup, Yambo command execution, and pytest launch.
+- `src/yambo_tester/selection.py`: runlevel filtering, dependency expansion, and intentional skip markers.
+- `src/yambo_tester/versioning.py`: Yambo major-version normalization plus workflow and step metadata overlays.
 - `src/yambo_tester/data/config.toml`: packaged default/template config.
 - `src/yambo_tester/tests/test_reference.py`: main pytest validation logic.
 - `src/scripts/test_reference.py`: standalone experimental validation script; use it for prototyping only.
@@ -33,6 +35,12 @@ Use the legacy `yambo-tests` repository only as a behavioral reference, not as c
 - Keep test data layout compatible with the imported `yambo-tests/TESTS/MAIN` structure when practical.
 - Do not blindly translate Perl, Bash, or Fortran from `yambo-tests`; extract the behavior and implement it clearly in Python.
 - Be careful with MPI/OpenMP/GPU assumptions. Missing project executables should skip only the affected tests, while missing core executables should fail early as described in the README.
+- Treat `tests.toml` as the owner of workflow-specific behavior. Keep validation and runner code generic, and encode per-workflow metadata there with explicit keys such as `runlevel`, `dependencies`, `nprocs`, `skip_columns`, `variables`, `tolerance`, `whitelist`, and version overlays.
+- Keep Yambo 5/Yambo 6 behavior version-aware. `--yambo-version`/`-y` overrides detection; otherwise the runner detects the major version from `yambo -h` and falls back to Yambo 5 compatibility.
+- Workflow tarball sources come from CLI `--download_link`, then config `[parameters].download_link`, then resolved `tests.toml` metadata (`tarball_url` after `[versions."<major>"]` overlay). Do not reintroduce a global automatic download-link default that bypasses workflow metadata.
+- Required executables are `yambo`, `p2y`, and `a2y`. Optional tools such as `ypp` and project executables are checked only when registered under `[executables]` or with `--exe KEY=VALUE`; missing optional tools should skip affected steps.
+- Conversion-tool steps such as `p2y` may omit `input` and `output`, may use `input_dir` for `-I`, and may validate `STDOUT` strings against captured stdout plus `l_<exe>` logs.
+- Use isolated named loggers. `setup_logging()` is for the main run logger, `setup_test_logger()` is for per-workflow `tester.log` files, and propagation should stay disabled so logs do not leak between scopes.
 
 ## Current Priority
 
@@ -42,6 +50,7 @@ When fixing validation:
 
 - Inspect the failing imported test and its `tests.toml` first.
 - Compare against `~/src/yambo-tests/config/RULES.h`, `~/src/yambo-tests/config/WHITELIST.h`, and `~/src/yambo-tests/scripts/find_the_diff/` only for semantics.
+- Fix bad `tests.toml` paths and metadata before changing Python validation logic.
 - Add focused pytest coverage or fixture coverage for the rule being implemented.
 - Keep numerical tolerances and skip/whitelist behavior explicit and documented in code or supporting docs.
 

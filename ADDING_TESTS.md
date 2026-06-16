@@ -110,22 +110,48 @@ Compute the archive checksum and copy it into `tests.toml`:
 sha256sum cache/Al_bulk_GW-OPTICS.tar.gz
 ```
 
-## Writing `tests.toml`
-
-Each workflow directory must contain a `tests.toml` file. It starts with the
-tarball checksum, followed by one table per run step.
+`tests.toml` should also declare the default tarball source URL and supported
+Yambo major versions. Version-specific workflow metadata can be overlaid with a
+top-level `[versions."<major>"]` table:
 
 ```toml
 sha256 = "0123456789abcdef..."
+tarball_url = "https://media.yambo-code.eu/robots/databases/tests"
+
+[yambo_versions]
+supported = ["5"]
+
+[versions."6"]
+tarball_url = "https://media.yambo-code.eu/robots/databases/y6"
+```
+
+At runtime, tarball URLs are resolved from CLI `--download_link`, then
+`download_link` in `config.toml`, then the workflow metadata after applying the
+selected Yambo-version overlay. Workflows that do not support the selected
+major version are recorded as intentional skips.
+
+## Writing `tests.toml`
+
+Each workflow directory must contain a `tests.toml` file. It starts with
+workflow metadata, followed by one table per run step.
+
+```toml
+sha256 = "0123456789abcdef..."
+tarball_url = "https://media.yambo-code.eu/robots/databases/tests"
+
+[yambo_versions]
+supported = ["5"]
 
 [01_init]
 exe = "yambo"
 input = "INPUTS/01_init"
 output = "01_init"
+runlevel = "init"
+dependencies = []
 [01_init.reference]
 "o-01_init.ndb.gops" = ["SAVE/ndb.gops", "ng_in_shell", "E_of_shell"]
 "o-01_init.ndb.kindx" = ["SAVE/ndb.kindx", "Qindx", "Sindx"]
-"r-01_init_setup" = [""]
+"r-01_init_setup" = ["Game Over & Game summary"]
 
 [02_qp]
 exe = "yambo"
@@ -136,15 +162,13 @@ dependencies = ["01_init"]
 [02_qp.reference]
 "o-02_QP.qp" = { path = "02_QP/o-02_QP.qp", skip_columns = [5] }
 "o-02_QP.ndb.QP" = { path = "02_QP/ndb.QP", variables = ["QP_Z"] }
-"r-02_QP_gw0_dyson" = [""]
+"r-02_QP_gw0_dyson" = ["Game Over & Game summary"]
 ```
 
 Required step fields:
 
 - `exe`: executable key from the configuration registry, such as `yambo`,
   `ypp`, `yambo_ph`, `ypp_ph`, or a custom key defined under `[executables]`.
-- `input`: input file passed with `-F`.
-- `output`: output name used with `-J` and `-C`.
 - `runlevel`: primary Yambo runlevel covered by the step, such as `init`,
   `qp`, `bse`, `optics`, `lifetimes`, `gf`, `rim_cut`, or `ypp`.
 - `dependencies`: list of prerequisite step table names needed when this step
@@ -153,10 +177,19 @@ Required step fields:
 
 Optional step fields:
 
+- `input`: input file passed with `-F`; Yambo steps normally provide this, but
+  conversion-tool steps may omit it.
+- `output`: output name used with `-J` and `-C`; conversion-tool steps may omit
+  it when the executable does not need those options.
+- `input_dir`: input directory passed with `-I`, used by conversion tools such
+  as `p2y`.
 - `flags`: suffix appended to the `-J` output target after a comma.
 - `nprocs`: per-step MPI rank count, overriding the global `nprocs`.
 - `actions`: pre-run shell-style actions. The runner supports simple `mkdir`
   and `cp` actions directly, and attempts other commands with `subprocess`.
+- `versions`: per-Yambo-major step overlay. The overlay is shallow; if it
+  declares `reference`, that table replaces the base step `reference` table for
+  that major version.
 
 Reference entries can use the compact list syntax:
 
@@ -182,6 +215,22 @@ Supported metadata:
 - `tolerance`: per-reference comparison tolerance. `tollerance` is also accepted
   for compatibility with the existing configuration spelling.
 - `whitelist`: mark a known noisy or accepted failure as an expected failure.
+
+Reference key `STDOUT` is special: it checks that the expected string is present
+in captured command stdout or, if present, the step's `l_<exe>` log file. Report
+references whose keys start with `r-` always check for report completion; a
+non-empty string value also checks that the string appears in the resolved
+report file.
+
+For version-specific step behavior, add a step-local overlay:
+
+```toml
+[00_p2y.reference]
+"STDOUT" = ["== P2Y completed =="]
+
+[00_p2y.versions."6".reference]
+"STDOUT" = ["Game Over"]
+```
 
 ## Running The New Test
 
