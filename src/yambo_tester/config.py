@@ -6,11 +6,10 @@ import string
 import tomllib
 import argparse
 import subprocess
-import urllib.request
-from urllib.error import HTTPError
 from pathlib import Path
 import importlib.resources
 from datetime import datetime
+from .versioning import resolve_yambo_version
 
 # Default parameters
 PARAMETERS = {
@@ -24,7 +23,8 @@ PARAMETERS = {
     'thrs': 1,
     'tollerance': 0.1,
     'runlevels': [],
-    'download_link': "https://media.yambo-code.eu/robots/databases/y6",
+    'download_link': "",
+    'yambo_version': "",
     }
 
 REQUIRED_EXECUTABLES = {
@@ -66,6 +66,8 @@ def load_config():
             config['config'] = importlib.resources.files("yambo_tester.data") / "config.toml"
 
     config.setdefault("parameters", {})
+    if config["parameters"].get("download_link"):
+        config["parameters"]["download_link_origin"] = "config"
     config.setdefault("executables", {})
 
     # Overwrite default parameters with those read from the config file.
@@ -86,11 +88,14 @@ def load_config():
 
     if not "tests" in config:
         config['tests'] = {
-            "Al_bulk": ["DFT", "GW-OPTICS"],
+            "Al_bulk": ["DFT", "GW-OPTICS", "ELPH"],
+            "PA_chain": ["DFT", "PA_chain"],
             "He": ["DFT"],
-            "Si_bulk": ["GW-OPTICS"],
-            "hBN": ["GW-OPTICS"],
-            "LiF": ["GW-OPTICS"]
+            "Nickel": ["DFT"],
+            "AlAs": ["DFT"],
+            "hBN": ["DFT"],
+            "Iron_With-SOC": ["DFT"],
+            "Iron_Without-SOC": ["DFT"],
         }
 
     return config
@@ -180,6 +185,24 @@ def get_yambo_info(yambo: str) -> dict:
     return info
 
 
+def resolve_runtime_yambo_version(parameters, detected_info=None, logger=None):
+    """
+    Resolve and store the effective Yambo major version.
+
+    Tarball source URLs are workflow metadata, unless explicitly overridden by
+    CLI or config. This keeps parameter validation independent of any selected
+    workflow.
+    """
+    yambo_version = resolve_yambo_version(
+        requested=parameters.get('yambo_version'),
+        detected_info=detected_info,
+    )
+    parameters['yambo_version'] = yambo_version
+    if logger:
+        logger.info(f"yambo_version: {yambo_version}")
+    return parameters
+
+
 def check_parameters(parameters, executables=None, logger=None):
     """
     Check parameters one by one and report it in the main logger.
@@ -190,17 +213,14 @@ def check_parameters(parameters, executables=None, logger=None):
     if executables is None:
         executables = {}
 
-    if not parameters['init']:
-        # Check download_link
-        try:
-            logger.info(f"download_link: {parameters['download_link']}")
-            c = urllib.request.urlopen(parameters['download_link']).getcode()
-        except HTTPError as e:
-            logger.warning(f"Link not reachable: the tests will be performed only if the tarball is available in the cache directory.")
-
     # Check only cache directory
     if parameters['donly']:
-        parameters['cache_dir'] = check_dir('cache_dir', parameters['cache_dir'], logger)
+        for par in ['tests_dir', 'cache_dir']:
+            if parameters.get(par):
+                parameters[par] = check_dir(par, parameters[par], logger)
+        parameters = resolve_runtime_yambo_version(parameters, logger=logger)
+        if parameters.get('download_link'):
+            logger.info(f"download_link: {parameters['download_link']}")
 
     # Copy the default config.toml
     elif parameters['init']:
@@ -238,7 +258,11 @@ def check_parameters(parameters, executables=None, logger=None):
         parameters['executables'] = resolved_executables
 
         # Extract info from "yambo -h"
-        parameters.update(get_yambo_info(parameters['executables']['yambo']))
+        yambo_info = get_yambo_info(parameters['executables']['yambo'])
+        parameters.update(yambo_info)
+        parameters = resolve_runtime_yambo_version(parameters, yambo_info, logger)
+        if parameters.get('download_link'):
+            logger.info(f"download_link: {parameters['download_link']}")
         
         if parameters['mpi_launcher']:
             try:

@@ -85,6 +85,30 @@ same values can be overridden on the command line with repeated
 yambo-tester --exe yambo=/opt/yambo/bin/yambo --exe custom_tool=/opt/tools/custom_tool
 ```
 
+### Yambo Version Selection
+
+By default, `yambo-tester` detects the installed Yambo major version from
+`yambo -h`. The resolved major version selects version-specific workflow
+metadata in each `tests.toml`, including whether the workflow is supported and
+which test-database repository contains its tarball.
+
+You can override detection with `--yambo-version` or `-y`:
+
+```bash
+yambo-tester --yambo-version 6
+yambo-tester -y 5
+```
+
+Tarball URLs are resolved in this order: `--download_link`, then
+`download_link` in `config.toml`, then the workflow metadata from `tests.toml`
+after applying any `[versions."<major>"]` overlay. Workflows that declare no
+support for the selected major version are skipped cleanly. When testing a build
+outside `PATH`, combine version detection or override with `--bin`:
+
+```bash
+yambo-tester --bin /home/nicola/src/yambo-6.0/bin
+```
+
 ### Parameter Hierarchy
 
 When a parameter is not explicitly provided, **yambo-tester** resolves it using the following hierarchical system:
@@ -143,5 +167,5 @@ The following features and improvements are planned for future releases of yambo
 - [x] Generation of a final test report suitable for upload to a web portal or dashboard, enabling remote monitoring of test outcomes.
 - [ ] Parallel execution of tests using the `concurrent.futures.ProcessPoolExecutor` module
 - [x] Definition of keys in tests.toml files for specific selections of tests types
-- [ ] Add support for different Yambo versions
+- [x] Add support for different Yambo versions
 - [x] Add support for internal definition of OMP_NUM_THREADS variable

@@ -1,4 +1,8 @@
 sha256 = "28c9c09b3967df61514fa9027d1d4117ffdae95f6da3f356851b87d09c647528"
+tarball_url = "https://media.yambo-code.eu/robots/databases/tests"
+
+[yambo_versions]
+supported = ["5"]
 
 [01_init]
 exe = "elph"

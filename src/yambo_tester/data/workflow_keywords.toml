@@ -1,2 +1,2 @@
 executables = ["a2y", "elph", "elph_pp", "p2y", "yambo"]
-runlevels = ["bse", "dft", "gf", "init", "lifetimes", "optics", "pp", "qp", "rim_cut"]
+runlevels = ["bse", "dft", "gf", "hf", "init", "lifetimes", "optics", "pp", "qp", "rim_cut"]

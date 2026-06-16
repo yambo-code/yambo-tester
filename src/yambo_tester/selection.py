@@ -1,8 +1,10 @@
 # Copyright (c) 2025 Nicola Spallanzani
 # Licensed under the MIT License. See LICENSE file for details.
 
+UNSUPPORTED_VERSION_RETURNCODE = -9997
 RUNLEVEL_FILTER_RETURNCODE = -9998
 MISSING_EXECUTABLE_RETURNCODE = -9999
+UNSUPPORTED_VERSION_REASON = "unsupported-yambo-version"
 RUNLEVEL_FILTER_REASON = "runlevel-filter"
 MISSING_EXECUTABLE_REASON = "missing-executable"
 

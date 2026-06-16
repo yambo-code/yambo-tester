@@ -6,9 +6,8 @@ from pathlib import Path
 import importlib.resources
 import tomllib
 from .log import setup_logging
-from .download import download_test
 from .config import load_config, check_parameters
-from .runner import setup_rundir, run_test, run_pytest
+from .runner import download_workflow_tarball, setup_rundir, run_test, run_pytest
 
 
 def parse_executable_override(value):
@@ -58,7 +57,9 @@ def set_cl_args(config):
     parser.add_argument('-l', '--label',
                         help='Label of the submisison', type=str, dest='label')
     parser.add_argument('-d', '--download_link',
-                        help='Download link', type=str, dest='link')
+                        help='Download link', type=str, dest='download_link')
+    parser.add_argument('-y', '--yambo-version',
+                        help='Yambo major version used for test database selection', type=str, dest='yambo_version')
     parser.add_argument('--download_only',
                         help="Download only the tests' tarballs", dest='donly', action='store_true')
     parser.add_argument('--nochecksum',
@@ -105,6 +106,8 @@ def set_cl_args(config):
             continue
         if val:
             config['parameters'][arg] = val
+            if arg == 'download_link':
+                config['parameters']['download_link_origin'] = 'cli'
     if args.executables:
         config.setdefault('executables', {})
         for key, executable in args.executables:
@@ -140,7 +143,11 @@ def main():
         for test_name, test_types in config['tests'].items():
             for test_type in test_types:
                 test = {'name': test_name, 'type': test_type}
-                tar_file, process = download_test(test['name'], test['type'], parameters, logger)
+                tar_file, process = download_workflow_tarball(test, parameters, logger)
+                if process is not None:
+                    retcode = process.wait()
+                    if retcode != 0:
+                        raise RuntimeError(f"Download of tarball {tar_file} failed.")
     elif parameters['init']:
         pass
     else:

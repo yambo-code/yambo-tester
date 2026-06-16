@@ -40,6 +40,9 @@ dependencies = ["01_init"]
 "o-03_QP_COHSEX.qp" = ["o-03_QP_COHSEX.qp"]
 "o-example.qp" = { path = "o-example.qp", skip_columns = [5], tolerance = 0.11, whitelist = false }
 "r-03_QP_COHSEX_em1s_HF_and_locXC_gw0_cohsex" = ["Game Over & Game summary"]
+
+[03_qp_cohsex.versions."6".reference]
+"r-03_QP_COHSEX_em1s_HF_and_locXC_gw0_cohsex" = ["Game Over & Game summary"]
 ```
 
 Important fields:
@@ -56,6 +59,7 @@ Important fields:
 - `nprocs`: optional per-step MPI-rank override; otherwise the global configured `nprocs` is used.
 - `actions`: optional pre-run actions such as simple `mkdir` or `cp` steps.
 - `reference`: maps reference files in `REFERENCE/` to generated output paths and, for NetCDF databases, selected variables.
+- `versions`: optional per-Yambo-major shallow overlays for a step.
 
 Reference entries support two forms:
 
@@ -81,6 +85,50 @@ The packaged keyword inventory used by `--list-executables` and
 is kept in sync with the imported workflow `tests.toml` files.
 
 `SAVE/` and `SAVE_converted/` may be empty in the source tree. They are populated from private tarballs during setup.
+
+## Yambo Versions
+
+The effective Yambo major version is resolved by `--yambo-version`/`-y` first,
+then by auto-detecting `yambo -h`, then by the Yambo 5 compatibility default.
+The resolved major version is written to `results.toml`, and validation uses it
+to apply version-specific metadata.
+
+Workflow files own supported-version and tarball-source metadata:
+
+```toml
+sha256 = "..."
+tarball_url = "https://media.yambo-code.eu/robots/databases/tests"
+
+[yambo_versions]
+supported = ["5"]
+
+[versions."6"]
+tarball_url = "https://media.yambo-code.eu/robots/databases/y6"
+```
+
+If the selected version is not supported, all steps in that workflow are
+recorded as intentionally skipped and pytest reports them as skipped. Tarball
+URLs are resolved in this order: CLI `--download_link`, config
+`[parameters].download_link`, then the resolved workflow metadata.
+
+Top-level `[versions."<major>"]` overlays replace workflow metadata only. Step
+overlays live under `[step_name.versions."<major>"]` and replace only the
+top-level fields they declare. In particular, a version-specific `reference`
+table replaces the base `reference` table for that version:
+
+```toml
+[00_p2y.reference]
+"STDOUT" = ["== P2Y completed =="]
+
+[00_p2y.versions."6".reference]
+"STDOUT" = ["Game Over"]
+```
+
+Current imported DFT workflows declare support for Yambo 5 and 6 and use the
+Yambo 6 tarball repository. Non-DFT workflows currently declare Yambo 5 support
+only and use the legacy tests repository. To add a future major version, extend
+normalization support in `src/yambo_tester/versioning.py`, then add compact
+workflow or step overlays only where behavior differs.
 
 ## Runlevel Selection
 

@@ -10,7 +10,8 @@ nprocs = 2
 thrs = 1
 tollerance = 0.1
 runlevels = []
-download_link = "https://media.yambo-code.eu/robots/databases/y6"
+download_link = ""
+yambo_version = ""
 
 [executables]
 # required executables
@@ -20,8 +21,8 @@ a2y = "a2y"
 # Optional executables are registered explicitly in a local config.toml or with --exe KEY=VALUE.
 
 [tests]
-Al_bulk = ["DFT"]
-PA_chain = ["DFT"]
+Al_bulk = ["DFT", "GW-OPTICS", "ELPH"]
+PA_chain = ["DFT", "PA_chain"]
 He = ["DFT"]
 Nickel = ["DFT"]
 AlAs = ["DFT"]
