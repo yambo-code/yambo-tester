@@ -10,7 +10,7 @@ from yambo_tester.tests.test_reference import (
     test_reference_ok as reference_test_reference_ok,
     test_runs_ok as reference_test_runs_ok,
 )
-from yambo_tester.selection import RUNLEVEL_FILTER_RETURNCODE
+from yambo_tester.selection import RUNLEVEL_FILTER_RETURNCODE, UNSUPPORTED_VERSION_RETURNCODE
 
 
 def test_normalize_reference_preserves_legacy_list_syntax():
@@ -213,3 +213,8 @@ def test_stdout_or_log_contains_fails_when_missing_from_both(tmp_path):
 def test_runs_ok_skips_runlevel_filtered_steps():
     with pytest.raises(pytest.skip.Exception):
         reference_test_runs_ok(("02_qp", {"returncode": RUNLEVEL_FILTER_RETURNCODE}))
+
+
+def test_runs_ok_skips_unsupported_version_steps():
+    with pytest.raises(pytest.skip.Exception):
+        reference_test_runs_ok(("02_qp", {"returncode": UNSUPPORTED_VERSION_RETURNCODE}))

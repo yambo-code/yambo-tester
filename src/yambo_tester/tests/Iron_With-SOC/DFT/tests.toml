@@ -1,4 +1,8 @@
 sha256 = "b3613253432adeda62c2917e3f4ddfeac37cebe42634b8ff169e60ed2beddae3"
+tarball_url = "https://media.yambo-code.eu/robots/databases/y6"
+
+[yambo_versions]
+supported = ["5", "6"]
 
 [01_a2y]
 exe = "a2y"

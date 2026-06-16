@@ -13,11 +13,19 @@ import importlib.resources
 from .log import setup_test_logger
 from .config import get_executable
 from .download import download_test, sha256sum
+from .versioning import (
+    DEFAULT_YAMBO_VERSION,
+    resolve_workflow_tarball_url,
+    workflow_steps_for_version,
+    workflow_supports_version,
+)
 from .selection import (
     MISSING_EXECUTABLE_REASON,
     MISSING_EXECUTABLE_RETURNCODE,
     RUNLEVEL_FILTER_REASON,
     RUNLEVEL_FILTER_RETURNCODE,
+    UNSUPPORTED_VERSION_REASON,
+    UNSUPPORTED_VERSION_RETURNCODE,
     selected_step_names,
 )
 
@@ -56,6 +64,40 @@ def command_reference_output(std_out, run, run_dir):
     return std_out
 
 
+def source_workflow_config(test, parameters):
+    config_path = parameters['tests_dir'].joinpath(test['name'], test['type'], "tests.toml")
+    if not config_path.exists():
+        raise FileNotFoundError(f"{config_path} not available")
+    with open(config_path, "rb") as f:
+        return tomllib.load(f)
+
+
+def parameters_with_workflow_download_link(test, parameters, logger):
+    workflow_config = source_workflow_config(test, parameters)
+    yambo_version = parameters.get('yambo_version') or DEFAULT_YAMBO_VERSION
+    if not workflow_supports_version(workflow_config, yambo_version):
+        logger.info(f"[{test['name']}/{test['type']}] skipped download for unsupported Yambo version {yambo_version}")
+        return None
+
+    download_link = resolve_workflow_tarball_url(workflow_config, yambo_version, parameters)
+    if not download_link:
+        raise ValueError(
+            f"No tarball_url metadata or explicit download_link for {test['name']}/{test['type']}."
+        )
+
+    resolved = dict(parameters)
+    resolved['download_link'] = download_link
+    logger.info(f"[{test['name']}/{test['type']}] download_link: {download_link}")
+    return resolved
+
+
+def download_workflow_tarball(test, parameters, logger):
+    resolved_parameters = parameters_with_workflow_download_link(test, parameters, logger)
+    if resolved_parameters is None:
+        return None, None
+    return download_test(test['name'], test['type'], resolved_parameters, logger)
+
+
 def setup_rundir(test, parameters, logger):
     """
     Prepare the test environment.
@@ -70,7 +112,6 @@ def setup_rundir(test, parameters, logger):
     :return: tuple containing the Path to the created test directory and run directory.
     """
     this_test = f"[{test['name']}/{test['type']}]"
-    tar_file, process = download_test(test['name'], test['type'], parameters, logger)
 
     try:
         if not parameters['scratch_test'].exists():
@@ -99,24 +140,29 @@ def setup_rundir(test, parameters, logger):
         logger.error(f"{local_config} not available")
         raise FileNotFoundError(f"{local_config} not available") 
 
-    try:
-        if process != None:
-            retcode = process.wait()
-            if retcode != 0:
-                raise RuntimeError(f"Dawnload of tarball {tar_file} failed.")
-        if not parameters['nochecksum']:
-            if not config['sha256'] == sha256sum(tar_file):
-                logger.error(f"SHA-256 mismatch for file '{tar_file.name}'.")
-                raise ValueError(f"SHA-256 mismatch for file '{tar_file.name}'.")
-        with tarfile.open(tar_file) as tar:
-            tar.extractall(path=test_dir)
-        logger.info(f"Extracted tarball")
-    except RuntimeError as e:
-        logger.error(e)
-        raise e
-    except Exception as e:
-        logger.error(f"Unable to extract the tarball into {test_dir}")
-        raise e
+    yambo_version = parameters.get('yambo_version') or DEFAULT_YAMBO_VERSION
+    if workflow_supports_version(config, yambo_version):
+        tar_file, process = download_workflow_tarball(test, parameters, logger)
+        try:
+            if process is not None:
+                retcode = process.wait()
+                if retcode != 0:
+                    raise RuntimeError(f"Download of tarball {tar_file} failed.")
+            if not parameters['nochecksum']:
+                if not config['sha256'] == sha256sum(tar_file):
+                    logger.error(f"SHA-256 mismatch for file '{tar_file.name}'.")
+                    raise ValueError(f"SHA-256 mismatch for file '{tar_file.name}'.")
+            with tarfile.open(tar_file) as tar:
+                tar.extractall(path=test_dir)
+            logger.info(f"Extracted tarball")
+        except RuntimeError as e:
+            logger.error(e)
+            raise e
+        except Exception as e:
+            logger.error(f"Unable to extract the tarball into {test_dir}")
+            raise e
+    else:
+        logger.info(f"{this_test} skipped tarball extraction for unsupported Yambo version {yambo_version}")
 
     return test_dir, run_dir
 
@@ -127,8 +173,7 @@ def run_test(test, parameters, logger, verbose=False):
 
     local_config = test['run_dir'].joinpath("tests.toml")
     with open(local_config, "rb") as f:
-        config = tomllib.load(f)
-    sha256 = config.pop('sha256', None)
+        workflow_config = tomllib.load(f)
 
     SAVE_converted = test['run_dir'].joinpath('SAVE_converted')
     SAVE = test['run_dir'].joinpath('SAVE')
@@ -136,7 +181,29 @@ def run_test(test, parameters, logger, verbose=False):
         oldSAVE = SAVE.rename(test['run_dir'].joinpath('oldSAVE'))
         SAVE = SAVE_converted.rename(SAVE)
 
-    results = {"tollerance": parameters['tollerance']} # collect info about a run
+    yambo_version = parameters.get('yambo_version') or DEFAULT_YAMBO_VERSION
+    config = workflow_steps_for_version(workflow_config, yambo_version)
+    results = {
+        "tollerance": parameters['tollerance'],
+        "yambo_version": yambo_version,
+    }
+
+    if not workflow_supports_version(workflow_config, yambo_version):
+        for name, run in config.items():
+            results[name] = {
+                "returncode": UNSUPPORTED_VERSION_RETURNCODE,
+                "cmd": '',
+                "stdout": None,
+                "stderr": None,
+                "run_dir": str(test['run_dir']),
+                "skip_reason": UNSUPPORTED_VERSION_REASON,
+                "runlevel": run.get("runlevel", ""),
+            }
+        with open(test['run_dir'].joinpath("results.toml"), "w") as f:
+            toml.dump(results, f)
+        local_logger.info(f"{this_test} skipped for unsupported Yambo version {yambo_version}")
+        return local_logger
+
     subtests = list(config.items())
     subtests.sort(key=step_sort_key) # input sorting when available
     selected_names = selected_step_names(config, parameters.get('runlevels', []))

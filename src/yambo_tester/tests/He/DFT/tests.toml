@@ -1,4 +1,8 @@
 sha256 = "5cee9dad2338d05ca0cdf6996e4f8a3293406496cf244c2b82ab3a49116a49e4"
+tarball_url = "https://media.yambo-code.eu/robots/databases/y6"
+
+[yambo_versions]
+supported = ["5", "6"]
 
 [00_p2y]
 exe = "p2y"
@@ -7,7 +11,11 @@ runlevel = "dft"
 nprocs = 1
 dependencies = []
 [00_p2y.reference]
-#"STDOUT" = ["== P2Y completed =="]
+#"o-00_p2y.ns.kb_pp_pwscf_fragment_1" =
+#"o-00_p2y.ns.wf_fragments_1_1" =
+"STDOUT" = ["== P2Y completed =="]
+
+[00_p2y.versions."6".reference]
 "STDOUT" = ["Game Over"]
 
 [01_init]

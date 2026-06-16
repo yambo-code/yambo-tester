@@ -2,8 +2,6 @@ import argparse
 import logging
 import os
 import sys
-import urllib.request
-
 import pytest
 
 from yambo_tester.cli import parse_executable_override, set_cl_args
@@ -68,8 +66,6 @@ def test_parse_executable_override_rejects_malformed_values():
 
 
 def test_check_parameters_ignores_unconfigured_optional_executables(monkeypatch, tmp_path):
-    monkeypatch.setattr(urllib.request, "urlopen", lambda *_args, **_kwargs: type("Resp", (), {"getcode": lambda self: 200})())
-
     yambo_bin = tmp_path / "bin"
     yambo_bin.mkdir()
     tests_dir = tmp_path / "tests"
@@ -120,8 +116,6 @@ def test_check_parameters_ignores_unconfigured_optional_executables(monkeypatch,
 
 
 def test_check_parameters_rejects_missing_required_executable(monkeypatch, tmp_path):
-    monkeypatch.setattr(urllib.request, "urlopen", lambda *_args, **_kwargs: type("Resp", (), {"getcode": lambda self: 200})())
-
     yambo_bin = tmp_path / "bin"
     yambo_bin.mkdir()
     tests_dir = tmp_path / "tests"
@@ -159,3 +153,132 @@ def test_check_parameters_rejects_missing_required_executable(monkeypatch, tmp_p
 
     with pytest.raises(FileNotFoundError, match="p2y"):
         check_parameters(parameters, executables, logging.getLogger("test-config-missing"))
+
+
+def _base_runtime_parameters(tmp_path, download_link="", yambo_version=""):
+    tests_dir = tmp_path / "tests"
+    tests_dir.mkdir()
+    scratch_dir = tmp_path / "scratch"
+    scratch_dir.mkdir()
+    cache_dir = tmp_path / "cache"
+    cache_dir.mkdir()
+    yambo_bin = tmp_path / "bin"
+    yambo_bin.mkdir()
+
+    parameters = {
+        "init": False,
+        "donly": False,
+        "download_link": download_link,
+        "yambo_version": yambo_version,
+        "cache_dir": cache_dir,
+        "scratch_dir": scratch_dir,
+        "tests_dir": tests_dir,
+        "yambo_bin": yambo_bin,
+        "mpi_launcher": None,
+        "nprocs": 2,
+        "thrs": 1,
+        "tollerance": 0.1,
+        "label": "demo",
+    }
+    if download_link:
+        parameters["download_link_origin"] = "config"
+    return parameters
+
+
+def _write_required_executables(yambo_bin, yambo_stderr):
+    _write_executable(yambo_bin / "yambo", stderr_text=yambo_stderr)
+    _write_executable(yambo_bin / "p2y")
+    _write_executable(yambo_bin / "a2y")
+
+
+def test_set_cl_args_registers_yambo_version_and_download_link(monkeypatch):
+    monkeypatch.setattr(
+        sys,
+        "argv",
+        [
+            "yambo-tester",
+            "--yambo-version",
+            "6",
+            "--download_link",
+            "https://example.invalid/custom",
+        ],
+    )
+
+    config = {"parameters": {}, "executables": {}}
+
+    updated = set_cl_args(config)
+
+    assert updated["parameters"]["yambo_version"] == "6"
+    assert updated["parameters"]["download_link"] == "https://example.invalid/custom"
+    assert updated["parameters"]["download_link_origin"] == "cli"
+    assert "link" not in updated["parameters"]
+
+
+def test_check_parameters_detects_yambo6_without_selecting_global_repository(monkeypatch, tmp_path):
+    parameters = _base_runtime_parameters(tmp_path)
+    _write_required_executables(
+        parameters["yambo_bin"],
+        "Version: 6.0.0 revision 123 hash abc\nConfiguration: MPI\n",
+    )
+
+    resolved = check_parameters(
+        parameters,
+        {"yambo": "yambo", "p2y": "p2y", "a2y": "a2y"},
+        logging.getLogger("test-config-version-detect"),
+    )
+
+    assert resolved["yambo_version"] == "6"
+    assert resolved["download_link"] == ""
+
+
+def test_check_parameters_yambo_version_override_wins_over_detection(monkeypatch, tmp_path):
+    parameters = _base_runtime_parameters(tmp_path, yambo_version="5")
+    _write_required_executables(
+        parameters["yambo_bin"],
+        "Version: 6.0.0 revision 123 hash abc\nConfiguration: MPI\n",
+    )
+
+    resolved = check_parameters(
+        parameters,
+        {"yambo": "yambo", "p2y": "p2y", "a2y": "a2y"},
+        logging.getLogger("test-config-version-override"),
+    )
+
+    assert resolved["yambo_version"] == "5"
+    assert resolved["download_link"] == ""
+
+
+def test_check_parameters_preserves_explicit_download_link(monkeypatch, tmp_path):
+    parameters = _base_runtime_parameters(tmp_path, download_link="https://example.invalid/custom")
+    _write_required_executables(
+        parameters["yambo_bin"],
+        "Version: 6.0.0 revision 123 hash abc\nConfiguration: MPI\n",
+    )
+
+    resolved = check_parameters(
+        parameters,
+        {"yambo": "yambo", "p2y": "p2y", "a2y": "a2y"},
+        logging.getLogger("test-config-explicit-link"),
+    )
+
+    assert resolved["yambo_version"] == "6"
+    assert resolved["download_link"] == "https://example.invalid/custom"
+    assert resolved["download_link_origin"] == "config"
+
+
+def test_check_parameters_download_only_resolves_yambo5_without_global_repository(monkeypatch, tmp_path):
+    cache_dir = tmp_path / "cache"
+    cache_dir.mkdir()
+    parameters = {
+        "init": False,
+        "donly": True,
+        "download_link": "",
+        "yambo_version": "",
+        "cache_dir": cache_dir,
+        "tests_dir": tmp_path,
+    }
+
+    resolved = check_parameters(parameters, {}, logging.getLogger("test-config-download-only"))
+
+    assert resolved["yambo_version"] == "5"
+    assert resolved["download_link"] == ""

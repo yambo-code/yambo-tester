@@ -10,7 +10,9 @@ from pathlib import Path
 from yambo_tester.selection import (
     MISSING_EXECUTABLE_RETURNCODE,
     RUNLEVEL_FILTER_RETURNCODE,
+    UNSUPPORTED_VERSION_RETURNCODE,
 )
+from yambo_tester.versioning import DEFAULT_YAMBO_VERSION, workflow_steps_for_version
 
 ZERO_DFL = 1e-6
 TOO_LARGE = 10e99
@@ -183,9 +185,10 @@ def pytest_generate_tests(metafunc):
     with open(rundir / "results.toml", 'rb') as f:
         results = tomllib.load(f)
     tollerance = results.pop('tollerance', None)
+    yambo_version = results.pop('yambo_version', DEFAULT_YAMBO_VERSION)
     with open(rundir / "tests.toml", 'rb') as f:
-        tests = tomllib.load(f)
-    sha256 = tests.pop('sha256', None)
+        workflow_config = tomllib.load(f)
+    tests = workflow_steps_for_version(workflow_config, yambo_version)
 
     # Sequence for test_runs_ok func
     if "run_item" in metafunc.fixturenames:
@@ -205,6 +208,7 @@ def pytest_generate_tests(metafunc):
             skip = results[key]['returncode'] in {
                 MISSING_EXECUTABLE_RETURNCODE,
                 RUNLEVEL_FILTER_RETURNCODE,
+                UNSUPPORTED_VERSION_RETURNCODE,
             }
             for r, o in val['reference'].items():
                 ref_spec = normalize_reference(o)
@@ -239,6 +243,8 @@ def test_runs_ok(run_item):
         pytest.skip("Test skipped due to missing executable")
     elif info["returncode"] == RUNLEVEL_FILTER_RETURNCODE:
         pytest.skip("Test skipped by runlevel selection")
+    elif info["returncode"] == UNSUPPORTED_VERSION_RETURNCODE:
+        pytest.skip("Test skipped by unsupported Yambo version")
     else:
         assert info["returncode"] == 0, f"Subtest {name} failed: {info['stderr']}"
 
