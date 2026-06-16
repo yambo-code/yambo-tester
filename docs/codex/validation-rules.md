@@ -12,6 +12,7 @@ Use those files to understand behavior, not as implementation templates.
 
 - `r-*`: Yambo report files. Validate existence and a successful-run marker near the end. Current Python checks for `Game Over & Game summary`, and imported fixtures should use that string explicitly rather than `[""]`.
 - `o-*`: text output files with numerical columns. Compare generated data against `REFERENCE/o-*`.
+- `STDOUT`: captured command stdout. Used mainly by conversion tools; checks may fall back to the step `l_<exe>` log file.
 - `l_*`: log files, often in `LOG/` for parallel runs. No standalone validation is currently required, but `STDOUT` checks may fall back to `l_<exe>` when validating conversion tools like `p2y`.
 - `ndb.*`: NetCDF/HDF5-compatible databases. Read with `netCDF4`; compare only variables listed in `tests.toml`.
 
@@ -33,9 +34,14 @@ Use those files to understand behavior, not as implementation templates.
 The current validator is intentionally simpler than the legacy tool:
 
 - For text `o-*` files, it reads arrays with `numpy.genfromtxt()` and compares columns after the first column with `numpy.allclose()`.
+- Bare generated-output filenames resolve relative to the step `output` directory; paths containing directories resolve from the workflow root.
+- Per-reference metadata can set `skip_columns`, `tolerance`/`tollerance`, `variables`, and `whitelist`.
 - For database references, it reads selected variables from the generated NetCDF file and compares their flattened values to reference data.
+- For report references, it checks completion and, when a non-empty string is configured, checks that string in the report file.
+- For `STDOUT`, it checks the expected string in captured stdout and the step `l_<exe>` log file when available.
 - It rejects NaN and extremely large values.
-- It uses the configured `tollerance` as relative tolerance and `1e-6` as absolute tolerance.
+- It masks numerically insignificant near-zero values before relative comparison.
+- It uses the configured global or per-reference `tollerance`/`tolerance` as relative tolerance and `1e-6` as absolute tolerance.
 
 ## Development Guidance
 
