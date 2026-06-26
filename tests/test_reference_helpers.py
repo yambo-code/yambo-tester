@@ -4,6 +4,8 @@ import pytest
 from yambo_tester.tests.test_reference import (
     assert_file_contains,
     assert_close_significant,
+    compare_text_output,
+    load_text_output_data,
     normalize_reference,
     resolve_output_file,
     assert_stdout_or_log_contains,
@@ -57,6 +59,61 @@ def test_significant_comparison_fails_large_values():
 
     with pytest.raises(AssertionError):
         assert_close_significant(out, ref, 0.1, "large-diff")
+
+
+def test_text_output_loader_preserves_one_row_multiple_columns(tmp_path):
+    data_file = tmp_path / "o-single-row.qp"
+    data_file.write_text("1 10.0 20.0\n")
+
+    data = load_text_output_data(data_file)
+
+    assert data.shape == (1, 3)
+
+
+def test_compare_text_output_handles_one_row_multiple_columns(tmp_path):
+    ref_file = tmp_path / "ref.dat"
+    out_file = tmp_path / "out.dat"
+    ref_file.write_text("1 10.0 20.0\n")
+    out_file.write_text("1 10.5 19.5\n")
+
+    compare_text_output(out_file, ref_file, "o-single-row.qp", 0.1, set())
+
+
+def test_compare_text_output_skips_one_row_column(tmp_path):
+    ref_file = tmp_path / "ref.dat"
+    out_file = tmp_path / "out.dat"
+    ref_file.write_text("1 10.0 20.0\n")
+    out_file.write_text("1 10.0 99.0\n")
+
+    compare_text_output(out_file, ref_file, "o-single-row.qp", 0.1, {2})
+
+
+def test_compare_text_output_handles_one_row_one_column(tmp_path):
+    ref_file = tmp_path / "ref.dat"
+    out_file = tmp_path / "out.dat"
+    ref_file.write_text("1\n")
+    out_file.write_text("2\n")
+
+    compare_text_output(out_file, ref_file, "o-single-value.qp", 0.1, set())
+
+
+def test_compare_text_output_handles_multiple_rows_one_column(tmp_path):
+    ref_file = tmp_path / "ref.dat"
+    out_file = tmp_path / "out.dat"
+    ref_file.write_text("1\n2\n")
+    out_file.write_text("3\n4\n")
+
+    compare_text_output(out_file, ref_file, "o-one-column.qp", 0.1, set())
+
+
+def test_compare_text_output_still_fails_multi_row_difference(tmp_path):
+    ref_file = tmp_path / "ref.dat"
+    out_file = tmp_path / "out.dat"
+    ref_file.write_text("1 10.0\n2 20.0\n")
+    out_file.write_text("1 10.0\n2 30.0\n")
+
+    with pytest.raises(AssertionError):
+        compare_text_output(out_file, ref_file, "o-multi-row.qp", 0.1, set())
 
 
 def test_resolve_output_file_uses_output_directory_for_bare_paths(tmp_path):
