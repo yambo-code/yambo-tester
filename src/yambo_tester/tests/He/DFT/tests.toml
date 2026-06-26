@@ -6,7 +6,7 @@ supported = ["5", "6"]
 
 [00_p2y]
 exe = "p2y"
-input_dir = "si-hf.save"
+input_dir = "he.save"
 runlevel = "dft"
 nprocs = 1
 dependencies = []

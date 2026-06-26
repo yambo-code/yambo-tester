@@ -1,34 +1,37 @@
+#  __      __   ______   __       __  _______    ______               
+# |  \    /  \ /      \ |  \     /  \|       \  /      \              
+#  \$$\  /  $$|  $$$$$$\| $$\   /  $$| $$$$$$$\|  $$$$$$\             
+#   \$$\/  $$ | $$__| $$| $$$\ /  $$$| $$__/ $$| $$  | $$             
+#    \$$  $$  | $$    $$| $$$$\  $$$$| $$    $$| $$  | $$             
+#     \$$$$   | $$$$$$$$| $$\$$ $$ $$| $$$$$$$\| $$  | $$             
+#     | $$    | $$  | $$| $$ \$$$| $$| $$__/ $$| $$__/ $$             
+#     | $$    | $$  | $$| $$  \$ | $$| $$    $$ \$$    $$             
+#      \$$     \$$   \$$ \$$      \$$ \$$$$$$$   \$$$$$$              
 #                                                                     
-#  **    **    **     ****     ****  ******     *******               
-# //**  **    ****   /**/**   **/** /*////**   **/////**              
-#  //****    **//**  /**//** ** /** /*   /**  **     //**             
-#   //**    **  //** /** //***  /** /******  /**      /**             
-#    /**   **********/**  //*   /** /*//// **/**      /**             
-#    /**  /**//////**/**   /    /** /*    /**//**     **              
-#    /**  /**     /**/**        /** /*******  //*******               
-#    //   //      // //         //  ///////    ///////                
-#                                                                     
-#        Version 5.0.0 Revision 18614 Hash 555c293                    
-#                   Branch is bug-fixes                               
-#                    MPI+HDF5_IO Build                                
-#                http://www.yambo-code.org                            
+# Version 5.3.0 Revision 23927 Hash (prev commit) 1730222ea           
+#                        Branch is                                    
+#         MPI+OpenMP+SLK+SLEPC+HDF5_MPI_IO Build                      
+#                http://www.yambo-code.eu                             
 #
-# Hartree-Fock Components and Corrections
+# Vxc  =Perdew, Burke & Ernzerhof(X)+Perdew, Burke & Ernzerhof(C)
+# Vnlxc=Hartree-Fock
 #
-#    K-point            Band               Eo                 Ehf                GAUPBE(XC)         Hartree-Fock
+#    K-point            Band               Eo [eV]            Ehf [eV]           Vxc [eV]           Vnlxc [eV]
 #
-     1.00000000         1.00000000         0.00000000         1.41120601        -21.4938622        -20.0826550   
+        1                  1                  0.000000          -7.510832          -16.11310          -23.62393
 # 
-# 09/16/2020 at 15:44 yambo @ yurigagarin.local [start]
-# 09/16/2020 at 15:44                           [end]
+# 06/26/2026 at 11:49 yambo @ totoro [start]
+# 06/26/2026 at 11:49                [end]
 #
-# .-Input file  yambo.in
+# .-Input file  02_HF/02_HF
 # | HF_and_locXC                     # [R] Hartree-Fock
 # | rim_cut                          # [R] Coulomb potential
 # | BoseTemp= 0.000000         eV    # Bosonic Temperature
+# | #DegFix                        # Force the code to impose the energy levels to respect their degeneracy
+# | SE_Threads=  8                   # [OPENMP/GW] Number of threads for self-energy
 # | RandQpts=0                       # [RIM] Number of random q-points in the BZ
 # | RandGvec= 1                RL    # [RIM] Coulomb interaction RS components
-# | CUTGeo= "ws x"                   # [CUT] Coulomb Cutoff geometry: box/cylinder/sphere/ws X/Y/Z/XY..
+# | CUTGeo= "ws x"                   # [CUT] Coulomb Cutoff geometry: box/cylinder/sphere/ws/slab X/Y/Z/XY..
 # | % CUTBox
 # |  0.000000 | 0.000000 | 0.000000 |        # [CUT] [au] Box sides
 # | %
