@@ -25,6 +25,7 @@ Use the legacy `yambo-tests` repository only as a behavioral reference, not as c
 - `src/yambo_tester/data/config.toml`: packaged default/template config.
 - `src/yambo_tester/tests/test_reference.py`: main pytest validation logic.
 - `src/scripts/test_reference.py`: standalone experimental validation script; use it for prototyping only.
+- `src/scripts/tester_dump.py`: `tester-dump` helper for creating numeric text references from selected NetCDF variables.
 
 ## Working Rules
 
@@ -40,6 +41,7 @@ Use the legacy `yambo-tests` repository only as a behavioral reference, not as c
 - Workflow tarball sources come from CLI `--download_link`, then config `[parameters].download_link`, then resolved `tests.toml` metadata (`tarball_url` after `[versions."<major>"]` overlay). Do not reintroduce a global automatic download-link default that bypasses workflow metadata.
 - Required executables are `yambo`, `p2y`, and `a2y`. Optional tools such as `ypp` and project executables are checked only when registered under `[executables]` or with `--exe KEY=VALUE`; missing optional tools should skip affected steps.
 - Conversion-tool steps such as `p2y` may omit `input` and `output`, may use `input_dir` for `-I`, and may validate `STDOUT` strings against captured stdout plus `l_<exe>` logs.
+- Use `tester-dump` when preparing committed text references from NetCDF outputs. It writes selected variables in requested order, flattening each variable and limiting it to the first 100 values.
 - Use isolated named loggers. `setup_logging()` is for the main run logger, `setup_test_logger()` is for per-workflow `tester.log` files, and propagation should stay disabled so logs do not leak between scopes.
 
 ## Current Priority

@@ -137,6 +137,17 @@ If the `scratch` and `cache` directories specified in the configuration do **not
 
 - [Adding new tests](ADDING_TESTS.md): how to organize input and reference files, prepare the SAVE tarball, place it in the cache, and write `tests.toml`.
 
+When preparing NetCDF database references for new tests, use the installed
+`tester-dump` helper to dump selected variables to minimal numeric text files:
+
+```bash
+tester-dump -i file.nc -v var1 -v var2 -o reference.txt
+```
+
+The helper writes variables in the requested order and limits each variable to
+the first 100 flattened values. See [Adding new tests](ADDING_TESTS.md) for the
+full reference-preparation workflow.
+
 ## Authors and Acknowledgments
 
 **Nicola Spallanzani** is the main developer and current maintainer of yambo-tester.

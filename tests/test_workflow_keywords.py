@@ -58,5 +58,5 @@ def test_list_runlevels_flag_prints_keywords_and_exits(monkeypatch, capsys):
     main()
 
     captured = capsys.readouterr()
-    assert captured.out.splitlines() == ["bse", "dft", "gf", "init", "lifetimes", "optics", "pp", "qp", "rim_cut"]
+    assert captured.out.splitlines() == ["bse", "dft", "gf", "hf", "init", "lifetimes", "optics", "pp", "qp", "rim_cut"]
     assert captured.err == ""

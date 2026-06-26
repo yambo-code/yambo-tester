@@ -28,6 +28,7 @@ where = ["src"]
 [project.scripts]
 yambo-tester = "yambo_tester.cli:main"
 tester = "scripts.test_reference:main"
+tester-dump = "scripts.tester_dump:main"
 
 
 [tool.setuptools.package-data]
