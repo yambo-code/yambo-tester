@@ -276,7 +276,7 @@ def test_reference_ok(ref_item):
             )
 
         # Check text output files
-        if ref[:2] == 'o-' and not '.ndb' in ref:
+        if ref[:2] == 'o-' and not ('.ndb.' in ref or '.ns.' in ref):
             try:
                 compare_text_output(out_file, ref_file, ref, tol, info['skip_columns'])
             except AssertionError as e:
@@ -285,7 +285,7 @@ def test_reference_ok(ref_item):
                 raise
     
         # Check output DBs
-        if '.ndb' in ref:
+        if '.ndb.' in ref or '.ns.' in ref:
             try:
                 compare_database(out_file, ref_file, info['variables'], ref, tol)
             except AssertionError as e:
