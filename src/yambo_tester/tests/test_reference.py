@@ -76,9 +76,13 @@ def assert_close_significant(out_data, ref_data, tol, label):
     assert np.allclose(out_data[mask], ref_data[mask], rtol=tol, atol=ZERO_DFL), f"{label}: Difference larger than {tol}!"
 
 
+def load_text_output_data(path):
+    return np.genfromtxt(str(path), ndmin=2)
+
+
 def compare_text_output(out_file, ref_file, ref, tol, skip_columns):
-    ref_data = np.genfromtxt(str(ref_file))
-    out_data = np.genfromtxt(str(out_file))
+    ref_data = load_text_output_data(ref_file)
+    out_data = load_text_output_data(out_file)
 
     for col in range(1, ref_data.shape[1]):
         if col in skip_columns:
