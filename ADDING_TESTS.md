@@ -58,6 +58,32 @@ Large runtime databases should not be committed directly. Keep only small
 placeholder files in the repository if needed, and put the real `SAVE/` content
 in the test tarball.
 
+### Preparing NetCDF Text References
+
+Use `tester-dump` to create small textual references from selected NetCDF
+variables instead of committing large `ndb.*` or `ns.*` database files. The
+command is installed with `yambo-tester` and writes the numeric stream expected
+by database reference validation.
+
+The preferred syntax repeats `-v` once per variable:
+
+```bash
+tester-dump -i 02_QP/ndb.QP -v QP_Z -o REFERENCE/o-02_QP.ndb.QP
+tester-dump -i 02_QP/ndb.QP -v QP_E -v QP_Z -o REFERENCE/o-02_QP.ndb.QP
+```
+
+Comma-separated variables are also accepted:
+
+```bash
+tester-dump -i 02_QP/ndb.QP -v QP_E,QP_Z -o REFERENCE/o-02_QP.ndb.QP
+```
+
+Variables are written in the order requested on the command line. Each variable
+is flattened in the natural order returned by `netCDF4`; if it contains more
+than 100 elements, only the first 100 flattened values are written. The output
+file contains only numeric values, one value per line, with no headers, comments,
+variable names, or blank lines.
+
 ## SAVE Tarball
 
 The tarball name is derived from the test name and workflow type:
