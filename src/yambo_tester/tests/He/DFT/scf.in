@@ -3,7 +3,7 @@
  restart_mode = 'from_scratch'
  pseudo_dir   = './'
  outdir       = './'
- prefix       = 'si-hf'
+ prefix       = 'he'
  wf_collect   = .TRUE.
  verbosity = 'high'
 /
@@ -15,7 +15,7 @@
  nbnd            = 8
  ecutwfc         = 20.0
  ecutfock        = 40.0
- input_dft       = 'HF'
+! input_dft       = 'HF'
 ! exx_fraction = 
 ! exx_screening_factor
  exxdiv_treatment="vcut_spherical",
