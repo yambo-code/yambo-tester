@@ -17,7 +17,7 @@ dependencies = []
 "STDOUT" = ["== P2Y completed =="]
 
 [00_p2y.versions."6".reference]
-"o-00_p2y.ns.db1" = ["SAVE/ns.db1", "EIGENVALUES"]
+"o-00_p2y.ns.db1" = ["SAVE/ns.electrons", "EIGENVALUES"]
 "o-00_p2y.ns.kb_pp_pwscf_fragment_1" = ["SAVE/ns.kb_pp_pwscf_fragment_1", "PP_KB_K1"]
 "o-00_p2y.ns.wf_fragments_1_1" = ["SAVE/ns.wf_fragments_1_1", "WF_COMPONENTS_@_SP_POL1_K1_BAND_GRP_1"]
 "STDOUT" = ["Game Over"]
