@@ -1,0 +1,51 @@
+sha256 = "9403bd13676a2d1dbd44f14ef34e844a59d198b5a7c5dad66407a6981d9d4e22"
+tarball_url = "https://media.yambo-code.eu/robots/databases/y6"
+
+[yambo_versions]
+supported = ["5", "6"]
+
+[00_p2y]
+exe = "p2y"
+input_dir = "Si.save"
+runlevel = "dft"
+nprocs = 1
+dependencies = []
+[00_p2y.reference]
+"o-00_p2y.ns.db1" = ["SAVE/ns.db1", "EIGENVALUES"]
+"o-00_p2y.ns.kb_pp_pwscf_fragment_1" = ["SAVE/ns.kb_pp_pwscf_fragment_1", "PP_KB_K1"]
+"o-00_p2y.ns.wf_fragments_1_1" = ["SAVE/ns.wf_fragments_1_1", "WF_COMPONENTS_@_SP_POL1_K1_BAND_GRP_1"]
+"STDOUT" = ["== P2Y completed =="]
+
+[00_p2y.versions."6".reference]
+"o-00_p2y.ns.db1" = ["SAVE/ns.db1", "EIGENVALUES"]
+"o-00_p2y.ns.kb_pp_pwscf_fragment_1" = ["SAVE/ns.kb_pp_pwscf_fragment_1", "PP_KB_K1"]
+"o-00_p2y.ns.wf_fragments_1_1" = ["SAVE/ns.wf_fragments_1_1", "WF_COMPONENTS_@_SP_POL1_K1_BAND_GRP_1"]
+"STDOUT" = ["Game Over"]
+
+[01_init]
+exe = "yambo"
+output = "01_init"
+runlevel = "init"
+dependencies = ["00_p2y"]
+[01_init.reference]
+"o-01_init.ndb.gops" = ["SAVE/ndb.gops", "ng_in_shell", "E_of_shell"]
+"o-01_init.ndb.kindx" = ["SAVE/ndb.kindx", "Qindx", "Sindx"]
+"r-01_init_setup" = ["Game Over & Game summary"]
+
+[01_init.versions."6".reference]
+"o-01_init.ndb.gops" = ["SAVE/ndb.RL_shells", "ng_in_shell", "E_of_shell"]
+"o-01_init.ndb.KPT_indexes_fragment_1" = ["SAVE/ndb.KPT_indexes_fragment_1", "Qindx"]
+"o-01_init.ndb.KPT_indexes_fragment_2" = ["SAVE/ndb.KPT_indexes_fragment_2", "Sindx"]
+"r-01_init_setup" = ["Game Over & Game summary"]
+
+[02_HF]
+exe = "yambo"
+input = "INPUTS/02_HF"
+output = "02_HF"
+runlevel = "hf"
+nprocs = 1
+dependencies = ["01_init"]
+[02_HF.reference]
+"o-02_HF.hf" = ["o-02_HF.hf"]
+"o-02_HF.ndb.HF_and_locXC" = ["02_HF/ndb.HF_and_locXC", "Sx", "Vxc"]
+"r-02_HF_HF_and_locXC" = ["Game Over & Game summary"]
