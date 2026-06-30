@@ -1,0 +1,29 @@
+#                                                                     
+#  /$$     /$$ /$$$$$$  /$$      /$$ /$$$$$$$   /$$$$$$               
+# |  $$   /$$//$$__  $$| $$$    /$$$| $$__  $$ /$$__  $$              
+#  \  $$ /$$/| $$  \ $$| $$$$  /$$$$| $$  \ $$| $$  \ $$              
+#   \  $$$$/ | $$$$$$$$| $$ $$/$$ $$| $$$$$$$ | $$  | $$              
+#    \  $$/  | $$__  $$| $$  $$$| $$| $$__  $$| $$  | $$              
+#     | $$   | $$  | $$| $$\  $ | $$| $$  \ $$| $$  | $$              
+#     | $$   | $$  | $$| $$ \/  | $$| $$$$$$$/|  $$$$$$/              
+#     |__/   |__/  |__/|__/     |__/|_______/  \______/               
+#                                                                     
+# Version 6.0.0 Revision 23875 Hash (prev commit) 4d36a1a             
+#                     Branch is main                                  
+#         MPI+OpenMP+SLK+SLEPC+HDF5_MPI_IO Build                      
+#                http://www.yambo-code.eu                             
+#
+#
+# ==== Runlevels ===
+HF_lXC                                      # Hartree-Fock
+#
+# ==== Hartree-Fock (V=hf) ===
+EXXRLvcs= 15                       [Ry]   # Exchange    RL components
+VXCRLvcs= 15                       [Ry]   # XCpotential RL components
+# ==== Hartree-Fock (V=hf) ===
+%HF_lXC_krange                   # Generalized Kpoint/Band indices
+1|2|1|15|
+%
+%HF_lXC_erange                   # Generalized Kpoint/Energy indices
+1|2| 0.000000|-1.000000|
+%
