@@ -23,8 +23,9 @@ Use the legacy `yambo-tests` repository only as a behavioral reference, not as c
 - `src/yambo_tester/selection.py`: runlevel filtering, dependency expansion, and intentional skip markers.
 - `src/yambo_tester/versioning.py`: Yambo major-version normalization plus workflow and step metadata overlays.
 - `src/yambo_tester/data/config.toml`: packaged default/template config.
+- `src/yambo_tester/reference_compare.py`: shared numeric reference-comparison helpers.
 - `src/yambo_tester/tests/test_reference.py`: main pytest validation logic.
-- `src/scripts/test_reference.py`: standalone experimental validation script; use it for prototyping only.
+- `src/scripts/test_reference.py`: `tester` helper for quick numeric text-column comparisons; keep it aligned with `reference_compare.py`.
 - `src/scripts/tester_dump.py`: `tester-dump` helper for creating numeric text references from selected NetCDF variables.
 
 ## Working Rules
@@ -42,6 +43,7 @@ Use the legacy `yambo-tests` repository only as a behavioral reference, not as c
 - Required executables are `yambo`, `p2y`, and `a2y`. Optional tools such as `ypp` and project executables are checked only when registered under `[executables]` or with `--exe KEY=VALUE`; missing optional tools should skip affected steps.
 - Conversion-tool steps such as `p2y` may omit `input` and `output`, may use `input_dir` for `-I`, and may validate `STDOUT` strings against captured stdout plus `l_<exe>` logs.
 - Use `tester-dump` when preparing committed text references from NetCDF outputs. It writes selected variables in requested order, flattening each variable and limiting it to the first 100 values.
+- Keep `tester` (`src/scripts/test_reference.py`) as a lightweight text-column comparator that reuses `src/yambo_tester/reference_compare.py`; do not let it drift from the main pytest reference-checking rules.
 - Use isolated named loggers. `setup_logging()` is for the main run logger, `setup_test_logger()` is for per-workflow `tester.log` files, and propagation should stay disabled so logs do not leak between scopes.
 
 ## Current Priority

@@ -148,6 +148,16 @@ The helper writes variables in the requested order and limits each variable to
 the first 100 flattened values. See [Adding new tests](ADDING_TESTS.md) for the
 full reference-preparation workflow.
 
+For quick numeric text-output checks, use the installed `tester` helper to
+compare one selected reference column with one selected output column:
+
+```bash
+tester -r reference.txt -o output.txt --ref-col 2 --out-col 3
+```
+
+Column numbers are 1-based. The helper uses the same tolerance and
+significant-value comparison rules as the main workflow reference validator.
+
 ## Authors and Acknowledgments
 
 **Nicola Spallanzani** is the main developer and current maintainer of yambo-tester.
