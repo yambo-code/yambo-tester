@@ -7,6 +7,7 @@ TESTS_URL = "https://media.yambo-code.eu/robots/databases/tests"
 EXPECTED_DEFAULT_TESTS = {
     "Al_bulk": ["DFT", "GW-OPTICS", "ELPH"],
     "PA_chain": ["DFT", "PA_chain"],
+    "Si_bulk": ["DFT"],
     "He": ["DFT"],
     "Nickel": ["DFT"],
     "AlAs": ["DFT"],

@@ -7,6 +7,16 @@ import numpy as np
 import netCDF4 as nc
 from glob import glob
 from pathlib import Path
+from yambo_tester.reference_compare import (
+    ZERO_DFL,
+    TOO_LARGE,
+    SIGNIFICANCE_THRESHOLD,
+    assert_close_significant,
+    assert_finite_output,
+    compare_text_output,
+    load_text_output_data,
+    significant_mask,
+)
 from yambo_tester.selection import (
     MISSING_EXECUTABLE_RETURNCODE,
     RUNLEVEL_FILTER_RETURNCODE,
@@ -14,9 +24,6 @@ from yambo_tester.selection import (
 )
 from yambo_tester.versioning import DEFAULT_YAMBO_VERSION, workflow_steps_for_version
 
-ZERO_DFL = 1e-6
-TOO_LARGE = 10e99
-SIGNIFICANCE_THRESHOLD = 1e-3
 METADATA_KEYS = {"sha256"}
 
 
@@ -59,36 +66,6 @@ def normalize_reference(reference):
         "tolerance": None,
         "contains": None,
     }
-
-
-def significant_mask(ref_data, out_data):
-    max_abs = np.max(np.abs(ref_data))
-    threshold = max_abs * SIGNIFICANCE_THRESHOLD
-    return (np.abs(ref_data) >= threshold) | (np.abs(out_data) >= threshold)
-
-
-def assert_finite_output(data, label):
-    assert np.all(abs(data) < TOO_LARGE) and not np.all(np.isnan(data)), f"{label}: NaN or too large number!"
-
-
-def assert_close_significant(out_data, ref_data, tol, label):
-    mask = significant_mask(ref_data, out_data)
-    assert np.allclose(out_data[mask], ref_data[mask], rtol=tol, atol=ZERO_DFL), f"{label}: Difference larger than {tol}!"
-
-
-def load_text_output_data(path):
-    return np.genfromtxt(str(path), ndmin=2)
-
-
-def compare_text_output(out_file, ref_file, ref, tol, skip_columns):
-    ref_data = load_text_output_data(ref_file)
-    out_data = load_text_output_data(out_file)
-
-    for col in range(1, ref_data.shape[1]):
-        if col in skip_columns:
-            continue
-        assert_finite_output(out_data[:, col], str(out_file))
-        assert_close_significant(out_data[:, col], ref_data[:, col], tol, ref)
 
 
 def compare_database(out_file, ref_file, variables, ref, tol):
