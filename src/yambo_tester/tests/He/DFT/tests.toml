@@ -1,4 +1,4 @@
-sha256 = "5cee9dad2338d05ca0cdf6996e4f8a3293406496cf244c2b82ab3a49116a49e4"
+sha256 = "b1e9d56034129b77616ef23e8cf381801cd624d9dee4bb39a0a1585c5ac5b15b"
 tarball_url = "https://media.yambo-code.eu/robots/databases/y6"
 
 [yambo_versions]
@@ -17,6 +17,9 @@ dependencies = []
 "STDOUT" = ["== P2Y completed =="]
 
 [00_p2y.versions."6".reference]
+"o-00_p2y.ns.db1" = ["SAVE/ns.electrons", "EIGENVALUES"]
+"o-00_p2y.ns.kb_pp_pwscf_fragment_1" = ["SAVE/ns.kb_pp_pwscf_fragment_1", "PP_KB_K1"]
+"o-00_p2y.ns.wf_fragments_1_1" = ["SAVE/ns.wf_fragments_1_1", "WF_COMPONENTS_@_SP_POL1_K1_BAND_GRP_1"]
 "STDOUT" = ["Game Over"]
 
 [01_init]
@@ -24,6 +27,7 @@ exe = "yambo"
 input = "INPUTS/01_init"
 output = "01_init"
 runlevel = "init"
+nprocs = 1
 dependencies = ["00_p2y"]
 [01_init.reference]
 "o-01_init.ndb.gops" = ["SAVE/ndb.gops", "ng_in_shell", "E_of_shell"]
@@ -48,3 +52,11 @@ dependencies = ["01_init"]
 "o-02_HF.ndb.cutoff" = ["02_HF/ndb.cutoff", "CUT_BARE_QPG"]
 "o-02_HF.ndb.HF_and_locXC" = ["02_HF/ndb.HF_and_locXC", "Sx", "Vxc"]
 "r-02_HF_HF_and_locXC_rim_cut" = ["Game Over & Game summary"]
+
+[02_HF.versions."6"]
+input = "INPUTS/02_HF_y6"
+[02_HF.versions."6".reference]
+"o-02_HF.Fock-V_xc_qp" = ["o-02_HF.Fock-V_xc_qp"]
+"o-02_HF.ndb.SE_Fock" = ["02_HF/ndb.SE_Fock", "SPECTRAL_FUNCTION"]
+"o-02_HF.ndb.SE_Kohn_Sham" = ["02_HF/ndb.SE_Kohn_Sham", "SPECTRAL_FUNCTION"]
+"r-02_HF_HF_and_locXC" = ["Game Over & Game summary"]

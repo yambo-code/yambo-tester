@@ -1,0 +1,57 @@
+#                                                                     
+#                                                                     
+# Y88b    /   e           e    e      888~~\    ,88~-_                
+#  Y88b  /   d8b         d8b  d8b     888   |  d888   \               
+#   Y88b/   /Y88b       d888bdY88b    888 _/  88888    |              
+#    Y8Y   /  Y88b     / Y88Y Y888b   888  \  88888    |              
+#     Y   /____Y88b   /   YY   Y888b  888   |  Y888   /               
+#    /   /      Y88b /          Y888b 888__/    `88_-~                
+#                                                                     
+#                                                                     
+# Version 6.0.0 Revision 23875 Hash (prev commit) 4d36a1a             
+#         Branch is fix-issue-17-hf-cutoff-units                      
+#         MPI+OpenMP+SLK+SLEPC+HDF5_MPI_IO Build                      
+#                http://www.yambo-code.eu                             
+#
+#
+# ==== Runlevels ===
+HF_lXC                                      # Hartree-Fock
+rim_cut                                     # Coulomb potential
+#
+# ==== OpenMP ===
+HF_lXC_Threads=0                            # [HF_lXC] Number of threads
+#
+# ==== MPI (V=parallel) ===
+NLogCPUs=0                                  # Live-timing CPU`s (0 for all)
+PAR_def_mode= "balanced"                    # Default distribution mode ("balanced"/"memory"/"workload"/"KQmemory")
+HFlXC_CPU= ""                               # CPUs for each role
+HFlXC_ROLEs= ""                             # CPUs roles (qp,g,q,b)
+#
+# ==== Timing (V=timing) ===
+StdoHash=  40                               # Live-timing Hashes
+#
+# ==== Electrons (V=el) ===
+Nelectro= 2.000000                          # Electrons number
+OccTresh= 0.100000E-4                       # Occupation treshold (metallic bands)
+#
+# ==== Temperatures (V=el) ===
+ElecTemp= 0.000000                   [K]    # Electronic Temperature
+#
+# ==== Bosons (V=bosons) ===
+BoseTemp= -315775.                   [K]    # Bosonic Temperature
+BoseCut= 0.100000                           # Finite T Bose function cutoff
+#
+# ==== I/O (V=io) ===
+DBsIOoff= "none"                            # Space-separated list of DB with NO I/O. DB=(DIP,X,HF,COLLs,J,GF,CARRIERs,OBS,W,SC,BS,ALL)
+DBsFRAGpm= "none"                           # Space-separated list of +DB to FRAG and -DB to NOT FRAG. DB=(DIP,X,W,HF,COLLS,K,BS,QINDX,RT,ELPH,SC,
+#
+# ==== Hartree-Fock (V=hf) ===
+EXXRLvcs= 257                      [RL]   # Exchange    RL components
+VXCRLvcs= 257                      [RL]   # XCpotential RL components
+# ==== Hartree-Fock (V=hf) ===
+%HF_lXC_krange                   # Generalized Kpoint/Band indices
+1|1|1|1|
+%
+%HF_lXC_erange                   # Generalized Kpoint/Energy indices
+1|1| 0.000000|-1.000000|
+%
