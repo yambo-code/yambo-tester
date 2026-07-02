@@ -88,9 +88,10 @@ yambo-tester --exe yambo=/opt/yambo/bin/yambo --exe custom_tool=/opt/tools/custo
 ### Yambo Version Selection
 
 By default, `yambo-tester` detects the installed Yambo major version from
-`yambo -h`. The resolved major version selects version-specific workflow
-metadata in each `tests.toml`, including whether the workflow is supported and
-which test-database repository contains its tarball.
+`yambo -h` and falls back to Yambo 6 metadata when detection is unavailable.
+The resolved major version selects version-specific workflow metadata in each
+`tests.toml`, including whether the workflow is supported and which
+test-database repository contains its tarball.
 
 You can override detection with `--yambo-version` or `-y`:
 
@@ -102,7 +103,14 @@ yambo-tester -y 5
 Tarball URLs are resolved in this order: `--download_link`, then
 `download_link` in `config.toml`, then the workflow metadata from `tests.toml`
 after applying any `[versions."<major>"]` overlay. Workflows that declare no
-support for the selected major version are skipped cleanly. When testing a build
+support for the selected major version are skipped cleanly.
+Imported workflows keep version-specific fixtures under `INPUTS/Y5`,
+`INPUTS/Y6`, `REFERENCE/Y5`, and `REFERENCE/Y6`. Reference keys in
+`tests.toml` should be explicit paths such as `REFERENCE/Y6/o-example.qp`;
+legacy bare reference keys still resolve through `REFERENCE/<key>` for
+compatibility.
+
+When testing a build
 outside `PATH`, combine version detection or override with `--bin`:
 
 ```bash

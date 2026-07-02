@@ -12,7 +12,9 @@ Tests are organized by system name and workflow type:
 <system>/
   <workflow>/
     INPUTS/
+      Y6/
     REFERENCE/
+      Y6/
     SAVE/
     tests.toml
 ```
@@ -23,7 +25,9 @@ For example:
 Al_bulk/
   GW-OPTICS/
     INPUTS/
+      Y6/
     REFERENCE/
+      Y6/
     SAVE/
     tests.toml
 ```
@@ -41,11 +45,9 @@ the current supported Yambo version.
 
 ## Input And Reference Files
 
-Put Yambo input files in `INPUTS/`. The path used in `tests.toml` is relative to
-the workflow directory and is passed to Yambo with `-F`.
+Put Yambo input files in versioned directories such as `INPUTS/Y6/` and, when Yambo 5 behavior differs, `INPUTS/Y5/`. The path used in `tests.toml` is relative to the workflow directory and is passed to Yambo with `-F`.
 
-Put reference files in `REFERENCE/`. The validator currently understands these
-reference types:
+Put reference files in versioned directories such as `REFERENCE/Y6/` and `REFERENCE/Y5/`. Reference keys in `tests.toml` should be explicit workflow-relative paths such as `REFERENCE/Y6/o-02_QP.qp`; legacy bare keys still resolve through `REFERENCE/<key>`. The validator classifies references by the basename and currently understands these reference types:
 
 - `r-*`: report files. The generated report is checked for the successful-run
   marker `Game Over & Game summary`.
@@ -68,8 +70,8 @@ by database reference validation.
 The preferred syntax repeats `-v` once per variable:
 
 ```bash
-tester-dump -i 02_QP/ndb.QP -v QP_Z -o REFERENCE/o-02_QP.ndb.QP
-tester-dump -i 02_QP/ndb.QP -v QP_E -v QP_Z -o REFERENCE/o-02_QP.ndb.QP
+tester-dump -i 02_QP/ndb.QP -v QP_Z -o REFERENCE/Y6/o-02_QP.ndb.QP
+tester-dump -i 02_QP/ndb.QP -v QP_E -v QP_Z -o REFERENCE/Y6/o-02_QP.ndb.QP
 ```
 
 Comma-separated variables are also accepted:
@@ -142,13 +144,13 @@ top-level `[versions."<major>"]` table:
 
 ```toml
 sha256 = "0123456789abcdef..."
-tarball_url = "https://media.yambo-code.eu/robots/databases/tests"
+tarball_url = "https://media.yambo-code.eu/robots/databases/y6"
 
 [yambo_versions]
-supported = ["5"]
+supported = ["5", "6"]
 
-[versions."6"]
-tarball_url = "https://media.yambo-code.eu/robots/databases/y6"
+[versions."5"]
+tarball_url = "https://media.yambo-code.eu/robots/databases/tests"
 ```
 
 At runtime, tarball URLs are resolved from CLI `--download_link`, then
@@ -163,32 +165,32 @@ workflow metadata, followed by one table per run step.
 
 ```toml
 sha256 = "0123456789abcdef..."
-tarball_url = "https://media.yambo-code.eu/robots/databases/tests"
+tarball_url = "https://media.yambo-code.eu/robots/databases/y6"
 
 [yambo_versions]
-supported = ["5"]
+supported = ["5", "6"]
 
 [01_init]
 exe = "yambo"
-input = "INPUTS/01_init"
+input = "INPUTS/Y6/01_init"
 output = "01_init"
 runlevel = "init"
 dependencies = []
 [01_init.reference]
-"o-01_init.ndb.gops" = ["SAVE/ndb.gops", "ng_in_shell", "E_of_shell"]
-"o-01_init.ndb.kindx" = ["SAVE/ndb.kindx", "Qindx", "Sindx"]
-"r-01_init_setup" = ["Game Over & Game summary"]
+"REFERENCE/Y6/o-01_init.ndb.gops" = ["SAVE/ndb.RL_shells", "ng_in_shell", "E_of_shell"]
+"REFERENCE/Y6/o-01_init.ndb.KPT_indexes_fragment_1" = ["SAVE/ndb.KPT_indexes_fragment_1", "Qindx"]
+"REFERENCE/Y6/r-01_init_setup" = ["Game Over & Game summary"]
 
 [02_qp]
 exe = "yambo"
-input = "INPUTS/02_QP"
+input = "INPUTS/Y6/02_QP"
 output = "02_QP"
 runlevel = "qp"
 dependencies = ["01_init"]
 [02_qp.reference]
-"o-02_QP.qp" = { path = "02_QP/o-02_QP.qp", skip_columns = [5] }
-"o-02_QP.ndb.QP" = { path = "02_QP/ndb.QP", variables = ["QP_Z"] }
-"r-02_QP_gw0_dyson" = ["Game Over & Game summary"]
+"REFERENCE/Y6/o-02_QP.qp" = { path = "02_QP/o-02_QP.qp", skip_columns = [5] }
+"REFERENCE/Y6/o-02_QP.ndb.QP" = { path = "02_QP/ndb.QP", variables = ["QP_Z"] }
+"REFERENCE/Y6/r-02_QP_gw0_dyson" = ["Game Over & Game summary"]
 ```
 
 Required step fields:
@@ -199,7 +201,7 @@ Required step fields:
   `qp`, `bse`, `optics`, `lifetimes`, `gf`, `rim_cut`, or `ypp`.
 - `dependencies`: list of prerequisite step table names needed when this step
   is selected by runlevel.
-- `reference`: mapping from files in `REFERENCE/` to generated outputs.
+- `reference`: mapping from explicit reference keys such as `REFERENCE/Y6/o-file` to generated outputs.
 
 Optional step fields:
 
@@ -217,18 +219,22 @@ Optional step fields:
   declares `reference`, that table replaces the base step `reference` table for
   that major version.
 
+Keep step-level child tables next to the owning step: write `[step.reference]`
+and `[step.versions."5"...]` immediately after `[step]` before starting the next
+step.
+
 Reference entries can use the compact list syntax:
 
 ```toml
-"o-02_QP.qp" = ["02_QP/o-02_QP.qp"]
-"o-02_QP.ndb.QP" = ["02_QP/ndb.QP", "QP_Z"]
+"REFERENCE/Y6/o-02_QP.qp" = ["02_QP/o-02_QP.qp"]
+"REFERENCE/Y6/o-02_QP.ndb.QP" = ["02_QP/ndb.QP", "QP_Z"]
 ```
 
 or the metadata table syntax:
 
 ```toml
-"o-02_QP.qp" = { path = "02_QP/o-02_QP.qp", skip_columns = [5], tolerance = 0.11 }
-"o-02_QP.ndb.QP" = { path = "02_QP/ndb.QP", variables = ["QP_Z"], whitelist = true }
+"REFERENCE/Y6/o-02_QP.qp" = { path = "02_QP/o-02_QP.qp", skip_columns = [5], tolerance = 0.11 }
+"REFERENCE/Y6/o-02_QP.ndb.QP" = { path = "02_QP/ndb.QP", variables = ["QP_Z"], whitelist = true }
 ```
 
 Supported metadata:

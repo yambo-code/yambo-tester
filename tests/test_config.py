@@ -266,7 +266,7 @@ def test_check_parameters_preserves_explicit_download_link(monkeypatch, tmp_path
     assert resolved["download_link_origin"] == "config"
 
 
-def test_check_parameters_download_only_resolves_yambo5_without_global_repository(monkeypatch, tmp_path):
+def test_check_parameters_download_only_resolves_yambo6_without_global_repository(monkeypatch, tmp_path):
     cache_dir = tmp_path / "cache"
     cache_dir.mkdir()
     parameters = {
@@ -280,5 +280,5 @@ def test_check_parameters_download_only_resolves_yambo5_without_global_repositor
 
     resolved = check_parameters(parameters, {}, logging.getLogger("test-config-download-only"))
 
-    assert resolved["yambo_version"] == "5"
+    assert resolved["yambo_version"] == "6"
     assert resolved["download_link"] == ""

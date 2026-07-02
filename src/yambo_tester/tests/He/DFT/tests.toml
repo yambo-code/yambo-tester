@@ -10,53 +10,55 @@ input_dir = "he.save"
 runlevel = "dft"
 nprocs = 1
 dependencies = []
-[00_p2y.reference]
-"o-00_p2y.ns.db1" = ["SAVE/ns.db1", "EIGENVALUES"]
-"o-00_p2y.ns.kb_pp_pwscf_fragment_1" = ["SAVE/ns.kb_pp_pwscf_fragment_1", "PP_KB_K1"]
-"o-00_p2y.ns.wf_fragments_1_1" = ["SAVE/ns.wf_fragments_1_1", "WF_COMPONENTS_@_SP_POL1_K1_BAND_GRP_1"]
-"STDOUT" = ["== P2Y completed =="]
 
-[00_p2y.versions."6".reference]
-"o-00_p2y.ns.db1" = ["SAVE/ns.electrons", "EIGENVALUES"]
-"o-00_p2y.ns.kb_pp_pwscf_fragment_1" = ["SAVE/ns.kb_pp_pwscf_fragment_1", "PP_KB_K1"]
-"o-00_p2y.ns.wf_fragments_1_1" = ["SAVE/ns.wf_fragments_1_1", "WF_COMPONENTS_@_SP_POL1_K1_BAND_GRP_1"]
-"STDOUT" = ["Game Over"]
+[00_p2y.reference]
+"REFERENCE/Y6/o-00_p2y.ns.db1" = ["SAVE/ns.electrons", "EIGENVALUES"]
+"REFERENCE/Y6/o-00_p2y.ns.kb_pp_pwscf_fragment_1" = ["SAVE/ns.kb_pp_pwscf_fragment_1", "PP_KB_K1"]
+"REFERENCE/Y6/o-00_p2y.ns.wf_fragments_1_1" = ["SAVE/ns.wf_fragments_1_1", "WF_COMPONENTS_@_SP_POL1_K1_BAND_GRP_1"]
+STDOUT = ["Game Over"]
+
+[00_p2y.versions."5".reference]
+"REFERENCE/Y5/o-00_p2y.ns.db1" = ["SAVE/ns.db1", "EIGENVALUES"]
+"REFERENCE/Y5/o-00_p2y.ns.kb_pp_pwscf_fragment_1" = ["SAVE/ns.kb_pp_pwscf_fragment_1", "PP_KB_K1"]
+"REFERENCE/Y5/o-00_p2y.ns.wf_fragments_1_1" = ["SAVE/ns.wf_fragments_1_1", "WF_COMPONENTS_@_SP_POL1_K1_BAND_GRP_1"]
+STDOUT = ["== P2Y completed =="]
 
 [01_init]
 exe = "yambo"
-input = "INPUTS/01_init"
 output = "01_init"
 runlevel = "init"
-nprocs = 1
 dependencies = ["00_p2y"]
-[01_init.reference]
-"o-01_init.ndb.gops" = ["SAVE/ndb.gops", "ng_in_shell", "E_of_shell"]
-"o-01_init.ndb.kindx" = ["SAVE/ndb.kindx", "Qindx", "Sindx"]
-"r-01_init_setup" = ["Game Over & Game summary"]
 
-[01_init.versions."6".reference]
-"o-01_init.ndb.gops" = ["SAVE/ndb.RL_shells", "ng_in_shell", "E_of_shell"]
-"o-01_init.ndb.KPT_indexes_fragment_1" = ["SAVE/ndb.KPT_indexes_fragment_1", "Qindx"]
-"o-01_init.ndb.KPT_indexes_fragment_2" = ["SAVE/ndb.KPT_indexes_fragment_2", "Sindx"]
-"r-01_init_setup" = ["Game Over & Game summary"]
+[01_init.reference]
+"REFERENCE/Y6/o-01_init.ndb.gops" = ["SAVE/ndb.RL_shells", "ng_in_shell", "E_of_shell"]
+"REFERENCE/Y6/o-01_init.ndb.KPT_indexes_fragment_1" = ["SAVE/ndb.KPT_indexes_fragment_1", "Qindx"]
+"REFERENCE/Y6/o-01_init.ndb.KPT_indexes_fragment_2" = ["SAVE/ndb.KPT_indexes_fragment_2", "Sindx"]
+"REFERENCE/Y6/r-01_init_setup" = ["Game Over & Game summary"]
+
+[01_init.versions."5".reference]
+"REFERENCE/Y5/o-01_init.ndb.gops" = ["SAVE/ndb.gops", "ng_in_shell", "E_of_shell"]
+"REFERENCE/Y5/o-01_init.ndb.kindx" = ["SAVE/ndb.kindx", "Qindx", "Sindx"]
+"REFERENCE/Y5/r-01_init_setup" = ["Game Over & Game summary"]
 
 [02_HF]
 exe = "yambo"
-input = "INPUTS/02_HF"
+input = "INPUTS/Y6/02_HF"
 output = "02_HF"
 runlevel = "hf"
 nprocs = 1
 dependencies = ["01_init"]
-[02_HF.reference]
-"o-02_HF.hf" = ["o-02_HF.hf"]
-"o-02_HF.ndb.cutoff" = ["02_HF/ndb.cutoff", "CUT_BARE_QPG"]
-"o-02_HF.ndb.HF_and_locXC" = ["02_HF/ndb.HF_and_locXC", "Sx", "Vxc"]
-"r-02_HF_HF_and_locXC_rim_cut" = ["Game Over & Game summary"]
 
-[02_HF.versions."6"]
-input = "INPUTS/02_HF_y6"
-[02_HF.versions."6".reference]
-"o-02_HF.Fock-V_xc_qp" = ["o-02_HF.Fock-V_xc_qp"]
-"o-02_HF.ndb.SE_Fock" = ["02_HF/ndb.SE_Fock", "SPECTRAL_FUNCTION"]
-"o-02_HF.ndb.SE_Kohn_Sham" = ["02_HF/ndb.SE_Kohn_Sham", "SPECTRAL_FUNCTION"]
-"r-02_HF_HF_and_locXC" = ["Game Over & Game summary"]
+[02_HF.reference]
+"REFERENCE/Y6/o-02_HF.Fock-V_xc_qp" = ["o-02_HF.Fock-V_xc_qp"]
+"REFERENCE/Y6/o-02_HF.ndb.SE_Fock" = ["02_HF/ndb.SE_Fock", "SPECTRAL_FUNCTION"]
+"REFERENCE/Y6/o-02_HF.ndb.SE_Kohn_Sham" = ["02_HF/ndb.SE_Kohn_Sham", "SPECTRAL_FUNCTION"]
+"REFERENCE/Y6/r-02_HF_HF_and_locXC" = ["Game Over & Game summary"]
+
+[02_HF.versions."5"]
+input = "INPUTS/Y5/02_HF"
+
+[02_HF.versions."5".reference]
+"REFERENCE/Y5/o-02_HF.hf" = ["o-02_HF.hf"]
+"REFERENCE/Y5/o-02_HF.ndb.cutoff" = ["02_HF/ndb.cutoff", "CUT_BARE_QPG"]
+"REFERENCE/Y5/o-02_HF.ndb.HF_and_locXC" = ["02_HF/ndb.HF_and_locXC", "Sx", "Vxc"]
+"REFERENCE/Y5/r-02_HF_HF_and_locXC_rim_cut" = ["Game Over & Game summary"]
