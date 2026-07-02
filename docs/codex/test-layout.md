@@ -6,7 +6,11 @@ Imported tests live under `src/yambo_tester/tests/` and intentionally resemble t
 <system>/
   <workflow>/
     INPUTS/
+      Y5/
+      Y6/
     REFERENCE/
+      Y5/
+      Y6/
     SAVE/
     SAVE_converted/
     tests.toml
@@ -30,19 +34,19 @@ Each workflow step is a TOML table such as:
 ```toml
 [03_qp_cohsex]
 exe = "yambo"
-input = "INPUTS/03_QP_COHSEX"
+input = "INPUTS/Y6/03_QP_COHSEX"
 output = "03_QP_COHSEX"
 runlevel = "qp"
 dependencies = ["01_init"]
 
 [03_qp_cohsex.reference]
-"o-03_QP_COHSEX.ndb.QP" = ["03_QP_COHSEX/ndb.QP", "QP_Z"]
-"o-03_QP_COHSEX.qp" = ["o-03_QP_COHSEX.qp"]
-"o-example.qp" = { path = "o-example.qp", skip_columns = [5], tolerance = 0.11, whitelist = false }
-"r-03_QP_COHSEX_em1s_HF_and_locXC_gw0_cohsex" = ["Game Over & Game summary"]
+"REFERENCE/Y6/o-03_QP_COHSEX.ndb.QP" = ["03_QP_COHSEX/ndb.QP", "QP_Z"]
+"REFERENCE/Y6/o-03_QP_COHSEX.qp" = ["o-03_QP_COHSEX.qp"]
+"REFERENCE/Y6/o-example.qp" = { path = "o-example.qp", skip_columns = [5], tolerance = 0.11, whitelist = false }
+"REFERENCE/Y6/r-03_QP_COHSEX_em1s_HF_and_locXC_gw0_cohsex" = ["Game Over & Game summary"]
 
-[03_qp_cohsex.versions."6".reference]
-"r-03_QP_COHSEX_em1s_HF_and_locXC_gw0_cohsex" = ["Game Over & Game summary"]
+[03_qp_cohsex.versions."5".reference]
+"REFERENCE/Y5/r-03_QP_COHSEX_em1s_HF_and_locXC_gw0_cohsex" = ["Game Over & Game summary"]
 ```
 
 Important fields:
@@ -58,7 +62,7 @@ Important fields:
 - `flags`: optional suffix appended to the `-J` target.
 - `nprocs`: optional per-step MPI-rank override; otherwise the global configured `nprocs` is used.
 - `actions`: optional pre-run actions such as simple `mkdir` or `cp` steps.
-- `reference`: maps reference files in `REFERENCE/` to generated output paths and, for NetCDF databases, selected variables.
+- `reference`: maps explicit workflow-relative reference paths such as `REFERENCE/Y6/o-file` to generated output paths and, for NetCDF databases, selected variables. Legacy bare keys still resolve through `REFERENCE/<key>`.
 - `versions`: optional per-Yambo-major shallow overlays for a step.
 
 Reference entries support two forms:
@@ -89,7 +93,7 @@ is kept in sync with the imported workflow `tests.toml` files.
 ## Yambo Versions
 
 The effective Yambo major version is resolved by `--yambo-version`/`-y` first,
-then by auto-detecting `yambo -h`, then by the Yambo 5 compatibility default.
+then by auto-detecting `yambo -h`, then by the Yambo 6 default.
 The resolved major version is written to `results.toml`, and validation uses it
 to apply version-specific metadata.
 
@@ -97,13 +101,13 @@ Workflow files own supported-version and tarball-source metadata:
 
 ```toml
 sha256 = "..."
-tarball_url = "https://media.yambo-code.eu/robots/databases/tests"
+tarball_url = "https://media.yambo-code.eu/robots/databases/y6"
 
 [yambo_versions]
-supported = ["5"]
+supported = ["5", "6"]
 
-[versions."6"]
-tarball_url = "https://media.yambo-code.eu/robots/databases/y6"
+[versions."5"]
+tarball_url = "https://media.yambo-code.eu/robots/databases/tests"
 ```
 
 If the selected version is not supported, all steps in that workflow are
@@ -116,6 +120,10 @@ overlays live under `[step_name.versions."<major>"]` and replace only the
 top-level fields they declare. In particular, a version-specific `reference`
 table replaces the base `reference` table for that version:
 
+Keep each step table, its base `reference` table, and its step-level version
+overlays adjacent in `tests.toml`; this keeps all behavior for a step readable
+in one block.
+
 ```toml
 [00_p2y.reference]
 "STDOUT" = ["== P2Y completed =="]
@@ -124,8 +132,9 @@ table replaces the base `reference` table for that version:
 "STDOUT" = ["Game Over"]
 ```
 
-Current imported DFT workflows declare support for Yambo 5 and 6 and use the
-Yambo 6 tarball repository. Non-DFT workflows currently declare Yambo 5 support
+Current imported DFT workflows declare support for Yambo 5 and 6, use Yambo 6
+metadata as the base, and keep Yambo 5 compatibility differences under
+`versions."5"` overlays. Non-DFT workflows currently declare Yambo 5 support
 only and use the legacy tests repository. To add a future major version, extend
 normalization support in `src/yambo_tester/versioning.py`, then add compact
 workflow or step overlays only where behavior differs.
@@ -138,3 +147,8 @@ that selected set are still written to `results.toml` with an intentional skip
 marker so pytest reports them as skipped instead of failing on missing outputs.
 
 With no selected runlevel, every workflow step runs as before.
+
+
+Reference type detection is based on `Path(reference_key).name`, so
+`REFERENCE/Y6/o-file`, `REFERENCE/Y5/r-file`, and legacy `o-file` keys are
+classified by their basename.

@@ -4,31 +4,39 @@ tarball_url = "https://media.yambo-code.eu/robots/databases/y6"
 [yambo_versions]
 supported = ["5", "6"]
 
+[versions."5"]
+tarball_url = "https://media.yambo-code.eu/robots/databases/tests"
+
 [00_p2y]
 exe = "p2y"
 input_dir = "Al.save"
 runlevel = "dft"
 nprocs = 1
 dependencies = []
-[00_p2y.reference]
-"STDOUT" = ["== P2Y completed =="]
 
-[00_p2y.versions."6".reference]
-"STDOUT" = ["Game Over"]
+[00_p2y.reference]
+STDOUT = ["Game Over"]
+
+[00_p2y.versions."5".reference]
+STDOUT = ["== P2Y completed =="]
 
 [01_init]
 exe = "yambo"
-input = "INPUTS/01_init"
+input = "INPUTS/Y6/01_init"
 output = "01_init"
 runlevel = "init"
 dependencies = []
-[01_init.reference]
-"o-01_init.ndb.gops" = ["SAVE/ndb.gops", "ng_in_shell", "E_of_shell"]
-"o-01_init.ndb.kindx" = ["SAVE/ndb.kindx", "Qindx", "Sindx"]
-"r-01_init_setup" = ["Game Over & Game summary"]
 
-[01_init.versions."6".reference]
-"o-01_init.ndb.gops" = ["SAVE/ndb.RL_shells", "ng_in_shell", "E_of_shell"]
-"o-01_init.ndb.KPT_indexes_fragment_1" = ["SAVE/ndb.KPT_indexes_fragment_1", "Qindx"]
-"o-01_init.ndb.KPT_indexes_fragment_2" = ["SAVE/ndb.KPT_indexes_fragment_2", "Sindx"]
-"r-01_init_setup" = ["Game Over & Game summary"]
+[01_init.reference]
+"REFERENCE/Y6/o-01_init.ndb.gops" = ["SAVE/ndb.RL_shells", "ng_in_shell", "E_of_shell"]
+"REFERENCE/Y6/o-01_init.ndb.KPT_indexes_fragment_1" = ["SAVE/ndb.KPT_indexes_fragment_1", "Qindx"]
+"REFERENCE/Y6/o-01_init.ndb.KPT_indexes_fragment_2" = ["SAVE/ndb.KPT_indexes_fragment_2", "Sindx"]
+"REFERENCE/Y6/r-01_init_setup" = ["Game Over & Game summary"]
+
+[01_init.versions."5"]
+input = "INPUTS/Y5/01_init"
+
+[01_init.versions."5".reference]
+"REFERENCE/Y5/o-01_init.ndb.gops" = ["SAVE/ndb.gops", "ng_in_shell", "E_of_shell"]
+"REFERENCE/Y5/o-01_init.ndb.kindx" = ["SAVE/ndb.kindx", "Qindx", "Sindx"]
+"REFERENCE/Y5/r-01_init_setup" = ["Game Over & Game summary"]

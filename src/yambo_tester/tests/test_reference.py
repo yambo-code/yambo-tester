@@ -14,7 +14,12 @@ from yambo_tester.reference_compare import (
     assert_close_significant,
     assert_finite_output,
     compare_text_output,
+    is_database_reference,
+    is_report_reference,
+    is_text_output_reference,
     load_text_output_data,
+    reference_basename,
+    resolve_reference_path,
     significant_mask,
 )
 from yambo_tester.selection import (
@@ -88,13 +93,13 @@ def resolve_output_file(rundir, odir, ref, path):
     if ref == "STDOUT":
         return rundir.joinpath(path)
 
-    if ref[:2] == 'r-':
+    if is_report_reference(ref):
         if path:
             return rundir.joinpath(path)
         tmp = glob(str(rundir.joinpath(odir)) + '/r-*')
         if tmp:
             return Path(tmp[0])
-        return rundir.joinpath(odir, ref)
+        return rundir.joinpath(odir, reference_basename(ref))
 
     if path:
         out_path = Path(path)
@@ -102,7 +107,7 @@ def resolve_output_file(rundir, odir, ref, path):
             return rundir.joinpath(odir, out_path)
         return rundir.joinpath(out_path)
 
-    return rundir.joinpath(odir, ref)
+    return rundir.joinpath(odir, reference_basename(ref))
 
 
 def string_check_spec(ref, ref_spec, result):
@@ -112,7 +117,7 @@ def string_check_spec(ref, ref_spec, result):
             "contains": ref_spec["contains"] or ref_spec["path"],
         }
 
-    if ref[:2] == "r-" and ref_spec["contains"] is None and ref_spec["path"]:
+    if is_report_reference(ref) and ref_spec["contains"] is None and ref_spec["path"]:
         return {
             "path": "",
             "contains": ref_spec["path"],
@@ -240,11 +245,12 @@ def test_reference_ok(ref_item):
     else:
         rundir = Path(info['dir'])
         tol = float(info['tol'])
-        ref_file = rundir.joinpath('REFERENCE', ref)
+        ref_file = resolve_reference_path(rundir, ref)
         out_file = resolve_output_file(rundir, info['odir'], ref, info['path'])
     
         # Check if reference and output files exist
-        if ref != "STDOUT" and not ref[:2] == 'r-': assert ref_file.exists(), f"{ref} file do not exists!"
+        if ref != "STDOUT" and not is_report_reference(ref):
+            assert ref_file.exists(), f"{ref} file do not exists!"
         assert out_file.exists(), f"{info['out']} file do not exists!"
 
         if ref == "STDOUT":
@@ -257,7 +263,7 @@ def test_reference_ok(ref_item):
             )
 
         # Check text output files
-        if ref[:2] == 'o-' and not ('.ndb.' in ref or '.ns.' in ref):
+        if is_text_output_reference(ref):
             try:
                 compare_text_output(out_file, ref_file, ref, tol, info['skip_columns'])
             except AssertionError as e:
@@ -266,7 +272,7 @@ def test_reference_ok(ref_item):
                 raise
     
         # Check output DBs
-        if '.ndb.' in ref or '.ns.' in ref:
+        if is_database_reference(ref):
             try:
                 compare_database(out_file, ref_file, info['variables'], ref, tol)
             except AssertionError as e:
@@ -275,7 +281,7 @@ def test_reference_ok(ref_item):
                 raise
     
         # Check report files
-        if ref[:2] == 'r-':
+        if is_report_reference(ref):
             report = False
             with open(str(out_file), 'rb') as f:
                 for line in f:

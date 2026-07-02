@@ -22,8 +22,8 @@ def test_resolve_yambo_version_uses_detected_major_when_no_override():
     assert resolve_yambo_version("", detected) == "6"
 
 
-def test_resolve_yambo_version_falls_back_to_yambo5():
-    assert resolve_yambo_version("", {}) == "5"
+def test_resolve_yambo_version_falls_back_to_yambo6():
+    assert resolve_yambo_version("", {}) == "6"
 
 
 def test_resolve_yambo_version_rejects_unsupported_major():
@@ -36,18 +36,18 @@ def test_download_link_for_version_maps_supported_versions():
     assert download_link_for_version("6.0") == "https://media.yambo-code.eu/robots/databases/y6"
 
 
-def test_workflow_steps_for_version_applies_shallow_step_overlay():
+def test_workflow_steps_for_version_uses_yambo6_base_metadata():
     workflow = {
         "sha256": "abc",
         "yambo_versions": {"supported": ["5", "6"]},
         "00_p2y": {
             "exe": "p2y",
-            "input_dir": "Al.save",
-            "reference": {"STDOUT": ["== P2Y completed =="]},
+            "input_dir": "Al6.save",
+            "reference": {"STDOUT": ["Game Over"]},
             "versions": {
-                "6": {
-                    "input_dir": "Al6.save",
-                    "reference": {"STDOUT": ["Game Over"]},
+                "5": {
+                    "input_dir": "Al.save",
+                    "reference": {"STDOUT": ["== P2Y completed =="]},
                 },
             },
         },
@@ -62,12 +62,12 @@ def test_workflow_steps_for_version_applies_shallow_step_overlay():
     assert "versions" not in resolved["00_p2y"]
 
 
-def test_workflow_steps_for_version_keeps_base_step_without_overlay():
+def test_workflow_steps_for_version_applies_yambo5_overlay():
     workflow = {
         "00_p2y": {
             "exe": "p2y",
-            "reference": {"STDOUT": ["== P2Y completed =="]},
-            "versions": {"6": {"reference": {"STDOUT": ["Game Over"]}}},
+            "reference": {"STDOUT": ["Game Over"]},
+            "versions": {"5": {"reference": {"STDOUT": ["== P2Y completed =="]}}},
         },
     }
 

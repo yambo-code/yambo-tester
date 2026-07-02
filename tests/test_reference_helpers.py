@@ -1,6 +1,13 @@
 import numpy as np
 import pytest
 
+from yambo_tester.reference_compare import (
+    is_database_reference,
+    is_report_reference,
+    is_text_output_reference,
+    reference_basename,
+    resolve_reference_path,
+)
 from yambo_tester.tests.test_reference import (
     assert_file_contains,
     assert_close_significant,
@@ -13,6 +20,30 @@ from yambo_tester.tests.test_reference import (
     test_runs_ok as reference_test_runs_ok,
 )
 from yambo_tester.selection import RUNLEVEL_FILTER_RETURNCODE, UNSUPPORTED_VERSION_RETURNCODE
+
+
+def test_resolve_reference_path_preserves_stdout_special_case(tmp_path):
+    assert resolve_reference_path(tmp_path, "STDOUT") is None
+
+
+def test_resolve_reference_path_uses_explicit_relative_key(tmp_path):
+    assert (
+        resolve_reference_path(tmp_path, "REFERENCE/Y6/o-02_HF.ndb.SE_Fock")
+        == tmp_path / "REFERENCE" / "Y6" / "o-02_HF.ndb.SE_Fock"
+    )
+
+
+def test_resolve_reference_path_keeps_legacy_bare_key_compatibility(tmp_path):
+    assert resolve_reference_path(tmp_path, "o-02_HF.hf") == tmp_path / "REFERENCE" / "o-02_HF.hf"
+
+
+def test_reference_type_detection_uses_basename_for_path_like_keys():
+    assert reference_basename("REFERENCE/Y6/o-02_HF.ndb.SE_Fock") == "o-02_HF.ndb.SE_Fock"
+    assert is_text_output_reference("REFERENCE/Y6/o-02_HF.hf")
+    assert is_report_reference("REFERENCE/Y5/r-01_init_setup")
+    assert is_database_reference("REFERENCE/Y6/o-02_HF.ndb.SE_Fock")
+    assert is_database_reference("REFERENCE/Y5/o-00_p2y.ns.db1")
+    assert not is_database_reference("STDOUT")
 
 
 def test_normalize_reference_preserves_legacy_list_syntax():
@@ -114,6 +145,13 @@ def test_compare_text_output_still_fails_multi_row_difference(tmp_path):
 
     with pytest.raises(AssertionError):
         compare_text_output(out_file, ref_file, "o-multi-row.qp", 0.1, set())
+
+
+def test_resolve_output_file_uses_reference_basename_for_explicit_key_without_path(tmp_path):
+    assert (
+        resolve_output_file(tmp_path, "02_QP", "REFERENCE/Y6/o-02_QP.qp", "")
+        == tmp_path / "02_QP" / "o-02_QP.qp"
+    )
 
 
 def test_resolve_output_file_uses_output_directory_for_bare_paths(tmp_path):

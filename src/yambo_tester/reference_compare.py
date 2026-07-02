@@ -9,6 +9,47 @@ import numpy as np
 ZERO_DFL = 1e-6
 TOO_LARGE = 10e99
 SIGNIFICANCE_THRESHOLD = 1e-3
+STDOUT_REFERENCE = "STDOUT"
+
+
+def reference_basename(reference_key):
+    """
+    Return the filename portion used for reference type classification.
+    """
+    if reference_key == STDOUT_REFERENCE:
+        return STDOUT_REFERENCE
+    return Path(reference_key).name
+
+
+def resolve_reference_path(workflow_root, reference_key):
+    """
+    Return the filesystem path for a tests.toml reference key.
+
+    ``STDOUT`` is not a reference file. Explicit relative keys such as
+    ``REFERENCE/Y6/o-file`` are resolved from the workflow root. Legacy bare
+    keys continue to resolve through ``REFERENCE/<key>``.
+    """
+    if reference_key == STDOUT_REFERENCE:
+        return None
+
+    key_path = Path(reference_key)
+    if len(key_path.parts) == 1:
+        return Path(workflow_root).joinpath("REFERENCE", key_path)
+    return Path(workflow_root).joinpath(key_path)
+
+
+def is_report_reference(reference_key):
+    return reference_basename(reference_key).startswith("r-")
+
+
+def is_text_output_reference(reference_key):
+    basename = reference_basename(reference_key)
+    return basename.startswith("o-") and not is_database_reference(reference_key)
+
+
+def is_database_reference(reference_key):
+    basename = reference_basename(reference_key)
+    return ".ndb." in basename or ".ns." in basename
 
 
 def significant_mask(ref_data, out_data):

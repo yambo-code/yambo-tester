@@ -1,7 +1,7 @@
 # Copyright (c) 2025 Nicola Spallanzani
 # Licensed under the MIT License. See LICENSE file for details.
 
-DEFAULT_YAMBO_VERSION = "5"
+DEFAULT_YAMBO_VERSION = "6"
 WORKFLOW_METADATA_KEYS = {"sha256", "tarball_url", "yambo_versions", "versions"}
 
 YAMBO_VERSION_DOWNLOAD_LINKS = {
@@ -43,7 +43,7 @@ def resolve_yambo_version(requested=None, detected_info=None, default=DEFAULT_YA
     Resolve the effective Yambo major version.
 
     Explicit user configuration wins over executable auto-detection. If neither
-    is available, keep the Yambo 5 compatibility default.
+    is available, use the Yambo 6 default metadata behavior.
     """
     requested_major = normalize_yambo_version(requested)
     if requested_major:

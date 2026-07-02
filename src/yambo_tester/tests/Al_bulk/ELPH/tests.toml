@@ -6,43 +6,47 @@ supported = ["5"]
 
 [01_init]
 exe = "elph"
-input = "INPUTS/01_init"
+input = "INPUTS/Y5/01_init"
 output = "01_init"
 runlevel = "init"
 dependencies = []
+
 [01_init.reference]
-"o-01_init.ndb.gops" = ["SAVE/ndb.gops", "ng_in_shell", "E_of_shell"]
-"o-01_init.ndb.kindx" = ["SAVE/ndb.kindx", "Qindx", "Sindx"]
-"r-01_init_setup" = ["Game Over & Game summary"]
+"REFERENCE/Y5/o-01_init.ndb.gops" = ["SAVE/ndb.gops", "ng_in_shell", "E_of_shell"]
+"REFERENCE/Y5/o-01_init.ndb.kindx" = ["SAVE/ndb.kindx", "Qindx", "Sindx"]
+"REFERENCE/Y5/r-01_init_setup" = ["Game Over & Game summary"]
 
 [02_QP]
 exe = "elph"
-input = "INPUTS/02_QP"
+input = "INPUTS/Y5/02_QP"
 output = "02_QP"
 runlevel = "qp"
 dependencies = ["01_init"]
+
 [02_QP.reference]
-"o-02_QP.qp" = ["02_QP/o-02_QP.qp"]
-"o-02_QP.ndb.QP" = ["02_QP/ndb.QP", "QP_Z"]
-"r-02_QP_gw0_dyson_el_ph_corr" = ["Game Over & Game summary"]
+"REFERENCE/Y5/o-02_QP.qp" = ["02_QP/o-02_QP.qp"]
+"REFERENCE/Y5/o-02_QP.ndb.QP" = ["02_QP/ndb.QP", "QP_Z"]
+"REFERENCE/Y5/r-02_QP_gw0_dyson_el_ph_corr" = ["Game Over & Game summary"]
 
 [03_ypp]
 exe = "elph_pp"
-input = "INPUTS/03_ypp"
+input = "INPUTS/Y5/03_ypp"
 output = "03_ypp"
 runlevel = "pp"
 dependencies = ["01_init"]
+
 [03_ypp.reference]
-"r-03_ypp" = ["Game Over & Game summary"]
+"REFERENCE/Y5/r-03_ypp" = ["Game Over & Game summary"]
 
 [05_QP]
 exe = "elph"
-input = "INPUTS/05_QP"
+input = "INPUTS/Y5/05_QP"
 output = "05_QP"
-flags = "03_ypp"
 runlevel = "qp"
 dependencies = ["01_init", "03_ypp"]
+flags = "03_ypp"
+
 [05_QP.reference]
-"o-05_QP.qp" = ["05_QP/o-05_QP.qp"]
-"o-05_QP.ndb.QP" = ["05_QP/ndb.QP", "QP_Z"]
-"r-02_QP_gw0_dyson_el_ph_corr" = ["Game Over & Game summary"]
+"REFERENCE/Y5/o-05_QP.qp" = ["05_QP/o-05_QP.qp"]
+"REFERENCE/Y5/o-05_QP.ndb.QP" = ["05_QP/ndb.QP", "QP_Z"]
+"REFERENCE/Y5/r-02_QP_gw0_dyson_el_ph_corr" = ["Game Over & Game summary"]

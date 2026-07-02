@@ -3,7 +3,11 @@ import tomllib
 import pytest
 
 from scripts.test_reference import build_parser, main
-from yambo_tester.reference_compare import compare_text_columns
+from yambo_tester.reference_compare import compare_text_columns, is_text_output_reference
+
+
+def test_tester_shares_path_like_reference_classification():
+    assert is_text_output_reference("REFERENCE/Y6/o-02_QP.qp")
 
 
 def test_compare_selected_columns_within_tolerance(tmp_path):
