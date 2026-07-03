@@ -2,42 +2,49 @@
 
 ## Status
 
-Planning documents have been added. Implementation has not started yet.
+Implemented for the first-pass DFT template scope.
 
 ## Completed
 
-- Inspected current workflow metadata loading in `runner.setup_rundir()` and
-  `runner.run_test()`.
-- Confirmed that scratch-side expansion fits the current flow: the workflow
-  tree is copied first, then `tests.toml` is read from the scratch copy for
-  version checks, tarball handling, execution, and pytest validation.
-- Confirmed that the existing version resolver applies shallow step overlays
-  late, so template expansion should produce a normal expanded `tests.toml`
-  rather than changing version-resolution semantics.
-- Identified the best template location as
-  `src/yambo_tester/data/workflow_templates.toml`.
-- Identified initial low-risk migration targets:
-  `Si_bulk/DFT/tests.toml` and `He/DFT/tests.toml`.
+- Added packaged templates in `src/yambo_tester/data/workflow_templates.toml`
+  and included them in package data.
+- Added `src/yambo_tester/template_expansion.py` to load templates, detect
+  `step_type`, apply placeholders recursively, merge local overrides, and keep
+  old-style fully expanded steps unchanged.
+- Wired scratch-side expansion into `runner.setup_rundir()` immediately after
+  copying the workflow directory and before version support, tarball URL,
+  checksum, extraction, execution, and validation logic consume metadata.
+- Kept version resolution semantics unchanged: expanded step version overlays
+  are still consumed by the existing shallow `resolve_step_metadata()` logic.
+- Added focused tests for expansion, placeholders, local override precedence,
+  template and local version overlays, reference merging, old-style workflow
+  compatibility, unknown template errors, packaged template shapes, and
+  `setup_rundir()` scratch rewrite behavior.
+- Made workflow keyword and metadata tests template-aware.
+- Migrated DFT workflows that match the initial templates:
+  `Si_bulk/DFT`, `He/DFT`, `Al_bulk/DFT`, `PA_chain/DFT`, `Nickel/DFT`,
+  `AlAs/DFT`, `hBN/DFT`, `Iron_With-SOC/DFT`, and
+  `Iron_Without-SOC/DFT`.
+- Removed the temporary `init_input` idea; workflows needing explicit init
+  inputs use `step_type = "init"` with local `input` and version-specific
+  `input` overrides.
+- Kept DFT workflows on the Yambo 6 tarball repository for both Yambo 5 and
+  Yambo 6 execution.
+- Updated `docs/codex/test-layout.md`, `README.md`, and `AGENTS.md`.
 
-## Next Steps
+## Remaining Work
 
-- Add `src/yambo_tester/data/workflow_templates.toml` and package it in
-  `pyproject.toml`.
-- Add `src/yambo_tester/template_expansion.py`.
-- Wire expansion into `runner.setup_rundir()` immediately after copying the
-  workflow directory to scratch.
-- Add unit tests for expansion, placeholders, merge precedence, version
-  overlays, and old-style compatibility.
-- Migrate the first DFT workflows to compact `step_type` syntax.
-- Update `docs/codex/test-layout.md`, `README.md`, and `AGENTS.md`.
+No required work remains for the plan's first-pass scope. Broader GW, optics,
+ELPH, or PA-chain workflow templates were intentionally left out because the
+plan called for templating only exact, low-risk repeated shapes first. Future
+work can add new templates if repeated shapes become clear and can be covered
+with focused tests.
 
-## Notes
+## Verification
 
-- `{step}` should resolve to the local step table name.
-- `{previous_step}` should resolve from TOML insertion order, excluding workflow
-  metadata tables.
-- Local overrides should win over template defaults.
-- Reference tables should merge by key, with local references overriding
-  template references.
-- Version-specific reference tables should be expanded as complete merged
-  replacement tables so existing Yambo 5/Yambo 6 behavior stays intact.
+Last verified with:
+
+```bash
+.env/bin/pytest
+# 114 passed, 2 skipped
+```

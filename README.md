@@ -77,6 +77,10 @@ declared in each workflow's `tests.toml` and intentionally skips unrelated
 steps during validation. The same selection can be configured with
 `runlevels = ["qp", "bse"]` under `[parameters]` in `config.toml`.
 
+Conversion steps use dedicated runlevels, so use `--runlevel p2y` for
+Quantum ESPRESSO conversion steps and `--runlevel a2y` for ABINIT conversion
+steps.
+
 Executable names are configured under `[executables]` in `config.toml`. The
 same values can be overridden on the command line with repeated
 `--exe KEY=VALUE` arguments, for example:

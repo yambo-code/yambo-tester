@@ -1,6 +1,6 @@
 # Workflow Step Templates Plan
 
-Status: planned.
+Status: implemented.
 
 ## Summary
 
@@ -43,14 +43,13 @@ dependencies = ["{previous_step}"]
 input = "INPUTS/Y5/{step}"
 ```
 
-Initial templates should focus on exact, low-risk repetition already present in
-the imported DFT suite:
+Initial templates focus on exact, low-risk repetition already present in the
+imported DFT suite:
 
-- `p2y`: Quantum ESPRESSO SAVE conversion with Yambo 6 defaults and Yambo 5
-  reference overrides.
+- `p2y`: Quantum ESPRESSO SAVE conversion with common stdout references.
 - `init`: standard Yambo initialization.
 - `HF`: standard DFT Hartree-Fock/local-XC step.
-- `a2y`, if useful as a minimal ABINIT conversion template.
+- `a2y`: minimal ABINIT conversion smoke check.
 
 Do not template broader GW, optics, ELPH, or PA-chain workflows in the first
 pass unless an exact repeated shape is identified.
@@ -127,14 +126,22 @@ when debugging.
 
 ## Migration
 
-Migrate first:
+Migrated:
 
 - `src/yambo_tester/tests/Si_bulk/DFT/tests.toml`
 - `src/yambo_tester/tests/He/DFT/tests.toml`
+- `src/yambo_tester/tests/Al_bulk/DFT/tests.toml`
+- `src/yambo_tester/tests/PA_chain/DFT/tests.toml`
+- `src/yambo_tester/tests/Nickel/DFT/tests.toml`
+- `src/yambo_tester/tests/AlAs/DFT/tests.toml`
+- `src/yambo_tester/tests/hBN/DFT/tests.toml`
+- `src/yambo_tester/tests/Iron_With-SOC/DFT/tests.toml`
+- `src/yambo_tester/tests/Iron_Without-SOC/DFT/tests.toml`
 
-These workflows share nearly identical `p2y`, `init`, and `HF` steps and differ
-mainly in `sha256`, `input_dir`, and a small number of references. Leave
-existing fully expanded workflows valid so migration can be gradual.
+`Si_bulk` and `He` add local `p2y` database references on top of the common
+stdout conversion template. `Al_bulk` and `PA_chain` keep explicit init input
+paths as local overrides on `step_type = "init"`. Existing fully expanded
+workflows remain valid so migration can stay gradual.
 
 ## Documentation
 
