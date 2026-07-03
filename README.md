@@ -157,7 +157,7 @@ is expanded in the scratch copy of `tests.toml` before execution. Local fields
 in the workflow file override template defaults, so per-workflow values such as
 `input_dir`, `nprocs`, references, and version overlays still belong in the
 local `tests.toml`. Reusable templates are packaged in
-`src/yambo_tester/data/workflow_templates.toml`; current DFT templates include `p2y`, `init`, `init_input`, `HF`, and `a2y`.
+`src/yambo_tester/data/workflow_templates.toml`; current DFT templates include `p2y`, `init`, `HF`, and `a2y`.
 
 When preparing NetCDF database references for new tests, use the installed
 `tester-dump` helper to dump selected variables to minimal numeric text files:
