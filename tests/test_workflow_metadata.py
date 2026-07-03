@@ -2,6 +2,8 @@ import re
 import tomllib
 from pathlib import Path
 
+from yambo_tester.template_expansion import expand_workflow_templates, workflow_uses_templates
+
 
 DFT_URL = "https://media.yambo-code.eu/robots/databases/y6"
 TESTS_URL = "https://media.yambo-code.eu/robots/databases/tests"
@@ -22,11 +24,18 @@ def workflow_files():
     return sorted(Path("src/yambo_tester/tests").glob("*/*/tests.toml"))
 
 
+def load_workflow_file(path):
+    with path.open("rb") as f:
+        config = tomllib.load(f)
+    if workflow_uses_templates(config):
+        return expand_workflow_templates(config, workflow_file=path)
+    return config
+
+
 def test_imported_workflows_declare_version_support_and_tarball_url():
     assert workflow_files()
     for path in workflow_files():
-        with path.open("rb") as f:
-            config = tomllib.load(f)
+        config = load_workflow_file(path)
 
         if path.parent.name == "DFT":
             assert config["yambo_versions"]["supported"] == ["5", "6"], path
@@ -45,8 +54,7 @@ def test_packaged_default_config_restores_validated_workflows():
 
 def test_imported_reference_keys_are_explicit_relative_paths():
     for path in workflow_files():
-        with path.open("rb") as f:
-            config = tomllib.load(f)
+        config = load_workflow_file(path)
 
         for step_name, step in config.items():
             if step_name in {"sha256", "tarball_url", "yambo_versions", "versions"}:
@@ -63,8 +71,7 @@ def test_imported_reference_keys_are_explicit_relative_paths():
 
 def test_imported_fixture_inputs_and_references_are_versioned_by_support():
     for path in workflow_files():
-        with path.open("rb") as f:
-            config = tomllib.load(f)
+        config = load_workflow_file(path)
         supported = set(config["yambo_versions"]["supported"])
         workflow = path.parent
 
@@ -85,14 +92,13 @@ def test_imported_fixture_inputs_and_references_are_versioned_by_support():
                 assert not (workflow / "REFERENCE" / "Y6").exists(), path
 
 
-def test_dft_workflows_use_yambo5_overlays_for_compatibility_metadata():
+def test_dft_workflows_use_yambo6_tarballs_and_yambo5_step_overlays():
     for path in workflow_files():
         if path.parent.name != "DFT":
             continue
-        with path.open("rb") as f:
-            config = tomllib.load(f)
+        config = load_workflow_file(path)
 
-        assert config.get("versions", {}).get("5", {}).get("tarball_url") == TESTS_URL, path
+        assert config.get("versions", {}).get("5", {}).get("tarball_url", DFT_URL) == DFT_URL, path
         for step_name, step in config.items():
             if step_name in {"sha256", "tarball_url", "yambo_versions", "versions"}:
                 continue
@@ -112,8 +118,7 @@ def test_step_child_tables_are_grouped_with_their_step():
     for path in workflow_files():
         text = path.read_text()
         headers = [(match.group(1), match.start()) for match in table_re.finditer(text)]
-        with path.open("rb") as f:
-            config = tomllib.load(f)
+        config = load_workflow_file(path)
         step_names = [name for name in config if name not in {"sha256", "tarball_url", "yambo_versions", "versions"}]
 
         step_header_positions = {name: pos for name, pos in headers if name in step_names}

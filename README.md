@@ -145,6 +145,20 @@ If the `scratch` and `cache` directories specified in the configuration do **not
 
 - [Adding new tests](ADDING_TESTS.md): how to organize input and reference files, prepare the SAVE tarball, place it in the cache, and write `tests.toml`.
 
+Workflow steps may also use packaged reusable metadata templates with
+`step_type`. A compact step such as:
+
+```toml
+[02_HF]
+step_type = "HF"
+```
+
+is expanded in the scratch copy of `tests.toml` before execution. Local fields
+in the workflow file override template defaults, so per-workflow values such as
+`input_dir`, `nprocs`, references, and version overlays still belong in the
+local `tests.toml`. Reusable templates are packaged in
+`src/yambo_tester/data/workflow_templates.toml`; current DFT templates include `p2y`, `init`, `init_input`, `HF`, and `a2y`.
+
 When preparing NetCDF database references for new tests, use the installed
 `tester-dump` helper to dump selected variables to minimal numeric text files:
 

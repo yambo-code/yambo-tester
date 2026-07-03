@@ -97,7 +97,9 @@ then by auto-detecting `yambo -h`, then by the Yambo 6 default.
 The resolved major version is written to `results.toml`, and validation uses it
 to apply version-specific metadata.
 
-Workflow files own supported-version and tarball-source metadata:
+Workflow files own supported-version and tarball-source metadata. DFT
+runlevel workflows use the Yambo 6 database tarball repository for both Yambo 5
+and Yambo 6 execution:
 
 ```toml
 sha256 = "..."
@@ -105,9 +107,16 @@ tarball_url = "https://media.yambo-code.eu/robots/databases/y6"
 
 [yambo_versions]
 supported = ["5", "6"]
+```
 
-[versions."5"]
+Non-DFT Yambo 5-only workflows use the legacy test repository:
+
+```toml
+sha256 = "..."
 tarball_url = "https://media.yambo-code.eu/robots/databases/tests"
+
+[yambo_versions]
+supported = ["5"]
 ```
 
 If the selected version is not supported, all steps in that workflow are
@@ -132,12 +141,13 @@ in one block.
 "STDOUT" = ["Game Over"]
 ```
 
-Current imported DFT workflows declare support for Yambo 5 and 6, use Yambo 6
-metadata as the base, and keep Yambo 5 compatibility differences under
-`versions."5"` overlays. Non-DFT workflows currently declare Yambo 5 support
-only and use the legacy tests repository. To add a future major version, extend
-normalization support in `src/yambo_tester/versioning.py`, then add compact
-workflow or step overlays only where behavior differs.
+Current imported DFT workflows declare support for Yambo 5 and 6, use the
+Yambo 6 tarball repository for both versions, and keep Yambo 5 step-level
+compatibility differences under `versions."5"` overlays. Non-DFT workflows
+currently declare Yambo 5 support only and use the legacy tests repository. To
+add a future major version, extend normalization support in
+`src/yambo_tester/versioning.py`, then add compact workflow or step overlays
+only where behavior differs.
 
 ## Runlevel Selection
 
@@ -152,3 +162,53 @@ With no selected runlevel, every workflow step runs as before.
 Reference type detection is based on `Path(reference_key).name`, so
 `REFERENCE/Y6/o-file`, `REFERENCE/Y5/r-file`, and legacy `o-file` keys are
 classified by their basename.
+
+## Workflow Step Templates
+
+Reusable step metadata lives in
+`src/yambo_tester/data/workflow_templates.toml`. Each top-level table is a
+`step_type` that a workflow step can reference:
+
+```toml
+[00_p2y]
+step_type = "p2y"
+input_dir = "Si.save"
+
+[01_init]
+step_type = "init"
+
+[02_HF]
+step_type = "HF"
+```
+
+The initial DFT template set is intentionally narrow: `p2y` for QE
+conversion, `init` for initialization after the previous step, `init_input` for
+explicit `INPUTS/Y*/{step}` initialization files with no dependency, `HF` for
+standard Hartree-Fock/local-XC checks, and `a2y` for ABINIT smoke conversion.
+`p2y` includes the common stdout marker; workflows that validate conversion
+databases add those references locally.
+
+`runner.setup_rundir()` copies the source workflow to scratch, reads the
+scratch `tests.toml`, expands any templated steps, and rewrites only the
+scratch file. Source fixtures may stay compact, while execution, debugging,
+version overlays, runlevel selection, and validation continue to consume a
+normal fully expanded `tests.toml`.
+
+Supported placeholders are `{step}` for the local table name and
+`{previous_step}` for the previous workflow step in TOML insertion order,
+excluding workflow metadata tables. Placeholders are applied recursively in
+strings, lists, dictionaries, reference keys, reference values, and
+version-specific sections.
+
+Expansion keeps top-level workflow metadata such as `sha256`, `tarball_url`,
+`yambo_versions`, and top-level `versions` unchanged. For each templated step,
+template base fields are applied first, then local base overrides. Template and
+local reference tables merge by reference key, with local keys winning. Version
+sections are expanded similarly: template version fields are applied first, then
+local version fields. Version-specific reference tables are written as complete
+replacement tables for that version, so they should contain the references that
+apply to that Yambo major version.
+
+Unknown `step_type` values fail during setup with a clear `ValueError` naming
+the missing template and workflow file. Fully expanded old-style steps remain
+valid and are copied unchanged.

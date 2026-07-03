@@ -13,6 +13,7 @@ import importlib.resources
 from .log import setup_test_logger
 from .config import get_executable
 from .download import download_test, sha256sum
+from .template_expansion import expand_workflow_templates, workflow_uses_templates
 from .versioning import (
     DEFAULT_YAMBO_VERSION,
     resolve_workflow_tarball_url,
@@ -136,6 +137,11 @@ def setup_rundir(test, parameters, logger):
         logger.info(f"{this_test} Using local tests.toml")
         with open(local_config, "rb") as f:
             config = tomllib.load(f)
+        if workflow_uses_templates(config):
+            config = expand_workflow_templates(config, workflow_file=local_config)
+            with open(local_config, "w") as f:
+                toml.dump(config, f)
+            logger.info(f"{this_test} Expanded workflow step templates in scratch tests.toml")
     else:
         logger.error(f"{local_config} not available")
         raise FileNotFoundError(f"{local_config} not available") 

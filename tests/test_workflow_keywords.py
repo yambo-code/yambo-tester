@@ -3,6 +3,7 @@ import tomllib
 from pathlib import Path
 
 from yambo_tester.cli import load_workflow_keywords, main
+from yambo_tester.template_expansion import expand_workflow_templates, workflow_uses_templates
 
 
 def collect_workflow_keywords(tests_root):
@@ -12,6 +13,8 @@ def collect_workflow_keywords(tests_root):
     for tests_file in tests_root.rglob("tests.toml"):
         with tests_file.open("rb") as f:
             tests = tomllib.load(f)
+        if workflow_uses_templates(tests):
+            tests = expand_workflow_templates(tests, workflow_file=tests_file)
 
         for name, spec in tests.items():
             if name == "sha256":
