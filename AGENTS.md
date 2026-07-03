@@ -38,6 +38,7 @@ Use the legacy `yambo-tests` repository only as a behavioral reference, not as c
 - Do not blindly translate Perl, Bash, or Fortran from `yambo-tests`; extract the behavior and implement it clearly in Python.
 - Be careful with MPI/OpenMP/GPU assumptions. Missing project executables should skip only the affected tests, while missing core executables should fail early as described in the README.
 - Treat `tests.toml` as the owner of workflow-specific behavior. Keep validation and runner code generic, and encode per-workflow metadata there with explicit keys such as `runlevel`, `dependencies`, `nprocs`, `skip_columns`, `variables`, `tolerance`, `whitelist`, and version overlays.
+- Put reusable step behavior in `src/yambo_tester/data/workflow_templates.toml` and keep per-workflow differences as local `tests.toml` overrides.
 - Keep Yambo 5/Yambo 6 behavior version-aware. `--yambo-version`/`-y` overrides detection; otherwise the runner detects the major version from `yambo -h` and falls back to Yambo 5 compatibility.
 - Workflow tarball sources come from CLI `--download_link`, then config `[parameters].download_link`, then resolved `tests.toml` metadata (`tarball_url` after `[versions."<major>"]` overlay). Do not reintroduce a global automatic download-link default that bypasses workflow metadata.
 - Required executables are `yambo`, `p2y`, and `a2y`. Optional tools such as `ypp` and project executables are checked only when registered under `[executables]` or with `--exe KEY=VALUE`; missing optional tools should skip affected steps.

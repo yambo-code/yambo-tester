@@ -4,15 +4,6 @@ tarball_url = "https://media.yambo-code.eu/robots/databases/y6"
 [yambo_versions]
 supported = ["5", "6"]
 
-[versions."5"]
-tarball_url = "https://media.yambo-code.eu/robots/databases/tests"
-
-[01_a2y]
-exe = "a2y"
+[00_a2y]
+step_type = "a2y"
 input = "DB/hBN_o_DS2_WFK.nc"
-runlevel = "dft"
-nprocs = 1
-dependencies = []
-
-[01_a2y.reference]
-STDOUT = ["== Writing DB2 (wavefunctions) + nlPP ..."]
