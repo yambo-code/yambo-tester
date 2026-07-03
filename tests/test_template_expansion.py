@@ -97,10 +97,14 @@ def test_template_and_local_version_overrides_resolve_through_versioning():
     }
 
 
-def test_packaged_templates_cover_conversion_and_input_init_variants():
+def test_packaged_templates_cover_conversion_and_local_init_overrides():
     workflow = {
         "00_p2y": {"step_type": "p2y", "input_dir": "Al.save"},
-        "01_init": {"step_type": "init_input"},
+        "01_init": {
+            "step_type": "init",
+            "input": "INPUTS/Y6/01_init",
+            "versions": {"5": {"input": "INPUTS/Y5/01_init"}},
+        },
         "02_a2y": {"step_type": "a2y", "input": "DB/WFK.nc"},
     }
 
@@ -109,7 +113,7 @@ def test_packaged_templates_cover_conversion_and_input_init_variants():
     assert expanded["00_p2y"]["reference"] == {"STDOUT": ["Game Over"]}
     assert expanded["00_p2y"]["versions"]["5"]["reference"] == {"STDOUT": ["== P2Y completed =="]}
     assert expanded["01_init"]["input"] == "INPUTS/Y6/01_init"
-    assert expanded["01_init"]["dependencies"] == []
+    assert expanded["01_init"]["dependencies"] == ["00_p2y"]
     assert expanded["01_init"]["versions"]["5"]["input"] == "INPUTS/Y5/01_init"
     assert expanded["02_a2y"]["reference"] == {"STDOUT": ["== Writing DB2 (wavefunctions) + nlPP ..."]}
 

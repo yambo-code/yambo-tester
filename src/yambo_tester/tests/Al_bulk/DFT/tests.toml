@@ -9,4 +9,8 @@ step_type = "p2y"
 input_dir = "Al.save"
 
 [01_init]
-step_type = "init_input"
+step_type = "init"
+input = "INPUTS/Y6/01_init"
+
+[01_init.versions."5"]
+input = "INPUTS/Y5/01_init"

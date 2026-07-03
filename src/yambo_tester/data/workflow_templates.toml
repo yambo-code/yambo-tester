@@ -27,27 +27,6 @@ dependencies = ["{previous_step}"]
 "REFERENCE/Y5/o-{step}.ndb.kindx" = ["SAVE/ndb.kindx", "Qindx", "Sindx"]
 "REFERENCE/Y5/r-{step}_setup" = ["Game Over & Game summary"]
 
-[init_input]
-exe = "yambo"
-input = "INPUTS/Y6/{step}"
-output = "{step}"
-runlevel = "init"
-dependencies = []
-
-[init_input.reference]
-"REFERENCE/Y6/o-{step}.ndb.gops" = ["SAVE/ndb.RL_shells", "ng_in_shell", "E_of_shell"]
-"REFERENCE/Y6/o-{step}.ndb.KPT_indexes_fragment_1" = ["SAVE/ndb.KPT_indexes_fragment_1", "Qindx"]
-"REFERENCE/Y6/o-{step}.ndb.KPT_indexes_fragment_2" = ["SAVE/ndb.KPT_indexes_fragment_2", "Sindx"]
-"REFERENCE/Y6/r-{step}_setup" = ["Game Over & Game summary"]
-
-[init_input.versions."5"]
-input = "INPUTS/Y5/{step}"
-
-[init_input.versions."5".reference]
-"REFERENCE/Y5/o-{step}.ndb.gops" = ["SAVE/ndb.gops", "ng_in_shell", "E_of_shell"]
-"REFERENCE/Y5/o-{step}.ndb.kindx" = ["SAVE/ndb.kindx", "Qindx", "Sindx"]
-"REFERENCE/Y5/r-{step}_setup" = ["Game Over & Game summary"]
-
 [HF]
 exe = "yambo"
 input = "INPUTS/Y6/{step}"

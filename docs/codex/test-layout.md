@@ -182,11 +182,11 @@ step_type = "HF"
 ```
 
 The initial DFT template set is intentionally narrow: `p2y` for QE
-conversion, `init` for initialization after the previous step, `init_input` for
-explicit `INPUTS/Y*/{step}` initialization files with no dependency, `HF` for
+conversion, `init` for initialization after the previous step, `HF` for
 standard Hartree-Fock/local-XC checks, and `a2y` for ABINIT smoke conversion.
 `p2y` includes the common stdout marker; workflows that validate conversion
-databases add those references locally.
+databases add those references locally. Workflows that need explicit init input
+files keep those paths as local overrides on `step_type = "init"`.
 
 `runner.setup_rundir()` copies the source workflow to scratch, reads the
 scratch `tests.toml`, expands any templated steps, and rewrites only the
