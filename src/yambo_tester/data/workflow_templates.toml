@@ -1,6 +1,6 @@
 [p2y]
 exe = "p2y"
-runlevel = "dft"
+runlevel = "p2y"
 nprocs = 1
 dependencies = []
 
@@ -50,7 +50,7 @@ input = "INPUTS/Y5/{step}"
 
 [a2y]
 exe = "a2y"
-runlevel = "dft"
+runlevel = "a2y"
 nprocs = 1
 dependencies = []
 

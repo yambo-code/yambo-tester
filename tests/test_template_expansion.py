@@ -110,11 +110,13 @@ def test_packaged_templates_cover_conversion_and_local_init_overrides():
 
     expanded = expand_workflow_templates(workflow, templates=load_workflow_templates())
 
+    assert expanded["00_p2y"]["runlevel"] == "p2y"
     assert expanded["00_p2y"]["reference"] == {"STDOUT": ["Game Over"]}
     assert expanded["00_p2y"]["versions"]["5"]["reference"] == {"STDOUT": ["== P2Y completed =="]}
     assert expanded["01_init"]["input"] == "INPUTS/Y6/01_init"
     assert expanded["01_init"]["dependencies"] == ["00_p2y"]
     assert expanded["01_init"]["versions"]["5"]["input"] == "INPUTS/Y5/01_init"
+    assert expanded["02_a2y"]["runlevel"] == "a2y"
     assert expanded["02_a2y"]["reference"] == {"STDOUT": ["== Writing DB2 (wavefunctions) + nlPP ..."]}
 
 

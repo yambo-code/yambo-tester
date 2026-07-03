@@ -149,7 +149,7 @@ def test_run_test_skips_workflow_when_yambo_version_is_unsupported(tmp_path):
         "[01_p2y]\n"
         "exe = \"p2y\"\n"
         "input_dir = \"Al.save\"\n"
-        "runlevel = \"dft\"\n"
+        "runlevel = \"p2y\"\n"
         "dependencies = []\n"
         "[01_p2y.reference]\n"
         "\"STDOUT\" = [\"== P2Y completed ==\"]\n"
@@ -192,7 +192,7 @@ def _write_source_workflow(tmp_path, tarball_url="https://example.invalid/tests"
         '[01_p2y]\n'
         'exe = "p2y"\n'
         'input_dir = "Al.save"\n'
-        'runlevel = "dft"\n'
+        'runlevel = "p2y"\n'
         'dependencies = []\n'
         '[01_p2y.reference]\n'
         '"STDOUT" = ["== P2Y completed =="]\n'
