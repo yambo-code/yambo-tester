@@ -10,6 +10,18 @@ STDOUT = ["Game Over"]
 [p2y.versions."5".reference]
 STDOUT = ["== P2Y completed =="]
 
+[a2y]
+exe = "a2y"
+runlevel = "a2y"
+nprocs = 1
+dependencies = []
+
+[a2y.reference]
+STDOUT = ["Game Over"]
+
+[a2y.versions."5".reference]
+STDOUT = ["== Writing DB2 (wavefunctions) + nlPP ..."]
+
 [init]
 exe = "yambo"
 output = "{step}"
@@ -47,12 +59,3 @@ input = "INPUTS/Y5/{step}"
 [HF.versions."5".reference]
 "REFERENCE/Y5/o-{step}.hf" = ["o-{step}.hf"]
 "REFERENCE/Y5/o-{step}.ndb.HF_and_locXC" = ["{step}/ndb.HF_and_locXC", "Sx", "Vxc"]
-
-[a2y]
-exe = "a2y"
-runlevel = "a2y"
-nprocs = 1
-dependencies = []
-
-[a2y.reference]
-STDOUT = ["== Writing DB2 (wavefunctions) + nlPP ..."]
