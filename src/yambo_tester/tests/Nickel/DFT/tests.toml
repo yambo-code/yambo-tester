@@ -7,3 +7,6 @@ supported = ["5", "6"]
 [00_p2y]
 step_type = "p2y"
 input_dir = "Ni.save"
+
+[01_init]
+step_type = "init"
