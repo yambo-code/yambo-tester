@@ -167,11 +167,12 @@ When preparing NetCDF database references for new tests, use the installed
 `tester-dump` helper to dump selected variables to minimal numeric text files:
 
 ```bash
-tester-dump -i file.nc -v var1 -v var2 -o reference.txt
+tester-dump -i file.nc -v var1 -v var2 -o reference.txt --max-values 250
 ```
 
 The helper writes variables in the requested order and limits each variable to
-the first 100 flattened values. See [Adding new tests](ADDING_TESTS.md) for the
+the first 100 flattened values by default. Use `--max-values` to choose a
+different per-variable limit. See [Adding new tests](ADDING_TESTS.md) for the
 full reference-preparation workflow.
 
 For quick numeric text-output checks, use the installed `tester` helper to

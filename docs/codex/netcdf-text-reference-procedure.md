@@ -105,12 +105,14 @@ run. Repeat `-v` in the same order listed by `tests.toml` or the template:
 /home/nicola/src/yambo-tester/.env/bin/tester-dump \
   -i /tmp/yambo-tester-nickel-y5/scratch/<run>/Nickel/DFT/SAVE/ndb.gops \
   -v ng_in_shell -v E_of_shell \
+  --max-values 250 \
   -o /home/nicola/src/yambo-tester/src/yambo_tester/tests/Nickel/DFT/REFERENCE/Y5/o-01_init.ndb.gops
 ```
 
 `tester-dump` writes only numeric values, one per line. It flattens each
 variable in `netCDF4` order and writes at most the first 100 values per
-variable.
+variable by default. Use `--max-values` to choose a different per-variable
+limit.
 
 ## Handle Y5/Y6 Naming Differences
 

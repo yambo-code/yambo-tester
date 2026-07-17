@@ -11,6 +11,16 @@ import numpy as np
 MAX_VALUES_PER_VARIABLE = 100
 
 
+def positive_int(value):
+    try:
+        parsed = int(value)
+    except ValueError as exc:
+        raise argparse.ArgumentTypeError("must be a positive integer") from exc
+    if parsed <= 0:
+        raise argparse.ArgumentTypeError("must be a positive integer")
+    return parsed
+
+
 def parse_variables(values):
     variables = []
     for value in values:
@@ -72,6 +82,12 @@ def build_parser():
         required=True,
         help="Output text reference file to create or overwrite.",
     )
+    parser.add_argument(
+        "--max-values",
+        type=positive_int,
+        default=MAX_VALUES_PER_VARIABLE,
+        help="Maximum number of flattened values to dump per variable. Default: 100.",
+    )
     return parser
 
 
@@ -81,7 +97,7 @@ def main(argv=None):
 
     try:
         variables = parse_variables(args.variables)
-        dump_variables(args.input, variables, args.output)
+        dump_variables(args.input, variables, args.output, limit=args.max_values)
     except (FileNotFoundError, TypeError, ValueError) as exc:
         parser.error(str(exc))
 
