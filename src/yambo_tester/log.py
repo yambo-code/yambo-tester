@@ -16,6 +16,14 @@ def _logger_name_for_path(logfile: Path, prefix: str = TEST_LOGGER_PREFIX) -> st
     return f"{prefix}.{safe_path}"
 
 
+def test_logger_name_for_run_dir(run_dir: Path) -> str:
+    return _logger_name_for_path(Path(run_dir) / "tester.log")
+
+
+def get_test_logger(run_dir: Path) -> logging.Logger:
+    return logging.getLogger(test_logger_name_for_run_dir(run_dir))
+
+
 def _reset_handlers(logger: logging.Logger) -> None:
     for handler in list(logger.handlers):
         logger.removeHandler(handler)

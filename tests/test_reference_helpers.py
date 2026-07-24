@@ -4,7 +4,10 @@ import numpy as np
 import pytest
 
 from yambo_tester.reference_compare import (
+    DEFAULT_MAX_MISMATCH_REPORTS,
     TOO_LARGE,
+    compare_significant_values,
+    format_comparison_diagnostics,
     assert_finite_output,
     is_database_reference,
     is_report_reference,
@@ -23,7 +26,97 @@ from yambo_tester.tests.test_reference import (
     test_reference_ok as reference_test_reference_ok,
     test_runs_ok as reference_test_runs_ok,
 )
+from yambo_tester.log import setup_test_logger
 from yambo_tester.selection import RUNLEVEL_FILTER_RETURNCODE, UNSUPPORTED_VERSION_RETURNCODE
+
+
+def test_comparison_result_reports_mismatch_details():
+    ref = np.array([1.0, 2.0, 3.0])
+    out = np.array([1.0, 3.0, 6.0])
+
+    result = compare_significant_values(out, ref, 0.1, row_indices=[10, 11, 12], column=2)
+
+    assert result.passed is False
+    assert result.total_elements == 3
+    assert result.mismatch_count == 2
+    assert [item.flat_index for item in result.mismatches] == [1, 2]
+    assert [item.row_index for item in result.mismatches] == [11, 12]
+    assert result.mismatches[0].column == 2
+    assert result.mismatches[0].reference == 2.0
+    assert result.mismatches[0].output == 3.0
+    assert result.mismatches[0].abs_diff == 1.0
+    assert result.mismatches[0].rel_diff == 0.5
+
+
+def test_comparison_result_passes_within_tolerance():
+    ref = np.array([10.0, 20.0])
+    out = np.array([10.5, 19.5])
+
+    result = compare_significant_values(out, ref, 0.1)
+
+    assert result.passed is True
+    assert result.mismatch_count == 0
+    assert result.mismatches == ()
+
+
+def test_comparison_result_uses_same_significant_mask_as_assertion():
+    ref = np.array([3.014e-6, 10.0])
+    out = np.array([1.311e-6, 12.0])
+
+    result = compare_significant_values(out, ref, 0.1)
+
+    assert result.passed is False
+    assert [item.flat_index for item in result.mismatches] == [1]
+    with pytest.raises(AssertionError, match="Comparison failed: 1 of 2"):
+        assert_close_significant(out, ref, 0.1, "consistent")
+
+
+def test_comparison_diagnostics_limit_reported_mismatches():
+    ref = np.ones(25)
+    out = np.arange(25, dtype=float) + 10.0
+
+    result = compare_significant_values(out, ref, 0.1, max_reported=3)
+    report = format_comparison_diagnostics("limited", result, 0.1)
+
+    assert result.mismatch_count == 25
+    assert len(result.mismatches) == 3
+    assert "Comparison failed: 25 of 25 values" in report
+    assert "Showing the first 3 mismatches; 22 additional mismatches were omitted." in report
+
+
+def test_comparison_result_handles_scalar_values():
+    result = compare_significant_values(np.array(2.0), np.array(1.0), 0.1)
+
+    assert result.total_elements == 1
+    assert result.mismatch_count == 1
+    assert result.mismatches[0].flat_index == 0
+
+
+def test_comparison_result_preserves_reference_nan_semantics():
+    ref = np.array([np.nan, 1.0])
+    out = np.array([2.0, 1.0])
+
+    result = compare_significant_values(out, ref, 0.1)
+
+    assert result.passed is True
+    assert result.mismatch_count == 0
+
+
+def test_comparison_result_reports_infinity_mismatch_like_allclose():
+    ref = np.array([1.0])
+    out = np.array([np.inf])
+
+    result = compare_significant_values(out, ref, 0.1)
+
+    assert result.passed is False
+    assert result.mismatches[0].abs_diff == float("inf")
+
+
+def test_default_mismatch_report_limit_is_named_constant():
+    result = compare_significant_values(np.arange(30.0), np.ones(30), 0.1)
+
+    assert result.max_reported == DEFAULT_MAX_MISMATCH_REPORTS
+    assert len(result.mismatches) == DEFAULT_MAX_MISMATCH_REPORTS
 
 
 def test_resolve_reference_path_preserves_stdout_special_case(tmp_path):
@@ -203,6 +296,41 @@ def test_compare_text_output_still_fails_multi_row_difference(tmp_path):
 
     with pytest.raises(AssertionError):
         compare_text_output(out_file, ref_file, "o-multi-row.qp", 0.1, set())
+
+
+def test_workflow_reference_failure_logs_diagnostics_to_tester_log(tmp_path):
+    reference_dir = tmp_path / "REFERENCE"
+    output_dir = tmp_path / "output"
+    reference_dir.mkdir()
+    output_dir.mkdir()
+    (reference_dir / "o-fail.qp").write_text("1 10.0\n2 20.0\n")
+    (output_dir / "o-fail.qp").write_text("1 10.0\n2 30.0\n")
+    logger = setup_test_logger(tmp_path)
+
+    with pytest.raises(AssertionError):
+        reference_test_reference_ok(("o-fail.qp", {
+            "out": "o-fail.qp",
+            "path": "",
+            "variables": [],
+            "skip_columns": set(),
+            "whitelist": False,
+            "exe": "yambo",
+            "stdout": "",
+            "run_dir": str(tmp_path),
+            "dir": str(tmp_path),
+            "tol": 0.1,
+            "odir": "output",
+            "contains": None,
+            "skip": False,
+        }))
+
+    for handler in logger.handlers:
+        handler.flush()
+    log_text = (tmp_path / "tester.log").read_text()
+    assert "Comparison failed: 1 of 2 values differ beyond tolerance." in log_text
+    assert "Index 1:" in log_text
+    assert "reference = 20" in log_text
+    assert "output    = 30" in log_text
 
 
 def test_resolve_output_file_uses_reference_basename_for_explicit_key_without_path(tmp_path):

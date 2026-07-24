@@ -194,6 +194,16 @@ are flattened, and each variable is compared against the corresponding text
 reference slice. The helper uses the same tolerance and significant-value
 comparison rules as the main workflow reference validator.
 
+Failed numerical comparisons report the total number of mismatching elements
+and show bounded element-level details. Element indices are zero-based flat
+indices; text comparisons also report zero-based row indices and the selected
+1-based column, while NetCDF comparisons report the variable name and the
+multidimensional index when the original variable shape is available. By
+default the first 20 mismatches are printed; the total mismatch count is always
+reported. Use `tester --max-mismatches N` to change the CLI detail limit.
+Tolerance is applied only to significant values with NumPy close semantics
+using the configured relative tolerance and an absolute tolerance of `1e-6`.
+
 ## Authors and Acknowledgments
 
 **Nicola Spallanzani** is the main developer and current maintainer of yambo-tester.

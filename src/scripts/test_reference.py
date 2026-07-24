@@ -5,6 +5,7 @@ import argparse
 import sys
 
 from yambo_tester.reference_compare import (
+    DEFAULT_MAX_MISMATCH_REPORTS,
     compare_reference_column_to_netcdf_variables,
     compare_text_columns,
     looks_like_netcdf_output,
@@ -64,6 +65,15 @@ def build_parser():
         dest="tolerance",
         help=argparse.SUPPRESS,
     )
+    parser.add_argument(
+        "--max-mismatches",
+        type=int,
+        default=DEFAULT_MAX_MISMATCH_REPORTS,
+        help=(
+            "Maximum number of element-level mismatches to print. "
+            f"Default: {DEFAULT_MAX_MISMATCH_REPORTS}."
+        ),
+    )
     return parser
 
 
@@ -86,6 +96,7 @@ def main(argv=None):
                 variables,
                 args.reference_column,
                 args.tolerance,
+                max_mismatches=args.max_mismatches,
             )
             return 0
 
@@ -98,6 +109,7 @@ def main(argv=None):
             args.reference_column,
             args.output_column,
             args.tolerance,
+            max_mismatches=args.max_mismatches,
         )
         return 0
     except (AssertionError, FileNotFoundError, IndexError, OSError, TypeError, ValueError) as exc:
