@@ -3,8 +3,6 @@
 
 import pytest
 import tomllib
-import numpy as np
-import netCDF4 as nc
 from glob import glob
 from pathlib import Path
 from yambo_tester.reference_compare import (
@@ -13,6 +11,7 @@ from yambo_tester.reference_compare import (
     SIGNIFICANCE_THRESHOLD,
     assert_close_significant,
     assert_finite_output,
+    compare_reference_column_to_netcdf_variables,
     compare_text_output,
     is_database_reference,
     is_report_reference,
@@ -74,19 +73,7 @@ def normalize_reference(reference):
 
 
 def compare_database(out_file, ref_file, variables, ref, tol):
-    ref_data = np.genfromtxt(str(ref_file))
-    nvars = len(variables)
-    ndata = len(ref_data) // nvars
-
-    ds = nc.Dataset(str(out_file))
-    for i in range(nvars):
-        out_data = ds[variables[i]][:].ravel()
-        assert_finite_output(out_data, str(out_file))
-
-        start, stop = i * ndata, i * ndata + ndata
-        expected = ref_data[start:stop]
-        actual = out_data[:len(expected)]
-        assert_close_significant(actual, expected, tol, ref)
+    compare_reference_column_to_netcdf_variables(ref_file, out_file, variables, 1, tol, label=ref)
 
 
 def resolve_output_file(rundir, odir, ref, path):
