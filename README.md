@@ -175,15 +175,24 @@ the first 100 flattened values by default. Use `--max-values` to choose a
 different per-variable limit. See [Adding new tests](ADDING_TESTS.md) for the
 full reference-preparation workflow.
 
-For quick numeric text-output checks, use the installed `tester` helper to
-compare one selected reference column with one selected output column:
+For quick numeric checks, use the installed `tester` helper. It can compare a
+text reference with either a text output file or selected variables from a
+NetCDF output file:
 
 ```bash
+tester -r reference.txt -o output.txt
 tester -r reference.txt -o output.txt --ref-col 2 --out-col 3
+tester -r reference.txt -o sample.nc -v EIGENVALUES
+tester -r reference.txt -o sample.nc --variables ng_in_shell,E_of_shell
 ```
 
-Column numbers are 1-based. The helper uses the same tolerance and
-significant-value comparison rules as the main workflow reference validator.
+Column numbers are 1-based and default to the first column when omitted. For
+NetCDF outputs, specify one or more variables with `-v`, `--variable`, or
+`--variables`; repeat the option or use comma-separated names for multiple
+variables. Variables are read in the requested order, multidimensional arrays
+are flattened, and each variable is compared against the corresponding text
+reference slice. The helper uses the same tolerance and significant-value
+comparison rules as the main workflow reference validator.
 
 ## Authors and Acknowledgments
 

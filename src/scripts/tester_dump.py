@@ -7,6 +7,8 @@ from pathlib import Path
 import netCDF4 as nc
 import numpy as np
 
+from yambo_tester.reference_compare import parse_variable_list
+
 
 MAX_VALUES_PER_VARIABLE = 100
 
@@ -21,13 +23,9 @@ def positive_int(value):
     return parsed
 
 
+
 def parse_variables(values):
-    variables = []
-    for value in values:
-        variables.extend(part.strip() for part in value.split(",") if part.strip())
-    if not variables:
-        raise ValueError("at least one variable must be provided with -v/--variable")
-    return variables
+    return parse_variable_list(values)
 
 
 def format_numeric_value(value):

@@ -1,7 +1,11 @@
+import warnings
+
 import numpy as np
 import pytest
 
 from yambo_tester.reference_compare import (
+    TOO_LARGE,
+    assert_finite_output,
     is_database_reference,
     is_report_reference,
     is_text_output_reference,
@@ -90,6 +94,60 @@ def test_significant_comparison_fails_large_values():
 
     with pytest.raises(AssertionError):
         assert_close_significant(out, ref, 0.1, "large-diff")
+
+
+def _assert_no_runtime_warning(func, *args, **kwargs):
+    with warnings.catch_warnings(record=True) as recorded:
+        warnings.simplefilter("always")
+        func(*args, **kwargs)
+
+    runtime_warnings = [warning for warning in recorded if issubclass(warning.category, RuntimeWarning)]
+    assert runtime_warnings == []
+
+
+def test_finite_output_accepts_valid_float32_without_runtime_warning():
+    data = np.array([0.0, 1.0, np.finfo(np.float32).max], dtype=np.float32)
+
+    _assert_no_runtime_warning(assert_finite_output, data, "float32")
+
+
+def test_finite_output_accepts_valid_float64_without_runtime_warning():
+    data = np.array([0.0, 1.0, TOO_LARGE * 0.99], dtype=np.float64)
+
+    _assert_no_runtime_warning(assert_finite_output, data, "float64")
+
+
+def test_finite_output_accepts_valid_complex64_without_runtime_warning():
+    value = np.finfo(np.float32).max / 4
+    data = np.array([1.0 + 2.0j, value + value * 1j], dtype=np.complex64)
+
+    _assert_no_runtime_warning(assert_finite_output, data, "complex64")
+
+
+def test_finite_output_accepts_valid_complex128_without_runtime_warning():
+    data = np.array([1.0 + 2.0j, (TOO_LARGE * 0.25) + (TOO_LARGE * 0.25j)], dtype=np.complex128)
+
+    _assert_no_runtime_warning(assert_finite_output, data, "complex128")
+
+
+def test_finite_output_rejects_nan_values():
+    with pytest.raises(AssertionError, match="NaN or infinite number"):
+        assert_finite_output(np.array([1.0, np.nan]), "nan-data")
+
+
+def test_finite_output_rejects_positive_and_negative_infinity():
+    with pytest.raises(AssertionError, match="NaN or infinite number"):
+        assert_finite_output(np.array([np.inf, -np.inf]), "inf-data")
+
+
+def test_finite_output_rejects_complex_nan_and_infinity():
+    with pytest.raises(AssertionError, match="NaN or infinite number"):
+        assert_finite_output(np.array([1.0 + np.nan * 1j, np.inf + 1j]), "complex-invalid")
+
+
+def test_finite_output_rejects_excessive_finite_values():
+    with pytest.raises(AssertionError, match="too large number"):
+        assert_finite_output(np.array([TOO_LARGE * 2], dtype=np.float64), "large-data")
 
 
 def test_text_output_loader_preserves_one_row_multiple_columns(tmp_path):
