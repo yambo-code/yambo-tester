@@ -1,6 +1,7 @@
 # Copyright (c) 2026 Nicola Spallanzani
 # Licensed under the MIT License. See LICENSE file for details.
 
+from dataclasses import dataclass
 from pathlib import Path
 
 import netCDF4 as nc
@@ -12,6 +13,50 @@ TOO_LARGE = 10e99
 SIGNIFICANCE_THRESHOLD = 1e-3
 STDOUT_REFERENCE = "STDOUT"
 NETCDF_MAGIC_HEADERS = (b"CDF", b"\x89HDF\r\n\x1a\n")
+DEFAULT_MAX_MISMATCH_REPORTS = 20
+
+
+@dataclass(frozen=True)
+class MismatchDetail:
+    flat_index: int
+    reference: object
+    output: object
+    abs_diff: float
+    rel_diff: float
+    row_index: int | None = None
+    column: int | None = None
+    variable: str | None = None
+    index: tuple[int, ...] | None = None
+
+
+@dataclass(frozen=True)
+class ComparisonResult:
+    passed: bool
+    total_elements: int
+    mismatch_count: int
+    mismatches: tuple[MismatchDetail, ...]
+    max_reported: int
+
+    @property
+    def omitted_count(self):
+        return max(self.mismatch_count - len(self.mismatches), 0)
+
+
+@dataclass(frozen=True)
+class NetcdfVariableData:
+    name: str
+    data: np.ndarray
+    original_shape: tuple[int, ...]
+
+    @property
+    def shape(self):
+        return self.data.shape
+
+    def __array__(self, dtype=None):
+        return np.asarray(self.data, dtype=dtype)
+
+    def __getitem__(self, item):
+        return self.data[item]
 
 
 def reference_basename(reference_key):
@@ -112,9 +157,123 @@ def assert_finite_output(data, label):
         raise AssertionError(f"{label}: too large number!")
 
 
-def assert_close_significant(out_data, ref_data, tol, label):
-    mask = significant_mask(ref_data, out_data)
-    assert np.allclose(out_data[mask], ref_data[mask], rtol=tol, atol=ZERO_DFL), f"{label}: Difference larger than {tol}!"
+def _relative_difference(abs_diff, reference):
+    ref_abs = abs(reference)
+    if ref_abs == 0:
+        return 0.0 if abs_diff == 0 else float("inf")
+    return float(abs_diff / ref_abs)
+
+
+def compare_significant_values(
+    out_data,
+    ref_data,
+    tol,
+    *,
+    max_reported=DEFAULT_MAX_MISMATCH_REPORTS,
+    row_indices=None,
+    column=None,
+    variable=None,
+    original_shape=None,
+):
+    if max_reported < 0:
+        raise ValueError(f"maximum mismatch report count must be non-negative: {max_reported}")
+
+    ref_values = np.asarray(ref_data)
+    out_values = np.asarray(out_data)
+    if ref_values.shape != out_values.shape:
+        raise ValueError(
+            "comparison arrays have different shapes: "
+            f"reference has {ref_values.shape}, output has {out_values.shape}"
+        )
+
+    ref_flat = ref_values.ravel()
+    out_flat = out_values.ravel()
+    mask = significant_mask(ref_flat, out_flat)
+    close = np.isclose(out_flat[mask], ref_flat[mask], rtol=tol, atol=ZERO_DFL)
+    masked_indices = np.flatnonzero(mask)
+    mismatch_indices = masked_indices[~close]
+    mismatch_count = int(mismatch_indices.shape[0])
+
+    details = []
+    rows = None if row_indices is None else np.asarray(row_indices).ravel()
+    for flat_index in mismatch_indices[:max_reported]:
+        ref_value = ref_flat[flat_index].item()
+        out_value = out_flat[flat_index].item()
+        abs_diff = float(abs(out_value - ref_value))
+        row_index = None if rows is None else int(rows[flat_index])
+        multi_index = None
+        if original_shape is not None:
+            multi_index = tuple(int(i) for i in np.unravel_index(int(flat_index), original_shape))
+        details.append(MismatchDetail(
+            flat_index=int(flat_index),
+            row_index=row_index,
+            column=column,
+            variable=variable,
+            index=multi_index,
+            reference=ref_value,
+            output=out_value,
+            abs_diff=abs_diff,
+            rel_diff=_relative_difference(abs_diff, ref_value),
+        ))
+
+    return ComparisonResult(
+        passed=mismatch_count == 0,
+        total_elements=int(ref_flat.shape[0]),
+        mismatch_count=mismatch_count,
+        mismatches=tuple(details),
+        max_reported=max_reported,
+    )
+
+
+def _format_value(value):
+    if isinstance(value, (float, np.floating)):
+        return f"{float(value):.12g}"
+    return str(value)
+
+
+def _format_diff(value):
+    if np.isinf(value):
+        return "inf"
+    if np.isnan(value):
+        return "nan"
+    return f"{value:.6g}"
+
+
+def format_comparison_diagnostics(label, result, tolerance):
+    lines = [
+        f"{label}: Difference larger than {tolerance}!",
+        f"Comparison failed: {result.mismatch_count} of {result.total_elements} values differ beyond tolerance.",
+    ]
+    if result.omitted_count:
+        lines.append(
+            f"Showing the first {len(result.mismatches)} mismatches; "
+            f"{result.omitted_count} additional mismatches were omitted."
+        )
+
+    for mismatch in result.mismatches:
+        lines.append("")
+        lines.append(f"Index {mismatch.flat_index}:")
+        lines.append(f"  flat_index = {mismatch.flat_index}")
+        if mismatch.row_index is not None:
+            lines.append(f"  row_index  = {mismatch.row_index}")
+        if mismatch.column is not None:
+            lines.append(f"  column     = {mismatch.column}")
+        if mismatch.variable is not None:
+            lines.append(f"  variable   = {mismatch.variable}")
+        if mismatch.index is not None:
+            lines.append(f"  index      = {mismatch.index}")
+        lines.append(f"  reference = {_format_value(mismatch.reference)}")
+        lines.append(f"  output    = {_format_value(mismatch.output)}")
+        lines.append(f"  abs_diff  = {_format_diff(mismatch.abs_diff)}")
+        lines.append(f"  rel_diff  = {_format_diff(mismatch.rel_diff)}")
+
+    return "\n".join(lines)
+
+
+def assert_close_significant(out_data, ref_data, tol, label, **kwargs):
+    result = compare_significant_values(out_data, ref_data, tol, **kwargs)
+    if not result.passed:
+        raise AssertionError(format_comparison_diagnostics(label, result, tol))
 
 
 def _count_data_rows(path):
@@ -135,15 +294,29 @@ def load_text_output_data(path):
     return data
 
 
-def compare_text_output(out_file, ref_file, ref, tol, skip_columns):
+def compare_text_output(out_file, ref_file, ref, tol, skip_columns, max_mismatches=DEFAULT_MAX_MISMATCH_REPORTS):
     ref_data = load_text_output_data(ref_file)
     out_data = load_text_output_data(out_file)
+
+    if ref_data.shape != out_data.shape:
+        raise ValueError(
+            "text files have different shapes: "
+            f"reference has {ref_data.shape}, output has {out_data.shape}"
+        )
 
     for col in range(1, ref_data.shape[1]):
         if col in skip_columns:
             continue
         assert_finite_output(out_data[:, col], str(out_file))
-        assert_close_significant(out_data[:, col], ref_data[:, col], tol, ref)
+        assert_close_significant(
+            out_data[:, col],
+            ref_data[:, col],
+            tol,
+            ref,
+            max_reported=max_mismatches,
+            row_indices=np.arange(ref_data.shape[0]),
+            column=col + 1,
+        )
 
 
 def _validate_column_number(column, label):
@@ -159,7 +332,14 @@ def selected_column(data, column, label):
     return data[:, index]
 
 
-def compare_text_columns(reference_file, output_file, reference_column, output_column, tolerance):
+def compare_text_columns(
+    reference_file,
+    output_file,
+    reference_column,
+    output_column,
+    tolerance,
+    max_mismatches=DEFAULT_MAX_MISMATCH_REPORTS,
+):
     reference_path = Path(reference_file)
     output_path = Path(output_file)
 
@@ -180,7 +360,15 @@ def compare_text_columns(reference_file, output_file, reference_column, output_c
         )
 
     assert_finite_output(out_column, str(output_path))
-    assert_close_significant(out_column, ref_column, tolerance, str(output_path))
+    assert_close_significant(
+        out_column,
+        ref_column,
+        tolerance,
+        str(output_path),
+        max_reported=max_mismatches,
+        row_indices=np.arange(ref_column.shape[0]),
+        column=output_column,
+    )
 
 
 def _open_netcdf_dataset(path):
@@ -206,10 +394,10 @@ def load_netcdf_variable_data(output_file, variables):
 
         variable_data = []
         for variable in variables:
-            data = np.asarray(dataset.variables[variable][:]).ravel()
-            if not np.issubdtype(data.dtype, np.number):
+            raw_data = np.asarray(dataset.variables[variable][:])
+            if not np.issubdtype(raw_data.dtype, np.number):
                 raise TypeError(f"variable is not numeric: {variable}")
-            variable_data.append(data)
+            variable_data.append(NetcdfVariableData(variable, raw_data.ravel(), raw_data.shape))
         return variable_data
 
 
@@ -220,6 +408,7 @@ def compare_reference_column_to_netcdf_variables(
     reference_column,
     tolerance,
     label=None,
+    max_mismatches=DEFAULT_MAX_MISMATCH_REPORTS,
 ):
     reference_path = Path(reference_file)
     output_path = Path(output_file)
@@ -239,16 +428,25 @@ def compare_reference_column_to_netcdf_variables(
         )
 
     rows_per_variable = ref_column.shape[0] // nvars
-    for index, data in enumerate(variable_data):
+    for index, variable_info in enumerate(variable_data):
         start = index * rows_per_variable
         stop = start + rows_per_variable
         expected = ref_column[start:stop]
-        if data.shape[0] < expected.shape[0]:
+        if variable_info.shape[0] < expected.shape[0]:
             raise ValueError(
-                f"NetCDF variable {variables[index]} has {data.shape[0]} value(s), "
+                f"NetCDF variable {variables[index]} has {variable_info.shape[0]} value(s), "
                 f"reference expects {expected.shape[0]}"
             )
-        actual = data[:expected.shape[0]]
+        actual = variable_info[:expected.shape[0]]
         comparison_label = label or str(output_path)
         assert_finite_output(actual, str(output_path))
-        assert_close_significant(actual, expected, tolerance, comparison_label)
+        assert_close_significant(
+            actual,
+            expected,
+            tolerance,
+            comparison_label,
+            max_reported=max_mismatches,
+            row_indices=np.arange(start, stop),
+            variable=variable_info.name,
+            original_shape=variable_info.original_shape,
+        )

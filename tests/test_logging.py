@@ -1,7 +1,7 @@
 import logging
 
 from yambo_tester import cli
-from yambo_tester.log import setup_logging, setup_test_logger
+from yambo_tester.log import get_test_logger, setup_logging, setup_test_logger
 
 
 def test_main_and_local_loggers_stay_isolated(tmp_path):
@@ -56,6 +56,19 @@ def test_reconfiguring_same_test_logger_does_not_duplicate_lines(tmp_path):
     assert "first run" not in text
     assert logger.propagate is False
     assert len(logger.handlers) == 1
+
+
+def test_get_test_logger_returns_existing_per_run_logger(tmp_path):
+    run_dir = tmp_path / "run"
+    configured = setup_test_logger(run_dir)
+    fetched = get_test_logger(run_dir)
+
+    fetched.error("diagnostic details")
+    for handler in configured.handlers:
+        handler.flush()
+
+    assert fetched is configured
+    assert "diagnostic details" in (run_dir / "tester.log").read_text()
 
 
 def test_cli_logs_setup_and_test_lifecycle(monkeypatch, tmp_path):

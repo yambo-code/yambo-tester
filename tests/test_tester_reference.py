@@ -51,6 +51,92 @@ def test_compare_selected_columns_fails_beyond_tolerance(tmp_path):
         compare_text_columns(reference, output, 2, 2, 0.1)
 
 
+def test_compare_selected_columns_reports_detailed_mismatch(tmp_path):
+    reference = tmp_path / "reference.txt"
+    output = tmp_path / "output.txt"
+    reference.write_text("1 10.0\n2 20.0\n")
+    output.write_text("1 10.0\n2 30.0\n")
+
+    with pytest.raises(AssertionError) as excinfo:
+        compare_text_columns(reference, output, 2, 2, 0.1)
+
+    message = str(excinfo.value)
+    assert "Comparison failed: 1 of 2 values differ beyond tolerance." in message
+    assert "Index 1:" in message
+    assert "row_index  = 1" in message
+    assert "column     = 2" in message
+    assert "reference = 20" in message
+    assert "output    = 30" in message
+    assert "abs_diff  = 10" in message
+    assert "rel_diff  = 0.5" in message
+
+
+def test_cli_main_reports_detailed_difference_without_usage(capsys, tmp_path):
+    reference = tmp_path / "reference.txt"
+    output = tmp_path / "output.txt"
+    reference.write_text("1 10.0\n")
+    output.write_text("1 12.0\n")
+
+    exit_code = main(["-r", str(reference), "-o", str(output), "--ref-col", "2", "--out-col", "2"])
+
+    captured = capsys.readouterr()
+    assert exit_code == 1
+    assert captured.out == ""
+    assert "Comparison failed: 1 of 1 values differ beyond tolerance." in captured.err
+    assert "flat_index = 0" in captured.err
+    assert "reference = 10" in captured.err
+    assert "output    = 12" in captured.err
+    assert "usage:" not in captured.err
+
+
+def test_cli_max_mismatches_limits_reported_details(capsys, tmp_path):
+    reference = tmp_path / "reference.txt"
+    output = tmp_path / "output.txt"
+    _write_text(reference, [1.0, 1.0, 1.0, 1.0])
+    _write_text(output, [2.0, 3.0, 4.0, 5.0])
+
+    exit_code = main(["-r", str(reference), "-o", str(output), "--max-mismatches", "2"])
+
+    captured = capsys.readouterr()
+    assert exit_code == 1
+    assert "Comparison failed: 4 of 4 values differ beyond tolerance." in captured.err
+    assert "Showing the first 2 mismatches; 2 additional mismatches were omitted." in captured.err
+    assert captured.err.count("Index ") == 2
+
+
+def test_cli_rejects_negative_max_mismatches_without_usage(capsys, tmp_path):
+    reference = tmp_path / "reference.txt"
+    output = tmp_path / "output.txt"
+    _write_text(reference, [1.0])
+    _write_text(output, [2.0])
+
+    exit_code = main(["-r", str(reference), "-o", str(output), "--max-mismatches", "-1"])
+
+    captured = capsys.readouterr()
+    assert exit_code == 1
+    assert "maximum mismatch report count must be non-negative" in captured.err
+    assert "usage:" not in captured.err
+
+
+def test_netcdf_multidimensional_mismatch_reports_variable_and_index(tmp_path):
+    reference = tmp_path / "reference.txt"
+    output = tmp_path / "sample.nc"
+    _write_text(reference, [0, 1, 2, 99, 4, 5, 6, 7, 8, 9, 10, 11])
+    _write_netcdf(output)
+
+    with pytest.raises(AssertionError) as excinfo:
+        compare_reference_column_to_netcdf_variables(reference, output, ["matrix"], 1, 0.1)
+
+    message = str(excinfo.value)
+    assert "Comparison failed: 1 of 12 values differ beyond tolerance." in message
+    assert "flat_index = 3" in message
+    assert "row_index  = 3" in message
+    assert "variable   = matrix" in message
+    assert "index      = (1, 0)" in message
+    assert "reference = 99" in message
+    assert "output    = 3" in message
+
+
 def test_compare_different_reference_and_output_columns(tmp_path):
     reference = tmp_path / "reference.txt"
     output = tmp_path / "output.txt"
@@ -135,21 +221,6 @@ def test_row_count_mismatch_fails_clearly(tmp_path):
         compare_text_columns(reference, output, 1, 1, 0.1)
 
 
-def test_cli_main_reports_difference_without_usage(capsys, tmp_path):
-    reference = tmp_path / "reference.txt"
-    output = tmp_path / "output.txt"
-    reference.write_text("1 10.0\n")
-    output.write_text("1 12.0\n")
-
-    exit_code = main(["-r", str(reference), "-o", str(output), "--ref-col", "2", "--out-col", "2"])
-
-    captured = capsys.readouterr()
-    assert exit_code == 1
-    assert captured.out == ""
-    assert "Difference larger than 0.1" in captured.err
-    assert "usage:" not in captured.err
-
-
 def test_cli_main_accepts_long_column_options(capsys, tmp_path):
     reference = tmp_path / "reference.txt"
     output = tmp_path / "output.txt"
@@ -178,7 +249,9 @@ def test_help_documents_column_numbering():
 
     assert "--reference-column" in help_text
     assert "--output-column" in help_text
+    assert "--max-mismatches" in help_text
     assert "1-based column number" in help_text
+    assert "element-level mismatches" in help_text
 
 
 def test_cli_main_uses_first_columns_by_default_for_text_outputs(capsys, tmp_path):

@@ -39,9 +39,10 @@ The current validator is intentionally simpler than the legacy tool:
 - For database references, it reads selected variables from the generated NetCDF file and compares their flattened values to reference data.
 - For report references, it checks completion and, when a non-empty string is configured, checks that string in the report file.
 - For `STDOUT`, it checks the expected string in captured stdout and the step `l_<exe>` log file when available.
-- It rejects NaN and extremely large values.
+- It rejects output NaN, infinity, and extremely large values before numerical comparison.
 - It masks numerically insignificant near-zero values before relative comparison.
-- It uses the configured global or per-reference `tollerance`/`tolerance` as relative tolerance and `1e-6` as absolute tolerance.
+- It uses the configured global or per-reference `tollerance`/`tolerance` as relative tolerance and `1e-6` as absolute tolerance, with diagnostics generated from the same significant-value mask and NumPy close rule as the final pass/fail decision.
+- Failed numerical comparisons report the total mismatch count and bounded element details. Indices are zero-based flat indices; text comparisons can also report zero-based rows and 1-based columns, and NetCDF comparisons can also report variable names and multidimensional indices. The default detail limit is 20 mismatches.
 
 ## Development Guidance
 

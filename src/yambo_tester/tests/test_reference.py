@@ -21,6 +21,7 @@ from yambo_tester.reference_compare import (
     resolve_reference_path,
     significant_mask,
 )
+from yambo_tester.log import get_test_logger
 from yambo_tester.selection import (
     MISSING_EXECUTABLE_RETURNCODE,
     RUNLEVEL_FILTER_RETURNCODE,
@@ -74,6 +75,12 @@ def normalize_reference(reference):
 
 def compare_database(out_file, ref_file, variables, ref, tol):
     compare_reference_column_to_netcdf_variables(ref_file, out_file, variables, 1, tol, label=ref)
+
+
+def log_reference_failure(run_dir, message):
+    logger = get_test_logger(run_dir)
+    if logger.handlers:
+        logger.error(message)
 
 
 def resolve_output_file(rundir, odir, ref, path):
@@ -254,6 +261,7 @@ def test_reference_ok(ref_item):
             try:
                 compare_text_output(out_file, ref_file, ref, tol, info['skip_columns'])
             except AssertionError as e:
+                log_reference_failure(info['run_dir'], str(e))
                 if info['whitelist']:
                     pytest.xfail(str(e))
                 raise
@@ -263,6 +271,7 @@ def test_reference_ok(ref_item):
             try:
                 compare_database(out_file, ref_file, info['variables'], ref, tol)
             except AssertionError as e:
+                log_reference_failure(info['run_dir'], str(e))
                 if info['whitelist']:
                     pytest.xfail(str(e))
                 raise
