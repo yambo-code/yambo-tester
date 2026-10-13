@@ -1,0 +1,163 @@
+#                                                                     
+# ooooo   oooo ..     ooo        ooo ooooooooo.    .oooo.             
+#  `88.   .8" .88.    `88.       .88 `88"   `Y8b  dP"  `Yb            
+#   `88. .8" .8"88.    888b     d"88  88     888 88      88           
+#    `88.8" .8" `88.   8 Y88. .P  88  88oooo888" 88      88           
+#     `88" .88ooo888.  8  `888"   88  88    `88b 88      88           
+#      88 .8"     `88. 8    Y     88  88    .88P `8b    d8"           
+#     o88o88o      888o8          88 o88bood8P"   `Ybod8P"            
+#                                                                     
+#                                                                     
+#  Version 6.0.0 Revision 23875 Hash (prev commit) 4d36a1a            
+#                    Branch is devel-GW                               
+#                 MPI+SLK+HDF5_MPI_IO Build                           
+#                 http://www.yambo-code.eu                            
+#
+#
+#  Dyson solver                             : exact
+#  Number of states                         :  28
+#  Number of bands                          :   6
+#  Number of k-points                       :   7
+#  [Fock] Kind                              : Self-Energy
+#  [Fock] Approximation                     : Fock
+#  [Fock] Number of states                  :  28
+#  [Fock] Number of frequencies             :  1
+#  [Fock] Total self-energy weight          :   1.00000000   
+#  [Fock] Reciprocal lattice vectors        :  1003
+#  [V_xc] Kind                              : V_xc
+#  [V_xc] Approximation                     : Perdew, Burke & Ernzerhof(X)+Perdew, Burke & Ernzerhof(C)
+#  [V_xc] Number of states                  :  28
+#  [V_xc] Number of frequencies             :  1
+#  [V_xc] Total self-energy weight          :  -1.00000000   
+#  [V_xc] Reciprocal lattice vectors        :  1003
+#  [CoHSeX] Kind                            : Self-Energy
+#  [CoHSeX] Approximation                   : CoHSeX
+#  [CoHSeX] Number of states                :  28
+#  [CoHSeX] Number of frequencies           :  1
+#  [CoHSeX] Total self-energy weight        :   1.00000000   
+#  [CoHSeX] Reciprocal lattice vectors      :  109
+#  [CoHSeX] G[W] bands range                :   1   6
+#  [CoHSeX] Empty bands in COH              : no
+#  [CoHSeX] [Xs] Bands range                :    1   40
+#  [CoHSeX] [Xs] Time-ordering              : T-ordered
+#  [CoHSeX] [Xs] Electron-Field interact    : r.E
+#  [CoHSeX] [Xs] [r,Vnl] included           : no
+#  [CoHSeX] [Xs] Response function size     :  109
+#  [CoHSeX] [Xs] Dyson equation Kernel      : HARTREE
+#  [CoHSeX] [Xs] Reduction fraction         :   100.000000    [%]
+#  [CoHSeX] [Xs] Number of frequencies      :  1
+#  [CoHSeX] [Xs] Frequencies range          :   0.00000000      0.00000000    [eV]
+#  [CoHSeX] [Xs] Damping range              :  0.100000005E-2  0.100000005E-2 [eV]
+#                                                                                                                                                                                                                                                                                                           
+#  QP @ state[ 1 ] K range                  :   1   7
+#  QP @ state[ 1 ] b range                  :   3   6
+#
+#
+#    K-point            Band               Eo [eV]            E [eV]             E-Eo [eV]          Fock|Eo [eV]       V_xc|Eo [eV]       CoHSeX|Eo [eV]
+#
+        1                  3                 -1.404829          -4.571585          -3.166757          -22.54210          -18.22732           1.148021
+        1                   4                -1.404827          -4.688242          -3.283415          -22.54181          -18.22698           1.031421
+        1                   5                 4.653343           5.858913           1.205570          -1.288913          -4.008994          -1.514511
+        1                   6                 5.664001           6.562590           0.898590          -0.658463          -2.397827          -0.840774
+        2                  3                 -3.378315          -7.106650          -3.728335          -22.43079          -17.39909           1.303366
+        2                   4                -2.297321          -5.645447          -3.348126          -22.41539          -17.82940           1.237865
+        2                   5                 5.546723           6.777320           1.230597          -1.267117          -4.017054          -1.519340
+        2                   6                 6.487167           7.472336           0.985169          -0.853326          -2.759781          -0.921287
+        3                  3                 -3.658245          -7.266789          -3.608544          -22.46510          -17.39807           1.458484
+        3                   4                -2.598153          -6.333074          -3.734921          -18.32985          -14.08122           0.513710
+        3                   5                 7.035465           9.077973           2.042509          -6.468927          -12.02725          -3.515815
+        3                   6                 8.002345           9.418698           1.416353          -1.836000          -5.181736          -1.929383
+         4                 3                 -4.223079          -7.929744          -3.706665          -22.53760          -17.26696           1.563980
+         4                  4                -0.918094          -4.193073          -3.274978          -19.10651          -15.47519           0.356336
+         4                  5                 4.769152           6.179962           1.410810          -5.905546          -10.89324          -3.576889
+         4                  6                 9.618391           11.58468           1.966286          -6.495922          -12.37251          -3.910302
+         5                 3                 -3.988211          -7.664596          -3.676385          -22.17374          -17.02959           1.467764
+         5                  4                -3.199162          -7.090909          -3.891747          -18.30228          -13.77795           0.632580
+         5                  5                 7.274174           8.572903           1.298729          -1.264023          -4.165475          -1.602723
+         5                  6                 7.662480           9.515936           1.853456          -4.246331          -8.470647          -2.370859
+         6                 3                 -5.381110          -9.339753          -3.958643          -22.32764          -16.62498           1.744016
+         6                  4                -1.079976          -4.396944          -3.316967          -18.76247          -15.16072           0.284778
+         6                  5                 5.447548           7.069017           1.621469          -6.431681          -11.70690          -3.653749
+         6                  6                 10.48349           12.10908           1.625588          -2.267687          -6.172699          -2.279424
+         7                 3                 -7.219752          -11.73950          -4.519750          -22.59904          -15.92045           2.158835
+         7                  4                 0.000000          -2.998757          -2.998757          -19.71402          -16.44836           0.266903
+         7                  5                 4.631999           6.037284           1.405286          -5.657377          -10.85109          -3.788427
+         7                  6                 12.36209           13.82750           1.465411          -2.460300          -7.038948          -3.113236
+# 
+# 10/12/2026 at 21:01 yambo @ UNIJ2P4Q7TFK3 [start]
+# 10/12/2026 at 21:17                       [end]
+#  
+# Timing   [Min/Max/Average]: 10s/10s/10s
+#
+# .-Input file  03_cohsex/03_cohsex
+# | #
+# | # ==== Runlevels ===
+# | rim_cut                                     # Coulomb potential
+# | dipoles                                     # Oscillator strenghts (or dipoles)
+# | X_static                                    # Statically Screened Interaction
+# | self_energy                                 # Self-energy and quasi-particle corrections
+# | #
+# | # ==== MPI (V=parallel) ===
+# | HFlXC_CPU= "2.1.1.1"                        # CPUs for each role
+# | HFlXC_ROLEs= "qp.g.q.b"                     # CPUs roles (qp,g,q,b)
+# | DIP_CPU= "2.1.1"                            # CPUs for each role
+# | DIP_ROLEs= "k.c.v"                          # CPUs roles (k,c,v)
+# | EM1S_CPU= "2.1.1.1.1"                       # CPUs for each role
+# | EM1S_ROLEs= "q.g.k.c.v"                     # CPUs roles (q,g,k,c,v)
+# | EM1S_nCPU_LinAlg_INV=-1                     # CPUs for Linear Algebra (if -1 it is automatically set)
+# | GW_CPU= "2.1.1.1"                           # CPUs for each role
+# | GW_ROLEs= "qp.g.q.b"                        # CPUs roles (qp,g,q,b)
+# | #
+# | # ==== Bosons (V=bosons) ===
+# | BoseTemp= 0.000000                   [K]    # Bosonic Temperature
+# | #
+# | # ==== Fields (V=fields) ===
+# | EF_interaction= "r.E"                       # Interaction kind (r.E|p.A)
+# | #
+# | # ==== Coulomb cutoff (V=cutoff) ===
+# | CUTGeo= "slab z"                            # Coulomb Cutoff geometry: box/cylinder/sphere/ws/slab X/Y/Z/XY..
+# | % CUTBox
+# |  0.000000 | 0.000000 | 0.000000 |           # [au] Box sides
+# | %
+# | CUTRadius= 0.000000                         # [au] Sphere/Cylinder radius
+# | CUTCylLen= 0.000000                         # [au] Cylinder length
+# | CUTwsGvec= 0.000000                         # WS cutoff: number of G to be modified
+# | #CUTCol_test                    # Perform a cutoff test in R-space
+# | #
+# | # ==== RIM (V=rim) ===
+# | RandQpts= 1000000                           # Number of random q-points in the BZ
+# | RandGvec= 109                        [RL]   # Coulomb interaction RS components
+# | #
+# | # ==== Dipoles (V=dipoles) ===
+# | % DipBands
+# |    1 |  40 |                                # Bands range for dipoles
+# | %
+# | DipComputed= " R V P [G-space]"             # [default R P V; extra P2 Spin Orb]
+# | #
+# | # ==== Hartree-Fock (V=hf) ===
+# | EXXRLvcs= 1003                       [RL]   # Exchange    RL components
+# | VXCRLvcs= 1003                       [RL]   # XCpotential RL components
+# | #
+# | # ==== Static dielectric matrix (V=X) ===
+# | EM1S_NGsBlk= 109                     [RL]   # Response block size
+# | % EM1S_QpntsR
+# |   1 |  7 |                                  # Transferred momenta
+# | %
+# | % EM1S_BndsRn
+# |    1 |  40 |                                # Polarization function bands
+# | %
+# | % EM1S_LongDr
+# |  1.000000 | 0.000000 | 0.000000 |           # [cc] Electric Field
+# | %
+# | EM1S_CGrdSp= 100.0000                       # [o/o] Poles coarse grid controller
+# | #
+# | # ==== TDDFT ===
+# | TDDFTKernel= "HARTREE"                      # TDDFT Kernel: IP/Hartree/ALDA/LRC/PF/BSfxc
+# | #
+# | # ==== GW (V=gw) ===
+# | % GbndRnge
+# |    1 |  40 |                                # G[W] bands range
+# | %
+# | #
+# | # ==== Self-energy (V=qp) ===
+# | SEApprox= "COHSEX"                          # Self-energy approximation ("HF","COHSEX","PPA")

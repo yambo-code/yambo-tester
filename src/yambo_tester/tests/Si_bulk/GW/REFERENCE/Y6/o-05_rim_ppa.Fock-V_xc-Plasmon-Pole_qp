@@ -1,0 +1,178 @@
+#                                                                     
+#  /$$     /$$ /$$$$$$  /$$      /$$ /$$$$$$$   /$$$$$$               
+# |  $$   /$$//$$__  $$| $$$    /$$$| $$__  $$ /$$__  $$              
+#  \  $$ /$$/| $$  \ $$| $$$$  /$$$$| $$  \ $$| $$  \ $$              
+#   \  $$$$/ | $$$$$$$$| $$ $$/$$ $$| $$$$$$$ | $$  | $$              
+#    \  $$/  | $$__  $$| $$  $$$| $$| $$__  $$| $$  | $$              
+#     | $$   | $$  | $$| $$\  $ | $$| $$  \ $$| $$  | $$              
+#     | $$   | $$  | $$| $$ \/  | $$| $$$$$$$/|  $$$$$$/              
+#     |__/   |__/  |__/|__/     |__/|_______/  \______/               
+#                                                                     
+# Version 6.0.0 Revision 23875 Hash (prev commit) 4d36a1a             
+#                   Branch is devel-GW                                
+#               MPI+SLK+HDF5_MPI_IO Build                             
+#                http://www.yambo-code.eu                             
+#
+#
+#  Dyson solver                                   : n
+#  Number of states                               :  29
+#  Number of bands                                :   6
+#  Number of k-points                             :   8
+#  On mass shell                                  : no
+#  [Fock] Kind                                    : Self-Energy
+#  [Fock] Approximation                           : Fock
+#  [Fock] Number of states                        :  29
+#  [Fock] Number of frequencies                   :  1
+#  [Fock] Total self-energy weight                :   1.00000000   
+#  [Fock] Reciprocal lattice vectors              :  307
+#  [V_xc] Kind                                    : V_xc
+#  [V_xc] Approximation                           : Perdew, Burke & Ernzerhof(X)+Perdew, Burke & Ernzerhof(C)
+#  [V_xc] Number of states                        :  29
+#  [V_xc] Number of frequencies                   :  1
+#  [V_xc] Total self-energy weight                :  -1.00000000   
+#  [V_xc] Reciprocal lattice vectors              :   3383
+#  [Plasmon-Pole] Kind                            : Self-Energy
+#  [Plasmon-Pole] Approximation                   : Plasmon-Pole
+#  [Plasmon-Pole] Number of states                :  29
+#  [Plasmon-Pole] Number of frequencies           :  2
+#  [Plasmon-Pole] Total self-energy weig          :   1.00000000   
+#  [Plasmon-Pole] Reciprocal lattice vec          :   51
+#  [Plasmon-Pole] G[W] bands range                :   1  10
+#  [Plasmon-Pole] Energy step                     :  0.100000001    [eV]
+#  [Plasmon-Pole] Damping                         :  0.100000001    [eV]
+#  [Plasmon-Pole] PPA imaginary energy            :   27.2113895    [eV]
+#  [Plasmon-Pole] [Xs] Bands range                :   1  10
+#  [Plasmon-Pole] [Xs] Time-ordering              : Retarded
+#  [Plasmon-Pole] [Xs] Electron-Field in          : r.E
+#  [Plasmon-Pole] [Xs] [r,Vnl] included           : no
+#  [Plasmon-Pole] [Xs] Response function          :   51
+#  [Plasmon-Pole] [Xs] Dyson equation Ke          : HARTREE
+#  [Plasmon-Pole] [Xs] Reduction fractio          :   100.000000    [%]
+#  [Plasmon-Pole] [Xs] Number of frequen          :  2
+#  [Plasmon-Pole] [Xs] Frequencies range          :   0.00000000      10.0000010    [eV]
+#  [Plasmon-Pole] [Xs] Damping range              :  0.999999940E-1  0.999999940E-1 [eV]
+#                                                                                                                                                                                                                                                                                                           
+#  QP @ state[ 1 ] K range                        :  1  1
+#  QP @ state[ 1 ] b range                        :   2   4
+#  QP @ state[ 2 ] K range                        :   2   8
+#  QP @ state[ 2 ] b range                        :   3   5
+#  QP @ state[ 3 ] K range                        :   4   8
+#  QP @ state[ 3 ] b range                        :   6   6
+#
+#
+#    K-point                 Band                    Eo [eV]                 E [eV]                  E-Eo [eV]               Fock|Eo [eV]            V_xc|Eo [eV]            Plasmon-Pole|Eo [eV]    dSc/dw|Eo               Re(Z)                   Im(Z)                   Im(E) [eV]
+#
+        1                       2                       0.000000                0.667902                0.667902               -12.86110               -11.27121                2.431220               -0.259715                0.793826               -0.001790                0.009746
+        1                       3                       0.000000                0.667925                0.667925               -12.86108               -11.27121                2.431235               -0.259715                0.793826               -0.001790                0.009746
+        1                        4                      0.000000                0.667924                0.667924               -12.86109               -11.27121                2.431243               -0.259717                0.793825               -0.001790                0.009746
+        2                       3                      -0.756453               -0.189739                0.566713               -12.82043               -11.03438                2.506045               -0.270537                0.787064               -0.001851                0.010634
+        2                        4                     -0.756453               -0.190055                0.566397               -12.82041               -11.03438                2.505624               -0.270527                0.787071               -0.001851                0.010633
+        2                        5                      1.939570                3.335802                1.396232               -5.793064               -10.03948               -2.502525               -0.248968                0.800657               -0.001785               -0.015314
+        3                       3                      -1.194291               -0.703940                0.490351               -13.07664               -11.00585                2.697582               -0.278326                0.782269               -0.001819                0.011900
+        3                        4                     -1.194291               -0.703374                0.490917               -13.07665               -11.00585                2.698310               -0.278314                0.782276               -0.001819                0.011902
+        3                        5                      1.454553                2.794550                1.339997               -5.903506               -10.01771               -2.443698               -0.246620                0.802165               -0.001754               -0.014566
+         4                      3                      -1.869181               -1.440179                0.429002               -12.87307               -10.66957                2.755407               -0.286586                0.777246               -0.001907                0.012630
+         4                       4                     -1.869181               -1.440076                0.429105               -12.87305               -10.66957                2.755531               -0.286610                0.777231               -0.001907                0.012629
+         4                       5                      1.131737                2.311879                1.180142               -5.457815               -9.291793               -2.366318               -0.243599                0.804114               -0.001750               -0.013704
+         4                       6                      3.125372                4.529149                1.403777               -4.598106               -9.110992               -2.768844               -0.242368                0.804912               -0.001351               -0.016509
+         5                      3                      -3.487262               -3.208424                0.278838               -12.83387               -10.15093                3.048335               -0.310649                0.762973               -0.002369                0.014945
+         5                       4                     -2.181883               -1.804851                0.377032               -13.07519               -10.66364                2.899107               -0.293226                0.773257               -0.001455                0.013654
+         5                       5                      1.527177                2.732124                1.204947               -5.140774               -9.147183               -2.511196               -0.240864                0.805886               -0.001739               -0.014555
+         5                       6                      4.432319                5.925949                1.493630               -4.800796               -9.540674               -2.869820               -0.252013                0.798713               -0.589302E-3            -0.016536
+         6                      3                      -3.694957               -3.449361                0.245596               -12.76817               -9.990482                3.102271               -0.321099                0.756911                0.005097                0.013970
+         6                       4                     -1.318831               -0.835028                0.483803               -12.91919               -10.90943                2.628464               -0.278898                0.781919               -0.001901                0.011642
+         6                       5                      2.420159                3.800773                1.380614               -5.179427               -9.526009               -2.626109               -0.246135                0.802478               -0.001660               -0.015819
+         6                       6                      4.728638                6.307346                1.578708               -4.908366               -10.05378               -3.125766               -0.279212                0.781717               -0.003358               -0.025879
+         7                      3                      -2.819647               -2.518909                0.300737               -13.27613               -10.53609                3.132208               -0.304237                0.766724               -0.002492                0.014735
+         7                       4                     -2.819647               -2.518901                0.300745               -13.27613               -10.53609                3.132220               -0.304241                0.766721               -0.002492                0.014735
+         7                       5                      0.734618                1.822237                1.087619               -5.112572               -8.896844               -2.437675               -0.238082                0.807697               -0.001708               -0.013500
+         7                       6                      0.734618                1.822712                1.088095               -5.112574               -8.896854               -2.437099               -0.238078                0.807700               -0.001708               -0.013499
+         8                      3                      -3.788287               -3.570652                0.217635               -12.75636               -9.922784                3.127706               -0.351045                0.740150                0.003645                0.014249
+         8                       4                     -3.788287               -3.570829                0.217458               -12.75637               -9.922789                3.127590               -0.351583                0.739854                0.003782                0.014362
+         8                       5                      4.280911                5.714875                1.433964               -4.963904               -9.473114               -2.729174               -0.241365                0.805552                0.003178               -0.007397
+         8                       6                      4.280911                5.714831                1.433920               -4.963906               -9.473118               -2.729309               -0.241308                0.805592                0.002767               -0.008035
+# 
+# 10/12/2026 at 20:01 yambo @ UNIJ2P4Q7TFK3 [start]
+# 10/12/2026 at 20:02                       [end]
+#  
+# Timing   [Min/Max/Average]: 07s/07s/07s
+#
+# .-Input file  05_rim_ppa/05_rim_ppa
+# | #
+# | # ==== Runlevels ===
+# | rim_cut                                     # Coulomb potential
+# | dipoles                                     # Oscillator strenghts (or dipoles)
+# | X_PPA                                       # Plasmon Pole Approximation for the Screened Interaction
+# | self_energy                                 # Self-energy and quasi-particle corrections
+# | #
+# | # ==== MPI (V=parallel) ===
+# | HFlXC_CPU= "2.1.1.1"                        # CPUs for each role
+# | HFlXC_ROLEs= "qp.g.q.b"                     # CPUs roles (qp,g,q,b)
+# | DIP_CPU= "2.1.1"                            # CPUs for each role
+# | DIP_ROLEs= "k.c.v"                          # CPUs roles (k,c,v)
+# | PPA_CPU= "2.1.1.1.1"                        # CPUs for each role
+# | PPA_ROLEs= "q.g.k.c.v"                      # CPUs roles (q,g,k,c,v)
+# | PPA_nCPU_LinAlg_INV=-1                      # CPUs for Linear Algebra (if -1 it is automatically set)
+# | GW_CPU= "2.1.1.1"                           # CPUs for each role
+# | GW_ROLEs= "qp.g.q.b"                        # CPUs roles (qp,g,q,b)
+# | #
+# | # ==== Bosons (V=bosons) ===
+# | BoseTemp= 0.000000                   [K]    # Bosonic Temperature
+# | #
+# | # ==== Fields (V=fields) ===
+# | EF_interaction= "r.E"                       # Interaction kind (r.E|p.A)
+# | #
+# | # ==== Coulomb cutoff (V=cutoff) ===
+# | CUTGeo= "none"                              # Coulomb Cutoff geometry: box/cylinder/sphere/ws/slab X/Y/Z/XY..
+# | % CUTBox
+# |  0.000000 | 0.000000 | 0.000000 |           # [au] Box sides
+# | %
+# | CUTRadius= 0.000000                         # [au] Sphere/Cylinder radius
+# | CUTCylLen= 0.000000                         # [au] Cylinder length
+# | CUTwsGvec= 0.000000                         # WS cutoff: number of G to be modified
+# | #CUTCol_test                    # Perform a cutoff test in R-space
+# | #
+# | # ==== RIM (V=rim) ===
+# | RandQpts=  5000000                          # Number of random q-points in the BZ
+# | RandGvec=  51                        [RL]   # Coulomb interaction RS components
+# | #
+# | # ==== Dipoles (V=dipoles) ===
+# | % DipBands
+# |   1 | 10 |                                  # Bands range for dipoles
+# | %
+# | DipComputed= " R V P [G-space]"             # [default R P V; extra P2 Spin Orb]
+# | #
+# | # ==== Hartree-Fock (V=hf) ===
+# | EXXRLvcs= 307                        [RL]   # Exchange    RL components
+# | VXCRLvcs=  3383                      [RL]   # XCpotential RL components
+# | #
+# | # ==== Plasmon-Pole dielectric matrix (V=X) ===
+# | PPA_GrFnTp= "R"                             # Time-order: T R r Ta Ra. (T)ordered,(R)etarded,(r)sonant,(a)nti-resonant
+# | PPA_NGsBlk=  51                      [RL]   # Response block size
+# | % PPA_QpntsR
+# |   1 |  8 |                                  # Transferred momenta
+# | %
+# | % PPA_BndsRn
+# |   1 | 10 |                                  # Polarization function bands
+# | %
+# | % PPA_LongDr
+# |  1.000000 | 0.000000 | 0.000000 |           # [cc] Electric Field
+# | %
+# | PPA_CGrdSp= 100.0000                        # [o/o] Poles coarse grid controller
+# | #
+# | # ==== Plasmon-Pole ===
+# | PPA_PPAPnt= 27.21139                 [eV]   # PPA imaginary energy
+# | #
+# | # ==== TDDFT ===
+# | TDDFTKernel= "HARTREE"                      # TDDFT Kernel: IP/Hartree/ALDA/LRC/PF/BSfxc
+# | #
+# | # ==== GW (V=gw) ===
+# | % GbndRnge
+# |   1 | 10 |                                  # G[W] bands range
+# | %
+# | #
+# | # ==== Self-energy (V=qp) ===
+# | SEApprox= "PPA"                             # Self-energy approximation ("HF","COHSEX","PPA")
+# | DysSolver= "n"                              # Dyson Equation solver ("n","s","g")
+# | GDamping= 0.100000                   [eV]   # G[W] damping
+# | ExtendOut                       # Print all variables in the output file

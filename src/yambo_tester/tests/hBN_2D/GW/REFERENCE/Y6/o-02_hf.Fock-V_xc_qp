@@ -1,0 +1,106 @@
+#                                                                     
+#  ____  ____     _       ____    ____  ______      ___               
+# |_  _||_  _|   / \     |_   \  /   _||_   _ \   ."   `.             
+#   \ \  / /    / _ \      |   \/   |    | |_) | /  .-.  \            
+#    \ \/ /    / ___ \     | |\  /| |    |  __". | |   | |            
+#    _|  |_  _/ /   \ \_  _| |_\/_| |_  _| |__) |\  `-"  /            
+#   |______||____| |____||_____||_____||_______/  `.___."             
+#                                                                     
+#                                                                     
+#                                                                     
+# Version 6.0.0 Revision 23875 Hash (prev commit) 4d36a1a             
+#                    Branch is devel-GW                               
+#                MPI+SLK+HDF5_MPI_IO Build                            
+#                 http://www.yambo-code.eu                            
+#
+#
+#  Dyson solver                      : exact
+#  Number of states                  :  28
+#  Number of bands                   :   6
+#  Number of k-points                :   7
+#  [Fock] Kind                       : Self-Energy
+#  [Fock] Approximation              : Fock
+#  [Fock] Number of states           :  28
+#  [Fock] Number of frequencies      :  1
+#  [Fock] Total self-energy weight   :   1.00000000   
+#  [Fock] Reciprocal lattice vectors :  1003
+#  [V_xc] Kind                       : V_xc
+#  [V_xc] Approximation              : Perdew, Burke & Ernzerhof(X)+Perdew, Burke & Ernzerhof(C)
+#  [V_xc] Number of states           :  28
+#  [V_xc] Number of frequencies      :  1
+#  [V_xc] Total self-energy weight   :  -1.00000000   
+#  [V_xc] Reciprocal lattice vectors :  1003
+#                                                                                                                                                                                                                                                                                                           
+#  QP @ state[ 1 ] K range           :   1   7
+#  QP @ state[ 1 ] b range           :   3   6
+#
+#
+#    K-point            Band               Eo [eV]            E [eV]             E-Eo [eV]          Fock|Eo [eV]       V_xc|Eo [eV]
+#
+        1                  3                 -1.404829          -5.719606          -4.314778          -22.54210          -18.22732
+        1                   4                -1.404827          -5.719664          -4.314836          -22.54181          -18.22698
+        1                   5                 4.653343           7.373424           2.720081          -1.288913          -4.008994
+        1                   6                 5.664001           7.403364           1.739364          -0.658463          -2.397827
+        2                  3                 -3.378315          -8.410016          -5.031701          -22.43079          -17.39909
+        2                   4                -2.297321          -6.883313          -4.585991          -22.41539          -17.82940
+        2                   5                 5.546723           8.296660           2.749937          -1.267117          -4.017054
+        2                   6                 6.487167           8.393622           1.906455          -0.853326          -2.759781
+        3                  3                 -3.658245          -8.725273          -5.067028          -22.46510          -17.39807
+        3                   4                -2.598153          -6.846785          -4.248631          -18.32985          -14.08122
+        3                   5                 7.035465           12.59379           5.558324          -6.468927          -12.02725
+        3                   6                 8.002345           11.34808           3.345736          -1.836000          -5.181736
+         4                 3                 -4.223079          -9.493724          -5.270645          -22.53760          -17.26696
+         4                  4                -0.918094          -4.549409          -3.631315          -19.10651          -15.47519
+         4                  5                 4.769152           9.756850           4.987698          -5.905546          -10.89324
+         4                  6                 9.618391           15.49498           5.876588          -6.495922          -12.37251
+         5                 3                 -3.988211          -9.132360          -5.144149          -22.17374          -17.02959
+         5                  4                -3.199162          -7.723488          -4.524327          -18.30228          -13.77795
+         5                  5                 7.274174           10.17563           2.901452          -1.264023          -4.165475
+         5                  6                 7.662480           11.88680           4.224317          -4.246331          -8.470647
+         6                 3                 -5.381110          -11.08377          -5.702659          -22.32764          -16.62498
+         6                  4                -1.079976          -4.681721          -3.601746          -18.76247          -15.16072
+         6                  5                 5.447548           10.72277           5.275218          -6.431681          -11.70690
+         6                  6                 10.48349           14.38850           3.905011          -2.267687          -6.172699
+         7                 3                 -7.219752          -13.89834          -6.678584          -22.59904          -15.92045
+         7                  4                 0.000000          -3.265660          -3.265660          -19.71402          -16.44836
+         7                  5                 4.631999           9.825711           5.193713          -5.657377          -10.85109
+         7                  6                 12.36209           16.94073           4.578647          -2.460300          -7.038948
+# 
+# 10/12/2026 at 21:01 yambo @ UNIJ2P4Q7TFK3 [start]
+# 10/12/2026 at 21:01                       [end]
+#  
+# Timing   [Min/Max/Average]: 11s/11s/11s
+#
+# .-Input file  02_hf/02_hf
+# | #
+# | # ==== Runlevels ===
+# | rim_cut                                     # Coulomb potential
+# | self_energy                                 # Self-energy and quasi-particle corrections
+# | #
+# | # ==== MPI (V=parallel) ===
+# | HFlXC_CPU= "2.1.1.1"                        # CPUs for each role
+# | HFlXC_ROLEs= "qp.g.q.b"                     # CPUs roles (qp,g,q,b)
+# | #
+# | # ==== Bosons (V=bosons) ===
+# | BoseTemp= 0.000000                   [K]    # Bosonic Temperature
+# | #
+# | # ==== Coulomb cutoff (V=cutoff) ===
+# | CUTGeo= "slab z"                            # Coulomb Cutoff geometry: box/cylinder/sphere/ws/slab X/Y/Z/XY..
+# | % CUTBox
+# |  0.000000 | 0.000000 | 0.000000 |           # [au] Box sides
+# | %
+# | CUTRadius= 0.000000                         # [au] Sphere/Cylinder radius
+# | CUTCylLen= 0.000000                         # [au] Cylinder length
+# | CUTwsGvec= 0.000000                         # WS cutoff: number of G to be modified
+# | #CUTCol_test                    # Perform a cutoff test in R-space
+# | #
+# | # ==== RIM (V=rim) ===
+# | RandQpts= 1000000                           # Number of random q-points in the BZ
+# | RandGvec= 109                        [RL]   # Coulomb interaction RS components
+# | #
+# | # ==== Hartree-Fock (V=hf) ===
+# | EXXRLvcs= 1003                       [RL]   # Exchange    RL components
+# | VXCRLvcs= 1003                       [RL]   # XCpotential RL components
+# | #
+# | # ==== Self-energy (V=qp) ===
+# | SEApprox= "HF"                              # Self-energy approximation ("HF","COHSEX","PPA")

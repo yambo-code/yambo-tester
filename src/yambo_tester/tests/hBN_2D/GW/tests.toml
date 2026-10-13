@@ -1,0 +1,117 @@
+# Monolayer hBN GW with slab Coulomb cutoff (CUTGeo="slab z") + RIM (RandQpts=1e6,
+# RandGvec=100 RL) on every step, and RIM-W (RandGvecW=9 RL) on top of PPA. ONCV PBE, 40 Ry,
+# 6x6x1 k-grid (7 IBZ points), 40 bands, EXXRLvcs=VXCRLvcs=1000 RL, 100 RL response block,
+# QP k 1-7 bands 3-6.
+#
+# Y6 and Y5 references come from the same inputs. At porting time the Y6 results were checked
+# against the Y5 ones state by state and agree to (max |diff|):
+#   HF E 9e-3 eV, Sx 7e-4 eV | COHSEX E-Eo 1e-2 eV, Sc 1e-3 eV | PPA E-Eo 9e-3 eV, Z 6e-4
+#   RIM-W + PPA E-Eo 1e-2 eV, Sc 9e-4 eV, Z 2e-3
+# The residual has two sources: the RIM Monte Carlo sampling (the two versions draw independent
+# random points) and V_xc, which at VXCRLvcs=1000 RL is unconverged in the vacuum and truncated
+# differently by the two versions (~13 meV, see hBN_2D/DFT, which uses the full set).
+# Y6 draws the same random points whatever the number of MPI tasks, so its tolerances are tight
+# (1e-3). Y5 redistributes the draw over the MPI tasks: its results move by up to ~0.5% between 1, 2
+# and 4 tasks, hence 1e-2 for Y5, and no Y5 ndb.QP reference (the small imaginary parts interleaved
+# in QP_E move by up to ~10%; the .qp table already checks E and Z). Also skipped for Y5: Im(Z) and
+# Width of PPA/RIM-W (move by up to ~50% and ~15%), the spurious Width of the static COHSEX self-
+# energy, and the RIM_W database (a near-zero element changes sign with the task count).
+# RIM_W_E is not referenced: its G=0 wing elements come from an interpolant whose q=0 value is
+# numerical noise (ill-conditioned in Y5 too).
+sha256 = "25fe67e0265ae84676cf250b9dc63aa8b2b07ad282dd863745e88294009d5e0e"
+tarball_url = "https://media.yambo-code.eu/robots/databases/y6"
+
+[yambo_versions]
+supported = ["5", "6"]
+
+[00_p2y]
+step_type = "p2y"
+input_dir = "hBN.save"
+
+[01_init]
+step_type = "init"
+
+# HF + slab cutoff + RIM
+[02_hf]
+exe = "yambo"
+input = "INPUTS/Y6/02_hf"
+output = "02_hf"
+runlevel = "rim_cut"
+dependencies = ["01_init"]
+
+[02_hf.reference]
+"REFERENCE/Y6/o-02_hf.Fock-V_xc_qp" = { path = "o-02_hf.Fock-V_xc_qp", tolerance = 0.001 }
+"REFERENCE/Y6/o-02_hf.ndb.QP_Fock-V_xc" = { path = "02_hf/ndb.QP_Fock-V_xc", variables = ["QP energies"], tolerance = 0.001 }
+"REFERENCE/Y6/r-02_hf_rim_cut_self_energy" = ["Game Over & Game summary"]
+
+[02_hf.versions."5"]
+input = "INPUTS/Y5/02_hf"
+
+[02_hf.versions."5".reference]
+"REFERENCE/Y5/o-02_hf.hf" = { path = "o-02_hf.hf", tolerance = 0.01 }
+"REFERENCE/Y5/r-02_hf_HF_and_locXC_rim_cut" = ["Game Over & Game summary"]
+
+# COHSEX + slab cutoff + RIM
+[03_cohsex]
+exe = "yambo"
+input = "INPUTS/Y6/03_cohsex"
+output = "03_cohsex"
+runlevel = "rim_cut"
+dependencies = ["01_init"]
+
+[03_cohsex.reference]
+"REFERENCE/Y6/o-03_cohsex.Fock-V_xc-CoHSeX_qp" = { path = "o-03_cohsex.Fock-V_xc-CoHSeX_qp", tolerance = 0.001 }
+"REFERENCE/Y6/o-03_cohsex.ndb.static_dielectric_matrix" = { path = "03_cohsex/ndb.static_dielectric_matrix", variables = ["EM1S_X_at_Q_1"], tolerance = 0.001 }
+"REFERENCE/Y6/o-03_cohsex.ndb.QP_Fock-V_xc-CoHSeX" = { path = "03_cohsex/ndb.QP_Fock-V_xc-CoHSeX", variables = ["QP energies"], tolerance = 0.001 }
+"REFERENCE/Y6/r-03_cohsex_rim_cut_dipoles_X_static_self_energy" = ["Game Over & Game summary"]
+
+[03_cohsex.versions."5"]
+input = "INPUTS/Y5/03_cohsex"
+
+[03_cohsex.versions."5".reference]
+"REFERENCE/Y5/o-03_cohsex.qp" = { path = "o-03_cohsex.qp", tolerance = 0.01, skip_columns = [11, 12] }
+"REFERENCE/Y5/o-03_cohsex.ndb.em1s_fragment_1" = { path = "03_cohsex/ndb.em1s_fragment_1", variables = ["X_Q_1"], tolerance = 0.01 }
+"REFERENCE/Y5/r-03_cohsex_HF_and_locXC_gw0_dyson_rim_cut_dipoles_cohsex_em1s_el_el_corr" = ["Game Over & Game summary"]
+
+# PPA (Newton) + slab cutoff + RIM
+[04_ppa]
+exe = "yambo"
+input = "INPUTS/Y6/04_ppa"
+output = "04_ppa"
+runlevel = "rim_cut"
+dependencies = ["01_init"]
+
+[04_ppa.reference]
+"REFERENCE/Y6/o-04_ppa.Fock-V_xc-Plasmon-Pole_qp" = { path = "o-04_ppa.Fock-V_xc-Plasmon-Pole_qp", tolerance = 0.001 }
+"REFERENCE/Y6/o-04_ppa.ndb.plasmon-pole_dielectric_matrix" = { path = "04_ppa/ndb.plasmon-pole_dielectric_matrix", variables = ["PPA_X_at_Q_1"], tolerance = 0.001 }
+"REFERENCE/Y6/o-04_ppa.ndb.QP_Fock-V_xc-Plasmon-Pole" = { path = "04_ppa/ndb.QP_Fock-V_xc-Plasmon-Pole", variables = ["QP energies", "Ren Factors"], tolerance = 0.001 }
+"REFERENCE/Y6/r-04_ppa_rim_cut_dipoles_X_PPA_self_energy" = ["Game Over & Game summary"]
+
+[04_ppa.versions."5"]
+input = "INPUTS/Y5/04_ppa"
+
+[04_ppa.versions."5".reference]
+"REFERENCE/Y5/o-04_ppa.qp" = { path = "o-04_ppa.qp", tolerance = 0.01, skip_columns = [12, 13, 14] }
+"REFERENCE/Y5/o-04_ppa.ndb.pp_fragment_1" = { path = "04_ppa/ndb.pp_fragment_1", variables = ["X_Q_1"], tolerance = 0.01 }
+"REFERENCE/Y5/r-04_ppa_HF_and_locXC_gw0_dyson_rim_cut_em1d_ppa_el_el_corr" = ["Game Over & Game summary"]
+
+# RIM-W + PPA + slab cutoff + RIM
+[05_rimw]
+exe = "yambo"
+input = "INPUTS/Y6/05_rimw"
+output = "05_rimw"
+runlevel = "rim_w"
+dependencies = ["01_init"]
+
+[05_rimw.reference]
+"REFERENCE/Y6/o-05_rimw.Fock-V_xc-Plasmon-Pole_qp" = { path = "o-05_rimw.Fock-V_xc-Plasmon-Pole_qp", tolerance = 0.001 }
+"REFERENCE/Y6/o-05_rimw.ndb.RIM_W" = { path = "05_rimw/ndb.RIM_W", variables = ["RIM_W"], tolerance = 0.001 }
+"REFERENCE/Y6/o-05_rimw.ndb.QP_Fock-V_xc-Plasmon-Pole" = { path = "05_rimw/ndb.QP_Fock-V_xc-Plasmon-Pole", variables = ["QP energies", "Ren Factors"], tolerance = 0.001 }
+"REFERENCE/Y6/r-05_rimw_rim_cut_rim_w_dipoles_X_PPA_self_energy" = ["Game Over & Game summary"]
+
+[05_rimw.versions."5"]
+input = "INPUTS/Y5/05_rimw"
+
+[05_rimw.versions."5".reference]
+"REFERENCE/Y5/o-05_rimw.qp" = { path = "o-05_rimw.qp", tolerance = 0.01, skip_columns = [12, 13, 14] }
+"REFERENCE/Y5/r-05_rimw_HF_and_locXC_gw0_dyson_rim_cut_rim_w_em1d_ppa_el_el_corr" = ["Game Over & Game summary"]

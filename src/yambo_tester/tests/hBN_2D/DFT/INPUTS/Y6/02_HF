@@ -1,0 +1,8 @@
+# Monolayer hBN, plain Hartree-Fock (no Coulomb cutoff: the cutoff/RIM variants live in hBN_2D/GW)
+self_energy                                 # Self-energy and quasi-particle corrections
+EXXRLvcs= 1000 RL                           # Exchange    RL components
+VXCRLvcs= 19039 RL                          # XCpotential RL components (all: Vxc in the vacuum is not converged below)
+SEApprox= "HF"                              # Self-energy approximation ("HF","COHSEX","PPA")
+%QP_krange                                  # Generalized Kpoint/Band indices
+1|7|1|8|
+%
