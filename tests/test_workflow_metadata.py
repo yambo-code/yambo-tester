@@ -37,7 +37,9 @@ def test_imported_workflows_declare_version_support_and_tarball_url():
     for path in workflow_files():
         config = load_workflow_file(path)
 
-        if path.parent.name == "DFT":
+        # DFT workflows and workflows written for Yambo 6 (e.g. Si_bulk/GW, hBN_2D/GW) run on both
+        # majors from the Yambo 6 repository; legacy imported workflows are Yambo 5 only.
+        if path.parent.name == "DFT" or config["tarball_url"] == DFT_URL:
             assert config["yambo_versions"]["supported"] == ["5", "6"], path
             assert config["tarball_url"] == DFT_URL, path
         else:

@@ -1,0 +1,20 @@
+# Monolayer hBN (15 A vacuum), ONCV PBE, 40 Ry, 6x6x1 k-grid (7 IBZ points), 40 bands: the same
+# QE run used by hBN_2D/GW (scf.in/nscf.in here). Conversion, setup and plain Hartree-Fock.
+# At porting time Y6 agreed with Y5 to 1e-5 eV on Fock and 1.2e-3 eV on V_xc. VXCRLvcs is the full
+# set on purpose: with the GGA in the vacuum, V_xc truncated at 1000 RL is unconverged and the two
+# versions truncate it differently (13 meV apart there; 0.7 eV apart at 3461 RL).
+sha256 = "f10d16adff1903e504e3fa5e64fb16bc133ac195fad159d8137db5993bae3695"
+tarball_url = "https://media.yambo-code.eu/robots/databases/y6"
+
+[yambo_versions]
+supported = ["5", "6"]
+
+[00_p2y]
+step_type = "p2y"
+input_dir = "hBN.save"
+
+[01_init]
+step_type = "init"
+
+[02_HF]
+step_type = "HF"
