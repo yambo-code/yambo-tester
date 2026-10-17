@@ -1,0 +1,108 @@
+#                                                                     
+#  __  __   ________   ___ __ __    _______   ______                  
+# /_/\/_/\ /_______/\ /__//_//_/\ /_______/\ /_____/\                 
+# \ \ \ \ \\::: _  \ \\::\| \| \ \\::: _  \ \\:::_ \ \                
+#  \:\_\ \ \\::(_)  \ \\:.      \ \\::(_)  \/_\:\ \ \ \               
+#   \::::_\/ \:: __  \ \\:.\-/\  \ \\::  _  \ \\:\ \ \ \              
+#     \::\ \  \:.\ \  \ \\. \  \  \ \\::(_)  \ \\:\_\ \ \             
+#      \__\/   \__\/\__\/ \__\/ \__\/ \_______\/ \_____\/             
+#                                                                     
+#                                                                     
+# Version 5.4.0 Revision 24143 Hash (prev commit) 77ed66f02           
+#                        Branch is                                    
+#                MPI+SLK+HDF5_MPI_IO Build                            
+#                http://www.yambo-code.eu                             
+#
+#
+# GW solver                                       : Newton
+# GW approximation                                : PPA
+# PPA imaginary Energy                            :   27.2113800    [ev]
+# RIM G`s                                         :   57
+# RIM random pts                                  :  1000000
+# dS/dw steps                                     :  2
+# dS/dw step                                      :  0.100000001    [ev]
+# X G`s                                           :   57 [used]
+# X G`s                                           :   57 [disk]
+# X bands                                         :   1   8
+# X poles                                         :   100.000000    [o/o]
+# X e/h E range                                   :  -1.00000000     -1.00000000    [ev]
+# X Hxc Kernel                                    : HARTREE
+# X BZ energy Double Grid                         : no
+# X Optical Averaged directions                   : none
+# Sc/G bands                                      :   1   8
+# Sc/G damping                                    :  0.100000001    [ev]
+# Sc bands terminator                             : no
+# Sx RL components                                :   6031
+#                                                 
+# QP @ state[ 1 ] K range                         :  1  1
+# QP @ state[ 1 ] b range                         :   1   5
+# GF energies kind                                : Perdew, Burke & Ernzerhof(X)+Perdew, Burke & Ernzerhof(C)
+# GF WF`s kind                                    : Perdew, Burke & Ernzerhof(X)+Perdew, Burke & Ernzerhof(C)
+# Xs energies kind                                : Perdew, Burke & Ernzerhof(X)+Perdew, Burke & Ernzerhof(C)
+# Xs WF`s kind                                    : Perdew, Burke & Ernzerhof(X)+Perdew, Burke & Ernzerhof(C)
+#
+# Vxc  =Perdew, Burke & Ernzerhof(X)+Perdew, Burke & Ernzerhof(C)
+# Vnlxc=Hartree-Fock
+#
+#    K-point            Band               Eo [eV]            E [eV]             E-Eo [eV]          Vxc [eV]           Vnlxc [eV]         Sc|Eo [eV]         Sc|E [eV]          dSc/dw|Eo [eV]     Re(Z)              Im(Z)              Width [meV]        Width [fs]
+#
+        1                  1                  0.000000          -12.40367          -12.40367          -16.62879          -29.06050           0.012342           0.028033          -0.034425           0.998737          -0.202617E-4        0.371288            1772.78
+        1                  2                  14.78579           16.01252           1.226727          -1.467752          -0.168369          -0.068978          -0.072657          -0.081603           0.997010          -0.257805E-4       -0.329085            2000.12
+        1                  3                  19.00085           21.12018           2.119334          -2.151965           0.038946          -0.063650          -0.071579          -0.101798           0.996273          -0.437678E-4       -0.461419            1426.49
+        1                   4                 19.00085           21.12010           2.119248          -2.151909           0.038868          -0.063607          -0.071530          -0.101727           0.996276          -0.437329E-4       -0.461089            1427.52
+        1                   5                 19.00085           21.11994           2.119090          -2.151727           0.038929          -0.063640          -0.071566          -0.101777           0.996274          -0.437646E-4       -0.461339            1426.74
+# 
+# 10/17/2026 at 11:15 yambo @ UNIJ2P4Q7TFK3 [start]
+# 10/17/2026 at 11:15                       [end]
+#
+# .-Input file  04_ppa/04_ppa
+# | HF_and_locXC                     # [R] Hartree-Fock
+# | gw0                              # [R] GW approximation
+# | dyson                            # [R] Dyson Equation solver
+# | rim_cut                          # [R] Coulomb potential
+# | em1d                             # [R][X] Dynamically Screened Interaction
+# | ppa                              # [R][Xp] Plasmon Pole Approximation for the Screened Interaction
+# | el_el_corr                       # [R] Electron-Electron Correlation
+# | BoseTemp= 0.000000         eV    # Bosonic Temperature
+# | #DegFix                        # Force the code to impose the energy levels to respect their degeneracy
+# | X_and_IO_CPU= "2.1.1"            # [PARALLEL] CPUs for each role
+# | X_and_IO_ROLEs= "c.k.q"          # [PARALLEL] CPUs roles (q,g,k,c,v)
+# | X_and_IO_nCPU_LinAlg_INV= 1      # [PARALLEL] CPUs for Linear Algebra (if -1 it is automatically set)
+# | DIP_CPU= "2.1"                   # [PARALLEL] CPUs for each role
+# | DIP_ROLEs= "c.k"                 # [PARALLEL] CPUs roles (k,c,v)
+# | SX_CPU= "2.1"                    # [PARALLEL] CPUs for each role
+# | SX_ROLEs= "b.q"                  # [PARALLEL] CPUs roles (q,g,qp,b)
+# | SE_CPU= "2.1"                    # [PARALLEL] CPUs for each role
+# | SE_ROLEs= "b.q"                  # [PARALLEL] CPUs roles (q,g,qp,b)
+# | RandQpts= 1000000                # [RIM] Number of random q-points in the BZ
+# | RandGvec=  57              RL    # [RIM] Coulomb interaction RS components
+# | CUTGeo= "box xyz"                # [CUT] Coulomb Cutoff geometry: box/cylinder/sphere/ws/slab X/Y/Z/XY..
+# | % CUTBox
+# |  17.00000 | 17.00000 | 17.00000 |        # [CUT] [au] Box sides
+# | %
+# | CUTRadius= 0.000000              # [CUT] [au] Sphere/Cylinder radius
+# | CUTCylLen= 0.000000              # [CUT] [au] Cylinder length
+# | CUTwsGvec= 0.000000              # [CUT] WS cutoff: number of G to be modified
+# | EXXRLvcs=  6031            RL    # [XX] Exchange    RL components
+# | VXCRLvcs= 12053            RL    # [XC] XCpotential RL components
+# | Chimod= "HARTREE"                # [X] IP/Hartree/ALDA/LRC/PF/BSfxc
+# | % BndsRnXp
+# |   1 |  8 |                           # [Xp] Polarization function bands
+# | %
+# | NGsBlkXp=  57              RL    # [Xp] Response block size
+# | % LongDrXp
+# |  0.577350E-5 | 0.577350E-5 | 0.577350E-5 # [Xp] [cc] Electric Field
+# | %
+# | PPAPntXp= 27.21138         eV    # [Xp] PPA imaginary energy
+# | % GbndRnge
+# |   1 |  8 |                           # [GW] G[W] bands range
+# | %
+# | GTermKind= "none"                # [GW] GW terminator ("none","BG" Bruneval-Gonze,"BRS" Berger-Reining-Sottile)
+# | DysSolver= "n"                   # [GW] Dyson Equation solver ("n","s","g","q")
+# | ExtendOut                      # [GW] Print all variables in the output file
+# | %QPkrange                        # [GW] QP generalized Kpoint/Band indices
+# | 1|1|1|5|
+# | %
+# | %QPerange                        # [GW] QP generalized Kpoint/Energy indices
+# | 1|1| 0.000000|-1.000000|
+# | %

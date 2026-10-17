@@ -1,0 +1,13 @@
+rim_cut
+self_energy
+CUTGeo= "box xyz"
+% CUTBox
+ 17.0 | 17.0 | 17.0 |
+%
+RandQpts= 1000000
+RandGvec= 51 RL
+EXXRLvcs= 6000 RL
+SEApprox= "HF"
+%QP_krange
+1|1|1|5|
+%

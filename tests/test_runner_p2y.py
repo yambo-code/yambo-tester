@@ -270,3 +270,13 @@ def test_download_workflow_tarball_skips_unsupported_version(monkeypatch, tmp_pa
     }
 
     assert download_workflow_tarball({"name": "Al_bulk", "type": "DFT"}, parameters, logging.getLogger("test-unsupported-url")) == (None, None)
+
+
+def test_order_steps_runs_dependencies_first():
+    config = {
+        "00_a2y": {"exe": "a2y", "input": "DB/AlAs_o_DS2_WFK.nc", "dependencies": []},
+        "01_init": {"exe": "yambo", "dependencies": ["00_a2y"]},
+        "02_hf": {"exe": "yambo", "input": "INPUTS/Y6/02_hf", "dependencies": ["01_init"]},
+    }
+
+    assert [name for name, _ in runner.order_steps(config)] == ["00_a2y", "01_init", "02_hf"]

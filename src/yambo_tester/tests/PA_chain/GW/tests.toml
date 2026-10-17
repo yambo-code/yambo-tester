@@ -1,0 +1,130 @@
+# Polyacetylene chain (1D) GW with the settings of the legacy yambo-tests PA_chain workflow: box
+# cutoff in the plane (CUTGeo="box xy", 19 au), EXXRLvcs=5000 RL, 21 RL response block, X bands
+# 1-10, G bands 1-20, QP k 1-4 bands 5-6; the last step uses the Wigner-Seitz cutoff ("ws xy").
+# Y6 and Y5 references come from the same inputs; at porting time Y6 vs Y5 agree to (max |dE|):
+#   HF 6e-4 eV | COHSEX 6e-4 eV | PPA 5e-4 eV | FF 5e-4 eV | PPA+ws 1.7e-3 eV
+# The HF Fock term agrees to 1e-5 eV; the residual is V_xc, evaluated in the vacuum of the large
+# cell where Y5 and Y6 apply different density thresholds (same effect as in hBN_2D).
+
+sha256 = "7f77baa8cd84a90ce0521d8c627cac9ef96facf0fba6a5f2227fe9e60f7c1bbb"
+tarball_url = "https://media.yambo-code.eu/robots/databases/y6"
+
+[yambo_versions]
+supported = ["5", "6"]
+
+[00_p2y]
+step_type = "p2y"
+input_dir = "chain.save"
+
+[01_init]
+exe = "yambo"
+output = "01_init"
+runlevel = "init"
+dependencies = ["00_p2y"]
+
+[01_init.reference]
+"REFERENCE/Y6/r-01_init_setup" = ["Game Over & Game summary"]
+
+[01_init.versions."5".reference]
+"REFERENCE/Y5/r-01_init_setup" = ["Game Over & Game summary"]
+
+[02_hf]
+exe = "yambo"
+input = "INPUTS/Y6/02_hf"
+output = "02_hf"
+runlevel = "rim_cut"
+dependencies = ["01_init"]
+
+[02_hf.reference]
+"REFERENCE/Y6/o-02_hf.Fock-V_xc_qp" = { path = "o-02_hf.Fock-V_xc_qp", tolerance = 0.001 }
+"REFERENCE/Y6/o-02_hf.ndb.QP_Fock-V_xc" = { path = "02_hf/ndb.QP_Fock-V_xc", variables = ["QP energies"], tolerance = 0.001 }
+"REFERENCE/Y6/r-02_hf_rim_cut_self_energy" = ["Game Over & Game summary"]
+
+[02_hf.versions."5"]
+input = "INPUTS/Y5/02_hf"
+
+[02_hf.versions."5".reference]
+"REFERENCE/Y5/o-02_hf.hf" = { path = "o-02_hf.hf", tolerance = 0.001 }
+"REFERENCE/Y5/r-02_hf_REPORT5" = ["Game Over & Game summary"]
+
+[03_cohsex]
+exe = "yambo"
+input = "INPUTS/Y6/03_cohsex"
+output = "03_cohsex"
+runlevel = "rim_cut"
+dependencies = ["01_init"]
+
+[03_cohsex.reference]
+"REFERENCE/Y6/o-03_cohsex.Fock-V_xc-CoHSeX_qp" = { path = "o-03_cohsex.Fock-V_xc-CoHSeX_qp", tolerance = 0.001 }
+"REFERENCE/Y6/o-03_cohsex.ndb.QP_Fock-V_xc-CoHSeX" = { path = "03_cohsex/ndb.QP_Fock-V_xc-CoHSeX", variables = ["QP energies"], tolerance = 0.001 }
+"REFERENCE/Y6/r-03_cohsex_rim_cut_dipoles_X_static_self_energy" = ["Game Over & Game summary"]
+
+[03_cohsex.versions."5"]
+input = "INPUTS/Y5/03_cohsex"
+
+[03_cohsex.versions."5".reference]
+"REFERENCE/Y5/o-03_cohsex.qp" = { path = "o-03_cohsex.qp", tolerance = 0.001 }
+"REFERENCE/Y5/o-03_cohsex.ndb.QP" = { path = "03_cohsex/ndb.QP", variables = ["QP_E"], tolerance = 0.001 }
+"REFERENCE/Y5/r-03_cohsex_REPORT5" = ["Game Over & Game summary"]
+
+[04_ppa]
+exe = "yambo"
+input = "INPUTS/Y6/04_ppa"
+output = "04_ppa"
+runlevel = "rim_cut"
+dependencies = ["01_init"]
+
+[04_ppa.reference]
+"REFERENCE/Y6/o-04_ppa.Fock-V_xc-Plasmon-Pole_qp" = { path = "o-04_ppa.Fock-V_xc-Plasmon-Pole_qp", tolerance = 0.001 }
+"REFERENCE/Y6/o-04_ppa.ndb.QP_Fock-V_xc-Plasmon-Pole" = { path = "04_ppa/ndb.QP_Fock-V_xc-Plasmon-Pole", variables = ["QP energies", "Ren Factors"], tolerance = 0.001 }
+"REFERENCE/Y6/r-04_ppa_rim_cut_dipoles_X_PPA_self_energy" = ["Game Over & Game summary"]
+
+[04_ppa.versions."5"]
+input = "INPUTS/Y5/04_ppa"
+
+[04_ppa.versions."5".reference]
+"REFERENCE/Y5/o-04_ppa.qp" = { path = "o-04_ppa.qp", tolerance = 0.001 }
+"REFERENCE/Y5/o-04_ppa.ndb.QP" = { path = "04_ppa/ndb.QP", variables = ["QP_E", "QP_Z"], tolerance = 0.001 }
+"REFERENCE/Y5/r-04_ppa_REPORT5" = ["Game Over & Game summary"]
+
+# Full frequency: the 600-point Kramers-Kronig sum is reduced in single precision, its
+# near-zero entries (E-Eo ~ 1e-2 eV, dSc/dw) move by ~1e-5 eV between 1, 2 and 4 MPI tasks.
+[05_ff]
+exe = "yambo"
+input = "INPUTS/Y6/05_ff"
+output = "05_ff"
+runlevel = "rim_cut"
+dependencies = ["01_init"]
+
+[05_ff.reference]
+"REFERENCE/Y6/o-05_ff.Fock-V_xc-Real-Axis_qp" = { path = "o-05_ff.Fock-V_xc-Real-Axis_qp", tolerance = 0.005 }
+"REFERENCE/Y6/o-05_ff.ndb.QP_Fock-V_xc-Real-Axis" = { path = "05_ff/ndb.QP_Fock-V_xc-Real-Axis", variables = ["QP energies", "Ren Factors"], tolerance = 0.005 }
+"REFERENCE/Y6/r-05_ff_rim_cut_dipoles_X_dynamic_self_energy" = ["Game Over & Game summary"]
+
+[05_ff.versions."5"]
+input = "INPUTS/Y5/05_ff"
+
+[05_ff.versions."5".reference]
+"REFERENCE/Y5/o-05_ff.qp" = { path = "o-05_ff.qp", tolerance = 0.005 }
+"REFERENCE/Y5/o-05_ff.ndb.QP" = { path = "05_ff/ndb.QP", variables = ["QP_E", "QP_Z"], tolerance = 0.005 }
+"REFERENCE/Y5/r-05_ff_REPORT5" = ["Game Over & Game summary"]
+
+[06_ppa_ws]
+exe = "yambo"
+input = "INPUTS/Y6/06_ppa_ws"
+output = "06_ppa_ws"
+runlevel = "rim_cut"
+dependencies = ["01_init"]
+
+[06_ppa_ws.reference]
+"REFERENCE/Y6/o-06_ppa_ws.Fock-V_xc-Plasmon-Pole_qp" = { path = "o-06_ppa_ws.Fock-V_xc-Plasmon-Pole_qp", tolerance = 0.01 }
+"REFERENCE/Y6/o-06_ppa_ws.ndb.QP_Fock-V_xc-Plasmon-Pole" = { path = "06_ppa_ws/ndb.QP_Fock-V_xc-Plasmon-Pole", variables = ["QP energies", "Ren Factors"], tolerance = 0.01 }
+"REFERENCE/Y6/r-06_ppa_ws_rim_cut_dipoles_X_PPA_self_energy" = ["Game Over & Game summary"]
+
+[06_ppa_ws.versions."5"]
+input = "INPUTS/Y5/06_ppa_ws"
+
+[06_ppa_ws.versions."5".reference]
+"REFERENCE/Y5/o-06_ppa_ws.qp" = { path = "o-06_ppa_ws.qp", tolerance = 0.01 }
+"REFERENCE/Y5/o-06_ppa_ws.ndb.QP" = { path = "06_ppa_ws/ndb.QP", variables = ["QP_E", "QP_Z"], tolerance = 0.01 }
+"REFERENCE/Y5/r-06_ppa_ws_REPORT5" = ["Game Over & Game summary"]

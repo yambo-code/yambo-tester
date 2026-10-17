@@ -1,0 +1,25 @@
+gw0                              # [R] GW approximation
+cohsex                           # [R][Xp] COlumb Hole Screened EXchange
+dyson                            # [R] Dyson Equation solver
+el_el_corr                       # [R] Electron-Electron Correlation
+HF_and_locXC                     # [R] Hartree-Fock
+em1s                             # [R][Xs] Statically Screened Interaction
+dipoles                          # [R] Oscillator strenghts (or dipoles)
+#DegFix                        # Force the code to impose the energy levels to respect their degeneracy
+EXXRLvcs= 300 RL
+VXCRLvcs= 3383 RL
+Chimod= "HARTREE"                # [X] IP/Hartree/ALDA/LRC/PF/BSfxc
+% BndsRnXs
+  1 | 10 |                           # [Xs] Polarization function bands
+%
+NGsBlkXs= 51 RL
+% LongDrXs
+ 1.000000 | 0.000000 | 0.000000 |        # [Xs] [cc] Electric Field
+%
+%QPkrange                        # [GW] QP generalized Kpoint/Band indices
+1|8|3|6|
+%
+ExtendOut
+GDamping= 0.1 eV
+dScStep= 0.1 eV
+ChiLinAlgMod= "INVERSION"

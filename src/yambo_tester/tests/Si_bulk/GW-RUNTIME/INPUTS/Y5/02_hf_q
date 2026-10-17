@@ -1,0 +1,10 @@
+HF_and_locXC                     # [R] Hartree-Fock
+#DegFix                        # Force the code to impose the energy levels to respect their degeneracy
+EXXRLvcs= 300 RL
+VXCRLvcs=  3383            RL    # [XC] XCpotential RL components
+%QPkrange                        # [GW] QP generalized Kpoint/Band indices
+1|8|3|6|
+%
+ExtendOut
+SX_CPU= "4 1 1 1"
+SX_ROLEs= "q g qp b"
