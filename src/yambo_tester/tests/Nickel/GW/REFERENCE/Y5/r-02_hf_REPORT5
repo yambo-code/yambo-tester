@@ -1,0 +1,415 @@
+                                                                          
+                                                                          
+    Y88b    /   e           e    e      888~~\    ,88~-_                  
+     Y88b  /   d8b         d8b  d8b     888   |  d888   \                 
+      Y88b/   /Y88b       d888bdY88b    888 _/  88888    |                
+       Y8Y   /  Y88b     / Y88Y Y888b   888  \  88888    |                
+        Y   /____Y88b   /   YY   Y888b  888   |  Y888   /                 
+       /   /      Y88b /          Y888b 888__/    `88_-~                  
+                                                                          
+                                                                          
+    Version 5.4.0 Revision 24143 Hash (prev commit) 77ed66f02             
+                          Branch is                                       
+                  MPI+SLK+HDF5_MPI_IO Build                               
+                   http://www.yambo-code.eu                               
+ 
+ 10/17/2026 at 11:16 yambo @ UNIJ2P4Q7TFK3
+ ==================================================
+
+ Cores-Threads       : 2(CPU)-1(threads)-1(threads@X)-1(threads@DIP)-1(threads@SE)-1(threads@SX)-1(threads@RT)-1(threads@K)-1(threads@NL)-1(threads@OSCLL)
+ MPI Cores           :  2
+ Threads per core    :  1
+ Threads total       :  2
+ Nodes Computing     :  1
+ Nodes IO            :  1
+
+ Fragmented WFs      : yes
+ CORE databases      : .
+ Additional I/O      : .
+ Communications      : 02_hf
+ Input file          : 02_hf/02_hf
+ Report file         : 02_hf/r-02_hf_HF_and_locXC
+ Verbose log/report  : no
+ Log files           : 02_hf/LOG
+
+ Job   string        : 02_hf
+
+ Precision           : SINGLE
+  
+ [RD./SAVE//ns.db1]--------------------------------------------------------------
+  Bands                                            :  20
+  K-points                                         :  144
+  G-vectors                                        :   8441 [RL space]
+  Components                                       :  1071 [wavefunctions]
+  Symmetries                                       :  16 [spatial+T-reV]
+  Spinor components                                :  2
+  Spin polarizations                               :  1
+  Temperature                                      :  0.025852 [eV]
+  Electrons                                        :  10.00000
+  WF G-vectors                                     :  1517
+  Max atoms/species                                :  1
+  No. of atom species                              :  1
+  Exact exchange fraction in XC                    :  0.000000
+  Exact exchange screening in XC                   :  0.000000
+  Magnetic symmetries                              : yes
+ - S/N 002078 ---------------------------------------------- v.05.04.00 r.24143 -
+
+ [02] CORE Variables Setup
+ =========================
+
+
+  [02.01] Unit cells
+  ==================
+
+  Cell kind             :  FCC
+  Atoms in the cell     :  Ni
+  number of Ni atoms    :  1
+
+  List of atomic masses
+  Mass of Ni    :  58.69000
+
+  List of atomic coordinates    : [cc]
+  Ni1       :  0.000000  0.000000  0.000000  order 1
+
+  Alat factors          :  3.325000  3.325000  3.325000 [a.u.]
+  Direct lattice volume :  73.51991 [a.u.]
+  Direct lattice vectors:  A[ 1 ]  A[ 2 ]  A[ 3 ]
+   A[ 1 ]: -1.000000  0.000000  1.000000  [iru]
+   A[ 2 ]:  0.000000  1.000000  1.000000  [iru]
+   A[ 3 ]: -1.000000  1.000000  0.000000  [iru]
+
+  Recip. lattice volume :  3.373919 [a.u.]
+  Recip. lattice vectors:  B[ 1 ]  B[ 2 ]  B[ 3 ]
+   B[ 1 ]: -0.500000 -0.500000  0.500000  [iku]
+   B[ 2 ]:  0.500000  0.500000  0.500000  [iku]
+   B[ 3 ]: -0.500000  0.500000 -0.500000  [iku]
+   
+
+  [02.02] Symmetries
+  ==================
+
+  Inversion symmetry    : yes
+  Spatial inversion     : yes
+  Inversion index       :   5
+  K-space Time-reversal : yes
+  Magnetic symmetries   : yes
+  Time-reversal derived K-space symmetries:   9  16
+  Group table correct   : yes
+  Symmetries units      :  [cc]
+
+   [S  1]:   1.00000     0.729624E-8 -0.729624E-8  0.729624E-8   1.00000    -0.729624E-8 -0.729624E-8  0.729624E-8   1.00000   
+   [S  2]:  -1.00000    -0.729624E-8 -0.729624E-8 -0.729624E-8  -1.00000    -0.729624E-8  0.729624E-8 -0.729624E-8   1.00000   
+   [S  3]:  0.729624E-8  -1.00000    -0.729624E-8   1.00000    -0.729624E-8 -0.729624E-8  0.729624E-8  0.729624E-8   1.00000   
+   [S  4]: -0.729624E-8   1.00000    -0.729624E-8  -1.00000     0.729624E-8 -0.729624E-8 -0.729624E-8 -0.729624E-8   1.00000   
+   [S  5]:  -1.00000    -0.729624E-8  0.729624E-8 -0.729624E-8  -1.00000     0.729624E-8  0.729624E-8 -0.729624E-8  -1.00000   
+   [S  6]:   1.00000     0.729624E-8  0.729624E-8  0.729624E-8   1.00000     0.729624E-8 -0.729624E-8  0.729624E-8  -1.00000   
+   [S  7]: -0.729624E-8   1.00000     0.729624E-8  -1.00000     0.729624E-8  0.729624E-8 -0.729624E-8 -0.729624E-8  -1.00000   
+   [S  8]:  0.729624E-8  -1.00000     0.729624E-8   1.00000    -0.729624E-8  0.729624E-8  0.729624E-8  0.729624E-8  -1.00000   
+   [S* 9]:   1.00000    -0.729624E-8 -0.729624E-8  0.729624E-8  -1.00000    -0.729624E-8 -0.729624E-8 -0.729624E-8   1.00000   
+   [S*10]:  -1.00000     0.729624E-8 -0.729624E-8 -0.729624E-8   1.00000    -0.729624E-8  0.729624E-8  0.729624E-8   1.00000   
+   [S*11]: -0.729624E-8  -1.00000    -0.729624E-8  -1.00000    -0.729624E-8 -0.729624E-8 -0.729624E-8  0.729624E-8   1.00000   
+   [S*12]:  0.729624E-8   1.00000    -0.729624E-8   1.00000     0.729624E-8 -0.729624E-8  0.729624E-8 -0.729624E-8   1.00000   
+   [S*13]:  -1.00000     0.729624E-8  0.729624E-8 -0.729624E-8   1.00000     0.729624E-8  0.729624E-8  0.729624E-8  -1.00000   
+   [S*14]:   1.00000    -0.729624E-8  0.729624E-8  0.729624E-8  -1.00000     0.729624E-8 -0.729624E-8 -0.729624E-8  -1.00000   
+   [S*15]:  0.729624E-8   1.00000     0.729624E-8   1.00000     0.729624E-8  0.729624E-8  0.729624E-8 -0.729624E-8  -1.00000   
+   [S*16]: -0.729624E-8  -1.00000     0.729624E-8  -1.00000    -0.729624E-8  0.729624E-8 -0.729624E-8  0.729624E-8  -1.00000   
+
+  [02.03] Reciprocal space
+  ========================
+
+  nG shells         :  137
+  nG charge         :   8441
+  nG WFs            :  1517
+  nC WFs            :  1071
+  G-vecs. in first 13 shells:  [ Number ]
+     1    9   15   27   51   59   65   89  113
+   137  169  181  229
+  ...
+  Shell energy in first 13 shells:  [ mHa ]
+    0.00000      1339.08      1785.44      3570.89      4909.97      5356.33      7141.78      8480.86      8927.22   
+    10712.7      12051.8      14283.6      15622.6   
+  ...
+
+  [02.04] K-grid lattice
+  ======================
+
+  Compatible Grid is   : 3D
+  Base K vectors       :  K_min[ 1 ]  K_min[ 2 ]  K_min[ 3 ]
+  K_min[ 1 ] : -0.625000E-1  0.625000E-1 -0.372529E-8 [rlu]
+  K_min[ 2 ] :  0.000000 -0.062500  0.062500 [rlu]
+  K_min[ 3 ] :  0.062500  0.062500  0.000000 [rlu]
+  Grid dimensions      :  16  16  16
+  K lattice UC volume  :  0.001647 [a.u.]
+
+  [02.05] Energies & Occupations
+  ==============================
+
+  [X] === General ===
+  [X] Electronic Temperature                        :  0.258606E-1   300.100    [eV K]
+  [X] Bosonic    Temperature                        :  0.258606E-1   300.100    [eV K]
+  [X] Finite Temperature mode                       : yes
+  [X] El. density                                   :  0.91789E+24 [cm-3]
+  [X] Fermi Level                                   :  13.88776 [eV]
+
+  [X] === Gaps and Widths ===
+  [X] Conduction Band Min                           :  13.88776 [eV]
+  [X] Valence Band Max                              :  13.88776 [eV]
+  [X] Filled Bands                                  :   7
+  [X] Metallic Bands                                :   8  12
+  [X] Empty Bands                                   :  13  20
+   
+  [X] === Metallic Characters ===
+  [X] N of el / N of met el                         :  10.00000   3.05745
+  [X] Average metallic occ.                         :  0.305745
+
+  [WARNING] [X] Metallic system
+   
+
+ [03] Transferred momenta grid and indexing
+ ==========================================
+
+ [RD./SAVE//ndb.kindx]-----------------------------------------------------------
+  Fragmentation                                    : no
+  Polarization last K ( bz)                        :  2048
+  Polarization last K (ibz)                        :  144
+  QP states                                        :    1  144
+  X grid is uniform                                : yes
+  Grids (string)                                   :  X S
+  Grids (int-vector)                               :  1  0  0  1
+ - S/N 002078 ---------------------------------------------- v.05.04.00 r.24143 -
+
+ IBZ Q-points                                      :  205
+ BZ  Q-points                                      :  2048
+
+ K/Q-points units:
+ rlu = crystal or reduced units; cc = cartesian coordinates; iku = interal k-units
+
+ Q [  1]        [rlu]:  0.000000  0.000000  0.000000
+ Q [  2]        [rlu]: -0.062500 -0.062500 -0.125000
+ Q [  3]        [rlu]: -0.62500E-01  0.38262E-10 -0.62500E-01
+ Q [  4]        [rlu]: -0.125000 -0.125000 -0.125000
+ Q [  5]        [rlu]: -0.62500E-01 -0.62500E-01 -0.38262E-10
+ Q [  6]        [rlu]: -0.062500 -0.125000 -0.062500
+ Q [  7]        [rlu]: -0.187500 -0.187500 -0.250000
+ Q [  8]        [rlu]: -0.18750      0.65210E-09 -0.62500E-01
+ Q [  9]        [rlu]: -0.125000 -0.125000 -0.250000
+ Q [ 10]        [rlu]:  0.062500 -0.125000 -0.062500
+ Q [ 11]        [rlu]:  0.86924E-09  0.86924E-09  0.25000    
+ Q [ 12]        [rlu]: -0.312500 -0.312500 -0.375000
+ Q [ 13]        [rlu]: -0.312500     0.130420E-8 -0.625000E-1
+ Q [ 14]        [rlu]: -0.125000 -0.125000 -0.375000
+ Q [ 15]        [rlu]:  0.187500 -0.125000 -0.062500
+ Q [ 16]        [rlu]:  0.524663E-8  0.524663E-8  0.375000   
+ Q [ 17]        [rlu]: -0.437500 -0.437500 -0.500000
+ Q [ 18]        [rlu]: -0.437500     0.524663E-8 -0.625000E-1
+ Q [ 19]        [rlu]: -0.125000 -0.125000 -0.500000
+ Q [ 20]        [rlu]:  0.312500 -0.125000 -0.062500
+ Q [ 21]        [rlu]: -0.173847E-8 -0.173847E-8 -0.500000   
+ Q [ 22]        [rlu]:  0.437500  0.437500  0.375000
+ Q [ 23]        [rlu]:  0.437500    -0.173847E-8 -0.625000E-1
+ Q [ 24]        [rlu]: -0.125000 -0.125000  0.375000
+ Q [ 25]        [rlu]: -0.562500 -0.125000 -0.062500
+ Q [ 26]        [rlu]:  0.312500  0.312500  0.250000
+ Q [ 27]        [rlu]:  0.312500    -0.524663E-8 -0.625000E-1
+ Q [ 28]        [rlu]: -0.125000 -0.125000  0.250000
+ Q [ 29]        [rlu]: -0.437500 -0.125000 -0.062500
+ Q [ 30]        [rlu]:  0.187500  0.187500  0.125000
+ Q [ 31]        [rlu]:  0.18750     -0.86924E-09 -0.62500E-01
+ Q [ 32]        [rlu]: -0.125000 -0.125000  0.125000
+ Q [ 33]        [rlu]: -0.312500 -0.125000 -0.062500
+ Q [ 34]        [rlu]: -0.12500     -0.12500     -0.76524E-10
+ Q [ 35]        [rlu]: -0.187500 -0.125000 -0.062500
+ Q [ 36]        [rlu]:  0.76524E-10  0.12500      0.12500    
+ Q [ 37]        [rlu]: -0.062500 -0.187500 -0.250000
+ Q [ 38]        [rlu]: -0.18750      0.11479E-09 -0.18750    
+ Q [ 39]        [rlu]: -0.125000 -0.250000 -0.250000
+ Q [ 40]        [rlu]: -0.062500  0.062500  0.125000
+ Q [ 41]        [rlu]: -0.250000 -0.062500 -0.187500
+ Q [ 42]        [rlu]: -0.187500 -0.312500 -0.375000
+ Q [ 43]        [rlu]: -0.31250      0.65210E-09 -0.18750    
+ Q [ 44]        [rlu]: -0.125000 -0.250000 -0.375000
+ Q [ 45]        [rlu]:  0.187500 -0.125000  0.062500
+ Q [ 46]        [rlu]: -0.250000  0.062500 -0.187500
+ Q [ 47]        [rlu]:  0.86924E-09  0.12500      0.37500    
+ Q [ 48]        [rlu]: -0.312500 -0.437500 -0.500000
+ Q [ 49]        [rlu]: -0.43750      0.86924E-09 -0.18750    
+ Q [ 50]        [rlu]: -0.125000 -0.250000 -0.500000
+
+ Remaining 155 points informations can be written running with -fatlog
+
+
+ [04] Local Exchange-Correlation + Non-Local Fock
+ ================================================
+
+ [VXC] Plane waves :   8441
+ [EXS] Plane waves :  229
+  
+ QP @ state[ 1 ] K range:   1   4
+ QP @ state[ 1 ] b range:   5  14
+  
+ [WF-HF/Rho loader] Normalization (few states)  min/max  :  0.31657E-10   1.0000    
+
+ [xc] Functional : Slater exchange(X)+Perdew & Zunger(C)
+ [xc] LIBXC used to calculate xc functional
+  PP Number of Atomic Species                      :  1
+  NLCC RL compoments                               :   8441
+ - S/N 002078 ---------------------------------------------- v.05.04.00 r.24143 -
+  PP Number of Atomic Species                      :  1
+  NLCC RL compoments                               :   8441
+ - S/N 002078 ---------------------------------------------- v.05.04.00 r.24143 -
+ [WR./02_hf//ndb.HF_and_locXC]---------------------------------------------------
+  Brillouin Zone Q/K grids (IBZ/BZ)                :   205  2048   144  2048
+  RL vectors                                       :  1591 [WF]
+  Fragmentation                                    : no
+  Electronic Temperature                           :  300.1000 [K]
+  Bosonic    Temperature                           :  300.1000 [K]
+  Green`s function   wavefunctions                 : Slater exchange(X)+Perdew & Zunger(C)
+  Total number of QP states                        :   40
+  Exchange RL vectors                              :  229
+  Exchange summation bands                         :  12
+  RIM RL components                                : 0
+  RIM random points                                : 0
+ - S/N 002078 ---------------------------------------------- v.05.04.00 r.24143 -
+
+ [xc] E_xc :  -6.225169 [Ha]
+      E_xc :  -12.45034 [Ry]
+
+  Local XC kind (lXC) : Slater exchange(X)+Perdew & Zunger(C)
+  Non-Local XC kind (nlXC) : Hartree-Fock
+
+  Corrections @ K [1] :  [eV]
+ <5|nlXC|5> = -26.34450  0.231023E-8 <5|lXC|5> = -24.67523 -0.142920E-5
+ <6|nlXC|6> = -23.30405  0.440214E-8 <6|lXC|6> = -23.57421  0.467789E-4
+ <7|nlXC|7> = -22.68300 -0.622490E-8 <7|lXC|7> = -23.33248 -0.936776E-4
+ <8|nlXC|8> = -23.16624 -0.96791E-09 <8|lXC|8> = -23.64989  0.469353E-4
+ <9|nlXC|9> = -25.79099 -0.355418E-8 <9|lXC|9> = -25.15455  0.165994E-4
+ <10|nlXC|10> = -25.69503  0.315867E-8 <10|lXC|10> = -25.12450 -0.204215E-4
+ <11|nlXC|11> = -24.10945  0.291033E-8 <11|lXC|11> = -24.42746 -0.416984E-4
+ <12|nlXC|12> = -24.03819  0.94268E-09 <12|lXC|12> = -24.41680  0.466709E-4
+ <13|nlXC|13> = -4.480161 -0.38024E-09 <13|lXC|13> = -12.88727 -0.142878E-7
+ <14|nlXC|14> = -4.344127 -0.46509E-09 <14|lXC|14> = -12.72134  0.556581E-5
+
+  Corrections @ K [2] :  [eV]
+ <5|nlXC|5> = -26.35923  0.166237E-8 <5|lXC|5> = -24.80126  0.548220E-5
+ <6|nlXC|6> = -22.39787  0.84836E-09 <6|lXC|6> = -22.83959 -0.186940E-4
+ <7|nlXC|7> = -26.57180 -0.134882E-8 <7|lXC|7> = -25.41517  0.871419E-5
+ <8|nlXC|8> = -23.87470  0.159218E-8 <8|lXC|8> = -24.10542  0.214353E-3
+ <9|nlXC|9> = -22.84444  0.340361E-8 <9|lXC|9> = -23.59339 -0.254766E-3
+ <10|nlXC|10> = -24.38745 -0.63857E-09 <10|lXC|10> = -24.54325  0.166929E-3
+ <11|nlXC|11> = -23.82989  0.18225E-09 <11|lXC|11> = -24.21723 -0.325667E-3
+ <12|nlXC|12> = -23.54815 -0.416988E-8 <12|lXC|12> = -24.42195  0.207519E-3
+ <13|nlXC|13> = -5.793514  0.13727E-09 <13|lXC|13> = -14.48476  0.146511E-7
+ <14|nlXC|14> = -5.310935  0.10444E-09 <14|lXC|14> = -14.34133  0.208003E-4
+
+  Corrections @ K [3] :  [eV]
+ <5|nlXC|5> = -26.39964  0.360218E-8 <5|lXC|5> = -24.79951 -0.981465E-5
+ <6|nlXC|6> = -21.13731  0.238477E-8 <6|lXC|6> = -21.42953  0.132613E-3
+ <7|nlXC|7> = -24.96737  0.168420E-8 <7|lXC|7> = -24.53182 -0.116979E-3
+ <8|nlXC|8> = -24.45095  0.68495E-09 <8|lXC|8> = -24.30874 -0.224688E-3
+ <9|nlXC|9> = -22.85790 -0.644973E-8 <9|lXC|9> = -23.42394  0.776432E-3
+ <10|nlXC|10> = -26.20288 -0.625565E-8 <10|lXC|10> = -25.76395 -0.483236E-5
+ <11|nlXC|11> = -22.17468 -0.37553E-09 <11|lXC|11> = -24.21397 -0.001150
+ <12|nlXC|12> = -21.25501  0.198632E-8 <12|lXC|12> = -24.42291  0.599067E-3
+ <13|nlXC|13> = -7.366131 -0.50356E-09 <13|lXC|13> = -15.44722  0.294520E-6
+ <14|nlXC|14> = -6.642751  0.43185E-09 <14|lXC|14> = -15.35275  0.419765E-4
+
+  Corrections @ K [4] :  [eV]
+ <5|nlXC|5> = -19.91079 -0.458470E-8 <5|lXC|5> = -18.49589 -0.453251E-5
+ <6|nlXC|6> = -22.37983  0.48937E-09 <6|lXC|6> = -21.91288 -0.199638E-4
+ <7|nlXC|7> = -20.76522 -0.43815E-09 <7|lXC|7> = -20.66946  0.772490E-3
+ <8|nlXC|8> = -20.63200 -0.252775E-8 <8|lXC|8> = -20.82244 -0.118393E-3
+ <9|nlXC|9> = -26.15561 -0.30530E-09 <9|lXC|9> = -26.05873  0.969195E-5
+ <10|nlXC|10> = -23.00900  0.52313E-09 <10|lXC|10> = -23.76250 -0.512183E-5
+ <11|nlXC|11> = -20.07876 -0.141515E-8 <11|lXC|11> = -24.62618 -0.001177
+ <12|nlXC|12> = -17.41258  0.141076E-8 <12|lXC|12> = -23.74117  0.575879E-3
+ <13|nlXC|13> = -9.597456  0.76854E-09 <13|lXC|13> = -17.07100  0.129517E-8
+ <14|nlXC|14> = -8.466298 -0.32557E-10 <14|lXC|14> = -17.06835  0.606060E-4
+
+
+ Timing [Min/Max/Average]: 03m-22s/03m-22s/03m-22s
+
+ [05] Timing Overview
+ ====================
+
+ Clock: global (MAX - min (if any spread is present) clocks)
+      IO_and_Messaging_switch :      0.0000s P2 (   3 calls,   0.001 msec avg) [MAX]      0.0000s P1 (   3 calls,   0.001 msec avg) [min]
+             io_ATMPROJ_pwscf :      0.0000s P2 [MAX]      0.0000s P1 [min]
+                 io_KB_abinit :      0.0000s P2 [MAX]      0.0000s P1 [min]
+                 PP_uspp_init :      0.0000s P1 [MAX]      0.0000s P2 [min]
+                   io_DIPOLES :      0.0000s P2 [MAX]      0.0000s P1 [min]
+                   io_COL_CUT :      0.0000s P2 [MAX]      0.0000s P1 [min]
+               io_Double_Grid :      0.0000s P1 (   2 calls,   0.020 msec avg) [MAX]      0.0000s P2 (   2 calls,   0.015 msec avg) [min]
+                         io_X :      0.0000s P2 (   5 calls,   0.010 msec avg) [MAX]      0.0000s P1 (   5 calls,   0.008 msec avg) [min]
+                        io_HF :      0.0028s P1 (   3 calls,   0.928 msec avg) [MAX]      0.0001s P2 (   3 calls,   0.021 msec avg) [min]
+                    HF(REDUX) :     57.7339s P2 [MAX]      0.0002s P1 [min]
+                  io_KB_pwscf :      0.0007s P2 [MAX]      0.0006s P1 [min]
+                      io_GROT :      0.0015s P2 (   2 calls,   0.753 msec avg) [MAX]      0.0014s P1 (   2 calls,   0.724 msec avg) [min]
+                    FFT_setup :      0.0042s P2 [MAX]      0.0041s P1 [min]
+                     io_QINDX :      0.0043s P1 (   2 calls,   2.131 msec avg) [MAX]      0.0042s P2 (   2 calls,   2.118 msec avg) [min]
+                  io_fragment :      0.0449s P2 ( 144 calls,   0.312 msec avg) [MAX]      0.0446s P1 ( 144 calls,   0.310 msec avg) [min]
+                 scatter_Gamp :      0.0522s P1 (8200 calls,   0.006 msec avg) [MAX]      0.0504s P2 (8200 calls,   0.006 msec avg) [min]
+                        io_WF :      0.0591s P2 ( 147 calls,   0.402 msec avg) [MAX]      0.0590s P1 ( 147 calls,   0.401 msec avg) [min]
+          XC_potential_driver :      0.2828s P1 (   2 calls, 141.380 msec avg) [MAX]      0.2812s P2 (   2 calls, 140.620 msec avg) [min]
+                    XCo_local :      0.2955s P2 [MAX]      0.2879s P1 [min]
+                  WF_load_FFT :      0.6433s P1 [MAX]      0.6341s P2 [min]
+                           HF :    201.1745s P1 [MAX]    143.4493s P2 [min]
+
+ [06] Memory Overview
+ ====================
+
+ Memory Usage: global (Only MASTER cpu here). [O] stands for group 'O'
+ Memory treshold are: 51.20000 [Mb] (basic treshold)  512.0000 [Mb] (SAVEs treshold)
+
+
+ MAX allocations:
+
+                           WF%c [%c] :  581.7300 [Mb] Host ([04] Local Exchange-Correlation + Non-Local Fock)
+
+         Max memory used   :  609.8730 [Mb]
+
+ [07] Game Over & Game summary
+ =============================
+
+ 10/17/2026 at 11:16 yambo @ UNIJ2P4Q7TFK3 [start]
+ 10/17/2026 at 11:20                       [end]
+
+ Timing   [Min/Max/Average]: 03m-22s/03m-22s/03m-22s
+             [Time-Profile]: 03m-22s
+
+ .-ACKNOWLEDGMENT
+ |
+ | The users of YAMBO have little formal obligations with respect to
+ | the YAMBO group (those specified in the GNU General Public
+ | License, http://www.gnu.org/copyleft/gpl.txt). However, it is
+ | common practice in the scientific literature, to acknowledge the
+ | efforts of people that have made the research possible. In this
+ | spirit, please find below the reference we kindly ask you to use
+ | in order to acknowledge YAMBO
+ |
+ | Many-body perturbation theory calculations using the yambo code
+ | D. Sangalli, A. Ferretti, H. Miranda, C. Attaccalite, I. Marri, E. Cannuccia, P. Melo,
+ | M Marsili, F Paleari, A Marrazzo, G Prandini, P Bonfà, M O Atambo, F Affinito,
+ | M Palummo, A Molina-Sánchez, C Hogan, M Grüning, D Varsano and A Marini.
+ | J. Phys.: Condens. Matter 31, 325902 (2019).
+ |
+ | Yambo: An ab initio tool for excited state calculations
+ | A. Marini, C. Hogan, M. Grüning, D. Varsano
+ | Computer Physics Communications 180, 1392 (2009).
+ |
+  
+ .-Input file  02_hf/02_hf
+ | HF_and_locXC                     # [R] Hartree-Fock
+ | ElecTemp= 0.025861         eV    # Electronic Temperature
+ | BoseTemp= 0.025861         eV    # Bosonic Temperature
+ | #DegFix                        # Force the code to impose the energy levels to respect their degeneracy
+ | FFTGvecs= 1591             RL    # [FFT] Plane-waves
+ | SX_CPU= "2.1"                    # [PARALLEL] CPUs for each role
+ | SX_ROLEs= "b.q"                  # [PARALLEL] CPUs roles (q,g,qp,b)
+ | EXXRLvcs= 229              RL    # [XX] Exchange    RL components
+ | VXCRLvcs=  8441            RL    # [XC] XCpotential RL components
+ | %QPkrange                        # [GW] QP generalized Kpoint/Band indices
+ | 1|4|5|14|
+ | %
+ | %QPerange                        # [GW] QP generalized Kpoint/Energy indices
+ | 1|144| 0.000000|-1.000000|
+ | %

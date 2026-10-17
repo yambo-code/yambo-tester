@@ -1,0 +1,6 @@
+self_energy
+EXXRLvcs= 200 RL
+SEApprox= "HF"
+%QP_krange
+1|6|6|12|
+%

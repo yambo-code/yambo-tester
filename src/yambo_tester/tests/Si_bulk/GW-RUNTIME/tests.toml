@@ -1,0 +1,371 @@
+# Bulk Si GW, runtime variants of Si_bulk/GW (same physics, own copy of the Si_bulk/GW data). Every
+# step repeats one Si_bulk/GW step (02_hf, 03_cohsex, 04_ppa, 10_ff) with a different MPI task
+# count, parallel distribution (Y6 *_CPU/*_ROLEs, Y5 SX/SE/X_and_IO_CPU), PAR_def_mode, linear-
+# algebra mode, database I/O switch, or database reuse from a previous step, and is checked against
+# the Si_bulk/GW reference of that step: results must not depend on how the run is organised.
+# nprocs is fixed per step (4 at most); the global --np does not apply.
+sha256 = "4d593add74746426aef4ea2c88f5282c06b91c8727e1498217553b735540077d"
+tarball_url = "https://media.yambo-code.eu/robots/databases/y6"
+
+[yambo_versions]
+supported = ["5", "6"]
+
+[00_p2y]
+step_type = "p2y"
+input_dir = "si.save"
+
+[01_init]
+step_type = "init"
+
+# HF with the QP states distributed
+[02_hf_qp]
+exe = "yambo"
+input = "INPUTS/Y6/02_hf_qp"
+output = "02_hf_qp"
+runlevel = "hf"
+nprocs = 4
+dependencies = ["01_init"]
+
+[02_hf_qp.reference]
+"REFERENCE/Y6/o-02_hf_qp.Fock-V_xc_qp" = { path = "o-02_hf_qp.Fock-V_xc_qp", tolerance = 0.001 }
+"REFERENCE/Y6/o-02_hf_qp.ndb.QP_Fock-V_xc" = { path = "02_hf_qp/ndb.QP_Fock-V_xc", variables = ["QP energies"], tolerance = 0.001 }
+"REFERENCE/Y6/r-02_hf_qp" = ["Game Over & Game summary"]
+
+[02_hf_qp.versions."5"]
+input = "INPUTS/Y5/02_hf_qp"
+
+[02_hf_qp.versions."5".reference]
+"REFERENCE/Y5/o-02_hf_qp.hf" = { path = "o-02_hf_qp.hf", tolerance = 0.001 }
+"REFERENCE/Y5/r-02_hf_qp" = ["Game Over & Game summary"]
+
+# HF with the q-points distributed
+[02_hf_q]
+exe = "yambo"
+input = "INPUTS/Y6/02_hf_q"
+output = "02_hf_q"
+runlevel = "hf"
+nprocs = 4
+dependencies = ["01_init"]
+
+[02_hf_q.reference]
+"REFERENCE/Y6/o-02_hf_q.Fock-V_xc_qp" = { path = "o-02_hf_q.Fock-V_xc_qp", tolerance = 0.001 }
+"REFERENCE/Y6/o-02_hf_q.ndb.QP_Fock-V_xc" = { path = "02_hf_q/ndb.QP_Fock-V_xc", variables = ["QP energies"], tolerance = 0.001 }
+"REFERENCE/Y6/r-02_hf_q" = ["Game Over & Game summary"]
+
+[02_hf_q.versions."5"]
+input = "INPUTS/Y5/02_hf_q"
+
+[02_hf_q.versions."5".reference]
+"REFERENCE/Y5/o-02_hf_q.hf" = { path = "o-02_hf_q.hf", tolerance = 0.001 }
+"REFERENCE/Y5/r-02_hf_q" = ["Game Over & Game summary"]
+
+# COHSEX with the screening obtained by matrix inversion instead of the default linear system
+[03_cohsex_inv]
+exe = "yambo"
+input = "INPUTS/Y6/03_cohsex_inv"
+output = "03_cohsex_inv"
+runlevel = "qp"
+nprocs = 2
+dependencies = ["01_init"]
+
+[03_cohsex_inv.reference]
+"REFERENCE/Y6/o-03_cohsex_inv.Fock-V_xc-CoHSeX_qp" = { path = "o-03_cohsex_inv.Fock-V_xc-CoHSeX_qp", tolerance = 0.001 }
+"REFERENCE/Y6/o-03_cohsex_inv.ndb.static_dielectric_matrix" = { path = "03_cohsex_inv/ndb.static_dielectric_matrix", variables = ["EM1S_X_at_Q_1"], tolerance = 0.001 }
+"REFERENCE/Y6/o-03_cohsex_inv.ndb.QP_Fock-V_xc-CoHSeX" = { path = "03_cohsex_inv/ndb.QP_Fock-V_xc-CoHSeX", variables = ["QP energies"], tolerance = 0.001 }
+"REFERENCE/Y6/r-03_cohsex_inv" = ["Game Over & Game summary"]
+
+[03_cohsex_inv.versions."5"]
+input = "INPUTS/Y5/03_cohsex_inv"
+
+[03_cohsex_inv.versions."5".reference]
+"REFERENCE/Y5/o-03_cohsex_inv.qp" = { path = "o-03_cohsex_inv.qp", tolerance = 0.001, skip_columns = [11, 12] }
+"REFERENCE/Y5/o-03_cohsex_inv.ndb.em1s_fragment_1" = { path = "03_cohsex_inv/ndb.em1s_fragment_1", variables = ["X_Q_1"], tolerance = 0.001 }
+"REFERENCE/Y5/o-03_cohsex_inv.ndb.QP" = { path = "03_cohsex_inv/ndb.QP", variables = ["QP_E"], tolerance = 0.001 }
+"REFERENCE/Y5/r-03_cohsex_inv" = ["Game Over & Game summary"]
+
+# COHSEX with the G-vectors distributed in X and in Sigma
+[03_cohsex_g]
+exe = "yambo"
+input = "INPUTS/Y6/03_cohsex_g"
+output = "03_cohsex_g"
+runlevel = "qp"
+nprocs = 4
+dependencies = ["01_init"]
+
+[03_cohsex_g.reference]
+"REFERENCE/Y6/o-03_cohsex_g.Fock-V_xc-CoHSeX_qp" = { path = "o-03_cohsex_g.Fock-V_xc-CoHSeX_qp", tolerance = 0.001 }
+"REFERENCE/Y6/o-03_cohsex_g.ndb.static_dielectric_matrix" = { path = "03_cohsex_g/ndb.static_dielectric_matrix", variables = ["EM1S_X_at_Q_1"], tolerance = 0.001 }
+"REFERENCE/Y6/o-03_cohsex_g.ndb.QP_Fock-V_xc-CoHSeX" = { path = "03_cohsex_g/ndb.QP_Fock-V_xc-CoHSeX", variables = ["QP energies"], tolerance = 0.001 }
+"REFERENCE/Y6/r-03_cohsex_g" = ["Game Over & Game summary"]
+
+[03_cohsex_g.versions."5"]
+input = "INPUTS/Y5/03_cohsex_g"
+
+[03_cohsex_g.versions."5".reference]
+"REFERENCE/Y5/o-03_cohsex_g.qp" = { path = "o-03_cohsex_g.qp", tolerance = 0.001, skip_columns = [11, 12] }
+"REFERENCE/Y5/o-03_cohsex_g.ndb.em1s_fragment_1" = { path = "03_cohsex_g/ndb.em1s_fragment_1", variables = ["X_Q_1"], tolerance = 0.001 }
+"REFERENCE/Y5/o-03_cohsex_g.ndb.QP" = { path = "03_cohsex_g/ndb.QP", variables = ["QP_E"], tolerance = 0.001 }
+"REFERENCE/Y5/r-03_cohsex_g" = ["Game Over & Game summary"]
+
+# PPA serial
+[04_ppa_np1]
+exe = "yambo"
+input = "INPUTS/Y6/04_ppa_np1"
+output = "04_ppa_np1"
+runlevel = "qp"
+nprocs = 1
+dependencies = ["01_init"]
+
+[04_ppa_np1.reference]
+"REFERENCE/Y6/o-04_ppa_np1.Fock-V_xc-Plasmon-Pole_qp" = { path = "o-04_ppa_np1.Fock-V_xc-Plasmon-Pole_qp", tolerance = 0.001 }
+"REFERENCE/Y6/o-04_ppa_np1.ndb.plasmon-pole_dielectric_matrix" = { path = "04_ppa_np1/ndb.plasmon-pole_dielectric_matrix", variables = ["PPA_X_at_Q_1"], tolerance = 0.001 }
+"REFERENCE/Y6/o-04_ppa_np1.ndb.QP_Fock-V_xc-Plasmon-Pole" = { path = "04_ppa_np1/ndb.QP_Fock-V_xc-Plasmon-Pole", variables = ["QP energies", "Ren Factors"], tolerance = 0.001 }
+"REFERENCE/Y6/r-04_ppa_np1" = ["Game Over & Game summary"]
+
+[04_ppa_np1.versions."5"]
+input = "INPUTS/Y5/04_ppa_np1"
+
+[04_ppa_np1.versions."5".reference]
+"REFERENCE/Y5/o-04_ppa_np1.qp" = { path = "o-04_ppa_np1.qp", tolerance = 0.001 }
+"REFERENCE/Y5/o-04_ppa_np1.ndb.pp_fragment_1" = { path = "04_ppa_np1/ndb.pp_fragment_1", variables = ["X_Q_1"], tolerance = 0.001 }
+"REFERENCE/Y5/o-04_ppa_np1.ndb.QP" = { path = "04_ppa_np1/ndb.QP", variables = ["QP_E", "QP_Z"], tolerance = 0.001 }
+"REFERENCE/Y5/r-04_ppa_np1" = ["Game Over & Game summary"]
+
+# PPA on 3 MPI tasks (uneven split of 8 q-points)
+[04_ppa_np3]
+exe = "yambo"
+input = "INPUTS/Y6/04_ppa_np3"
+output = "04_ppa_np3"
+runlevel = "qp"
+nprocs = 3
+dependencies = ["01_init"]
+
+[04_ppa_np3.reference]
+"REFERENCE/Y6/o-04_ppa_np3.Fock-V_xc-Plasmon-Pole_qp" = { path = "o-04_ppa_np3.Fock-V_xc-Plasmon-Pole_qp", tolerance = 0.001 }
+"REFERENCE/Y6/o-04_ppa_np3.ndb.plasmon-pole_dielectric_matrix" = { path = "04_ppa_np3/ndb.plasmon-pole_dielectric_matrix", variables = ["PPA_X_at_Q_1"], tolerance = 0.001 }
+"REFERENCE/Y6/o-04_ppa_np3.ndb.QP_Fock-V_xc-Plasmon-Pole" = { path = "04_ppa_np3/ndb.QP_Fock-V_xc-Plasmon-Pole", variables = ["QP energies", "Ren Factors"], tolerance = 0.001 }
+"REFERENCE/Y6/r-04_ppa_np3" = ["Game Over & Game summary"]
+
+[04_ppa_np3.versions."5"]
+input = "INPUTS/Y5/04_ppa_np3"
+
+[04_ppa_np3.versions."5".reference]
+"REFERENCE/Y5/o-04_ppa_np3.qp" = { path = "o-04_ppa_np3.qp", tolerance = 0.001 }
+"REFERENCE/Y5/o-04_ppa_np3.ndb.pp_fragment_1" = { path = "04_ppa_np3/ndb.pp_fragment_1", variables = ["X_Q_1"], tolerance = 0.001 }
+"REFERENCE/Y5/o-04_ppa_np3.ndb.QP" = { path = "04_ppa_np3/ndb.QP", variables = ["QP_E", "QP_Z"], tolerance = 0.001 }
+"REFERENCE/Y5/r-04_ppa_np3" = ["Game Over & Game summary"]
+
+# PPA, default distribution: also the database source of 04_ppa_reuse
+[04_ppa_base]
+exe = "yambo"
+input = "INPUTS/Y6/04_ppa_base"
+output = "04_ppa_base"
+runlevel = "qp"
+nprocs = 2
+dependencies = ["01_init"]
+
+[04_ppa_base.reference]
+"REFERENCE/Y6/o-04_ppa_base.Fock-V_xc-Plasmon-Pole_qp" = { path = "o-04_ppa_base.Fock-V_xc-Plasmon-Pole_qp", tolerance = 0.001 }
+"REFERENCE/Y6/o-04_ppa_base.ndb.plasmon-pole_dielectric_matrix" = { path = "04_ppa_base/ndb.plasmon-pole_dielectric_matrix", variables = ["PPA_X_at_Q_1"], tolerance = 0.001 }
+"REFERENCE/Y6/o-04_ppa_base.ndb.QP_Fock-V_xc-Plasmon-Pole" = { path = "04_ppa_base/ndb.QP_Fock-V_xc-Plasmon-Pole", variables = ["QP energies", "Ren Factors"], tolerance = 0.001 }
+"REFERENCE/Y6/r-04_ppa_base" = ["Game Over & Game summary"]
+
+[04_ppa_base.versions."5"]
+input = "INPUTS/Y5/04_ppa_base"
+
+[04_ppa_base.versions."5".reference]
+"REFERENCE/Y5/o-04_ppa_base.qp" = { path = "o-04_ppa_base.qp", tolerance = 0.001 }
+"REFERENCE/Y5/o-04_ppa_base.ndb.pp_fragment_1" = { path = "04_ppa_base/ndb.pp_fragment_1", variables = ["X_Q_1"], tolerance = 0.001 }
+"REFERENCE/Y5/o-04_ppa_base.ndb.QP" = { path = "04_ppa_base/ndb.QP", variables = ["QP_E", "QP_Z"], tolerance = 0.001 }
+"REFERENCE/Y5/r-04_ppa_base" = ["Game Over & Game summary"]
+
+# PPA with q distributed in X and Sigma
+[04_ppa_q]
+exe = "yambo"
+input = "INPUTS/Y6/04_ppa_q"
+output = "04_ppa_q"
+runlevel = "qp"
+nprocs = 4
+dependencies = ["01_init"]
+
+[04_ppa_q.reference]
+"REFERENCE/Y6/o-04_ppa_q.Fock-V_xc-Plasmon-Pole_qp" = { path = "o-04_ppa_q.Fock-V_xc-Plasmon-Pole_qp", tolerance = 0.001 }
+"REFERENCE/Y6/o-04_ppa_q.ndb.plasmon-pole_dielectric_matrix" = { path = "04_ppa_q/ndb.plasmon-pole_dielectric_matrix", variables = ["PPA_X_at_Q_1"], tolerance = 0.001 }
+"REFERENCE/Y6/o-04_ppa_q.ndb.QP_Fock-V_xc-Plasmon-Pole" = { path = "04_ppa_q/ndb.QP_Fock-V_xc-Plasmon-Pole", variables = ["QP energies", "Ren Factors"], tolerance = 0.001 }
+"REFERENCE/Y6/r-04_ppa_q" = ["Game Over & Game summary"]
+
+[04_ppa_q.versions."5"]
+input = "INPUTS/Y5/04_ppa_q"
+
+[04_ppa_q.versions."5".reference]
+"REFERENCE/Y5/o-04_ppa_q.qp" = { path = "o-04_ppa_q.qp", tolerance = 0.001 }
+"REFERENCE/Y5/o-04_ppa_q.ndb.pp_fragment_1" = { path = "04_ppa_q/ndb.pp_fragment_1", variables = ["X_Q_1"], tolerance = 0.001 }
+"REFERENCE/Y5/o-04_ppa_q.ndb.QP" = { path = "04_ppa_q/ndb.QP", variables = ["QP_E", "QP_Z"], tolerance = 0.001 }
+"REFERENCE/Y5/r-04_ppa_q" = ["Game Over & Game summary"]
+
+# PPA with k,c distributed in X and the G bands in Sigma
+[04_ppa_kcv]
+exe = "yambo"
+input = "INPUTS/Y6/04_ppa_kcv"
+output = "04_ppa_kcv"
+runlevel = "qp"
+nprocs = 4
+dependencies = ["01_init"]
+
+[04_ppa_kcv.reference]
+"REFERENCE/Y6/o-04_ppa_kcv.Fock-V_xc-Plasmon-Pole_qp" = { path = "o-04_ppa_kcv.Fock-V_xc-Plasmon-Pole_qp", tolerance = 0.001 }
+"REFERENCE/Y6/o-04_ppa_kcv.ndb.plasmon-pole_dielectric_matrix" = { path = "04_ppa_kcv/ndb.plasmon-pole_dielectric_matrix", variables = ["PPA_X_at_Q_1"], tolerance = 0.001 }
+"REFERENCE/Y6/o-04_ppa_kcv.ndb.QP_Fock-V_xc-Plasmon-Pole" = { path = "04_ppa_kcv/ndb.QP_Fock-V_xc-Plasmon-Pole", variables = ["QP energies", "Ren Factors"], tolerance = 0.001 }
+"REFERENCE/Y6/r-04_ppa_kcv" = ["Game Over & Game summary"]
+
+[04_ppa_kcv.versions."5"]
+input = "INPUTS/Y5/04_ppa_kcv"
+
+[04_ppa_kcv.versions."5".reference]
+"REFERENCE/Y5/o-04_ppa_kcv.qp" = { path = "o-04_ppa_kcv.qp", tolerance = 0.001 }
+"REFERENCE/Y5/o-04_ppa_kcv.ndb.pp_fragment_1" = { path = "04_ppa_kcv/ndb.pp_fragment_1", variables = ["X_Q_1"], tolerance = 0.001 }
+"REFERENCE/Y5/o-04_ppa_kcv.ndb.QP" = { path = "04_ppa_kcv/ndb.QP", variables = ["QP_E", "QP_Z"], tolerance = 0.001 }
+"REFERENCE/Y5/r-04_ppa_kcv" = ["Game Over & Game summary"]
+
+# PPA with c,v distributed in X and the QP states in Sigma
+[04_ppa_qp]
+exe = "yambo"
+input = "INPUTS/Y6/04_ppa_qp"
+output = "04_ppa_qp"
+runlevel = "qp"
+nprocs = 4
+dependencies = ["01_init"]
+
+[04_ppa_qp.reference]
+"REFERENCE/Y6/o-04_ppa_qp.Fock-V_xc-Plasmon-Pole_qp" = { path = "o-04_ppa_qp.Fock-V_xc-Plasmon-Pole_qp", tolerance = 0.001 }
+"REFERENCE/Y6/o-04_ppa_qp.ndb.plasmon-pole_dielectric_matrix" = { path = "04_ppa_qp/ndb.plasmon-pole_dielectric_matrix", variables = ["PPA_X_at_Q_1"], tolerance = 0.001 }
+"REFERENCE/Y6/o-04_ppa_qp.ndb.QP_Fock-V_xc-Plasmon-Pole" = { path = "04_ppa_qp/ndb.QP_Fock-V_xc-Plasmon-Pole", variables = ["QP energies", "Ren Factors"], tolerance = 0.001 }
+"REFERENCE/Y6/r-04_ppa_qp" = ["Game Over & Game summary"]
+
+[04_ppa_qp.versions."5"]
+input = "INPUTS/Y5/04_ppa_qp"
+
+[04_ppa_qp.versions."5".reference]
+"REFERENCE/Y5/o-04_ppa_qp.qp" = { path = "o-04_ppa_qp.qp", tolerance = 0.001 }
+"REFERENCE/Y5/o-04_ppa_qp.ndb.pp_fragment_1" = { path = "04_ppa_qp/ndb.pp_fragment_1", variables = ["X_Q_1"], tolerance = 0.001 }
+"REFERENCE/Y5/o-04_ppa_qp.ndb.QP" = { path = "04_ppa_qp/ndb.QP", variables = ["QP_E", "QP_Z"], tolerance = 0.001 }
+"REFERENCE/Y5/r-04_ppa_qp" = ["Game Over & Game summary"]
+
+# PPA with PAR_def_mode="memory"
+[04_ppa_mem]
+exe = "yambo"
+input = "INPUTS/Y6/04_ppa_mem"
+output = "04_ppa_mem"
+runlevel = "qp"
+nprocs = 4
+dependencies = ["01_init"]
+
+[04_ppa_mem.reference]
+"REFERENCE/Y6/o-04_ppa_mem.Fock-V_xc-Plasmon-Pole_qp" = { path = "o-04_ppa_mem.Fock-V_xc-Plasmon-Pole_qp", tolerance = 0.001 }
+"REFERENCE/Y6/o-04_ppa_mem.ndb.plasmon-pole_dielectric_matrix" = { path = "04_ppa_mem/ndb.plasmon-pole_dielectric_matrix", variables = ["PPA_X_at_Q_1"], tolerance = 0.001 }
+"REFERENCE/Y6/o-04_ppa_mem.ndb.QP_Fock-V_xc-Plasmon-Pole" = { path = "04_ppa_mem/ndb.QP_Fock-V_xc-Plasmon-Pole", variables = ["QP energies", "Ren Factors"], tolerance = 0.001 }
+"REFERENCE/Y6/r-04_ppa_mem" = ["Game Over & Game summary"]
+
+[04_ppa_mem.versions."5"]
+input = "INPUTS/Y5/04_ppa_mem"
+
+[04_ppa_mem.versions."5".reference]
+"REFERENCE/Y5/o-04_ppa_mem.qp" = { path = "o-04_ppa_mem.qp", tolerance = 0.001 }
+"REFERENCE/Y5/o-04_ppa_mem.ndb.pp_fragment_1" = { path = "04_ppa_mem/ndb.pp_fragment_1", variables = ["X_Q_1"], tolerance = 0.001 }
+"REFERENCE/Y5/o-04_ppa_mem.ndb.QP" = { path = "04_ppa_mem/ndb.QP", variables = ["QP_E", "QP_Z"], tolerance = 0.001 }
+"REFERENCE/Y5/r-04_ppa_mem" = ["Game Over & Game summary"]
+
+# PPA with PAR_def_mode="workload"
+[04_ppa_work]
+exe = "yambo"
+input = "INPUTS/Y6/04_ppa_work"
+output = "04_ppa_work"
+runlevel = "qp"
+nprocs = 4
+dependencies = ["01_init"]
+
+[04_ppa_work.reference]
+"REFERENCE/Y6/o-04_ppa_work.Fock-V_xc-Plasmon-Pole_qp" = { path = "o-04_ppa_work.Fock-V_xc-Plasmon-Pole_qp", tolerance = 0.001 }
+"REFERENCE/Y6/o-04_ppa_work.ndb.plasmon-pole_dielectric_matrix" = { path = "04_ppa_work/ndb.plasmon-pole_dielectric_matrix", variables = ["PPA_X_at_Q_1"], tolerance = 0.001 }
+"REFERENCE/Y6/o-04_ppa_work.ndb.QP_Fock-V_xc-Plasmon-Pole" = { path = "04_ppa_work/ndb.QP_Fock-V_xc-Plasmon-Pole", variables = ["QP energies", "Ren Factors"], tolerance = 0.001 }
+"REFERENCE/Y6/r-04_ppa_work" = ["Game Over & Game summary"]
+
+[04_ppa_work.versions."5"]
+input = "INPUTS/Y5/04_ppa_work"
+
+[04_ppa_work.versions."5".reference]
+"REFERENCE/Y5/o-04_ppa_work.qp" = { path = "o-04_ppa_work.qp", tolerance = 0.001 }
+"REFERENCE/Y5/o-04_ppa_work.ndb.pp_fragment_1" = { path = "04_ppa_work/ndb.pp_fragment_1", variables = ["X_Q_1"], tolerance = 0.001 }
+"REFERENCE/Y5/o-04_ppa_work.ndb.QP" = { path = "04_ppa_work/ndb.QP", variables = ["QP_E", "QP_Z"], tolerance = 0.001 }
+"REFERENCE/Y5/r-04_ppa_work" = ["Game Over & Game summary"]
+
+# PPA with no dipole and screening database I/O (DBsIOoff="DIP X")
+[04_ppa_noio]
+exe = "yambo"
+input = "INPUTS/Y6/04_ppa_noio"
+output = "04_ppa_noio"
+runlevel = "qp"
+nprocs = 2
+dependencies = ["01_init"]
+
+[04_ppa_noio.reference]
+"REFERENCE/Y6/o-04_ppa_noio.Fock-V_xc-Plasmon-Pole_qp" = { path = "o-04_ppa_noio.Fock-V_xc-Plasmon-Pole_qp", tolerance = 0.001 }
+"REFERENCE/Y6/o-04_ppa_noio.ndb.QP_Fock-V_xc-Plasmon-Pole" = { path = "04_ppa_noio/ndb.QP_Fock-V_xc-Plasmon-Pole", variables = ["QP energies", "Ren Factors"], tolerance = 0.001 }
+"REFERENCE/Y6/r-04_ppa_noio" = ["Game Over & Game summary"]
+
+[04_ppa_noio.versions."5"]
+input = "INPUTS/Y5/04_ppa_noio"
+
+[04_ppa_noio.versions."5".reference]
+"REFERENCE/Y5/o-04_ppa_noio.qp" = { path = "o-04_ppa_noio.qp", tolerance = 0.001 }
+"REFERENCE/Y5/o-04_ppa_noio.ndb.QP" = { path = "04_ppa_noio/ndb.QP", variables = ["QP_E", "QP_Z"], tolerance = 0.001 }
+"REFERENCE/Y5/r-04_ppa_noio" = ["Game Over & Game summary"]
+
+# PPA reading the databases of 04_ppa_base (-J 04_ppa_reuse,04_ppa_base): it writes no
+# screening database of its own, the report must show the screening read back. Y5 also reads
+# ndb.QP back and only re-solves Dyson: its table has no Sigma columns and no ndb.QP is written.
+# Y5 COHSEX variants skip the spurious Width columns of the static self-energy (11, 12), which
+# move with the distribution as in Si_bulk/GW 08_cohsex_T.
+[04_ppa_reuse]
+exe = "yambo"
+input = "INPUTS/Y6/04_ppa_reuse"
+output = "04_ppa_reuse"
+runlevel = "qp"
+nprocs = 2
+flags = "04_ppa_base"
+dependencies = ["04_ppa_base"]
+
+[04_ppa_reuse.reference]
+"REFERENCE/Y6/o-04_ppa_reuse.Fock-V_xc-Plasmon-Pole_qp" = { path = "o-04_ppa_reuse.Fock-V_xc-Plasmon-Pole_qp", tolerance = 0.001 }
+"REFERENCE/Y6/o-04_ppa_reuse.ndb.QP_Fock-V_xc-Plasmon-Pole" = { path = "04_ppa_reuse/ndb.QP_Fock-V_xc-Plasmon-Pole", variables = ["QP energies", "Ren Factors"], tolerance = 0.001 }
+"REFERENCE/Y6/r-04_ppa_reuse" = { contains = "[RD@./04_ppa_base//ndb.plasmon-pole_dielectric_matrix_header]" }
+
+[04_ppa_reuse.versions."5"]
+input = "INPUTS/Y5/04_ppa_reuse"
+
+[04_ppa_reuse.versions."5".reference]
+"REFERENCE/Y5/o-04_ppa_reuse.qp" = { path = "o-04_ppa_reuse.qp", tolerance = 0.001 }
+"REFERENCE/Y5/r-04_ppa_reuse" = { contains = "[RD./04_ppa_base//ndb.pp]" }
+
+# Full frequency with q distributed in X and the G bands in Sigma
+[10_ff_q]
+exe = "yambo"
+input = "INPUTS/Y6/10_ff_q"
+output = "10_ff_q"
+runlevel = "qp"
+nprocs = 4
+dependencies = ["01_init"]
+
+[10_ff_q.reference]
+"REFERENCE/Y6/o-10_ff_q.Fock-V_xc-Real-Axis_qp" = { path = "o-10_ff_q.Fock-V_xc-Real-Axis_qp", tolerance = 0.005 }
+"REFERENCE/Y6/o-10_ff_q.ndb.QP_Fock-V_xc-Real-Axis" = { path = "10_ff_q/ndb.QP_Fock-V_xc-Real-Axis", variables = ["QP energies", "Ren Factors"], tolerance = 0.005 }
+"REFERENCE/Y6/r-10_ff_q" = ["Game Over & Game summary"]
+
+[10_ff_q.versions."5"]
+input = "INPUTS/Y5/10_ff_q"
+
+[10_ff_q.versions."5".reference]
+"REFERENCE/Y5/o-10_ff_q.qp" = { path = "o-10_ff_q.qp", tolerance = 0.005 }
+"REFERENCE/Y5/o-10_ff_q.ndb.QP" = { path = "10_ff_q/ndb.QP", variables = ["QP_E", "QP_Z"], tolerance = 0.005 }
+"REFERENCE/Y5/r-10_ff_q" = ["Game Over & Game summary"]
+

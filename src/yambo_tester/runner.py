@@ -36,6 +36,31 @@ def step_sort_key(item):
     return run.get('input', name)
 
 
+def order_steps(config):
+    """
+    Return the workflow steps in execution order.
+
+    Steps are sorted with step_sort_key (input name when available), then moved
+    after their declared dependencies: an a2y step whose input is "DB/x.nc" sorts
+    after "01_init" but must run before it.
+    """
+    pending = sorted(config.items(), key=step_sort_key)
+    names = {name for name, _ in pending}
+    ordered, done = [], set()
+    while pending:
+        for i, (name, run) in enumerate(pending):
+            deps = [d for d in run.get('dependencies', []) if d in names]
+            if all(d in done for d in deps):
+                ordered.append(pending.pop(i))
+                done.add(name)
+                break
+        else:
+            # dependency cycle: keep the remaining sorted order
+            ordered.extend(pending)
+            break
+    return ordered
+
+
 def stdout_filename(step_name):
     return f"{step_name}.stdout"
 
@@ -210,8 +235,7 @@ def run_test(test, parameters, logger, verbose=False):
         local_logger.info(f"{this_test} skipped for unsupported Yambo version {yambo_version}")
         return local_logger
 
-    subtests = list(config.items())
-    subtests.sort(key=step_sort_key) # input sorting when available
+    subtests = order_steps(config) # input sorting when available, after the dependencies
     selected_names = selected_step_names(config, parameters.get('runlevels', []))
 
     # For OpenMP pralallelization

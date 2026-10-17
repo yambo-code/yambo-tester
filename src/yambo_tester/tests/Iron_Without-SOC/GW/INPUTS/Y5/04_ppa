@@ -1,0 +1,28 @@
+HF_and_locXC
+gw0
+dyson
+el_el_corr
+dipoles
+ppa
+em1d
+EXXRLvcs= 200 RL
+Chimod= "HARTREE"
+% BndsRnXp
+ 1 | 15 |
+%
+NGsBlkXp= 27 RL
+% LongDrXp
+ 1.0 | 1.0 | 1.0 |
+%
+PPAPntXp= 27.21138 eV
+% GbndRnge
+ 1 | 15 |
+%
+GTermKind= "none"
+DysSolver= "n"
+GDamping= 0.1 eV
+dScStep= 0.1 eV
+%QPkrange
+1|6|6|12|
+%
+ExtendOut
