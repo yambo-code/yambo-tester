@@ -3,13 +3,16 @@
 # 6x6x1 k-grid (7 IBZ points), 40 bands, EXXRLvcs=VXCRLvcs=1000 RL, 100 RL response block,
 # QP k 1-7 bands 3-6.
 #
-# Y6 and Y5 references come from the same inputs. At porting time the Y6 results were checked
-# against the Y5 ones state by state and agree to (max |diff|):
-#   HF E 9e-3 eV, Sx 7e-4 eV | COHSEX E-Eo 1e-2 eV, Sc 1e-3 eV | PPA E-Eo 9e-3 eV, Z 6e-4
-#   RIM-W + PPA E-Eo 1e-2 eV, Sc 9e-4 eV, Z 2e-3
+# Y6 and Y5 references come from the same inputs. The Y6 results were checked against the Y5
+# ones state by state and agree to (max |diff|, Y6 references regenerated after the FFT box fix,
+# where Y6 no longer G0-shifts the WF G-vectors and builds the same 12x12x65 mesh as Y5):
+#   HF E 8.5e-3 eV, Sx 1e-5 eV | COHSEX E-Eo 8.7e-3 eV, Sc 4e-4 eV | PPA E-Eo 8.1e-3 eV, Z 1.2e-4
+#   RIM-W + PPA E-Eo 7.2e-3 eV, Sc 1.4e-3 eV, Z 1.5e-4
 # The residual has two sources: the RIM Monte Carlo sampling (the two versions draw independent
-# random points) and V_xc, which at VXCRLvcs=1000 RL is unconverged in the vacuum and truncated
-# differently by the two versions (~13 meV, see hBN_2D/DFT, which uses the full set).
+# random points) and V_xc (up to 8.5 meV on the pi/conduction states, ~0 on sigma). V_xc at
+# VXCRLvcs=1000 RL is unconverged in the vacuum (~0.4 eV from the full set, see hBN_2D/DFT, where
+# Y5 and Y6 agree to 1.2 meV). The 8.5 meV is not explained yet: same mesh, same libxc 5.2.3, each
+# version reproducible to 1e-5 eV over MPI tasks, and it stays flat for VXCRLvcs = 500-2000 RL.
 # Y6 draws the same random points whatever the number of MPI tasks, so its tolerances are tight
 # (1e-3). Y5 redistributes the draw over the MPI tasks: its results move by up to ~0.5% between 1, 2
 # and 4 tasks, hence 1e-2 for Y5, and no Y5 ndb.QP reference (the small imaginary parts interleaved
