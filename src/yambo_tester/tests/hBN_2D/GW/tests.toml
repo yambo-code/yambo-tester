@@ -4,14 +4,14 @@
 # QP k 1-7 bands 3-6.
 #
 # Y6 and Y5 references come from the same inputs. The Y6 results were checked against the Y5
-# ones state by state and agree to (max |diff|, Y6 references regenerated after two fixes: Y6 no
-# longer G0-shifts the WF G-vectors in the FFT box, same 12x12x65 mesh as Y5, and closes the WF
-# G-vectors to a full shell, 3461 as Y5 wf_ng instead of 3447, which the GGA density gradient used):
-#   HF E 1e-5 eV, Sx 1e-5 eV, V_xc 1e-5 eV | COHSEX E-Eo 4e-4 eV, Sc 4e-4 eV
-#   PPA E-Eo 4e-4 eV, Sc 5e-4 eV, Z 1.2e-4 | RIM-W + PPA E-Eo 1.2e-3 eV, Sc 1.4e-3 eV, Z 1.5e-4
-# The residual is the RIM Monte Carlo sampling (the two versions draw independent random points).
-# V_xc at VXCRLvcs=1000 RL is unconverged in the vacuum (~0.4 eV from the full set, see hBN_2D/DFT)
-# but now identical in the two versions.
+# ones state by state (max |diff|):
+#   Sx 1e-5 eV | COHSEX Sc 4e-4 eV | PPA Sc 5e-4 eV, Z 1.2e-4 | RIM-W + PPA Sc 1.4e-3 eV, Z 1.5e-4
+# (residual: RIM Monte Carlo sampling, the two versions draw independent random points).
+# V_xc, and with it E and E-Eo, differs from Y5 by up to 0.40 eV on purpose. This test truncates
+# VXCRLvcs to 1000 RL. Y5 then evaluates the GGA on the 12x12x65 Fock box, Y6 (branch vxc-grid-rr)
+# always on the density-grid box of the full G set (20x20x115, QE uses 20x20x120). The Y6 V_xc is
+# 73 meV from the full-set value, the Y5 one 396 meV. Y6 warns about the truncated VXCRLvcs and
+# about the aliased Fock box (12x12x65, alias-free 15x15x93; FFTAliasFree is not set here).
 # Y6 draws the same random points whatever the number of MPI tasks, so its tolerances are tight
 # (1e-3). Y5 redistributes the draw over the MPI tasks: its results move by up to ~0.5% between 1, 2
 # and 4 tasks, hence 1e-2 for Y5, and no Y5 ndb.QP reference (the small imaginary parts interleaved
