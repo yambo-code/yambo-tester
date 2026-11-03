@@ -166,9 +166,11 @@ def pytest_generate_tests(metafunc):
         results = tomllib.load(f)
     tollerance = results.pop('tollerance', None)
     yambo_version = results.pop('yambo_version', DEFAULT_YAMBO_VERSION)
+    variant = results.pop('yambo_variant', "")  # development-branch dialect
+    results.pop('yambo_build', None)  # traceability only, not a step
     with open(rundir / "tests.toml", 'rb') as f:
         workflow_config = tomllib.load(f)
-    tests = workflow_steps_for_version(workflow_config, yambo_version)
+    tests = workflow_steps_for_version(workflow_config, yambo_version, variant)  # same overlays as the run
 
     # Sequence for test_runs_ok func
     if "run_item" in metafunc.fixturenames:

@@ -32,4 +32,4 @@ tester-dump = "scripts.tester_dump:main"
 
 
 [tool.setuptools.package-data]
-"yambo_tester" = ["data/config.toml", "data/workflow_keywords.toml", "data/workflow_templates.toml", "data/parallel_names.toml", "data/benchmark_timers.toml", "data/slurm_job.sh", "tests/**/*"]
+"yambo_tester" = ["data/config.toml", "data/workflow_keywords.toml", "data/workflow_templates.toml", "data/parallel_names.toml", "data/benchmark_timers.toml", "data/variants.toml", "data/slurm_job.sh", "tests/**/*"]

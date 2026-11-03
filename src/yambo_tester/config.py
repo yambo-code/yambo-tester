@@ -10,6 +10,7 @@ from pathlib import Path
 import importlib.resources
 from datetime import datetime
 from .versioning import resolve_yambo_version
+from .variants import load_variant  # --variant check
 
 # Default parameters
 PARAMETERS = {
@@ -25,6 +26,7 @@ PARAMETERS = {
     'runlevels': [],
     'download_link': "",
     'yambo_version': "",
+    'yambo_variant': "",  # development-branch input dialect (data/variants.toml)
     }
 
 # Default SLURM settings for benchmark mode ([cluster] in config.toml)
@@ -266,6 +268,7 @@ def check_parameters(parameters, executables=None, logger=None):
         yambo_info = get_yambo_info(parameters['executables']['yambo'])
         parameters.update(yambo_info)
         parameters = resolve_runtime_yambo_version(parameters, yambo_info, logger)
+        load_variant(parameters.get('yambo_variant'), parameters['yambo_version'])  # fail early on unknown/mismatched variant
         if parameters.get('download_link'):
             logger.info(f"download_link: {parameters['download_link']}")
         

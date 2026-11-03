@@ -129,7 +129,7 @@ def prepare_jobs(config):
     for name, types in config["tests"].items():  # selected workflows
         for wtype in types:  # workflow types
             with open(Path(str(par["tests_dir"])) / name / wtype / "tests.toml", "rb") as f:  # source tests.toml
-                bench = resolve_workflow_metadata(tomllib.load(f), major).get("benchmark")  # [benchmark] table
+                bench = resolve_workflow_metadata(tomllib.load(f), major, par.get("yambo_variant", "")).get("benchmark")  # [benchmark] table
             if not bench:  # not a benchmark workflow
                 continue  # skip
             shape = {k: cluster.get(k) or bench.get(k) for k in ("nodes", "tasks_per_node", "threads")}  # node shape: [cluster] (machine) over [benchmark]
@@ -139,7 +139,7 @@ def prepare_jobs(config):
             for nodes in shape["nodes"]:  # strong-scaling points
                 job_dir = Path(par["scratch_dir"]).resolve() / "benchmark" / f"{name}_{wtype}" / f"nodes_{nodes:03d}"  # job dir
                 job_dir.mkdir(parents=True, exist_ok=True)  # create
-                keep = {k: par[k] for k in ("yambo_version", "tollerance", "runlevels") if par.get(k)}  # passthrough options
+                keep = {k: par[k] for k in ("yambo_version", "yambo_variant", "tollerance", "runlevels") if par.get(k)}  # passthrough options
                 keep.update({k: str(Path(str(par[k])).resolve()) for k in ("tests_dir", "cache_dir", "yambo_bin") if par.get(k)})  # absolute dirs
                 keep["scratch_dir"] = str(job_dir)  # runs land in the job dir
                 (job_dir / "config.toml").write_text(toml.dumps(  # job-local config

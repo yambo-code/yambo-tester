@@ -1,0 +1,47 @@
+# GrCo GW benchmark (MaX grco-small-ppa): graphene on a 4-layer Co(0001) slab, spin-polarized,
+# QE 7.5 PBE 75 Ry, 6x6x1 k-grid (7 IBZ points), 2000 bands, PPA with a 20 Ry response block,
+# box-z Coulomb cutoff + RIM (3e6 random q). Inputs from ~/codes/benchmark-scripts/yambo/grco
+# (the input MaX ran on LUMI-C with 8 MPI x 16 OpenMP per 128-core node).
+#
+# The tarball holds two ready SAVE dirs, GW_bench/Y5/SAVE and GW_bench/Y6/SAVE, each made with its
+# own p2y and already initialized (init writes ndb.* into SAVE, so it cannot run on the shared,
+# read-only copy). Steps read them with -I Y5 / -I Y6 and write only through -J/-C.
+#
+# Benchmark: yambo-tester --submit (one SLURM job per node count; node shape from [cluster]).
+# References: only "Game Over" for now; QP references come from the first 1-node runs.
+sha256 = ""
+tarball_url = "https://media.yambo-code.eu/robots/databases/y6"
+
+[yambo_versions]
+supported = ["5", "6"]
+
+[benchmark]                    # node shape (tasks_per_node, threads) is machine-specific: set it in [cluster]
+nodes = [1, 4]
+
+[benchmark.vars]               # MaX JUBE rule for grco-small: everything on bands, Sigma_x qp split
+sxp = "16 if ntasks > 320 else 8 if ntasks > 160 else 4 if ntasks > 80 else 2 if ntasks > 40 else 1"
+
+[benchmark.parallel]           # generic block -> role -> MPI tasks
+dip = { k = "1", c = "ntasks", v = "1" }
+chi = { q = "1", g = "1", k = "1", c = "ntasks", v = "1" }
+fock = { g = "1", q = "1", qp = "sxp", b = "ntasks // sxp" }
+gw = { g = "1", q = "1", qp = "1", b = "ntasks" }
+
+# HF + PPA GW with box cutoff and RIM, on the pre-initialized SAVE
+[01_gw]
+exe = "yambo"
+input = "INPUTS/Y6/01_gw"
+input_dir = "Y6"
+output = "01_gw"
+runlevel = "qp"
+dependencies = []
+
+[01_gw.reference]
+"REFERENCE/Y6/r-01_gw_rim_cut_dipoles_X_PPA_self_energy" = ["Game Over & Game summary"]
+
+[01_gw.versions."5"]
+input = "INPUTS/Y5/01_gw"
+input_dir = "Y5"
+
+[01_gw.versions."5".reference]
+"REFERENCE/Y5/r-01_gw_HF_and_locXC_gw0_rim_cut_em1d_ppa_el_el_corr" = ["Game Over & Game summary"]

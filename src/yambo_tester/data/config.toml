@@ -12,6 +12,7 @@ tollerance = 0.1
 runlevels = []
 download_link = ""
 yambo_version = ""
+yambo_variant = ""   # development-branch input dialect, e.g. "negf" (see data/variants.toml)
 
 [executables]
 # required executables

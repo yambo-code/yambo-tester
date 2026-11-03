@@ -14,6 +14,7 @@ from .log import setup_test_logger
 from .config import get_executable
 from .download import download_test, sha256sum
 from .benchmark import link_save, parallel_lines, patch_input  # benchmark mode: SAVE symlink, input patching
+from .variants import load_variant, rewrite_input  # development-branch input dialects
 from .template_expansion import expand_workflow_templates, workflow_uses_templates
 from .versioning import (
     DEFAULT_YAMBO_VERSION,
@@ -61,6 +62,15 @@ def order_steps(config):
             ordered.extend(pending)
             break
     return ordered
+
+
+def thread_env(parameters):
+    """Environment of the yambo runs, with the threads per MPI task always set."""
+    env = os.environ.copy()  # inherit the user environment
+    # threaded libraries (e.g. OpenBLAS with OpenMP) start one thread per core in every MPI task when
+    # OMP_NUM_THREADS is unset: with an MPI-only yambo that oversubscribes the cores (Si FF: 2 s -> 16 min)
+    env["OMP_NUM_THREADS"] = str(parameters['thrs'] if parameters.get('omp') else 1)  # yambo OpenMP: thrs; else 1
+    return env  # for subprocess
 
 
 def stdout_filename(step_name):
@@ -219,10 +229,13 @@ def run_test(test, parameters, logger, verbose=False):
         SAVE = SAVE_converted.rename(SAVE)
 
     yambo_version = parameters.get('yambo_version') or DEFAULT_YAMBO_VERSION
-    config = workflow_steps_for_version(workflow_config, yambo_version)
+    variant = parameters.get('yambo_variant') or ""  # development-branch dialect, if any
+    config = workflow_steps_for_version(workflow_config, yambo_version, variant)  # "<major>-<variant>" overlay on top
     results = {
         "tollerance": parameters['tollerance'],
         "yambo_version": yambo_version,
+        "yambo_variant": variant,  # read back by test_reference
+        "yambo_build": f"{parameters.get('revision', '')} {parameters.get('hash', '')}".strip(),  # traceability: Revision Hash of yambo -h
     }
 
     if not workflow_supports_version(workflow_config, yambo_version):
@@ -242,7 +255,11 @@ def run_test(test, parameters, logger, verbose=False):
         return local_logger
 
     subtests = order_steps(config) # input sorting when available, after the dependencies
-    bench = resolve_workflow_metadata(workflow_config, yambo_version).get('benchmark')  # [benchmark] table, if any
+    rules = load_variant(variant, yambo_version)  # variant input rules ({} without variant)
+    for _, run in subtests:  # every step
+        if rules and str(run.get('exe', '')).startswith('yambo') and run.get('input') and (test['run_dir'] / run['input']).is_file():  # yambo inputs only
+            rewrite_input(test['run_dir'] / run['input'], rules)  # runlevels of the variant, in the scratch copy
+    bench = resolve_workflow_metadata(workflow_config, yambo_version, variant).get('benchmark')  # [benchmark] table, if any
     if bench and parameters.get('nodes'):  # benchmark job (--nodes): set parallel strategy in scratch inputs
         lines = parallel_lines(bench, parameters['nprocs'], yambo_version, parameters['nodes'])  # <NAME>_CPU/_ROLEs values
         for _, run in subtests:  # every step
@@ -251,8 +268,7 @@ def run_test(test, parameters, logger, verbose=False):
     selected_names = selected_step_names(config, parameters.get('runlevels', []))
 
     # For OpenMP pralallelization
-    env = os.environ.copy()
-    if parameters['omp']: env["OMP_NUM_THREADS"] = str(parameters['thrs'])
+    env = thread_env(parameters)  # OMP_NUM_THREADS always set (threaded BLAS/FFT libraries too)
 
     # Loop that launches the subtests
     for name, run in subtests:
