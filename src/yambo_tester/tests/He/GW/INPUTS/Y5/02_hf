@@ -1,0 +1,13 @@
+rim_cut
+HF_and_locXC
+CUTGeo= "box xyz"
+% CUTBox
+ 17.0 | 17.0 | 17.0 |
+%
+RandQpts= 1000000
+RandGvec= 51 RL
+EXXRLvcs= 6000 RL
+%QPkrange
+1|1|1|5|
+%
+ExtendOut

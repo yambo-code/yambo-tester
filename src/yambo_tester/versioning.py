@@ -2,7 +2,7 @@
 # Licensed under the MIT License. See LICENSE file for details.
 
 DEFAULT_YAMBO_VERSION = "6"
-WORKFLOW_METADATA_KEYS = {"sha256", "tarball_url", "yambo_versions", "versions"}
+WORKFLOW_METADATA_KEYS = {"sha256", "tarball_url", "yambo_versions", "versions", "benchmark"}  # benchmark: [benchmark] table, not a step
 
 YAMBO_VERSION_DOWNLOAD_LINKS = {
     "5": "https://media.yambo-code.eu/robots/databases/tests",
@@ -64,7 +64,13 @@ def download_link_for_version(yambo_version):
     return YAMBO_VERSION_DOWNLOAD_LINKS[major]
 
 
-def resolve_workflow_metadata(workflow_config, yambo_version):
+def overlay_keys(yambo_version, variant=""):
+    """Overlay keys in order: "<major>", then "<major>-<variant>" when a variant is selected."""
+    major = normalize_yambo_version(yambo_version)  # e.g. "6"
+    return [major] + ([f"{major}-{variant}"] if variant else [])  # e.g. ["6", "6-develop"]
+
+
+def resolve_workflow_metadata(workflow_config, yambo_version, variant=""):
     """
     Return workflow-level metadata after applying a shallow version overlay.
 
@@ -78,8 +84,8 @@ def resolve_workflow_metadata(workflow_config, yambo_version):
         for key, value in workflow_config.items()
         if key in WORKFLOW_METADATA_KEYS and key != "versions"
     }
-    overlay = workflow_config.get("versions", {}).get(major, {})
-    resolved.update(overlay)
+    for key in overlay_keys(major, variant):  # major, then variant overlay
+        resolved.update(workflow_config.get("versions", {}).get(key, {}))  # shallow overlay
     return resolved
 
 
@@ -111,7 +117,7 @@ def workflow_supports_version(workflow_config, yambo_version):
     return major in {normalize_yambo_version(item) for item in supported}
 
 
-def resolve_step_metadata(step, yambo_version):
+def resolve_step_metadata(step, yambo_version, variant=""):
     """
     Apply a shallow per-version overlay to a workflow step.
 
@@ -122,17 +128,17 @@ def resolve_step_metadata(step, yambo_version):
     """
     major = normalize_yambo_version(yambo_version)
     resolved = {key: value for key, value in step.items() if key != "versions"}
-    overlay = step.get("versions", {}).get(major, {})
-    resolved.update(overlay)
+    for key in overlay_keys(major, variant):  # major, then variant overlay
+        resolved.update(step.get("versions", {}).get(key, {}))  # shallow overlay
     return resolved
 
 
-def workflow_steps_for_version(workflow_config, yambo_version):
+def workflow_steps_for_version(workflow_config, yambo_version, variant=""):
     """
     Return executable workflow steps with per-version metadata resolved.
     """
     return {
-        name: resolve_step_metadata(step, yambo_version)
+        name: resolve_step_metadata(step, yambo_version, variant)  # variant: "<major>-<variant>" overlay
         for name, step in workflow_config.items()
         if name not in WORKFLOW_METADATA_KEYS
     }

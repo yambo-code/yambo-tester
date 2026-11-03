@@ -1,0 +1,94 @@
+#                                                                     
+#  ____  ____     _       ____    ____  ______      ___               
+# |_  _||_  _|   / \     |_   \  /   _||_   _ \   ."   `.             
+#   \ \  / /    / _ \      |   \/   |    | |_) | /  .-.  \            
+#    \ \/ /    / ___ \     | |\  /| |    |  __". | |   | |            
+#    _|  |_  _/ /   \ \_  _| |_\/_| |_  _| |__) |\  `-"  /            
+#   |______||____| |____||_____||_____||_______/  `.___."             
+#                                                                     
+#                                                                     
+#                                                                     
+# Version 5.4.0 Revision 24143 Hash (prev commit) 77ed66f02           
+#                        Branch is                                    
+#                MPI+SLK+HDF5_MPI_IO Build                            
+#                 http://www.yambo-code.eu                            
+#
+#
+# GW solver                                       : Newton
+# GW approximation                                : COHSEX
+# X G`s                                           :   51 [used]
+# X G`s                                           :   51 [disk]
+# X bands                                         :   1   9
+# X poles                                         :   100.000000    [o/o]
+# X e/h E range                                   :  -1.00000000     -1.00000000    [ev]
+# X Hxc Kernel                                    : HARTREE
+# X BZ energy Double Grid                         : no
+# X Optical Averaged directions                   : none
+# Sc Empty Bands                                  : no
+# Sc bands terminator                             : no
+# Sx RL components                                :  311
+#                                                 
+# QP @ state[ 1 ] K range                         :   1   4
+# QP @ state[ 1 ] b range                         :   7   9
+# GF WF`s kind                                    : Teter 93(XC)
+# Xs energies kind                                : Teter 93(XC)
+# Xs WF`s kind                                    : Teter 93(XC)
+#
+# Vxc  =Teter 93(XC)
+# Vnlxc=Hartree-Fock
+#
+#    K-point            Band               Eo [eV]            E [eV]             E-Eo [eV]          Vxc [eV]           Vnlxc [eV]         Sc|Eo [eV]         Re(Z)              Im(Z)              Width [meV]        Width [fs]
+#
+        1                   7                -0.882467          -5.100399          -4.217932          -18.27202          -25.79127           3.301316           1.000000           0.000000           0.211270            3115.50
+        1                   8                -0.882467          -5.157685          -4.275218          -18.27202          -25.79126           3.244021           1.000000           0.000000           0.197586            3331.27
+        1                   9                 5.277161           6.254312           0.977150          -9.441353          -4.949344          -3.514858           1.000000           0.000000          -0.223063            2950.79
+        2                   7                -1.313334          -4.921804          -3.608470          -14.52299          -20.95988           2.828424           1.000000           0.000000           0.142484            4619.55
+        2                   8                 0.000000          -3.239256          -3.239256          -16.26754          -22.23496           2.728171           1.000000           0.000000           0.141255            4659.76
+        2                   9                 4.094747           6.075088           1.980340          -10.48721          -4.737437          -3.769433           1.000000           0.000000          -0.246135            2674.19
+        3                   7                -0.908688          -5.083224          -4.174536          -18.24378          -25.77522           3.356904           1.000000           0.000000           0.204666            3216.03
+        3                   8                -0.908688          -5.013459          -4.104771          -18.24378          -25.77522           3.426676           1.000000           0.000000           0.219792            2994.70
+        3                   9                 7.961606           9.773499           1.811894          -11.51315          -6.044431          -3.656823           1.000000           0.000000          -0.234327            2808.94
+         4                  7                -0.625211          -4.143752          -3.518541          -15.40941          -21.60087           2.672914           1.000000           0.000000           0.133843            4917.77
+         4                  8                -0.625208          -3.975194          -3.349985          -15.40945          -21.60095           2.841521           1.000000           0.000000           0.144697            4548.89
+         4                  9                 4.656362           6.696073           2.039711          -11.22570          -5.474306          -3.711686           1.000000           0.000000          -0.238029            2765.25
+# 
+# 10/17/2026 at 11:16 yambo @ UNIJ2P4Q7TFK3 [start]
+# 10/17/2026 at 11:16                       [end]
+#
+# .-Input file  03_cohsex/03_cohsex
+# | HF_and_locXC                     # [R] Hartree-Fock
+# | gw0                              # [R] GW approximation
+# | dyson                            # [R] Dyson Equation solver
+# | dipoles                          # [R] Oscillator strenghts (or dipoles)
+# | cohsex                           # [R][Xp] COlumb Hole Screened EXchange
+# | em1s                             # [R][Xs] Statically Screened Interaction
+# | el_el_corr                       # [R] Electron-Electron Correlation
+# | BoseTemp= 0.000000         eV    # Bosonic Temperature
+# | #DegFix                        # Force the code to impose the energy levels to respect their degeneracy
+# | FFTGvecs=  3703            RL    # [FFT] Plane-waves
+# | DIP_CPU= "2.1"                   # [PARALLEL] CPUs for each role
+# | DIP_ROLEs= "v.k"                 # [PARALLEL] CPUs roles (k,c,v)
+# | X_and_IO_CPU= "2.1.1"            # [PARALLEL] CPUs for each role
+# | X_and_IO_ROLEs= "v.k.q"          # [PARALLEL] CPUs roles (q,g,k,c,v)
+# | X_and_IO_nCPU_LinAlg_INV= 1      # [PARALLEL] CPUs for Linear Algebra (if -1 it is automatically set)
+# | SX_CPU= "2.1"                    # [PARALLEL] CPUs for each role
+# | SX_ROLEs= "b.q"                  # [PARALLEL] CPUs roles (q,g,qp,b)
+# | SE_CPU= "2.1"                    # [PARALLEL] CPUs for each role
+# | SE_ROLEs= "b.q"                  # [PARALLEL] CPUs roles (q,g,qp,b)
+# | EXXRLvcs= 311              RL    # [XX] Exchange    RL components
+# | VXCRLvcs= 22647            RL    # [XC] XCpotential RL components
+# | Chimod= "HARTREE"                # [X] IP/Hartree/ALDA/LRC/PF/BSfxc
+# | DipComputed= "R V P [G-space]"   # [DIP] [default R P V; extra P2 Spin Orb]
+# | % BndsRnXs
+# |   1 |  9 |                           # [Xs] Polarization function bands
+# | %
+# | NGsBlkXs=  51              RL    # [Xs] Response block size
+# | % LongDrXs
+# |  0.577350E-5 | 0.577350E-5 | 0.577350E-5 # [Xs] [cc] Electric Field
+# | %
+# | %QPkrange                        # [GW] QP generalized Kpoint/Band indices
+# | 1|4|7|9|
+# | %
+# | %QPerange                        # [GW] QP generalized Kpoint/Energy indices
+# | 1|4| 0.000000|-1.000000|
+# | %

@@ -1,0 +1,51 @@
+#                                                                     
+#  __  __   ________   ___ __ __    _______   ______                  
+# /_/\/_/\ /_______/\ /__//_//_/\ /_______/\ /_____/\                 
+# \ \ \ \ \\::: _  \ \\::\| \| \ \\::: _  \ \\:::_ \ \                
+#  \:\_\ \ \\::(_)  \ \\:.      \ \\::(_)  \/_\:\ \ \ \               
+#   \::::_\/ \:: __  \ \\:.\-/\  \ \\::  _  \ \\:\ \ \ \              
+#     \::\ \  \:.\ \  \ \\. \  \  \ \\::(_)  \ \\:\_\ \ \             
+#      \__\/   \__\/\__\/ \__\/ \__\/ \_______\/ \_____\/             
+#                                                                     
+#                                                                     
+# Version 5.4.0 Revision 24143 Hash (prev commit) 77ed66f02           
+#                        Branch is                                    
+#                MPI+SLK+HDF5_MPI_IO Build                            
+#                http://www.yambo-code.eu                             
+#
+# Vxc  =Teter 93(XC)
+# Vnlxc=Hartree-Fock
+#
+#    K-point            Band               Eo [eV]            Ehf [eV]           Vxc [eV]           Vnlxc [eV]
+#
+        1                   7                -0.882467          -8.401715          -18.27202          -25.79127
+        1                   8                -0.882467          -8.401706          -18.27202          -25.79126
+        1                   9                 5.277161           9.769170          -9.441353          -4.949344
+        2                   7                -1.313334          -7.750228          -14.52299          -20.95988
+        2                   8                 0.000000          -5.967426          -16.26754          -22.23496
+        2                   9                 4.094747           9.844521          -10.48721          -4.737437
+        3                   7                -0.908688          -8.440128          -18.24378          -25.77522
+        3                   8                -0.908688          -8.440134          -18.24378          -25.77522
+        3                   9                 7.961606           13.43032          -11.51315          -6.044431
+         4                  7                -0.625211          -6.816665          -15.40941          -21.60087
+         4                  8                -0.625208          -6.816715          -15.40945          -21.60095
+         4                  9                 4.656362           10.40776          -11.22570          -5.474306
+# 
+# 10/17/2026 at 11:16 yambo @ UNIJ2P4Q7TFK3 [start]
+# 10/17/2026 at 11:16                       [end]
+#
+# .-Input file  02_hf/02_hf
+# | HF_and_locXC                     # [R] Hartree-Fock
+# | BoseTemp= 0.000000         eV    # Bosonic Temperature
+# | #DegFix                        # Force the code to impose the energy levels to respect their degeneracy
+# | FFTGvecs=  3703            RL    # [FFT] Plane-waves
+# | SX_CPU= "2.1"                    # [PARALLEL] CPUs for each role
+# | SX_ROLEs= "b.q"                  # [PARALLEL] CPUs roles (q,g,qp,b)
+# | EXXRLvcs= 311              RL    # [XX] Exchange    RL components
+# | VXCRLvcs= 22647            RL    # [XC] XCpotential RL components
+# | %QPkrange                        # [GW] QP generalized Kpoint/Band indices
+# | 1|4|7|9|
+# | %
+# | %QPerange                        # [GW] QP generalized Kpoint/Energy indices
+# | 1|4| 0.000000|-1.000000|
+# | %

@@ -1,0 +1,7 @@
+# Monolayer hBN, plain Hartree-Fock (no Coulomb cutoff: the cutoff/RIM variants live in hBN_2D/GW)
+HF_and_locXC                     # [R] Hartree-Fock
+EXXRLvcs= 1000 RL                # [XX] Exchange    RL components
+VXCRLvcs= 19039 RL               # [XC] XCpotential RL components (all: Vxc in the vacuum is not converged below)
+%QPkrange                        # [GW] QP generalized Kpoint/Band indices
+1|7|1|8|
+%

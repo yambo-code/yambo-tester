@@ -1,0 +1,152 @@
+#                                                                     
+#  /$$     /$$ /$$$$$$  /$$      /$$ /$$$$$$$   /$$$$$$               
+# |  $$   /$$//$$__  $$| $$$    /$$$| $$__  $$ /$$__  $$              
+#  \  $$ /$$/| $$  \ $$| $$$$  /$$$$| $$  \ $$| $$  \ $$              
+#   \  $$$$/ | $$$$$$$$| $$ $$/$$ $$| $$$$$$$ | $$  | $$              
+#    \  $$/  | $$__  $$| $$  $$$| $$| $$__  $$| $$  | $$              
+#     | $$   | $$  | $$| $$\  $ | $$| $$  \ $$| $$  | $$              
+#     | $$   | $$  | $$| $$ \/  | $$| $$$$$$$/|  $$$$$$/              
+#     |__/   |__/  |__/|__/     |__/|_______/  \______/               
+#                                                                     
+# Version 6.0.0 Revision 23875 Hash (prev commit) 4d36a1a             
+#                   Branch is devel-GW                                
+#               MPI+SLK+HDF5_MPI_IO Build                             
+#                http://www.yambo-code.eu                             
+#
+#
+#  Dyson solver                                : n
+#  Number of states                            :  11
+#  Number of bands                             :   6
+#  Number of k-points                          :  3
+#  On mass shell                               : no
+#  [Fock] Kind                                 : Self-Energy
+#  [Fock] Approximation                        : Fock
+#  [Fock] Number of states                     :  11
+#  [Fock] Number of frequencies                :  1
+#  [Fock] Total self-energy weight             :   1.00000000   
+#  [Fock] Reciprocal lattice vectors           :  307
+#  [V_xc] Kind                                 : V_xc
+#  [V_xc] Approximation                        : Slater exchange(X)+Perdew & Wang(C)
+#  [V_xc] Number of states                     :  11
+#  [V_xc] Number of frequencies                :  1
+#  [V_xc] Total self-energy weight             :  -1.00000000   
+#  [V_xc] Reciprocal lattice vectors           :  10417
+#  [Real-Axis] Kind                            : Self-Energy
+#  [Real-Axis] Approximation                   : Real-Axis
+#  [Real-Axis] Number of states                :  11
+#  [Real-Axis] Number of frequencies           :  2
+#  [Real-Axis] Total self-energy weight        :   1.00000000   
+#  [Real-Axis] Reciprocal lattice vector       :   51
+#  [Real-Axis] G[W] bands range                :   1  10
+#  [Real-Axis] Energy step                     :  0.100000001    [eV]
+#  [Real-Axis] Damping                         :  0.100000001    [eV]
+#  [Real-Axis] W frequencies                   :   600
+#  [Real-Axis] [Xs] Bands range                :   1  10
+#  [Real-Axis] [Xs] Time-ordering              : T-ordered
+#  [Real-Axis] [Xs] Electron-Field inter       : r.E
+#  [Real-Axis] [Xs] [r,Vnl] included           : no
+#  [Real-Axis] [Xs] Response function si       :   51
+#  [Real-Axis] [Xs] Dyson equation Kerne       : HARTREE
+#  [Real-Axis] [Xs] Reduction fraction         :   100.000000    [%]
+#  [Real-Axis] [Xs] Number of frequencie       :   600
+#  [Real-Axis] [Xs] Frequencies range          :   0.00000000      30.0000000    [eV]
+#  [Real-Axis] [Xs] Damping range              :  0.100000001     0.100000001    [eV]
+#                                                                                                                                                                                                                                                                                                           
+#  QP @ state[ 1 ] K range                     :  1  1
+#  QP @ state[ 1 ] b range                     :   2   5
+#  QP @ state[ 2 ] K range                     :  2  3
+#  QP @ state[ 2 ] b range                     :   3   5
+#  QP @ state[ 3 ] K range                     :  3  3
+#  QP @ state[ 3 ] b range                     :   6   6
+#
+#
+#    K-point              Band                 Eo [eV]              E [eV]               E-Eo [eV]            Fock|Eo [eV]         V_xc|Eo [eV]         Real-Axis|Eo [eV]    dSc/dw|Eo            Re(Z)                Im(Z)                Im(E) [eV]
+#
+        1                    2                    0.000000             0.765677             0.765677            -13.57495            -11.37563             3.142815            -0.232353             0.811331            -0.010049             0.006327
+        1                    3                    0.000000             0.733363             0.733363            -13.57495            -11.37563             3.104664            -0.234638             0.809830            -0.010019             0.006598
+        1                     4                   0.000000             0.750512             0.750512            -13.57495            -11.37563             3.124881            -0.233369             0.810663            -0.010035             0.006448
+        1                     5                   1.961827             3.741775             1.779948            -4.507333            -9.622737            -2.919928            -0.232554             0.810919            -0.018126            -0.057886
+        2                    3                   -0.824501            -0.187294             0.637206            -13.34855            -11.05302             3.091594            -0.249592             0.799955            -0.015653             0.007465
+        2                     4                  -0.824501            -0.197803             0.626697            -13.34855            -11.05302             3.078813            -0.250158             0.799593            -0.015639             0.007635
+        2                     5                   2.045931             3.735696             1.689765            -4.268281            -9.073071            -2.749388            -0.215791             0.822253            -0.014531            -0.046627
+        3                    3                   -2.172385            -1.683802             0.488583            -12.92309            -10.47344             3.078825            -0.288889             0.775237            -0.022007             0.015319
+        3                     4                  -2.172385            -1.693280             0.479105            -12.92309            -10.47344             3.066640            -0.288993             0.775165            -0.022178             0.015551
+        3                     5                   1.358279             2.834873             1.476595            -3.340595            -7.836459            -2.725014            -0.198838             0.833956            -0.012422            -0.036481
+        3                     6                   2.190315             3.926450             1.736136            -3.960989            -8.562022            -2.522380            -0.196831             0.835338            -0.012990            -0.042601
+# 
+# 10/17/2026 at 11:07 yambo @ UNIJ2P4Q7TFK3 [start]
+# 10/17/2026 at 11:07                       [end]
+#
+# .-Input file  05_ff/05_ff
+# | #
+# | # ==== Runlevels ===
+# | dipoles                                     # Oscillator strenghts (or dipoles)
+# | X_dynamic                                   # Dynamically Screened Interaction
+# | self_energy                                 # Self-energy and quasi-particle corrections
+# | #
+# | # ==== MPI (V=parallel) ===
+# | HFlXC_CPU= "2.1.1.1"                        # CPUs for each role
+# | HFlXC_ROLEs= "qp.g.q.b"                     # CPUs roles (qp,g,q,b)
+# | DIP_CPU= "2.1.1"                            # CPUs for each role
+# | DIP_ROLEs= "k.c.v"                          # CPUs roles (k,c,v)
+# | EM1D_CPU= "2.1.1.1.1"                       # CPUs for each role
+# | EM1D_ROLEs= "q.g.k.c.v"                     # CPUs roles (q,g,k,c,v)
+# | EM1D_nCPU_LinAlg_INV=-1                     # CPUs for Linear Algebra (if -1 it is automatically set)
+# | GW_CPU= "2.1.1.1"                           # CPUs for each role
+# | GW_ROLEs= "qp.g.q.b"                        # CPUs roles (qp,g,q,b)
+# | #
+# | # ==== Bosons (V=bosons) ===
+# | BoseTemp= 0.000000                   [K]    # Bosonic Temperature
+# | #
+# | # ==== Fields (V=fields) ===
+# | EF_interaction= "r.E"                       # Interaction kind (r.E|p.A)
+# | #
+# | # ==== Dipoles (V=dipoles) ===
+# | % DipBands
+# |   1 | 10 |                                  # Bands range for dipoles
+# | %
+# | DipComputed= " R V P [G-space]"             # [default R P V; extra P2 Spin Orb]
+# | #
+# | # ==== Hartree-Fock (V=hf) ===
+# | EXXRLvcs= 307                        [RL]   # Exchange    RL components
+# | VXCRLvcs= 10417                      [RL]   # XCpotential RL components
+# | #
+# | # ==== Frequency sampling ===
+# | % EM1D_EnRnge
+# |   0.00000 | 27.19433 |               [eV]   # Real frequency range
+# | %
+# | % EM1D_DmRnge
+# |  0.100000 | 0.100000 |               [eV]   # Frequency damping range
+# | %
+# | EM1D_ETStps=  600                           # Frequency steps
+# | #
+# | # ==== Dynamical dielectric matrix (V=X) ===
+# | EM1D_NGsBlk=  51                     [RL]   # Response block size
+# | % EM1D_QpntsR
+# |  1 | 3 |                                    # Transferred momenta
+# | %
+# | % EM1D_BndsRn
+# |   1 | 10 |                                  # Polarization function bands
+# | %
+# | EM1D_DrudeW= ( 0.97421E-35 , 0.93711E-39 ) [eV]   # Drude plasma frequency
+# | % EM1D_LongDr
+# |  1.000000 | 1.000000 | 1.000000 |           # [cc] Electric Field
+# | %
+# | EM1D_CGrdSp= 100.0000                       # [o/o] Poles coarse grid controller
+# | % EM1D_EhEngy
+# |   0.00000 | 27.19433 |               [eV]   # Electron-hole energy range
+# | %
+# | #
+# | # ==== TDDFT ===
+# | TDDFTKernel= "HARTREE"                      # TDDFT Kernel: IP/Hartree/ALDA/LRC/PF/BSfxc
+# | #
+# | # ==== GW (V=gw) ===
+# | % GbndRnge
+# |   1 | 10 |                                  # G[W] bands range
+# | %
+# | #
+# | # ==== Self-energy (V=qp) ===
+# | SEApprox= "FF"                              # Self-energy approximation ("HF","COHSEX","PPA")
+# | DysSolver= "n"                              # Dyson Equation solver ("n","s","g")
+# | GDamping= 0.100000                   [eV]   # G[W] damping
+# | ExtendOut                       # Print all variables in the output file

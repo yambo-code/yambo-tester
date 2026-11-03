@@ -1,0 +1,44 @@
+  MPI cpu                               :  2
+  Computing nodes                       :  1
+
+             [Time-Profile]: 08s
+
+  Clock: global (MAX - min (if any spread is present) clocks)
+                                       Xo (REDUX) :      0.0000s P1 (  3 calls,   0.001 msec avg) [MAX]      0.0000s P2 (  4 calls,   0.000 msec avg) [min]
+                                            io_QP :      0.0052s P1 [MAX]      0.0000s P2 [min]
+                                  io_PP_KB_abinit :      0.0000s P1 [MAX]      0.0000s P2 [min]
+                              io_DL_ATMPROJ_pwscf :      0.0000s P1 [MAX]      0.0000s P2 [min]
+                            io_COLL_collisions_HF :      0.0000s P1 [MAX]      0.0000s P2 [min]
+                           io_COLL_collisions_SEX :      0.0000s P1 [MAX]      0.0000s P2 [min]
+                          IO_srv_Messaging_switch :      0.0000s P2 ( 13 calls,   0.002 msec avg)
+                                        io_FineGd :      0.0000s P2 (  2 calls,   0.017 msec avg) [MAX]      0.0000s P1 (  2 calls,   0.017 msec avg) [min]
+                                       io_COL_CUT :      0.0014s P1 (  4 calls,   0.362 msec avg) [MAX]      0.0001s P2 (  4 calls,   0.014 msec avg) [min]
+                                     PP_uspp_init :      0.0001s P2 (  7 calls,   0.020 msec avg) [MAX]      0.0001s P1 (  6 calls,   0.017 msec avg) [min]
+                                   Coulomb Cutoff :      0.0016s P1 [MAX]      0.0001s P2 [min]
+                                     SCATTER_Gamp :      0.0006s P2 (105 calls,   0.005 msec avg) [MAX]      0.0005s P1 (105 calls,   0.005 msec avg) [min]
+                                     io_EL_shells :      0.0013s P1 (  2 calls,   0.626 msec avg)
+                                SERIAL_lin_system :      0.0022s P2 (  8 calls,   0.269 msec avg) [MAX]      0.0016s P1 (  6 calls,   0.269 msec avg) [min]
+                                   LINEAR ALGEBRA :      0.0022s P2 (  8 calls,   0.272 msec avg) [MAX]      0.0016s P1 (  6 calls,   0.271 msec avg) [min]
+                                        FFT_setup :      0.0021s P2 (  8 calls,   0.261 msec avg) [MAX]      0.0021s P1 (  7 calls,   0.296 msec avg) [min]
+       Plasmon-Pole dielectric matrix (procedure) :      0.0030s P2 (  4 calls,   0.738 msec avg) [MAX]      0.0022s P1 (  3 calls,   0.737 msec avg) [min]
+                                     io_RL_shells :      0.0026s P1 (  2 calls,   1.314 msec avg) [MAX]      0.0026s P2 (  2 calls,   1.288 msec avg) [min]
+                                   io_KPT_indexes :      0.0046s P2 (  5 calls,   0.913 msec avg) [MAX]      0.0044s P1 (  5 calls,   0.877 msec avg) [min]
+                                   io_PP_KB_pwscf :      0.0050s P2 (  6 calls,   0.836 msec avg) [MAX]      0.0047s P1 (  6 calls,   0.784 msec avg) [min]
+                              XC_potential_driver :      0.0047s P1 (  2 calls,   2.365 msec avg) [MAX]      0.0047s P2 (  2 calls,   2.355 msec avg) [min]
+                                            io_SE :      0.0234s P1 ( 65 calls,   0.360 msec avg) [MAX]      0.0077s P2 ( 65 calls,   0.118 msec avg) [min]
+                                     HF_lXC_local :      0.0120s P1 [MAX]      0.0108s P2 [min]
+                                  IO_srv_fragment :      0.0183s P2 ( 52 calls,   0.351 msec avg) [MAX]      0.0141s P1 ( 46 calls,   0.307 msec avg) [min]
+                                             io_X :      0.0208s P1 ( 19 calls,   1.093 msec avg) [MAX]      0.0153s P2 ( 20 calls,   0.766 msec avg) [min]
+                                            io_WF :      0.0270s P2 ( 53 calls,   0.510 msec avg) [MAX]      0.0206s P1 ( 46 calls,   0.449 msec avg) [min]
+                                io_COLL_dipoles_P :      0.0304s P1 (  4 calls,   7.606 msec avg) [MAX]      0.0273s P2 (  4 calls,   6.823 msec avg) [min]
+                                io_COLL_dipoles_V :      0.0351s P1 (  4 calls,   8.772 msec avg) [MAX]      0.0287s P2 (  4 calls,   7.172 msec avg) [min]
+                               io_COLL_dipoles_iR :      0.0945s P2 (  6 calls,  15.754 msec avg) [MAX]      0.0302s P1 (  4 calls,   7.543 msec avg) [min]
+                                   DIPOLE_g_space :      0.1145s P1 [MAX]      0.0930s P2 [min]
+                                          WF_load :      0.1333s P2 (  7 calls,  19.047 msec avg) [MAX]      0.1058s P1 (  6 calls,  17.640 msec avg) [min]
+                                             Fock :      0.1595s P1 [MAX]      0.1579s P2 [min]
+                              DIPOLE_get_database :      0.1610s P2
+                                          Dipoles :      0.2107s P1 [MAX]      0.1906s P2 [min]
+                                   Xo (procedure) :      1.7983s P2 (  4 calls,   0.450 sec avg) [MAX]      1.5509s P1 (  3 calls,   0.517 sec avg) [min]
+                                     Plasmon-Pole :      3.0702s P1 [MAX]      3.0696s P2 [min]
+                                           RIM(V) :      3.2484s P2 [MAX]      3.2484s P1 [min]
+

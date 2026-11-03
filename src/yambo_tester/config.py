@@ -10,6 +10,7 @@ from pathlib import Path
 import importlib.resources
 from datetime import datetime
 from .versioning import resolve_yambo_version
+from .variants import load_variant  # --variant check
 
 # Default parameters
 PARAMETERS = {
@@ -25,7 +26,12 @@ PARAMETERS = {
     'runlevels': [],
     'download_link': "",
     'yambo_version': "",
+    'yambo_variant': "",  # development-branch input dialect (data/variants.toml)
     }
+
+# Default SLURM settings for benchmark mode ([cluster] in config.toml)
+CLUSTER = {'partition': "", 'account': "", 'qos': "", 'time': "01:00:00", 'modules': [], 'setup': [], 'mpi': "",  # used by --submit; mpi "" = parameters.mpi_launcher
+           'nodes': [], 'tasks_per_node': 0, 'threads': 0, 'template': ""}  # machine shape (empty: from [benchmark]), own sbatch template
 
 REQUIRED_EXECUTABLES = {
     'yambo': 'yambo',
@@ -69,6 +75,7 @@ def load_config():
     if config["parameters"].get("download_link"):
         config["parameters"]["download_link_origin"] = "config"
     config.setdefault("executables", {})
+    config["cluster"] = {**CLUSTER, **config.get("cluster", {})}  # benchmark SLURM defaults, file values win
 
     # Overwrite default parameters with those read from the config file.
     for parameter in PARAMETERS:
@@ -261,6 +268,7 @@ def check_parameters(parameters, executables=None, logger=None):
         yambo_info = get_yambo_info(parameters['executables']['yambo'])
         parameters.update(yambo_info)
         parameters = resolve_runtime_yambo_version(parameters, yambo_info, logger)
+        load_variant(parameters.get('yambo_variant'), parameters['yambo_version'])  # fail early on unknown/mismatched variant
         if parameters.get('download_link'):
             logger.info(f"download_link: {parameters['download_link']}")
         

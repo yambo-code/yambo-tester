@@ -1,0 +1,44 @@
+# Bulk fcc Ni, non-collinear magnetic (spinor, magnetic symmetries) HF only. 16x16x16 k-grid
+# (144 IBZ points, 205 IBZ q-points: too many for a screening test), 20 bands, EXXRLvcs=200 RL,
+# QP k 1-4 bands 5-14. Y6 vs Y5 agree to 1.4e-5 eV at porting time.
+
+sha256 = "2b9ca4482682df66c7b9662564d3745984a2dc64742d5cc55770dbd65239371b"
+tarball_url = "https://media.yambo-code.eu/robots/databases/y6"
+
+[yambo_versions]
+supported = ["5", "6"]
+
+[00_p2y]
+step_type = "p2y"
+input_dir = "Ni.save"
+
+[01_init]
+exe = "yambo"
+output = "01_init"
+runlevel = "init"
+dependencies = ["00_p2y"]
+
+[01_init.reference]
+"REFERENCE/Y6/r-01_init_setup" = ["Game Over & Game summary"]
+
+[01_init.versions."5".reference]
+"REFERENCE/Y5/r-01_init_setup" = ["Game Over & Game summary"]
+
+[02_hf]
+exe = "yambo"
+input = "INPUTS/Y6/02_hf"
+output = "02_hf"
+runlevel = "hf"
+dependencies = ["01_init"]
+
+[02_hf.reference]
+"REFERENCE/Y6/o-02_hf.Fock-V_xc_qp" = { path = "o-02_hf.Fock-V_xc_qp", tolerance = 0.001 }
+"REFERENCE/Y6/o-02_hf.ndb.QP_Fock-V_xc" = { path = "02_hf/ndb.QP_Fock-V_xc", variables = ["QP energies"], tolerance = 0.001 }
+"REFERENCE/Y6/r-02_hf_self_energy" = ["Game Over & Game summary"]
+
+[02_hf.versions."5"]
+input = "INPUTS/Y5/02_hf"
+
+[02_hf.versions."5".reference]
+"REFERENCE/Y5/o-02_hf.hf" = { path = "o-02_hf.hf", tolerance = 0.001 }
+"REFERENCE/Y5/r-02_hf_REPORT5" = ["Game Over & Game summary"]

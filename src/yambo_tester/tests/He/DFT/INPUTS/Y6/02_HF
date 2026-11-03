@@ -15,11 +15,10 @@
 #
 #
 # ==== Runlevels ===
-HF_lXC                                      # Hartree-Fock
+self_energy                                 # Self-energy and quasi-particle corrections
 rim_cut                                     # Coulomb potential
 #
 # ==== OpenMP ===
-HF_lXC_Threads=0                            # [HF_lXC] Number of threads
 #
 # ==== MPI (V=parallel) ===
 NLogCPUs=0                                  # Live-timing CPU`s (0 for all)
@@ -46,12 +45,17 @@ DBsIOoff= "none"                            # Space-separated list of DB with NO
 DBsFRAGpm= "none"                           # Space-separated list of +DB to FRAG and -DB to NOT FRAG. DB=(DIP,X,W,HF,COLLS,K,BS,QINDX,RT,ELPH,SC,
 #
 # ==== Hartree-Fock (V=hf) ===
+RandQpts=0                                  # Number of random q-points in the BZ
+RandGvec= 1                          [RL]   # Coulomb interaction RS components
+CUTGeo= "ws x"                              # Coulomb Cutoff geometry (same as the Y5 input)
+CUTwsGvec= 0.700000                         # WS cutoff: number of G to be modified
 EXXRLvcs= 257                      [RL]   # Exchange    RL components
 VXCRLvcs= 257                      [RL]   # XCpotential RL components
 # ==== Hartree-Fock (V=hf) ===
-%HF_lXC_krange                   # Generalized Kpoint/Band indices
+SEApprox= "HF"                              # Self-energy approximation ("HF","COHSEX","PPA")
+%QP_krange                       # Generalized Kpoint/Band indices
 1|1|1|1|
 %
-%HF_lXC_erange                   # Generalized Kpoint/Energy indices
+%QP_erange                       # Generalized Kpoint/Energy indices
 1|1| 0.000000|-1.000000|
 %

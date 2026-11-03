@@ -1,0 +1,32 @@
+rim_cut                          # [R] Coulomb potential
+gw0                              # [R] GW approximation
+cohsex                           # [R][Xp] COlumb Hole Screened EXchange
+dyson                            # [R] Dyson Equation solver
+el_el_corr                       # [R] Electron-Electron Correlation
+HF_and_locXC                     # [R] Hartree-Fock
+em1s                             # [R][Xs] Statically Screened Interaction
+dipoles                          # [R] Oscillator strenghts (or dipoles)
+#DegFix                        # Force the code to impose the energy levels to respect their degeneracy
+RandQpts= 1000000
+RandGvec= 100 RL
+CUTGeo= "slab z"
+% CUTBox
+ 0.000000 | 0.000000 | 0.000000 |        # [CUT] [au] Box sides
+%
+CUTRadius= 0.000000              # [CUT] [au] Sphere/Cylinder radius
+CUTCylLen= 0.000000              # [CUT] [au] Cylinder length
+CUTwsGvec= 0.700000              # [CUT] WS cutoff: number of G to be modified
+EXXRLvcs= 1000 RL
+VXCRLvcs= 1000 RL
+Chimod= "HARTREE"                # [X] IP/Hartree/ALDA/LRC/PF/BSfxc
+% BndsRnXs
+  1 | 40 |
+%
+NGsBlkXs= 100 RL
+% LongDrXs
+ 1.000000 | 0.000000 | 0.000000 |        # [Xs] [cc] Electric Field
+%
+%QPkrange                        # [GW] QP generalized Kpoint/Band indices
+1|7|3|6|
+%
+ExtendOut

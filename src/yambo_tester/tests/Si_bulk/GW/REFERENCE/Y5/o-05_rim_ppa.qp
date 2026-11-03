@@ -1,0 +1,138 @@
+#  __      __   ______   __       __  _______    ______               
+# |  \    /  \ /      \ |  \     /  \|       \  /      \              
+#  \$$\  /  $$|  $$$$$$\| $$\   /  $$| $$$$$$$\|  $$$$$$\             
+#   \$$\/  $$ | $$__| $$| $$$\ /  $$$| $$__/ $$| $$  | $$             
+#    \$$  $$  | $$    $$| $$$$\  $$$$| $$    $$| $$  | $$             
+#     \$$$$   | $$$$$$$$| $$\$$ $$ $$| $$$$$$$\| $$  | $$             
+#     | $$    | $$  | $$| $$ \$$$| $$| $$__/ $$| $$__/ $$             
+#     | $$    | $$  | $$| $$  \$ | $$| $$    $$ \$$    $$             
+#      \$$     \$$   \$$ \$$      \$$ \$$$$$$$   \$$$$$$              
+#                                                                     
+# Version 5.4.0 Revision 24143 Hash (prev commit) 77ed66f02           
+#                        Branch is                                    
+#                MPI+SLK+HDF5_MPI_IO Build                            
+#                http://www.yambo-code.eu                             
+#
+#
+# GW solver                                       : Newton
+# GW approximation                                : PPA
+# PPA imaginary Energy                            :   27.2113800    [ev]
+# RIM G`s                                         :   51
+# RIM random pts                                  :   5000000
+# dS/dw steps                                     :  2
+# dS/dw step                                      :  0.100000001    [ev]
+# X G`s                                           :   51 [used]
+# X G`s                                           :   51 [disk]
+# X bands                                         :   1  10
+# X poles                                         :   100.000000    [o/o]
+# X e/h E range                                   :  -1.00000000     -1.00000000    [ev]
+# X Hxc Kernel                                    : HARTREE
+# X BZ energy Double Grid                         : no
+# X Optical Averaged directions                   : none
+# Sc/G bands                                      :   1  10
+# Sc/G damping                                    :  0.100000001    [ev]
+# Sc bands terminator                             : no
+# Sx RL components                                :  307
+#                                                 
+# QP @ state[ 1 ] K range                         :   1   8
+# QP @ state[ 1 ] b range                         :   3   6
+# GF energies kind                                : Perdew, Burke & Ernzerhof(X)+Perdew, Burke & Ernzerhof(C)
+# GF WF`s kind                                    : Perdew, Burke & Ernzerhof(X)+Perdew, Burke & Ernzerhof(C)
+# Xs energies kind                                : Perdew, Burke & Ernzerhof(X)+Perdew, Burke & Ernzerhof(C)
+# Xs WF`s kind                                    : Perdew, Burke & Ernzerhof(X)+Perdew, Burke & Ernzerhof(C)
+#
+# Vxc  =Perdew, Burke & Ernzerhof(X)+Perdew, Burke & Ernzerhof(C)
+# Vnlxc=Hartree-Fock
+#
+#    K-point            Band               Eo [eV]            E [eV]             E-Eo [eV]          Vxc [eV]           Vnlxc [eV]         Sc|Eo [eV]         Sc|E [eV]          dSc/dw|Eo [eV]     Re(Z)              Im(Z)              Width [meV]        Width [fs]
+#
+        1                  3                  0.000000           0.662993           0.662993          -11.27121          -12.86830           2.432309           2.260078          -7.070067           0.793760          -0.001791           9.761056           67.43244
+        1                   4                 0.000000           0.662971           0.662971          -11.27121          -12.86831           2.432316           2.260062          -7.071226           0.793733          -0.001791           9.760276           67.43784
+        1                   5                 2.528067           3.929503           1.401436          -9.972004          -5.701998          -2.508044          -2.868568          -6.999452           0.795399          -0.001628          -15.39974           42.74176
+        1                   6                 2.528067           3.929584           1.401517          -9.972003          -5.701999          -2.507956          -2.868487          -6.999176           0.795406          -0.001628          -15.40008           42.74082
+        2                  3                 -0.756453          -0.194576           0.561877          -11.03438          -12.82760           2.507154           2.355098          -7.365550           0.786976          -0.001852           10.64852           61.81251
+        2                   4                -0.756453          -0.194890           0.561563          -11.03438          -12.82759           2.506734           2.354770          -7.365163           0.786985          -0.001851           10.64806           61.81521
+        2                   5                 1.939570           3.331816           1.392246          -10.03948          -5.796810          -2.503627          -2.850426          -6.777343           0.800596          -0.001786          -15.31083           42.98996
+        2                   6                 3.471300           4.968544           1.497244          -10.01623          -5.455235          -2.677520          -3.063751          -7.018761           0.794951          -0.001482          -16.64763           39.53787
+        3                  3                 -1.194291          -0.708768           0.485523          -11.00585          -13.08396           2.698791           2.563628          -7.577231           0.782188          -0.001820           11.91525           55.24113
+        3                   4                -1.194291          -0.708208           0.486083          -11.00585          -13.08396           2.699514           2.564193          -7.577397           0.782184          -0.001820           11.91743           55.23102
+        3                   5                 1.454553           2.790482           1.335930          -10.01772          -5.907328          -2.444776          -2.774458          -6.714451           0.802081          -0.001754          -14.56254           45.19898
+        3                   6                 3.336540           4.814516           1.477977          -9.594402          -5.018169          -2.729326          -3.098257          -6.791356           0.800264          -0.002185          -17.92450           36.72135
+         4                 3                 -1.869181          -1.444836           0.424345          -10.66957          -12.88021           2.756621           2.634984          -7.802595           0.777153          -0.001908           12.64603           52.04888
+         4                  4                -1.869181          -1.444732           0.424449          -10.66957          -12.88021           2.756762           2.635092          -7.802760           0.777149          -0.001907           12.64491           52.05350
+         4                  5                 1.131737           2.308111           1.176374          -9.291791          -5.461316          -2.367374          -2.654101          -6.631588           0.804045          -0.001751          -13.70077           48.04195
+         4                  6                 3.125371           4.525565           1.400194          -9.110995          -4.601095          -2.770110          -3.109706          -6.599039           0.804820          -0.001352          -16.50999           39.86750
+         5                 3                 -3.487262          -3.212826           0.274436          -10.15094          -12.84095           3.049693           2.964454          -8.457776           0.762875          -0.002370           14.96342           43.98806
+         5                  4                -2.181883          -1.809520           0.372363          -10.66364          -13.08246           2.900414           2.791190          -7.984210           0.773145          -0.001456           13.66705           48.16049
+         5                  5                 1.527177           2.728418           1.201241          -9.147183          -5.144095          -2.512321          -2.801847          -6.557662           0.805805          -0.001739          -14.55261           45.22982
+         5                  6                 4.432318           5.922296           1.489977          -9.540669          -4.803937          -2.871108          -3.246755          -6.860151           0.798654          -0.590164E-3       -16.54106           39.79261
+         6                 3                 -3.694957          -3.453649           0.241308          -9.990483          -12.77519           3.103648           3.026012          -8.740735           0.756844           0.005098           13.94703           47.19371
+         6                  4                -1.318831          -0.839808           0.479023          -10.90943          -12.92641           2.629633           2.496001          -7.593175           0.781829          -0.001902           11.65783           56.46095
+         6                  5                 2.420158           3.796990           1.376831          -9.526004          -5.182787          -2.627296          -2.966385          -6.700880           0.802402          -0.001661          -15.81684           41.61462
+         6                  6                 4.728638           6.303555           1.574917          -10.05378          -4.911574          -3.127196          -3.567285          -7.601395           0.781635          -0.003358          -25.87097           25.44210
+         7                 3                 -2.819646          -2.523502           0.296145          -10.53609          -13.28349           3.133635           3.043551          -8.283113           0.766629          -0.002492           14.75557           44.60770
+         7                  4                -2.819646          -2.523494           0.296152          -10.53609          -13.28350           3.133647           3.043560          -8.283168           0.766627          -0.002492           14.75513           44.60903
+         7                  5                 0.734618           1.818580           1.083962          -8.896849          -5.115874          -2.438760          -2.697012          -6.482192           0.807610          -0.001708          -13.49705           48.76708
+         7                  6                 0.734618           1.819070           1.084452          -8.896853          -5.115873          -2.438186          -2.696527          -6.481474           0.807627          -0.001708          -13.49603           48.77079
+         8                 3                 -3.788287          -3.574837           0.213449          -9.922788          -12.76338           3.129108           3.054044          -9.557450           0.740049           0.003648           14.23458           46.24033
+         8                  4                -3.788287          -3.575012           0.213275          -9.922787          -12.76338           3.128994           3.053869          -9.572456           0.739745           0.003784           14.34597           45.88131
+         8                  5                 4.280911           5.711162           1.430251          -9.473117          -4.967162          -2.730378          -3.075704          -6.570737           0.805484           0.003177          -7.417683           88.73550
+         8                  6                 4.280911           5.711070           1.430159          -9.473118          -4.967165          -2.730510          -3.075794          -6.570295           0.805498           0.002767          -8.053547           81.72944
+# 
+# 10/12/2026 at 19:57 yambo @ UNIJ2P4Q7TFK3 [start]
+# 10/12/2026 at 19:57                       [end]
+#  
+# Timing   [Min/Max/Average]: 07s/07s/07s
+#
+# .-Input file  05_rim_ppa/05_rim_ppa
+# | HF_and_locXC                     # [R] Hartree-Fock
+# | gw0                              # [R] GW approximation
+# | dyson                            # [R] Dyson Equation solver
+# | rim_cut                          # [R] Coulomb potential
+# | em1d                             # [R][X] Dynamically Screened Interaction
+# | ppa                              # [R][Xp] Plasmon Pole Approximation for the Screened Interaction
+# | el_el_corr                       # [R] Electron-Electron Correlation
+# | BoseTemp= 0.000000         eV    # Bosonic Temperature
+# | #DegFix                        # Force the code to impose the energy levels to respect their degeneracy
+# | FFTGvecs=  609             RL    # [FFT] Plane-waves
+# | X_and_IO_CPU= "2.1.1"            # [PARALLEL] CPUs for each role
+# | X_and_IO_ROLEs= "c.k.q"          # [PARALLEL] CPUs roles (q,g,k,c,v)
+# | X_and_IO_nCPU_LinAlg_INV= 1      # [PARALLEL] CPUs for Linear Algebra (if -1 it is automatically set)
+# | DIP_CPU= "2.1"                   # [PARALLEL] CPUs for each role
+# | DIP_ROLEs= "v.k"                 # [PARALLEL] CPUs roles (k,c,v)
+# | SX_CPU= "2.1"                    # [PARALLEL] CPUs for each role
+# | SX_ROLEs= "b.q"                  # [PARALLEL] CPUs roles (q,g,qp,b)
+# | SE_CPU= "2.1"                    # [PARALLEL] CPUs for each role
+# | SE_ROLEs= "b.q"                  # [PARALLEL] CPUs roles (q,g,qp,b)
+# | RandQpts=  5000000               # [RIM] Number of random q-points in the BZ
+# | RandGvec=  51              RL    # [RIM] Coulomb interaction RS components
+# | CUTGeo= "none"                   # [CUT] Coulomb Cutoff geometry: box/cylinder/sphere/ws/slab X/Y/Z/XY..
+# | % CUTBox
+# |  0.000000 | 0.000000 | 0.000000 |        # [CUT] [au] Box sides
+# | %
+# | CUTRadius= 0.000000              # [CUT] [au] Sphere/Cylinder radius
+# | CUTCylLen= 0.000000              # [CUT] [au] Cylinder length
+# | CUTwsGvec= 0.000000              # [CUT] WS cutoff: number of G to be modified
+# | EXXRLvcs= 307              RL    # [XX] Exchange    RL components
+# | VXCRLvcs=  3383            RL    # [XC] XCpotential RL components
+# | Chimod= "HARTREE"                # [X] IP/Hartree/ALDA/LRC/PF/BSfxc
+# | % BndsRnXp
+# |   1 | 10 |                           # [Xp] Polarization function bands
+# | %
+# | NGsBlkXp=  51              RL    # [Xp] Response block size
+# | % LongDrXp
+# |  0.100000E-4 |  0.00000    |  0.00000    # [Xp] [cc] Electric Field
+# | %
+# | PPAPntXp= 27.21138         eV    # [Xp] PPA imaginary energy
+# | % GbndRnge
+# |   1 | 10 |                           # [GW] G[W] bands range
+# | %
+# | GTermKind= "none"                # [GW] GW terminator ("none","BG" Bruneval-Gonze,"BRS" Berger-Reining-Sottile)
+# | DysSolver= "n"                   # [GW] Dyson Equation solver ("n","s","g","q")
+# | ExtendOut                      # [GW] Print all variables in the output file
+# | %QPkrange                        # [GW] QP generalized Kpoint/Band indices
+# | 1|8|3|6|
+# | %
+# | %QPerange                        # [GW] QP generalized Kpoint/Energy indices
+# | 1|8| 0.000000|-1.000000|
+# | %

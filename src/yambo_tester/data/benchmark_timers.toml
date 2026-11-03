@@ -1,0 +1,18 @@
+# Report labels read by `yambo-tester --collect`, for Yambo 5 and Yambo 6 together.
+# Labels differ between versions and change while Y6 is developed: add new names here.
+# A column whose labels are all missing in a report triggers a warning (never a silent 0).
+
+[resources]                     # r- header line -> value
+tasks = ["MPI Cores", "MPI cpu"]                  # Y5, Y6
+threads = ["Threads per core", "OPENMP threads"]  # Y5 | Y6
+nodes = ["Nodes Computing", "Computing nodes"]    # Y5, Y6
+
+[columns]                       # result.dat column -> Clock timers summed (MAX values)
+Dipoles = ["Dipoles"]                             # Y5 and Y6
+Xo = ["Xo (procedure)"]                           # Y5 and Y6
+X = ["X (procedure)",                             # Y5
+     "Plasmon-Pole dielectric matrix (procedure)",  # Y6 PPA
+     "Dynamical dielectric matrix (procedure)",     # Y6 EM1D
+     "Static dielectric matrix (procedure)"]        # Y6 EM1S
+"Self Energy" = ["HF", "GW(ppa)", "GW(mpa)",      # Y5
+                 "Fock", "Plasmon-Pole"]          # Y6

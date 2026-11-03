@@ -1,0 +1,52 @@
+rim_cut                                     # Coulomb potential
+self_energy                                 # Self-energy and quasi-particle corrections
+X_PPA                                       # Plasmon Pole Approximation for the Screened Interaction
+dipoles                                     # Oscillator strenghts (or dipoles)
+HFlXC_CPU= ""                               # CPUs for each role
+HFlXC_ROLEs= ""                             # CPUs roles (qp,g,q,b)
+DIP_CPU= ""                                 # CPUs for each role
+DIP_ROLEs= ""                               # CPUs roles (k,c,v)
+PPA_CPU= ""                                 # CPUs for each role
+PPA_ROLEs= ""                               # CPUs roles (q,g,k,c,v)
+PPA_nCPU_LinAlg_INV=-1                      # CPUs for Linear Algebra (if -1 it is automatically set)
+GW_CPU= ""                                  # CPUs for each role
+GW_ROLEs= ""                                # CPUs roles (qp,g,q,b)
+EF_interaction= "r.E"                       # Interaction kind (r.E|p.A)
+CUTGeo= "slab z"
+% CUTBox
+ 0.000000 | 0.000000 | 0.000000 |           # [au] Box sides
+%
+CUTRadius= 0.000000                         # [au] Sphere/Cylinder radius
+CUTCylLen= 0.000000                         # [au] Cylinder length
+CUTwsGvec= 0.700000                         # WS cutoff: number of G to be modified
+#CUTCol_test                    # Perform a cutoff test in R-space
+RandQpts= 1000000
+RandGvec= 100 RL
+% DipBands
+  1 | 40 |
+%
+EXXRLvcs= 1000 RL
+VXCRLvcs= 1000 RL
+PPA_NGsBlk= 100 RL
+% PPA_QpntsR
+  1 |  7 |                                  # Transferred momenta
+%
+% PPA_BndsRn
+  1 | 40 |
+%
+% PPA_LongDr
+ 1.000000 | 0.000000 | 0.000000 |           # [cc] Electric Field
+%
+PPA_CGrdSp= 100.0000                        # [o/o] Poles coarse grid controller
+PPA_PPAPnt= 27.21139                 [eV]   # PPA imaginary energy
+TDDFTKernel= "HARTREE"                      # TDDFT Kernel: IP/Hartree/ALDA/LRC/PF/BSfxc
+% GbndRnge
+  1 | 40 |
+%
+SEApprox= "PPA"                             # Self-energy approximation ("HF","COHSEX","PPA")
+DysSolver= "n"                              # Dyson Equation solver ("n","s","g")
+GDamping= 0.100000                   [ev]   # G[W] damping
+%QP_krange                       # Generalized Kpoint/Band indices
+1|7|3|6|
+%
+ExtendOut

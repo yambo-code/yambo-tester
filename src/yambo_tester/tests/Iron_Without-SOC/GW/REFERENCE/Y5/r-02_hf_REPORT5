@@ -1,0 +1,486 @@
+                                                                          
+     /$$     /$$ /$$$$$$  /$$      /$$ /$$$$$$$   /$$$$$$                 
+    |  $$   /$$//$$__  $$| $$$    /$$$| $$__  $$ /$$__  $$                
+     \  $$ /$$/| $$  \ $$| $$$$  /$$$$| $$  \ $$| $$  \ $$                
+      \  $$$$/ | $$$$$$$$| $$ $$/$$ $$| $$$$$$$ | $$  | $$                
+       \  $$/  | $$__  $$| $$  $$$| $$| $$__  $$| $$  | $$                
+        | $$   | $$  | $$| $$\  $ | $$| $$  \ $$| $$  | $$                
+        | $$   | $$  | $$| $$ \/  | $$| $$$$$$$/|  $$$$$$/                
+        |__/   |__/  |__/|__/     |__/|_______/  \______/                 
+                                                                          
+    Version 5.4.0 Revision 24143 Hash (prev commit) 77ed66f02             
+                          Branch is                                       
+                  MPI+SLK+HDF5_MPI_IO Build                               
+                   http://www.yambo-code.eu                               
+ 
+ 10/17/2026 at 11:16 yambo @ UNIJ2P4Q7TFK3
+ ==================================================
+
+ Cores-Threads       : 2(CPU)-1(threads)-1(threads@X)-1(threads@DIP)-1(threads@SE)-1(threads@SX)-1(threads@RT)-1(threads@K)-1(threads@NL)-1(threads@OSCLL)
+ MPI Cores           :  2
+ Threads per core    :  1
+ Threads total       :  2
+ Nodes Computing     :  1
+ Nodes IO            :  1
+
+ Fragmented WFs      : yes
+ CORE databases      : .
+ Additional I/O      : .
+ Communications      : 02_hf
+ Input file          : 02_hf/02_hf
+ Report file         : 02_hf/r-02_hf_HF_and_locXC
+ Verbose log/report  : no
+ Log files           : 02_hf/LOG
+
+ Job   string        : 02_hf
+
+ Precision           : SINGLE
+  
+ [RD./SAVE//ns.db1]--------------------------------------------------------------
+  Bands                                            :  15
+  K-points                                         :   6
+  G-vectors                                        :  10833 [RL space]
+  Components                                       :  1358 [wavefunctions]
+  Symmetries                                       :   48 [spatial]
+  Spinor components                                :  1
+  Spin polarizations                               :  2
+  Temperature                                      :  0.000000 [eV]
+  Electrons                                        :  16.00000
+  WF G-vectors                                     :  1717
+  Max atoms/species                                :  1
+  No. of atom species                              :  1
+  Exact exchange fraction in XC                    :  0.000000
+  Exact exchange screening in XC                   :  0.000000
+  Magnetic symmetries                              : no
+ - S/N 006241 ---------------------------------------------- v.05.04.00 r.24143 -
+
+ [02] CORE Variables Setup
+ =========================
+
+
+  [02.01] Unit cells
+  ==================
+
+  Cell kind             :  BCC
+  Atoms in the cell     :  Fe
+  number of Fe atoms    :  1
+
+  List of atomic masses
+  Mass of Fe    :  55.84700
+
+  List of atomic coordinates    : [cc]
+  Fe1       :  0.000000  0.000000  0.000000  order 1
+
+  Alat factors          :  2.710000  2.710000  2.710000 [a.u.]
+  Direct lattice volume :  79.61005 [a.u.]
+  Direct lattice vectors:  A[ 1 ]  A[ 2 ]  A[ 3 ]
+   A[ 1 ]: -1.000000  1.000000  1.000000  [iru]
+   A[ 2 ]:  1.000000 -1.000000  1.000000  [iru]
+   A[ 3 ]:  1.000000  1.000000 -1.000000  [iru]
+
+  Recip. lattice volume :  3.115816 [a.u.]
+  Recip. lattice vectors:  B[ 1 ]  B[ 2 ]  B[ 3 ]
+   B[ 1 ]:  0.709013E-8  0.500000     0.500000     [iku]
+   B[ 2 ]:  0.500000     0.709013E-8  0.500000     [iku]
+   B[ 3 ]:  0.500000     0.500000     0.709013E-8  [iku]
+   
+
+  [02.02] Symmetries
+  ==================
+
+  Inversion symmetry    : yes
+  Spatial inversion     : yes
+  Inversion index       :  2
+  K-space Time-reversal : no
+  Magnetic symmetries   : no
+  Group table correct   : yes
+  Symmetries units      :  [cc]
+
+   [S  1]:   1.00000     0.931492E-8 -0.931492E-8  0.931492E-8   1.00000    -0.931492E-8  0.164050E-7 -0.222479E-8   1.00000   
+   [S  2]:  -1.00000    -0.931492E-8  0.931492E-8 -0.931492E-8  -1.00000     0.931492E-8 -0.164050E-7  0.222479E-8  -1.00000   
+   [S  3]:   1.00000    -0.931492E-8  0.931492E-8  0.931492E-8  -1.00000     0.931492E-8  0.164050E-7  0.222479E-8  -1.00000   
+   [S  4]:  -1.00000     0.931492E-8 -0.931492E-8 -0.931492E-8   1.00000    -0.931492E-8 -0.164050E-7 -0.222479E-8   1.00000   
+   [S  5]:  -1.00000    -0.931492E-8 -0.931492E-8 -0.931492E-8  -1.00000    -0.931492E-8 -0.164050E-7  0.222479E-8   1.00000   
+   [S  6]:   1.00000     0.931492E-8  0.931492E-8  0.931492E-8   1.00000     0.931492E-8  0.164050E-7 -0.222479E-8  -1.00000   
+   [S  7]:  -1.00000     0.931492E-8  0.931492E-8 -0.931492E-8   1.00000     0.931492E-8 -0.164050E-7 -0.222479E-8  -1.00000   
+   [S  8]:   1.00000    -0.931492E-8 -0.931492E-8  0.931492E-8  -1.00000    -0.931492E-8  0.164050E-7  0.222479E-8   1.00000   
+   [S  9]:  0.931492E-8   1.00000    -0.931492E-8   1.00000     0.931492E-8 -0.931492E-8 -0.222479E-8  0.164050E-7   1.00000   
+   [S 10]: -0.931492E-8  -1.00000     0.931492E-8  -1.00000    -0.931492E-8  0.931492E-8  0.222479E-8 -0.164050E-7  -1.00000   
+   [S 11]: -0.931492E-8   1.00000     0.931492E-8  -1.00000     0.931492E-8  0.931492E-8  0.222479E-8  0.164050E-7  -1.00000   
+   [S 12]:  0.931492E-8  -1.00000    -0.931492E-8   1.00000    -0.931492E-8 -0.931492E-8 -0.222479E-8 -0.164050E-7   1.00000   
+   [S 13]: -0.931492E-8  -1.00000    -0.931492E-8  -1.00000    -0.931492E-8 -0.931492E-8  0.222479E-8 -0.164050E-7   1.00000   
+   [S 14]:  0.931492E-8   1.00000     0.931492E-8   1.00000     0.931492E-8  0.931492E-8 -0.222479E-8  0.164050E-7  -1.00000   
+   [S 15]:  0.931492E-8  -1.00000     0.931492E-8   1.00000    -0.931492E-8  0.931492E-8 -0.222479E-8 -0.164050E-7  -1.00000   
+   [S 16]: -0.931492E-8   1.00000    -0.931492E-8  -1.00000     0.931492E-8 -0.931492E-8  0.222479E-8  0.164050E-7   1.00000   
+   [S 17]:  0.931492E-8   1.00000    -0.931492E-8  0.931492E-8  0.931492E-8  -1.00000     -1.00000     0.164050E-7  0.222479E-8
+   [S 18]: -0.931492E-8  -1.00000     0.931492E-8 -0.931492E-8 -0.931492E-8   1.00000      1.00000    -0.164050E-7 -0.222479E-8
+   [S 19]: -0.931492E-8   1.00000     0.931492E-8 -0.931492E-8  0.931492E-8   1.00000      1.00000     0.164050E-7 -0.222479E-8
+   [S 20]:  0.931492E-8  -1.00000    -0.931492E-8  0.931492E-8 -0.931492E-8  -1.00000     -1.00000    -0.164050E-7  0.222479E-8
+   [S 21]:  0.931492E-8  -1.00000     0.931492E-8  0.931492E-8 -0.931492E-8   1.00000     -1.00000    -0.164050E-7 -0.222479E-8
+   [S 22]: -0.931492E-8   1.00000    -0.931492E-8 -0.931492E-8  0.931492E-8  -1.00000      1.00000     0.164050E-7  0.222479E-8
+   [S 23]: -0.931492E-8  -1.00000    -0.931492E-8 -0.931492E-8 -0.931492E-8  -1.00000      1.00000    -0.164050E-7  0.222479E-8
+   [S 24]:  0.931492E-8   1.00000     0.931492E-8  0.931492E-8  0.931492E-8   1.00000     -1.00000     0.164050E-7 -0.222479E-8
+   [S 25]:  0.931492E-8  0.931492E-8  -1.00000     0.931492E-8   1.00000    -0.931492E-8  -1.00000    -0.222479E-8 -0.164050E-7
+   [S 26]: -0.931492E-8 -0.931492E-8   1.00000    -0.931492E-8  -1.00000     0.931492E-8   1.00000     0.222479E-8  0.164050E-7
+   [S 27]: -0.931492E-8 -0.931492E-8  -1.00000    -0.931492E-8  -1.00000    -0.931492E-8   1.00000     0.222479E-8 -0.164050E-7
+   [S 28]:  0.931492E-8  0.931492E-8   1.00000     0.931492E-8   1.00000     0.931492E-8  -1.00000    -0.222479E-8  0.164050E-7
+   [S 29]:  0.931492E-8 -0.931492E-8   1.00000     0.931492E-8  -1.00000     0.931492E-8  -1.00000     0.222479E-8  0.164050E-7
+   [S 30]: -0.931492E-8  0.931492E-8  -1.00000    -0.931492E-8   1.00000    -0.931492E-8   1.00000    -0.222479E-8 -0.164050E-7
+   [S 31]: -0.931492E-8  0.931492E-8   1.00000    -0.931492E-8   1.00000     0.931492E-8   1.00000    -0.222479E-8  0.164050E-7
+   [S 32]:  0.931492E-8 -0.931492E-8  -1.00000     0.931492E-8  -1.00000    -0.931492E-8  -1.00000     0.222479E-8 -0.164050E-7
+   [S 33]:  0.931492E-8  0.931492E-8  -1.00000      1.00000     0.931492E-8 -0.931492E-8 -0.222479E-8  -1.00000    -0.164050E-7
+   [S 34]: -0.931492E-8 -0.931492E-8   1.00000     -1.00000    -0.931492E-8  0.931492E-8  0.222479E-8   1.00000     0.164050E-7
+   [S 35]: -0.931492E-8 -0.931492E-8  -1.00000     -1.00000    -0.931492E-8 -0.931492E-8  0.222479E-8   1.00000    -0.164050E-7
+   [S 36]:  0.931492E-8  0.931492E-8   1.00000      1.00000     0.931492E-8  0.931492E-8 -0.222479E-8  -1.00000     0.164050E-7
+   [S 37]: -0.931492E-8  0.931492E-8   1.00000     -1.00000     0.931492E-8  0.931492E-8  0.222479E-8  -1.00000     0.164050E-7
+   [S 38]:  0.931492E-8 -0.931492E-8  -1.00000      1.00000    -0.931492E-8 -0.931492E-8 -0.222479E-8   1.00000    -0.164050E-7
+   [S 39]:  0.931492E-8 -0.931492E-8   1.00000      1.00000    -0.931492E-8  0.931492E-8 -0.222479E-8   1.00000     0.164050E-7
+   [S 40]: -0.931492E-8  0.931492E-8  -1.00000     -1.00000     0.931492E-8 -0.931492E-8  0.222479E-8  -1.00000    -0.164050E-7
+   [S 41]:   1.00000     0.931492E-8 -0.931492E-8  0.931492E-8  0.931492E-8  -1.00000     0.164050E-7  -1.00000     0.222479E-8
+   [S 42]:  -1.00000    -0.931492E-8  0.931492E-8 -0.931492E-8 -0.931492E-8   1.00000    -0.164050E-7   1.00000    -0.222479E-8
+   [S 43]:   1.00000    -0.931492E-8  0.931492E-8  0.931492E-8 -0.931492E-8   1.00000     0.164050E-7   1.00000    -0.222479E-8
+   [S 44]:  -1.00000     0.931492E-8 -0.931492E-8 -0.931492E-8  0.931492E-8  -1.00000    -0.164050E-7  -1.00000     0.222479E-8
+   [S 45]:  -1.00000     0.931492E-8  0.931492E-8 -0.931492E-8  0.931492E-8   1.00000    -0.164050E-7  -1.00000    -0.222479E-8
+   [S 46]:   1.00000    -0.931492E-8 -0.931492E-8  0.931492E-8 -0.931492E-8  -1.00000     0.164050E-7   1.00000     0.222479E-8
+   [S 47]:  -1.00000    -0.931492E-8 -0.931492E-8 -0.931492E-8 -0.931492E-8  -1.00000    -0.164050E-7   1.00000     0.222479E-8
+   [S 48]:   1.00000     0.931492E-8  0.931492E-8  0.931492E-8  0.931492E-8   1.00000     0.164050E-7  -1.00000    -0.222479E-8
+
+  [02.03] Reciprocal space
+  ========================
+
+  nG shells         :  139
+  nG charge         :  10833
+  nG WFs            :  1717
+  nC WFs            :  1358
+  G-vecs. in first 13 shells:  [ Number ]
+     1   13   19   43   55   79   87  135  141
+   177  201  225  249
+  ...
+  Shell energy in first 13 shells:  [ mHa ]
+    0.00000      1343.88      2687.76      4031.65      5375.53      6719.41      8063.29      9407.17      10751.1   
+    12094.9      13438.8      14782.7      16126.6   
+  ...
+
+  [02.04] K-grid lattice
+  ======================
+
+  Compatible Grid is   : 3D
+  Base K vectors       :  K_min[ 1 ]  K_min[ 2 ]  K_min[ 3 ]
+  K_min[ 1 ] :  0.000000 -0.250000  0.000000 [rlu]
+  K_min[ 2 ] :  0.250000  0.000000  0.000000 [rlu]
+  K_min[ 3 ] :  0.000000  0.000000 -0.250000 [rlu]
+  Grid dimensions      :   4   4   4
+  K lattice UC volume  :  0.048685 [a.u.]
+
+  [02.05] Energies & Occupations
+  ==============================
+
+
+  [WARNING] Merged spin levels are metallic
+  [X] === Spin Independent ===
+  [X] Electronic Temperature                        :  0.000000  0.000000 [eV K]
+  [X] Bosonic    Temperature                        :  0.000000  0.000000 [eV K]
+  [X] Finite Temperature mode                       : no
+  [X] El. density                                   :  0.13563E+25 [cm-3]
+  [X] Fermi Level                                   :  12.16174 [eV]
+
+  [X] === Spin up channel ===
+  [X] Conduction Band Min                  [spin UP]:  12.16174 [eV]
+  [X] Valence Band Max                     [spin UP]:  12.16174 [eV]
+  [X] Filled Bands                         [spin UP]:   8
+  [X] Metallic Bands                       [spin UP]:   9  10
+  [X] Empty Bands                          [spin UP]:  11  15
+   
+  [X] === Spin dn channel ===
+  [X] Conduction Band Min                  [spin DN]:  12.16174 [eV]
+  [X] Valence Band Max                     [spin DN]:  12.16174 [eV]
+  [X] Filled Bands                         [spin DN]:   6
+  [X] Metallic Bands                       [spin DN]:   7   8
+  [X] Empty Bands                          [spin DN]:   9  15
+   
+  [X] === Metallic Characters ===
+  [X] N of el / N of met el                [spin UP]:  8.000000  1.000000
+  [X] Average metallic occ.                [spin UP]:  0.250000
+  [X] N of el / N of met el                [spin DN]:  8.000000  2.000000
+  [X] Average metallic occ.                [spin DN]:  0.500000
+
+  [WARNING] [X] Metallic system
+   
+
+  [WARNING] Merged spin levels are metallic
+
+ [03] Transferred momenta grid and indexing
+ ==========================================
+
+ [RD./SAVE//ndb.kindx]-----------------------------------------------------------
+  Fragmentation                                    : no
+  Polarization last K ( bz)                        :   64
+  Polarization last K (ibz)                        :   6
+  QP states                                        :   1   6
+  X grid is uniform                                : yes
+  Grids (string)                                   :  X S
+  Grids (int-vector)                               :  1  0  0  1
+ - S/N 006241 ---------------------------------------------- v.05.04.00 r.24143 -
+
+ IBZ Q-points                                      :   8
+ BZ  Q-points                                      :   64
+
+ K/Q-points units:
+ rlu = crystal or reduced units; cc = cartesian coordinates; iku = interal k-units
+
+ Q [1]          [rlu]:  0.000000  0.000000  0.000000
+ Q [2]          [rlu]: -0.250000 -0.250000 -0.250000
+ Q [3]          [rlu]: -0.500000     0.173115E-8 -0.173115E-8
+ Q [4]          [rlu]:  0.250000 -0.250000 -0.250000
+ Q [5]          [rlu]:  0.25000     -0.86558E-09  0.86558E-09
+ Q [6]          [rlu]:  0.500000 -0.250000 -0.250000
+ Q [7]          [rlu]: -0.250000 -0.500000  0.500000
+ Q [8]          [rlu]: -0.500000 -0.500000  0.500000
+
+ [04] Local Exchange-Correlation + Non-Local Fock
+ ================================================
+
+ [VXC] Plane waves :  10833
+ [EXS] Plane waves :  201
+  
+ QP @ state[ 1 ] K range:   1   6
+ QP @ state[ 1 ] b range:   6  12
+  
+ [WF-HF/Rho loader] Normalization (few states)  min/max  :  0.23283E-09   1.0000    
+
+ [xc] Functional : Teter 93(XC)
+ [xc] LIBXC used to calculate xc functional
+ [WR./02_hf//ndb.HF_and_locXC]---------------------------------------------------
+  Brillouin Zone Q/K grids (IBZ/BZ)                :    8   64    6   64
+  RL vectors                                       :  1721 [WF]
+  Fragmentation                                    : no
+  Electronic Temperature                           :  0.000000 [K]
+  Bosonic    Temperature                           :  0.000000 [K]
+  Green`s function   wavefunctions                 : Teter 93(XC)
+  Total number of QP states                        :   84
+  Exchange RL vectors                              :  201
+  Exchange summation bands                         :  10   8
+  RIM RL components                                : 0
+  RIM random points                                : 0
+ - S/N 006241 ---------------------------------------------- v.05.04.00 r.24143 -
+
+ [xc] E_xc :  -12.82617 [Ha]
+      E_xc :  -25.65234 [Ry]
+
+  Local XC kind (lXC) : Teter 93(XC)
+  Non-Local XC kind (nlXC) : Hartree-Fock
+
+  Corrections @ K [1] :  [eV]
+ <6(up)|nlXC|6(up)> = -30.03830 -0.16012E-13 <6(up)|lXC|6(up)> = -26.36760  0.859872E-7
+ <6(dn)|nlXC|6(dn)> = -23.02683  0.56491E-13 <6(dn)|lXC|6(dn)> = -23.75871 -0.77656E-09
+ <7(up)|nlXC|7(up)> = -30.03395  0.89121E-14 <7(up)|lXC|7(up)> = -26.36760 -0.161391E-7
+ <7(dn)|nlXC|7(dn)> = -23.02250  0.24318E-12 <7(dn)|lXC|7(dn)> = -23.75871 -0.465943E-7
+ <8(up)|nlXC|8(up)> = -32.31012  0.59323E-13 <8(up)|lXC|8(up)> = -29.87415 -0.164885E-7
+ <8(dn)|nlXC|8(dn)> = -15.79559 -0.39741E-12 <8(dn)|lXC|8(dn)> = -26.93008 -0.278478E-7
+ <9(up)|nlXC|9(up)> = -32.31049  0.49283E-14 <9(up)|lXC|9(up)> = -29.87415  0.121530E-8
+ <9(dn)|nlXC|9(dn)> = -15.79486 -0.23557E-12 <9(dn)|lXC|9(dn)> = -26.93009  0.117019E-7
+ <10(up)|nlXC|10(up)> = -27.07688 -0.30002E-13 <10(up)|lXC|10(up)> = -29.10667  0.870478E-8
+ <10(dn)|nlXC|10(dn)> = -19.18613 -0.81908E-13 <10(dn)|lXC|10(dn)> = -27.00923  0.943778E-7
+ <11(up)|nlXC|11(up)> = -9.182931 -0.22130E-13 <11(up)|lXC|11(up)> = -17.62092 -0.723866E-8
+ <11(dn)|nlXC|11(dn)> = -7.981462 -0.22637E-13 <11(dn)|lXC|11(dn)> = -17.39116  0.562700E-8
+ <12(up)|nlXC|12(up)> = -9.189207 -0.12023E-13 <12(up)|lXC|12(up)> = -17.62092  0.139793E-7
+ <12(dn)|nlXC|12(dn)> = -7.987013 -0.14006E-12 <12(dn)|lXC|12(dn)> = -17.39117  0.119100E-7
+
+  Corrections @ K [2] :  [eV]
+ <6(up)|nlXC|6(up)> = -29.48756  0.65216E-13 <6(up)|lXC|6(up)> = -25.49625  0.311013E-7
+ <6(dn)|nlXC|6(dn)> = -23.02396 -0.18632E-12 <6(dn)|lXC|6(dn)> = -22.91183  0.117144E-8
+ <7(up)|nlXC|7(up)> = -23.93276 -0.15626E-12 <7(up)|lXC|7(up)> = -21.42839 -0.416922E-8
+ <7(dn)|nlXC|7(dn)> = -18.34608 -0.12881E-13 <7(dn)|lXC|7(dn)> = -18.02496  0.183887E-7
+ <8(up)|nlXC|8(up)> = -32.48463 -0.24574E-13 <8(up)|lXC|8(up)> = -29.92874 -0.193003E-7
+ <8(dn)|nlXC|8(dn)> = -16.12336  0.93574E-13 <8(dn)|lXC|8(dn)> = -27.11384  0.608732E-8
+ <9(up)|nlXC|9(up)> = -32.21107  0.10627E-12 <9(up)|lXC|9(up)> = -30.23585 -0.678169E-8
+ <9(dn)|nlXC|9(dn)> = -15.77131  0.62780E-12 <9(dn)|lXC|9(dn)> = -27.34974  0.104935E-6
+ <10(up)|nlXC|10(up)> = -18.58851 -0.18675E-13 <10(up)|lXC|10(up)> = -23.51125 -0.28025E-09
+ <10(dn)|nlXC|10(dn)> = -15.37865  0.16334E-12 <10(dn)|lXC|10(dn)> = -24.12499 -0.161756E-7
+ <11(up)|nlXC|11(up)> = -14.65256  0.17434E-13 <11(up)|lXC|11(up)> = -21.93977 -0.219102E-7
+ <11(dn)|nlXC|11(dn)> = -12.09501 -0.13130E-13 <11(dn)|lXC|11(dn)> = -21.49082 -0.880325E-8
+ <12(up)|nlXC|12(up)> = -9.739339 -0.18666E-13 <12(up)|lXC|12(up)> = -17.73680  0.213461E-8
+ <12(dn)|nlXC|12(dn)> = -8.519924  0.23969E-13 <12(dn)|lXC|12(dn)> = -17.39856  0.37429E-09
+
+  Corrections @ K [3] :  [eV]
+ <6(up)|nlXC|6(up)> = -30.99887 -0.82572E-14 <6(up)|lXC|6(up)> = -27.79273  0.459248E-7
+ <6(dn)|nlXC|6(dn)> = -23.60266 -0.10601E-12 <6(dn)|lXC|6(dn)> = -25.29758 -0.630791E-8
+ <7(up)|nlXC|7(up)> = -30.99841  0.18822E-14 <7(up)|lXC|7(up)> = -27.79273  0.146741E-7
+ <7(dn)|nlXC|7(dn)> = -23.60188 -0.69995E-13 <7(dn)|lXC|7(dn)> = -25.29758 -0.301834E-8
+ <8(up)|nlXC|8(up)> = -31.50294 -0.15469E-13 <8(up)|lXC|8(up)> = -28.50861  0.83079E-09
+ <8(dn)|nlXC|8(dn)> = -23.88398 -0.22516E-13 <8(dn)|lXC|8(dn)> = -26.05544  0.350384E-8
+ <9(up)|nlXC|9(up)> = -31.76316  0.22484E-12 <9(up)|lXC|9(up)> = -28.65601  0.141653E-7
+ <9(dn)|nlXC|9(dn)> = -15.15042 -0.21275E-12 <9(dn)|lXC|9(dn)> = -25.54023  0.696997E-8
+ <10(up)|nlXC|10(up)> = -32.16617 -0.28596E-13 <10(up)|lXC|10(up)> = -30.02960 -0.394521E-8
+ <10(dn)|nlXC|10(dn)> = -15.26431 -0.29851E-12 <10(dn)|lXC|10(dn)> = -27.13408  0.198168E-7
+ <11(up)|nlXC|11(up)> = -6.758352  0.17348E-14 <11(up)|lXC|11(up)> = -14.89929  0.49531E-09
+ <11(dn)|nlXC|11(dn)> = -5.819526  0.25181E-13 <11(dn)|lXC|11(dn)> = -14.87863  0.705688E-8
+ <12(up)|nlXC|12(up)> = -7.481682  0.20555E-09 <12(up)|lXC|12(up)> = -16.79411 -0.131555E-7
+ <12(dn)|nlXC|12(dn)> = -6.487119  0.61038E-10 <12(dn)|lXC|12(dn)> = -16.16996  0.483887E-8
+
+  Corrections @ K [4] :  [eV]
+ <6(up)|nlXC|6(up)> = -30.51971 -0.82913E-13 <6(up)|lXC|6(up)> = -26.90912 -0.300398E-7
+ <6(dn)|nlXC|6(dn)> = -23.37222  0.23687E-13 <6(dn)|lXC|6(dn)> = -24.38656  0.724965E-8
+ <7(up)|nlXC|7(up)> = -26.14043 -0.38881E-13 <7(up)|lXC|7(up)> = -23.32756 -0.564953E-7
+ <7(dn)|nlXC|7(dn)> = -18.61576 -0.25382E-12 <7(dn)|lXC|7(dn)> = -20.29597  0.903623E-8
+ <8(up)|nlXC|8(up)> = -31.47097 -0.30531E-13 <8(up)|lXC|8(up)> = -28.74489  0.333212E-7
+ <8(dn)|nlXC|8(dn)> = -16.99818 -0.31203E-12 <8(dn)|lXC|8(dn)> = -25.95081  0.191380E-7
+ <9(up)|nlXC|9(up)> = -32.10090  0.53771E-13 <9(up)|lXC|9(up)> = -30.57836 -0.399625E-7
+ <9(dn)|nlXC|9(dn)> = -19.74653 -0.85264E-14 <9(dn)|lXC|9(dn)> = -28.08846 -0.196437E-7
+ <10(up)|nlXC|10(up)> = -23.13358 -0.59920E-13 <10(up)|lXC|10(up)> = -26.08237  0.219267E-8
+ <10(dn)|nlXC|10(dn)> = -14.79548  0.55557E-13 <10(dn)|lXC|10(dn)> = -25.65382  0.276761E-7
+ <11(up)|nlXC|11(up)> = -12.17592 -0.63886E-14 <11(up)|lXC|11(up)> = -20.07246 -0.187323E-8
+ <11(dn)|nlXC|11(dn)> = -10.34890 -0.26386E-14 <11(dn)|lXC|11(dn)> = -19.90077  0.518729E-8
+ <12(up)|nlXC|12(up)> = -8.297366 -0.50816E-14 <12(up)|lXC|12(up)> = -17.26786  0.171068E-7
+ <12(dn)|nlXC|12(dn)> = -7.329473  0.49056E-13 <12(dn)|lXC|12(dn)> = -16.79385 -0.165944E-8
+
+  Corrections @ K [5] :  [eV]
+ <6(up)|nlXC|6(up)> = -27.15290  0.21356E-12 <6(up)|lXC|6(up)> = -23.48708 -0.209091E-7
+ <6(dn)|nlXC|6(dn)> = -18.87078 -0.62782E-12 <6(dn)|lXC|6(dn)> = -19.97604  0.651654E-8
+ <7(up)|nlXC|7(up)> = -28.90809 -0.24685E-13 <7(up)|lXC|7(up)> = -25.39567 -0.976699E-8
+ <7(dn)|nlXC|7(dn)> = -21.90216  0.36331E-13 <7(dn)|lXC|7(dn)> = -22.66111 -0.531510E-7
+ <8(up)|nlXC|8(up)> = -31.46877  0.10350E-13 <8(up)|lXC|8(up)> = -29.50568  0.617012E-7
+ <8(dn)|nlXC|8(dn)> = -18.00287  0.26639E-13 <8(dn)|lXC|8(dn)> = -26.95585  0.324503E-7
+ <9(up)|nlXC|9(up)> = -31.47146 -0.14690E-13 <9(up)|lXC|9(up)> = -29.50568  0.303448E-7
+ <9(dn)|nlXC|9(dn)> = -18.00517  0.15434E-13 <9(dn)|lXC|9(dn)> = -26.95585  0.639997E-7
+ <10(up)|nlXC|10(up)> = -14.45049  0.97054E-14 <10(up)|lXC|10(up)> = -20.98386  0.191161E-7
+ <10(dn)|nlXC|10(dn)> = -11.76665  0.80266E-12 <10(dn)|lXC|10(dn)> = -21.19972 -0.236206E-7
+ <11(up)|nlXC|11(up)> = -14.43418  0.64926E-14 <11(up)|lXC|11(up)> = -20.98386  0.487706E-8
+ <11(dn)|nlXC|11(dn)> = -11.75207 -0.53880E-12 <11(dn)|lXC|11(dn)> = -21.19971  0.474751E-7
+ <12(up)|nlXC|12(up)> = -10.96660 -0.23936E-13 <12(up)|lXC|12(up)> = -18.56296  0.888082E-8
+ <12(dn)|nlXC|12(dn)> = -9.721661  0.93745E-14 <12(dn)|lXC|12(dn)> = -18.17060  0.92703E-09
+
+  Corrections @ K [6] :  [eV]
+ <6(up)|nlXC|6(up)> = -28.57306 -0.37996E-12 <6(up)|lXC|6(up)> = -24.26007 -0.331070E-7
+ <6(dn)|nlXC|6(dn)> = -19.20635 -0.19029E-11 <6(dn)|lXC|6(dn)> = -21.15822 -0.538722E-8
+ <7(up)|nlXC|7(up)> = -30.85336 -0.66803E-13 <7(up)|lXC|7(up)> = -28.85577 -0.272207E-7
+ <7(dn)|nlXC|7(dn)> = -18.74638  0.69640E-13 <7(dn)|lXC|7(dn)> = -26.04418  0.621532E-7
+ <8(up)|nlXC|8(up)> = -30.85345 -0.31974E-13 <8(up)|lXC|8(up)> = -28.85576 -0.101517E-7
+ <8(dn)|nlXC|8(dn)> = -18.74611  0.34975E-12 <8(dn)|lXC|8(dn)> = -26.04418 -0.732778E-7
+ <9(up)|nlXC|9(up)> = -29.00317 -0.81626E-14 <9(up)|lXC|9(up)> = -30.46066  0.216370E-7
+ <9(dn)|nlXC|9(dn)> = -19.66940  0.12071E-12 <9(dn)|lXC|9(dn)> = -28.00567  0.350961E-8
+ <10(up)|nlXC|10(up)> = -12.93684 -0.43342E-13 <10(up)|lXC|10(up)> = -18.69915  0.234572E-7
+ <10(dn)|nlXC|10(dn)> = -10.37176 -0.16583E-12 <10(dn)|lXC|10(dn)> = -18.49469 -0.194499E-7
+ <11(up)|nlXC|11(up)> = -9.112320  0.20172E-14 <11(up)|lXC|11(up)> = -16.69907 -0.56800E-09
+ <11(dn)|nlXC|11(dn)> = -8.291321  0.60226E-13 <11(dn)|lXC|11(dn)> = -16.57524  0.605114E-8
+ <12(up)|nlXC|12(up)> = -9.112389  0.33150E-13 <12(up)|lXC|12(up)> = -16.69907  0.60881E-09
+ <12(dn)|nlXC|12(dn)> = -8.291020  0.24024E-14 <12(dn)|lXC|12(dn)> = -16.57524  0.29165E-09
+
+
+  [04.01] Hartree-Fock occupations report
+  =======================================
+
+
+  [WARNING] Merged spin levels are metallic
+  [Hartree-Fock] === Spin Independent ===
+  [Hartree-Fock] Electronic Temperature             :  0.000000  0.000000 [eV K]
+  [Hartree-Fock] Bosonic    Temperature             :  0.000000  0.000000 [eV K]
+  [Hartree-Fock] Finite Temperature mode            : no
+  [Hartree-Fock] El. density                        :  0.13563E+25 [cm-3]
+  [Hartree-Fock] Fermi Level                        :  12.16174 [eV]
+
+  [Hartree-Fock] === Spin up channel ===
+  [Hartree-Fock] Conduction Band Min       [spin UP]:  12.16174 [eV]
+  [Hartree-Fock] Valence Band Max          [spin UP]:  12.16174 [eV]
+  [Hartree-Fock] Filled Bands              [spin UP]:   8
+  [Hartree-Fock] Metallic Bands            [spin UP]:   9  10
+  [Hartree-Fock] Empty Bands               [spin UP]:  11  15
+   
+  [Hartree-Fock] === Spin dn channel ===
+  [Hartree-Fock] Conduction Band Min       [spin DN]:  12.16174 [eV]
+  [Hartree-Fock] Valence Band Max          [spin DN]:  12.16174 [eV]
+  [Hartree-Fock] Filled Bands              [spin DN]:   6
+  [Hartree-Fock] Metallic Bands            [spin DN]:   7   8
+  [Hartree-Fock] Empty Bands               [spin DN]:   9  15
+   
+  [Hartree-Fock] === Metallic Characters ===
+  [Hartree-Fock] N of el / N of met el     [spin UP]:  8.000000  1.000000
+  [Hartree-Fock] Average metallic occ.     [spin UP]:  0.250000
+  [Hartree-Fock] N of el / N of met el     [spin DN]:  8.000000  2.000000
+  [Hartree-Fock] Average metallic occ.     [spin DN]:  0.500000
+
+  [WARNING] [Hartree-Fock] Metallic system
+   
+
+ Timing [Min/Max/Average]: 09s/09s/09s
+
+ [05] Timing Overview
+ ====================
+
+ Clock: global (MAX - min (if any spread is present) clocks)
+             io_ATMPROJ_pwscf :      0.0000s P2 [MAX]      0.0000s P1 [min]
+      IO_and_Messaging_switch :      0.0000s P1 (  3 calls,   0.002 msec avg) [MAX]      0.0000s P2 (  3 calls,   0.001 msec avg) [min]
+                  io_KB_pwscf :      0.0000s P2 [MAX]      0.0000s P1 [min]
+                   io_COL_CUT :      0.0000s P1 [MAX]      0.0000s P2 [min]
+                 PP_uspp_init :      0.0000s P2 [MAX]      0.0000s P1 [min]
+                   io_DIPOLES :      0.0000s P1 [MAX]      0.0000s P2 [min]
+               io_Double_Grid :      0.0000s P2 (  2 calls,   0.019 msec avg) [MAX]      0.0000s P1 (  2 calls,   0.014 msec avg) [min]
+                    HF(REDUX) :      4.5477s P2 [MAX]      0.0000s P1 [min]
+                        io_HF :      0.0024s P1 (  3 calls,   0.790 msec avg) [MAX]      0.0001s P2 (  3 calls,   0.018 msec avg) [min]
+                         io_X :      0.0001s P2 (  5 calls,   0.016 msec avg) [MAX]      0.0001s P1 (  5 calls,   0.015 msec avg) [min]
+                 io_KB_abinit :      0.0007s P1 [MAX]      0.0007s P2 [min]
+                 scatter_Gamp :      0.0019s P1 (672 calls,   0.003 msec avg) [MAX]      0.0015s P2 (672 calls,   0.002 msec avg) [min]
+                     io_QINDX :      0.0021s P2 (  2 calls,   1.028 msec avg) [MAX]      0.0020s P1 (  2 calls,   0.996 msec avg) [min]
+                  io_fragment :      0.0035s P2 ( 12 calls,   0.292 msec avg) [MAX]      0.0031s P1 ( 12 calls,   0.255 msec avg) [min]
+                      io_GROT :      0.0032s P2 (  2 calls,   1.578 msec avg) [MAX]      0.0031s P1 (  2 calls,   1.553 msec avg) [min]
+                        io_WF :      0.0057s P2 ( 15 calls,   0.379 msec avg) [MAX]      0.0054s P1 ( 15 calls,   0.358 msec avg) [min]
+                    FFT_setup :      0.0083s P1 [MAX]      0.0083s P2 [min]
+          XC_potential_driver :      0.0104s P1 (  2 calls,   5.193 msec avg) [MAX]      0.0102s P2 (  2 calls,   5.120 msec avg) [min]
+                    XCo_local :      0.0291s P2 [MAX]      0.0183s P1 [min]
+                  WF_load_FFT :      0.0448s P1 [MAX]      0.0283s P2 [min]
+                           HF :      9.0634s P1 [MAX]      4.5375s P2 [min]
+
+ [06] Memory Overview
+ ====================
+
+ Memory Usage: global (Only MASTER cpu here). [O] stands for group 'O'
+ Memory treshold are: 51.20000 [Mb] (basic treshold)  512.0000 [Mb] (SAVEs treshold)
+
+
+         Max memory used   :  55.02900 [Mb]
+
+ [07] Game Over & Game summary
+ =============================
+
+ 10/17/2026 at 11:16 yambo @ UNIJ2P4Q7TFK3 [start]
+ 10/17/2026 at 11:16                       [end]
+
+ Timing   [Min/Max/Average]: 09s/09s/09s
+             [Time-Profile]: 09s
+
+ .-ACKNOWLEDGMENT
+ |
+ | The users of YAMBO have little formal obligations with respect to
+ | the YAMBO group (those specified in the GNU General Public
+ | License, http://www.gnu.org/copyleft/gpl.txt). However, it is
+ | common practice in the scientific literature, to acknowledge the
+ | efforts of people that have made the research possible. In this
+ | spirit, please find below the reference we kindly ask you to use
+ | in order to acknowledge YAMBO
+ |
+ | Many-body perturbation theory calculations using the yambo code
+ | D. Sangalli, A. Ferretti, H. Miranda, C. Attaccalite, I. Marri, E. Cannuccia, P. Melo,
+ | M Marsili, F Paleari, A Marrazzo, G Prandini, P Bonfà, M O Atambo, F Affinito,
+ | M Palummo, A Molina-Sánchez, C Hogan, M Grüning, D Varsano and A Marini.
+ | J. Phys.: Condens. Matter 31, 325902 (2019).
+ |
+ | Yambo: An ab initio tool for excited state calculations
+ | A. Marini, C. Hogan, M. Grüning, D. Varsano
+ | Computer Physics Communications 180, 1392 (2009).
+ |
+  
+ .-Input file  02_hf/02_hf
+ | HF_and_locXC                     # [R] Hartree-Fock
+ | BoseTemp= 0.000000         eV    # Bosonic Temperature
+ | #DegFix                        # Force the code to impose the energy levels to respect their degeneracy
+ | FFTGvecs= 1721             RL    # [FFT] Plane-waves
+ | SX_CPU= "2.1"                    # [PARALLEL] CPUs for each role
+ | SX_ROLEs= "b.q"                  # [PARALLEL] CPUs roles (q,g,qp,b)
+ | EXXRLvcs= 201              RL    # [XX] Exchange    RL components
+ | VXCRLvcs= 10833            RL    # [XC] XCpotential RL components
+ | %QPkrange                        # [GW] QP generalized Kpoint/Band indices
+ | 1|6|6|12|
+ | %
+ | %QPerange                        # [GW] QP generalized Kpoint/Energy indices
+ | 1|6| 0.000000|-1.000000|
+ | %

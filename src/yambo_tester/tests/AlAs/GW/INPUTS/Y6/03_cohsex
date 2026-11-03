@@ -1,0 +1,28 @@
+self_energy
+X_static
+dipoles
+EXXRLvcs= 300 RL
+% DipBands
+ 1 | 10 |
+%
+EM1S_NGsBlk= 51 RL
+% EM1S_QpntsR
+ 1 | 3 |
+%
+% EM1S_BndsRn
+ 1 | 10 |
+%
+% EM1S_LongDr
+ 1.0 | 1.0 | 1.0 |
+%
+TDDFTKernel= "HARTREE"
+% GbndRnge
+ 1 | 10 |
+%
+DysSolver= "n"
+GDamping= 0.1 eV
+ExtendOut
+SEApprox= "COHSEX"
+%QP_krange
+1|3|3|6|
+%

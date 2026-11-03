@@ -15,15 +15,16 @@
 #
 #
 # ==== Runlevels ===
-HF_lXC                                      # Hartree-Fock
+self_energy                                 # Self-energy and quasi-particle corrections
 #
 # ==== Hartree-Fock (V=hf) ===
 EXXRLvcs= 15                       [Ry]   # Exchange    RL components
 VXCRLvcs= 15                       [Ry]   # XCpotential RL components
-# ==== Hartree-Fock (V=hf) ===
-%HF_lXC_krange                   # Generalized Kpoint/Band indices
+# ==== Self-energy (V=qp) ===
+SEApprox= "HF"                              # Self-energy approximation ("HF","COHSEX","PPA")
+%QP_krange                       # Generalized Kpoint/Band indices
 1|2|1|15|
 %
-%HF_lXC_erange                   # Generalized Kpoint/Energy indices
+%QP_erange                       # Generalized Kpoint/Energy indices
 1|2| 0.000000|-1.000000|
 %

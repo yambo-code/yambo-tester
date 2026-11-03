@@ -121,6 +121,37 @@ outside `PATH`, combine version detection or override with `--bin`:
 yambo-tester --bin /home/nicola/src/yambo-6.0/bin
 ```
 
+### Development-branch variants
+
+Some Yambo development branches read a different input dialect than the
+released major version. For example, the `develop` branch (negf/engine refactor) turns on the
+self-energy with the `HF_lXC`, `gw` and `dyson` runlevels instead of
+`self_energy` plus `SEApprox`. Select the dialect by name with `--variant`, or
+with `yambo_variant` in `[parameters]`:
+
+```bash
+yambo-tester --bin ~/codes/6.0-develop/bin --variant develop
+```
+
+The variant is never guessed from the binary, because revision numbers and
+hashes are not ordered across branches. Its effects are:
+
+- the runlevel rules in `src/yambo_tester/data/variants.toml` rewrite the
+  scratch copy of every yambo input, so the same `INPUTS/Y6` files serve both
+  dialects;
+- in `tests.toml`, a `[versions."<major>-<variant>"]` overlay (e.g.
+  `versions."6-develop"`) is applied after `[versions."<major>"]`, at workflow
+  and step level. Use it only where the results really differ, e.g. a
+  `reference` table pointing to `REFERENCE/Y6-develop/...`;
+- `results.toml` records `yambo_variant` and `yambo_build` (the
+  `Revision Hash` line of `yambo -h`), so every run says which build it tested.
+
+An unknown variant, or one that belongs to another major version, stops the
+run before any test starts. To add a dialect, add a table to
+`variants.toml`: `major`, then one `[<name>.runlevels.<runlevel>]` table per
+runlevel line to replace. Each such table holds the selector variable `by`,
+the runlevel lists per selector value, `default`, and `drop`.
+
 ### Parameter Hierarchy
 
 When a parameter is not explicitly provided, **yambo-tester** resolves it using the following hierarchical system:
@@ -144,6 +175,75 @@ In typical usage, the user should set parameters either on the command line or i
 ### Scratch and Cache Directories
 
 If the `scratch` and `cache` directories specified in the configuration do **not** already exist, they will be **automatically created** by `yambo-tester`.
+
+### Benchmark mode (SLURM)
+
+A workflow becomes a strong-scaling benchmark when its `tests.toml` has a `[benchmark]` table. Write the parallel strategy once. Names of variables are intentionally general to keep them version-neutral. The names are `dip`, `chi`, `fock` and `gw`, and each block maps roles to formulas:
+
+```toml
+[benchmark]
+nodes = [1, 2, 4, 8, 16]   # scaling points (a site can override them in [cluster])
+[benchmark.vars]           # helper values, evaluated in order
+sxp = "16 if ntasks>320 else 8 if ntasks>160 else 4 if ntasks>80 else 2 if ntasks>40 else 1"
+[benchmark.parallel]       # generic block -> role -> formula
+dip  = { k = "1", c = "ntasks", v = "1" }
+chi  = { q = "1", g = "1", k = "1", c = "ntasks", v = "1" }
+fock = { q = "sxp", b = "ntasks // sxp" }
+gw   = { q = "1", qp = "1", b = "ntasks" }
+[benchmark.names."6"]      # optional: override the packaged name map for one major version
+chi = "EM1D"
+```
+
+How the strategy is applied:
+
+- **Formulas.** A formula can use `ntasks`, `nodes`, `threads` and the earlier `vars`. Only numbers, `+ - * //`, comparisons, `if/else` and parentheses are allowed; anything else is rejected. In each block, the CPU counts must multiply to `ntasks`.
+- **Name map.** `src/yambo_tester/data/parallel_names.toml` maps the generic blocks to the `<NAME>_CPU` / `<NAME>_ROLEs` variables:
+  - Yambo 5: `DIP`, `X_and_IO`, `SX`, `SE`;
+  - Yambo 6: `DIP`, `PPA`, `HFlXC`, `GW`.
+- **Patching.** When a run gets `--nodes N`, the runner rewrites these lines in the scratch copy of every `yambo*` step input, or appends them if they are missing. The inputs in the workflow directory stay plain Yambo inputs. Steps that set their own `nprocs` are not supported in benchmark mode.
+
+Everything machine-specific is in the `[cluster]` table of their own `config.toml`; yambo-tester hard-codes none of it.
+
+- **SLURM settings:** `partition`, `account` and `qos`; an empty value drops the line.
+- **Walltime:** `time`.
+- **Environment:** `modules`, a list. `setup`, a list of raw shell lines run before the command, e.g. `source ~/env.sh` where `module` is unavailable in batch shells, or `export OMP_PROC_BIND=close`.
+- **Launcher:** `mpi`, which can be a wrapper script, e.g. one that adds `--map-by` options. Empty means `[parameters].mpi_launcher`.
+- **Node shape:** `tasks_per_node` and `threads`, required unless the workflow sets them. Optional `nodes` overrides the workflow's scaling points, e.g. fewer runs on a busy cluster.
+- **Template:** `template`, the path of your own sbatch template. The default is the neutral `src/yambo_tester/data/slurm_job.sh`, with placeholders `{nodes} {ntasks_per_node} {threads} {partition} {account} {qos} {time} {modules} {cmd}`.
+
+The workflow's `[benchmark]` holds only what belongs to the physics test: the formulas and default node counts.
+
+```toml
+[cluster]                      # example site section (values are per machine)
+partition = "batch"
+account = "my-project"
+qos = "normal"
+time = "10:00:00"
+setup = ["source ~/my_env.sh"]
+mpi = "/path/to/mpirun_wrapper.sh"
+tasks_per_node = 8
+threads = 16
+```
+
+```bash
+yambo-tester --submit --dry-run   # write <scratch>/benchmark/<name>_<type>/nodes_NNN/{config.toml,job.sh} and print the jobs
+yambo-tester --submit             # same, then sbatch each job.sh
+yambo-tester --collect scratch/benchmark/<name>_<type>   # result.dat (MaX columns) + speedup/efficiency table
+```
+
+Each job runs `yambo-tester --nodes N --np <ntasks> --thrs <threads> --mpi <cluster.mpi>` on a job-local `config.toml` that selects only that workflow. The usual pytest reference checks therefore run inside every job.
+
+**SAVE sharing.** For a workflow with `[benchmark]`, the tarball is extracted only once, into `<cache>/extracted/<tarball name>/`. Each job's run tree gets a symlink to that `SAVE` instead of a copy; any other files in the tarball are copied as usual. The shared `SAVE` is made read-only, so if a step tries to write into it, Yambo fails with an error instead of silently changing the databases for every job.
+- Steps write through `-J`/`-C` (`output = "..."`).
+- Later steps read earlier databases with `flags`. For example, `flags = "01_init"` gives `-J 02_gw,01_init`.
+
+To refresh after the tarball changes, run `chmod -R u+w <cache>/extracted/<tarball name>`, then delete that directory.
+
+`--collect` reads every `r-*` report (it skips those copied from `REFERENCE/`) and writes `result.dat`, all times in seconds. The columns are `Nodes;Tasks;Threads/Task;Time-Profile;Dipoles;Xo;X;Self Energy;Other`.
+
+- Report labels for Yambo 5 and Yambo 6 live in `src/yambo_tester/data/benchmark_timers.toml`. For example, Y5 `HF + GW(ppa)` and Y6 `Fock + Plasmon-Pole` both feed `Self Energy`.
+- If a column finds none of its labels in a report, `--collect` prints a `WARNING`; it does not write a silent 0. Add the new label to that file when Yambo 6 renames a timer.
+- `Other` is the Time-Profile minus all the other columns.
 
 ### Documentation
 

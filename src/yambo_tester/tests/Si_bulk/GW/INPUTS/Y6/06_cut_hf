@@ -1,0 +1,20 @@
+rim_cut                                     # Coulomb potential
+self_energy                                 # Self-energy and quasi-particle corrections
+HFlXC_CPU= ""                               # CPUs for each role
+HFlXC_ROLEs= ""                             # CPUs roles (qp,g,q,b)
+CUTGeo= "sphere XYZ"
+% CUTBox
+ 0.000000 | 0.000000 | 0.000000 |           # [au] Box sides
+%
+CUTRadius= 5.0
+CUTCylLen= 0.000000                         # [au] Cylinder length
+CUTwsGvec= 0.700000                         # WS cutoff: number of G to be modified
+#CUTCol_test                    # Perform a cutoff test in R-space
+RandQpts= 1000000
+RandGvec= 51 RL
+EXXRLvcs= 300 RL
+VXCRLvcs=  3383                      [RL]   # XCpotential RL components
+SEApprox= "HF"                              # Self-energy approximation ("HF","COHSEX","PPA")
+%QP_krange                       # Generalized Kpoint/Band indices
+1|8|3|6|
+%

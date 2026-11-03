@@ -1,0 +1,16 @@
+# Input dialects of Yambo development branches, selected with --variant or [parameters].yambo_variant.
+# A variant belongs to one major version. Its workflow and step overlays in tests.toml use the key
+# "<major>-<name>" (e.g. versions."6-develop"), applied on top of versions."<major>".
+#
+# [<name>.runlevels.<runlevel>] replaces the line <runlevel> of a scratch input with the runlevels
+# chosen by the value of the variable `by` (case insensitive), or `default`; `drop` removes that variable.
+
+[develop]
+major = "6"                                   # applies to Yambo 6 inputs
+description = "develop branch (negf/engine refactor): HF_lXC, gw and dyson runlevels"
+
+[develop.runlevels.self_energy]               # main: self_energy + SEApprox
+by = "SEApprox"                               # variable that picks the new runlevels
+drop = true                                   # develop has no SEApprox
+HF = ["HF_lXC", "dyson"]                      # Hartree-Fock only
+default = ["HF_lXC", "gw", "dyson"]           # COHSEX, PPA, FF: screening set by the X runlevels

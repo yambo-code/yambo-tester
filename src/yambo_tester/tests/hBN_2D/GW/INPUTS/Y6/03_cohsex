@@ -1,0 +1,48 @@
+rim_cut                                     # Coulomb potential
+self_energy                                 # Self-energy and quasi-particle corrections
+X_static                                    # Statically Screened Interaction
+dipoles                                     # Oscillator strenghts (or dipoles)
+HFlXC_CPU= ""                               # CPUs for each role
+HFlXC_ROLEs= ""                             # CPUs roles (qp,g,q,b)
+DIP_CPU= ""                                 # CPUs for each role
+DIP_ROLEs= ""                               # CPUs roles (k,c,v)
+EM1S_CPU= ""                                # CPUs for each role
+EM1S_ROLEs= ""                              # CPUs roles (q,g,k,c,v)
+EM1S_nCPU_LinAlg_INV=-1                     # CPUs for Linear Algebra (if -1 it is automatically set)
+GW_CPU= ""                                  # CPUs for each role
+GW_ROLEs= ""                                # CPUs roles (qp,g,q,b)
+EF_interaction= "r.E"                       # Interaction kind (r.E|p.A)
+CUTGeo= "slab z"
+% CUTBox
+ 0.000000 | 0.000000 | 0.000000 |           # [au] Box sides
+%
+CUTRadius= 0.000000                         # [au] Sphere/Cylinder radius
+CUTCylLen= 0.000000                         # [au] Cylinder length
+CUTwsGvec= 0.700000                         # WS cutoff: number of G to be modified
+#CUTCol_test                    # Perform a cutoff test in R-space
+RandQpts= 1000000
+RandGvec= 100 RL
+% DipBands
+  1 | 40 |
+%
+EXXRLvcs= 1000 RL
+VXCRLvcs= 1000 RL
+EM1S_NGsBlk= 100 RL
+% EM1S_QpntsR
+  1 |  7 |                                  # Transferred momenta
+%
+% EM1S_BndsRn
+  1 | 40 |
+%
+% EM1S_LongDr
+ 1.000000 | 0.000000 | 0.000000 |           # [cc] Electric Field
+%
+EM1S_CGrdSp= 100.0000                       # [o/o] Poles coarse grid controller
+TDDFTKernel= "HARTREE"                      # TDDFT Kernel: IP/Hartree/ALDA/LRC/PF/BSfxc
+% GbndRnge
+  1 | 40 |
+%
+SEApprox= "COHSEX"                          # Self-energy approximation ("HF","COHSEX","PPA")
+%QP_krange                       # Generalized Kpoint/Band indices
+1|7|3|6|
+%

@@ -1,0 +1,30 @@
+gw0                              # [R] GW approximation
+ppa                              # [R][Xp] Plasmon Pole Approximation for the Screened Interaction
+el_el_corr                       # [R] Electron-Electron Correlation
+dyson                            # [R] Dyson Equation solver
+HF_and_locXC                     # [R] Hartree-Fock
+em1d                             # [R][X] Dynamically Screened Interaction
+#DegFix                        # Force the code to impose the energy levels to respect their degeneracy
+EXXRLvcs= 300 RL
+VXCRLvcs= 3383 RL
+Chimod= "HARTREE"                # [X] IP/Hartree/ALDA/LRC/PF/BSfxc
+% BndsRnXp
+  1 | 10 |                           # [Xp] Polarization function bands
+%
+NGsBlkXp= 51 RL
+% LongDrXp
+ 1.000000 | 0.000000 | 0.000000 |        # [Xp] [cc] Electric Field
+%
+PPAPntXp= 27.21138         eV    # [Xp] PPA imaginary energy
+% GbndRnge
+  1 | 10 |                           # [GW] G[W] bands range
+%
+GTermKind= "none"                # [GW] GW terminator ("none","BG" Bruneval-Gonze,"BRS" Berger-Reining-Sottile)
+DysSolver= "n"                   # [GW] Dyson Equation solver ("n","s","g","q")
+%QPkrange                        # [GW] QP generalized Kpoint/Band indices
+1|8|3|6|
+%
+ExtendOut
+GDamping= 0.1 eV
+dScStep= 0.1 eV
+PAR_def_mode= "memory"

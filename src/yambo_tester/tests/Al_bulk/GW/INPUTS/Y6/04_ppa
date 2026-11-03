@@ -1,0 +1,29 @@
+self_energy
+X_PPA
+dipoles
+EXXRLvcs= 300 RL
+% DipBands
+ 1 | 20 |
+%
+PPA_NGsBlk= 51 RL
+% PPA_QpntsR
+ 1 | 8 |
+%
+% PPA_BndsRn
+ 1 | 20 |
+%
+% PPA_LongDr
+ 1.0 | 1.0 | 1.0 |
+%
+TDDFTKernel= "HARTREE"
+PPA_PPAPnt= 27.21138 eV
+% GbndRnge
+ 1 | 20 |
+%
+DysSolver= "n"
+GDamping= 0.1 eV
+ExtendOut
+SEApprox= "PPA"
+%QP_krange
+1|8|1|4|
+%

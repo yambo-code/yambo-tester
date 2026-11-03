@@ -1,0 +1,81 @@
+#  __      __   ______   __       __  _______    ______               
+# |  \    /  \ /      \ |  \     /  \|       \  /      \              
+#  \$$\  /  $$|  $$$$$$\| $$\   /  $$| $$$$$$$\|  $$$$$$\             
+#   \$$\/  $$ | $$__| $$| $$$\ /  $$$| $$__/ $$| $$  | $$             
+#    \$$  $$  | $$    $$| $$$$\  $$$$| $$    $$| $$  | $$             
+#     \$$$$   | $$$$$$$$| $$\$$ $$ $$| $$$$$$$\| $$  | $$             
+#     | $$    | $$  | $$| $$ \$$$| $$| $$__/ $$| $$__/ $$             
+#     | $$    | $$  | $$| $$  \$ | $$| $$    $$ \$$    $$             
+#      \$$     \$$   \$$ \$$      \$$ \$$$$$$$   \$$$$$$              
+#                                                                     
+# Version 5.4.0 Revision 24143 Hash (prev commit) 77ed66f02           
+#                        Branch is                                    
+#                MPI+SLK+HDF5_MPI_IO Build                            
+#                http://www.yambo-code.eu                             
+#
+# Vxc  =Perdew, Burke & Ernzerhof(X)+Perdew, Burke & Ernzerhof(C)
+# Vnlxc=Hartree-Fock
+#
+#    K-point            Band               Eo [eV]            Ehf [eV]           Vxc [eV]           Vnlxc [eV]
+#
+        1                  3                  0.000000          -0.550841          -11.27121          -11.82205
+        1                   4                 0.000000          -0.550839          -11.27121          -11.82205
+        1                   5                 2.528067           6.179849          -9.972004          -6.320221
+        1                   6                 2.528067           6.179849          -9.972003          -6.320220
+        2                  3                 -0.756453          -1.515051          -11.03438          -11.79298
+        2                   4                -0.756453          -1.515051          -11.03438          -11.79298
+        2                   5                 1.939570           5.655809          -10.03948          -6.323244
+        2                   6                 3.471300           7.383862          -10.01623          -6.103667
+        3                  3                 -1.194291          -2.279987          -11.00585          -12.09155
+        3                   4                -1.194291          -2.279983          -11.00585          -12.09154
+        3                   5                 1.454553           5.047388          -10.01772          -6.424880
+        3                   6                 3.336540           7.277893          -9.594402          -5.653049
+         4                 3                 -1.869181          -3.076002          -10.66957          -11.87639
+         4                  4                -1.869181          -3.076002          -10.66957          -11.87639
+         4                  5                 1.131737           4.316398          -9.291791          -6.107130
+         4                  6                 3.125371           7.070166          -9.110995          -5.166201
+         5                 3                 -3.487262          -5.230728          -10.15094          -11.89440
+         5                  4                -2.181883          -3.674370          -10.66364          -12.15612
+         5                  5                 1.527177           4.860348          -9.147183          -5.814013
+         5                  6                 4.432318           8.538445          -9.540669          -5.434544
+         6                 3                 -3.694957          -5.505724          -9.990483          -11.80125
+         6                  4                -1.318831          -2.381978          -10.90943          -11.97257
+         6                  5                 2.420158           6.157373          -9.526004          -5.788789
+         6                  6                 4.728638           9.326260          -10.05378          -5.456155
+         7                 3                 -2.819646          -4.728805          -10.53609          -12.44524
+         7                  4                -2.819646          -4.728806          -10.53609          -12.44525
+         7                  5                 0.734618           3.800945          -8.896849          -5.830522
+         7                  6                 0.734618           3.800949          -8.896853          -5.830522
+         8                 3                 -3.788287          -5.770683          -9.922788          -11.90518
+         8                  4                -3.788287          -5.770685          -9.922787          -11.90518
+         8                  5                 4.280911           8.073792          -9.473117          -5.680235
+         8                  6                 4.280911           8.073793          -9.473118          -5.680235
+# 
+# 10/12/2026 at 19:57 yambo @ UNIJ2P4Q7TFK3 [start]
+# 10/12/2026 at 19:57                       [end]
+#
+# .-Input file  06_cut_hf/06_cut_hf
+# | HF_and_locXC                     # [R] Hartree-Fock
+# | rim_cut                          # [R] Coulomb potential
+# | BoseTemp= 0.000000         eV    # Bosonic Temperature
+# | #DegFix                        # Force the code to impose the energy levels to respect their degeneracy
+# | FFTGvecs=  609             RL    # [FFT] Plane-waves
+# | SX_CPU= "2.1"                    # [PARALLEL] CPUs for each role
+# | SX_ROLEs= "b.q"                  # [PARALLEL] CPUs roles (q,g,qp,b)
+# | RandQpts= 1000000                # [RIM] Number of random q-points in the BZ
+# | RandGvec=  51              RL    # [RIM] Coulomb interaction RS components
+# | CUTGeo= "sphere xyz"             # [CUT] Coulomb Cutoff geometry: box/cylinder/sphere/ws/slab X/Y/Z/XY..
+# | % CUTBox
+# |  0.000000 | 0.000000 | 0.000000 |        # [CUT] [au] Box sides
+# | %
+# | CUTRadius= 5.000000              # [CUT] [au] Sphere/Cylinder radius
+# | CUTCylLen= 0.000000              # [CUT] [au] Cylinder length
+# | CUTwsGvec= 0.000000              # [CUT] WS cutoff: number of G to be modified
+# | EXXRLvcs= 307              RL    # [XX] Exchange    RL components
+# | VXCRLvcs=  3383            RL    # [XC] XCpotential RL components
+# | %QPkrange                        # [GW] QP generalized Kpoint/Band indices
+# | 1|8|3|6|
+# | %
+# | %QPerange                        # [GW] QP generalized Kpoint/Energy indices
+# | 1|8| 0.000000|-1.000000|
+# | %
