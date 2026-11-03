@@ -2,7 +2,7 @@
 # Licensed under the MIT License. See LICENSE file for details.
 
 DEFAULT_YAMBO_VERSION = "6"
-WORKFLOW_METADATA_KEYS = {"sha256", "tarball_url", "yambo_versions", "versions"}
+WORKFLOW_METADATA_KEYS = {"sha256", "tarball_url", "yambo_versions", "versions", "benchmark"}  # benchmark: [benchmark] table, not a step
 
 YAMBO_VERSION_DOWNLOAD_LINKS = {
     "5": "https://media.yambo-code.eu/robots/databases/tests",

@@ -8,6 +8,7 @@ import tomllib
 from .log import setup_logging
 from .config import load_config, check_parameters
 from .runner import download_workflow_tarball, setup_rundir, run_test, run_pytest
+from .benchmark import collect, prepare_jobs, submit  # benchmark mode
 
 
 def parse_executable_override(value):
@@ -94,6 +95,18 @@ def set_cl_args(config):
                             help='List the runlevel keywords known to the tester and exit.',
                             dest='list_runlevels',
                             action='store_true')
+    parser.add_argument('--submit',  # benchmark mode: one SLURM job per node count
+                        help='Write and sbatch one job per [benchmark] node count of the selected workflows, then exit.',
+                        dest='submit', action='store_true')
+    parser.add_argument('--dry-run',  # with --submit: print instead of sbatch
+                        help='With --submit, write and print the job scripts without calling sbatch.',
+                        dest='dry_run', action='store_true')
+    parser.add_argument('--collect',  # benchmark mode: timing table
+                        help='Parse r- reports under DIR, write DIR/result.dat and print the scaling table, then exit.',
+                        type=str, dest='collect', metavar='DIR')
+    parser.add_argument('--nodes',  # set inside benchmark jobs
+                        help='Node count of this benchmark run: patches the [benchmark] parallel strategy into the inputs.',
+                        type=int, dest='nodes')
     parser.add_argument('--exe',
                         help='Executable override in KEY=VALUE form. May be repeated.',
                         type=parse_executable_override,
@@ -135,6 +148,12 @@ def main():
         if config['parameters'].get('list_runlevels'):
             print_keywords(keywords["runlevels"])
         return
+    if config['parameters'].get('collect'):  # benchmark: build result.dat and exit
+        collect(config['parameters']['collect'])  # parse reports, print table
+        return  # early exit
+    if config['parameters'].get('submit'):  # benchmark: write job dirs and submit, then exit
+        submit(prepare_jobs(config), dry_run=config['parameters'].get('dry_run', False))  # sbatch or print
+        return  # early exit
     logger = setup_logging(Path(config['parameters']['logger']))
     if not config['parameters']['init']: logger.info(f"Using {config['config']}")
     parameters = check_parameters(config['parameters'], config['executables'], logger)

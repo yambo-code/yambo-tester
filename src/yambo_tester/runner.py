@@ -13,9 +13,11 @@ import importlib.resources
 from .log import setup_test_logger
 from .config import get_executable
 from .download import download_test, sha256sum
+from .benchmark import link_save, parallel_lines, patch_input  # benchmark mode: SAVE symlink, input patching
 from .template_expansion import expand_workflow_templates, workflow_uses_templates
 from .versioning import (
     DEFAULT_YAMBO_VERSION,
+    resolve_workflow_metadata,  # [benchmark] table with version overlay
     resolve_workflow_tarball_url,
     workflow_steps_for_version,
     workflow_supports_version,
@@ -69,7 +71,8 @@ def build_run_command(run, parameters):
     cmd = []
     if parameters['mpi'] and parameters['mpi_launcher']:
         nprocs = run.get('nprocs', parameters['nprocs'])
-        cmd.extend([str(parameters['mpi_launcher']), '-np', str(nprocs)])
+        np_flag = '-n' if Path(str(parameters['mpi_launcher'])).name == 'srun' else '-np'  # srun takes -n, not -np
+        cmd.extend([str(parameters['mpi_launcher']), np_flag, str(nprocs)])  # launcher and task count
     executable = get_executable(parameters, run['exe'])
     if executable is None:
         raise FileNotFoundError(f"{run['exe']}: executable not available.")
@@ -183,8 +186,11 @@ def setup_rundir(test, parameters, logger):
                 if not config['sha256'] == sha256sum(tar_file):
                     logger.error(f"SHA-256 mismatch for file '{tar_file.name}'.")
                     raise ValueError(f"SHA-256 mismatch for file '{tar_file.name}'.")
-            with tarfile.open(tar_file) as tar:
-                tar.extractall(path=test_dir)
+            if config.get('benchmark'):  # benchmark: big SAVE shared via symlink
+                link_save(tar_file, parameters['cache_dir'], test_dir)  # extract once, link per job
+            else:  # regular tests: private copy
+                with tarfile.open(tar_file) as tar:
+                    tar.extractall(path=test_dir)
             logger.info(f"Extracted tarball")
         except RuntimeError as e:
             logger.error(e)
@@ -236,6 +242,12 @@ def run_test(test, parameters, logger, verbose=False):
         return local_logger
 
     subtests = order_steps(config) # input sorting when available, after the dependencies
+    bench = resolve_workflow_metadata(workflow_config, yambo_version).get('benchmark')  # [benchmark] table, if any
+    if bench and parameters.get('nodes'):  # benchmark job (--nodes): set parallel strategy in scratch inputs
+        lines = parallel_lines(bench, parameters['nprocs'], yambo_version, parameters['nodes'])  # <NAME>_CPU/_ROLEs values
+        for _, run in subtests:  # every step
+            if str(run.get('exe', '')).startswith('yambo') and run.get('input') and (test['run_dir'] / run['input']).is_file():  # yambo inputs only
+                patch_input(test['run_dir'] / run['input'], lines)  # rewrite/append parallel lines
     selected_names = selected_step_names(config, parameters.get('runlevels', []))
 
     # For OpenMP pralallelization
