@@ -62,7 +62,7 @@ def set_cl_args(config):
     parser.add_argument('-y', '--yambo-version',
                         help='Yambo major version used for test database selection', type=str, dest='yambo_version')
     parser.add_argument('--variant',  # development-branch input dialect
-                        help='Input dialect of a Yambo development branch (data/variants.toml), e.g. negf',
+                        help='Input dialect of a Yambo development branch (data/variants.toml), e.g. develop',
                         type=str, dest='yambo_variant')
     parser.add_argument('--download_only',
                         help="Download only the tests' tarballs", dest='donly', action='store_true')

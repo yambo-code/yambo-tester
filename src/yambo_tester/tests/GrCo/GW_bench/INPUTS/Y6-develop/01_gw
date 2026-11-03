@@ -1,0 +1,53 @@
+rim_cut                          # Coulomb potential
+HF_lXC                           # Hartree-Fock self-energy and local XC (develop: was self_energy)
+gw                               # GW correlation self-energy (develop: was self_energy + SEApprox)
+dyson                            # Dyson equation solver
+X_PPA                            # Plasmon Pole Approximation for the Screened Interaction
+dipoles                          # Oscillator strenghts (or dipoles)
+NLogCPUs= 10                     # Live-timing CPU`s (0 for all)
+DIP_CPU= "1 1 1"                 # CPUs for each role (patched per node count by yambo-tester)
+DIP_ROLEs= "k c v"               # CPUs roles (k,c,v)
+PPA_CPU= "1 1 1 1 1"             # CPUs for each role (patched per node count by yambo-tester)
+PPA_ROLEs= "q g k c v"           # CPUs roles (q,g,k,c,v)
+PPA_nCPU_LinAlg_INV= -1          # CPUs for Linear Algebra (if -1 it is automatically set)
+HFlXC_CPU= "1 1 1 1"             # CPUs for each role (patched per node count by yambo-tester)
+HFlXC_ROLEs= "g q qp b"          # CPUs roles (qp,g,q,b)
+GW_CPU= "1 1 1 1"                # CPUs for each role (patched per node count by yambo-tester)
+GW_ROLEs= "g q qp b"             # CPUs roles (qp,g,q,b)
+RandQpts= 3000000                # [RIM] Number of random q-points in the BZ
+RandGvec= 1                RL    # [RIM] Coulomb interaction RS components
+CUTGeo= "box z"                  # [CUT] Coulomb Cutoff geometry
+% CUTBox
+ 0.000000 | 0.000000 | 68.00000 |        # [CUT] [au] Box sides
+%
+CUTRadius= 0.000000              # [CUT] [au] Sphere/Cylinder radius
+CUTCylLen= 0.000000              # [CUT] [au] Cylinder length
+CUTwsGvec= 0.700000              # [CUT] WS cutoff: number of G to be modified
+EXXRLvcs= 110539           RL    # [XX] Exchange    RL components
+VXCRLvcs= 110539           RL    # [XC] XCpotential RL components
+% DipBands
+  1 | 2000 |                     # Bands for the dipoles (Y5: same as BndsRnXp by default)
+%
+TDDFTKernel= "HARTREE"           # TDDFT Kernel (Y5: Chimod)
+% PPA_QpntsR
+ 1 | 7 |                         # Transferred momenta (Y5: QpntsRXp)
+%
+% PPA_BndsRn
+ 1 | 2000 |                      # Polarization function bands (Y5: BndsRnXp)
+%
+PPA_NGsBlk= 20             Ry    # Response block size (Y5: NGsBlkXp)
+% PPA_LongDr
+ 0.577350E-5 | 0.577350E-5 | 0.577350E-5 |   # [cc] Electric Field (Y5: LongDrXp)
+%
+PPA_PPAPnt= 27.21139       eV    # PPA imaginary energy = 1 Ha (Y5: PPAPntXp)
+% GbndRnge
+ 1 | 2000 |                      # G[W] bands range
+%
+DysSolver= "n"                   # Dyson Equation solver ("n","s","g")
+GDamping= 0.100000         eV    # G[W] damping (Y5 default)
+%QP_krange                       # QP generalized Kpoint/Band indices (Y5: QPkrange)
+ 7| 7| 35| 36|
+ 7| 7| 40| 41|
+ 1| 1| 38| 39|
+ 1| 1| 44| 45|
+%

@@ -124,13 +124,13 @@ yambo-tester --bin /home/nicola/src/yambo-6.0/bin
 ### Development-branch variants
 
 Some Yambo development branches read a different input dialect than the
-released major version. For example, the `negf`/engine refactor turns on the
+released major version. For example, the `develop` branch (negf/engine refactor) turns on the
 self-energy with the `HF_lXC`, `gw` and `dyson` runlevels instead of
 `self_energy` plus `SEApprox`. Select the dialect by name with `--variant`, or
 with `yambo_variant` in `[parameters]`:
 
 ```bash
-yambo-tester --bin ~/codes/6.0-develop/bin --variant negf
+yambo-tester --bin ~/codes/6.0-develop/bin --variant develop
 ```
 
 The variant is never guessed from the binary, because revision numbers and
@@ -140,9 +140,9 @@ hashes are not ordered across branches. Its effects are:
   scratch copy of every yambo input, so the same `INPUTS/Y6` files serve both
   dialects;
 - in `tests.toml`, a `[versions."<major>-<variant>"]` overlay (e.g.
-  `versions."6-negf"`) is applied after `[versions."<major>"]`, at workflow
+  `versions."6-develop"`) is applied after `[versions."<major>"]`, at workflow
   and step level. Use it only where the results really differ, e.g. a
-  `reference` table pointing to `REFERENCE/Y6-negf/...`;
+  `reference` table pointing to `REFERENCE/Y6-develop/...`;
 - `results.toml` records `yambo_variant` and `yambo_build` (the
   `Revision Hash` line of `yambo -h`), so every run says which build it tested.
 

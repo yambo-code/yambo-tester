@@ -45,3 +45,9 @@ input_dir = "Y5"
 
 [01_gw.versions."5".reference]
 "REFERENCE/Y5/r-01_gw_HF_and_locXC_gw0_rim_cut_em1d_ppa_el_el_corr" = ["Game Over & Game summary"]
+
+[01_gw.versions."6-develop"]      # develop branch (--variant develop): HF_lXC, gw, dyson runlevels
+input = "INPUTS/Y6-develop/01_gw"
+
+[01_gw.versions."6-develop".reference]
+"REFERENCE/Y6-develop/r-01_gw_rim_cut_HF_lXC_gw_dyson_dipoles_X_PPA" = ["Game Over & Game summary"]

@@ -67,7 +67,7 @@ def download_link_for_version(yambo_version):
 def overlay_keys(yambo_version, variant=""):
     """Overlay keys in order: "<major>", then "<major>-<variant>" when a variant is selected."""
     major = normalize_yambo_version(yambo_version)  # e.g. "6"
-    return [major] + ([f"{major}-{variant}"] if variant else [])  # e.g. ["6", "6-negf"]
+    return [major] + ([f"{major}-{variant}"] if variant else [])  # e.g. ["6", "6-develop"]
 
 
 def resolve_workflow_metadata(workflow_config, yambo_version, variant=""):
