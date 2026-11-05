@@ -499,3 +499,22 @@ def test_runs_ok_skips_runlevel_filtered_steps():
 def test_runs_ok_skips_unsupported_version_steps():
     with pytest.raises(pytest.skip.Exception):
         reference_test_runs_ok(("02_qp", {"returncode": UNSUPPORTED_VERSION_RETURNCODE}))
+
+
+def test_compare_text_output_allows_skipped_reference_only_columns(tmp_path):
+    ref_file = tmp_path / "ref.dat"
+    out_file = tmp_path / "out.dat"
+    ref_file.write_text("1 10.0 5.0 7.0\n2 20.0 6.0 8.0\n")
+    out_file.write_text("1 10.0\n2 20.0\n")
+
+    compare_text_output(out_file, ref_file, "o-extra-ref-columns.eps", 0.1, {2, 3})
+
+
+def test_compare_text_output_rejects_unskipped_reference_only_columns(tmp_path):
+    ref_file = tmp_path / "ref.dat"
+    out_file = tmp_path / "out.dat"
+    ref_file.write_text("1 10.0 5.0\n2 20.0 6.0\n")
+    out_file.write_text("1 10.0\n2 20.0\n")
+
+    with pytest.raises(ValueError):
+        compare_text_output(out_file, ref_file, "o-extra-ref-columns.eps", 0.1, set())

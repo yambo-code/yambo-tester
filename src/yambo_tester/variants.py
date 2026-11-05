@@ -19,7 +19,12 @@ def load_variant(name, yambo_version):
     major = normalize_yambo_version(yambo_version)  # selected major
     if normalize_yambo_version(table[name]["major"]) != major:  # wrong major
         raise ValueError(f"Variant '{name}' is for Yambo {table[name]['major']}, not Yambo {major}.")  # clear error
-    return table[name]  # rules
+    rules = dict(table[name])  # rules of this variant
+    parent = rules.get("extends", "")
+    if parent:  # the parent rules first, this variant's own on top
+        base = load_variant(parent, yambo_version)
+        rules["runlevels"] = {**base.get("runlevels", {}), **rules.get("runlevels", {})}
+    return rules  # rules
 
 
 def rewrite_input(path, variant):

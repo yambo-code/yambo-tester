@@ -298,7 +298,11 @@ def compare_text_output(out_file, ref_file, ref, tol, skip_columns, max_mismatch
     ref_data = load_text_output_data(ref_file)
     out_data = load_text_output_data(out_file)
 
-    if ref_data.shape != out_data.shape:
+    # Columns present only in the reference are allowed when skip_columns names all of them
+    # (e.g. a Yambo 5 file with extra trailing columns used as reference for a Yambo 6 output).
+    extra_ref_columns = set(range(out_data.shape[1], ref_data.shape[1]))
+    if ref_data.shape[0] != out_data.shape[0] or ref_data.shape[1] < out_data.shape[1] \
+            or not extra_ref_columns <= set(skip_columns):
         raise ValueError(
             "text files have different shapes: "
             f"reference has {ref_data.shape}, output has {out_data.shape}"

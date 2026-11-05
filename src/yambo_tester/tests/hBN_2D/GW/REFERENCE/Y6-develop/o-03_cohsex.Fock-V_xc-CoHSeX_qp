@@ -1,0 +1,194 @@
+#  __      __   ______   __       __  _______    ______               
+# |  \    /  \ /      \ |  \     /  \|       \  /      \              
+#  \$$\  /  $$|  $$$$$$\| $$\   /  $$| $$$$$$$\|  $$$$$$\             
+#   \$$\/  $$ | $$__| $$| $$$\ /  $$$| $$__/ $$| $$  | $$             
+#    \$$  $$  | $$    $$| $$$$\  $$$$| $$    $$| $$  | $$             
+#     \$$$$   | $$$$$$$$| $$\$$ $$ $$| $$$$$$$\| $$  | $$             
+#     | $$    | $$  | $$| $$ \$$$| $$| $$__/ $$| $$__/ $$             
+#     | $$    | $$  | $$| $$  \$ | $$| $$    $$ \$$    $$             
+#      \$$     \$$   \$$ \$$      \$$ \$$$$$$$   \$$$$$$              
+#                                                                     
+# Version 6.0.0 Revision 23930 Hash (prev commit) 3b04d76b            
+#                  Branch is develop-rr                               
+#                MPI+SLK+HDF5_MPI_IO Build                            
+#                http://www.yambo-code.eu                             
+#
+#
+#  Dyson solver                             : o
+#  Number of states                         :  28
+#  Number of bands                          :   6
+#  Number of k-points                       :   7
+#  [Fock] Kind                              : Self-Energy
+#  [Fock] Approximation                     : Fock
+#  [Fock] Number of states                  :  28
+#  [Fock] Bands mixing                      :   0.00000000   
+#  [Fock] Number of frequencies             :  1
+#  [Fock] Total self-energy weight          :   1.00000000   
+#  [Fock] Reciprocal lattice vectors        :  1003
+#  [V_xc] Density grid RL vectors           :  19039
+#  [V_xc] Kind                              : V_xc
+#  [V_xc] Approximation                     : Perdew, Burke & Ernzerhof(X)+Perdew, Burke & Ernzerhof(C)
+#  [V_xc] Number of states                  :  28
+#  [V_xc] Bands mixing                      :   0.00000000   
+#  [V_xc] Number of frequencies             :  1
+#  [V_xc] Total self-energy weight          :  -1.00000000   
+#  [V_xc] Reciprocal lattice vectors        :  1003
+#  [CoHSeX] Kind                            : Self-Energy
+#  [CoHSeX] Approximation                   : CoHSeX
+#  [CoHSeX] Number of states                :  28
+#  [CoHSeX] Bands mixing                    :   0.00000000   
+#  [CoHSeX] Number of frequencies           :  1
+#  [CoHSeX] Total self-energy weight        :   1.00000000   
+#  [CoHSeX] Reciprocal lattice vectors      :  109
+#  [CoHSeX] G[W] bands range                :   1   6
+#  [CoHSeX] Empty bands in COH              : no
+#  [CoHSeX] [X] Bands range                 :    1   40
+#  [CoHSeX] [X] Time-ordering               : T-ordered
+#  [CoHSeX] [X] Electron-Field interacti    : r.E
+#  [CoHSeX] [X] [r,Vnl] included            : no
+#  [CoHSeX] [X] Response function size      :  109
+#  [CoHSeX] [X] G sets rule (XqGRule)       :  2
+#  [CoHSeX] [X] q->0 star average (Xq0Av    :  1
+#  [CoHSeX] [X] Dyson equation Kernel       : HARTREE
+#  [CoHSeX] [X] Reduction fraction          :   100.000000    [%]
+#  [CoHSeX] [X] Number of frequencies       :  1
+#  [CoHSeX] [X] Frequencies range           :   0.00000000      0.00000000    [eV]
+#  [CoHSeX] [X] Damping range               :  0.100000005E-2  0.100000005E-2 [eV]
+#  [CoHSeX] [Xs] Bands range                :    1   40
+#  [CoHSeX] [Xs] Time-ordering              : T-ordered
+#  [CoHSeX] [Xs] Electron-Field interact    : r.E
+#  [CoHSeX] [Xs] [r,Vnl] included           : no
+#  [CoHSeX] [Xs] Response function size     :  109
+#  [CoHSeX] [Xs] G sets rule (XqGRule)      :  2
+#  [CoHSeX] [Xs] q->0 star average (Xq0A    :  1
+#  [CoHSeX] [Xs] Dyson equation Kernel      : HARTREE
+#  [CoHSeX] [Xs] Reduction fraction         :   100.000000    [%]
+#  [CoHSeX] [Xs] Number of frequencies      :  1
+#  [CoHSeX] [Xs] Frequencies range          :   0.00000000      0.00000000    [eV]
+#  [CoHSeX] [Xs] Damping range              :  0.100000005E-2  0.100000005E-2 [eV]
+#                                                                                                                                                                                                                                                                                                           
+#  QP @ state[ 1 ] K range                  :   1   7
+#  QP @ state[ 1 ] b range                  :   3   6
+#
+#
+#    K-point            Band               Eo [eV]            E [eV]             E-Eo [eV]          Fock(Eo) [eV]      V_xc(Eo) [eV]      CoHSeX(Eo) [eV]
+#
+        1                  3                 -1.404829          -4.605366          -3.200537          -22.54209          -18.22894           1.112613
+        1                   4                -1.404827          -4.714748          -3.309920          -22.54181          -18.22894           1.002957
+        1                   5                 4.653343           5.454352           0.801009          -1.288913          -3.601250          -1.511329
+        1                   6                 5.664001           6.307369           0.643368          -0.658463          -2.143010          -0.841179
+        2                  3                 -3.378315          -7.124339          -3.746024          -22.43078          -17.40443           1.280330
+        2                   4                -2.297321          -5.679952          -3.382631          -22.41539          -17.83338           1.199382
+        2                   5                 5.546723           6.373942           0.827219          -1.267117          -3.611819          -1.517483
+        2                   6                 6.487167           7.202184           0.715017          -0.853326          -2.491045          -0.922702
+        3                  3                 -3.658245          -7.308228          -3.649983          -22.46510          -17.40468           1.410439
+        3                   4                -2.598153          -6.341402          -3.743249          -18.32985          -14.07804           0.508562
+        3                   5                 7.035465           8.965990           1.930525          -6.468926          -11.94447          -3.545022
+        3                   6                 8.002345           9.033151           1.030805          -1.836000          -4.796226          -1.929420
+         4                 3                 -4.223079          -7.975510          -3.752430          -22.53760          -17.27425           1.510922
+         4                  4                -0.918094          -4.201791          -3.283697          -19.10651          -15.48275           0.340058
+         4                  5                 4.769152           6.130062           1.360910          -5.905545          -10.86367          -3.597213
+         4                  6                 9.618391           11.54310           1.924706          -6.495921          -12.33520          -3.914572
+         5                 3                 -3.988211          -7.705787          -3.717575          -22.17374          -17.03776           1.418406
+         5                  4                -3.199162          -7.098230          -3.899068          -18.30227          -13.77220           0.631008
+         5                  5                 7.274174           8.166786           0.892613          -1.264023          -3.758531          -1.601896
+         5                  6                 7.662480           9.268127           1.605648          -4.246330          -8.238417          -2.386438
+         6                 3                 -5.381110          -9.382174          -4.001064          -22.32764          -16.63531           1.691268
+         6                  4                -1.079976          -4.408037          -3.328061          -18.76247          -15.16485           0.269559
+         6                  5                 5.447548           7.029025           1.581477          -6.431680          -11.69119          -3.678037
+         6                  6                 10.48349           11.74207           1.258575          -2.267687          -5.808645          -2.282384
+         7                 3                 -7.219752          -11.77631          -4.556553          -22.59903          -15.93603           2.106446
+         7                  4                 0.000000          -3.009248          -3.009248          -19.71401          -16.45736           0.247408
+         7                  5                 4.631999           6.017409           1.385411          -5.657376          -10.85635          -3.813562
+         7                  6                 12.36209           13.53801           1.175926          -2.460300          -6.746863          -3.110638
+# 
+# 11/05/2026 at 15:29 yambo @ UNIJ2P4Q7TFK3 [start]
+# 11/05/2026 at 15:30                       [end]
+#  
+# Timing   [Min/Max/Average]: 06s/06s/06s
+#
+# .-Input file  03_cohsex/03_cohsex
+# | #
+# | # ==== Runlevels ===
+# | rim_cut                                     # Coulomb potential
+# | HF_lXC                                      # Hartree-Fock
+# | gw                                          # GW self-energy, needs a screening -X
+# | dyson                                       # Solver
+# | dipoles                                     # Oscillator strenghts (or dipoles)
+# | X_static                                    # Statically Screened Interaction
+# | #
+# | # ==== MPI (V=parallel) ===
+# | HFlXC_CPU= "2.1.1.1"                        # CPUs for each role
+# | HFlXC_ROLEs= "qp.g.q.b"                     # CPUs roles (qp,g,q,b)
+# | DIP_CPU= "2.1.1"                            # CPUs for each role
+# | DIP_ROLEs= "k.c.v"                          # CPUs roles (k,c,v)
+# | EM1S_CPU= "2.1.1.1.1"                       # CPUs for each role
+# | EM1S_ROLEs= "q.g.k.c.v"                     # CPUs roles (q,g,k,c,v)
+# | EM1S_nCPU_LinAlg_INV=-1                     # CPUs for Linear Algebra (if -1 it is automatically set)
+# | GW_CPU= "2.1.1.1"                           # CPUs for each role
+# | GW_ROLEs= "qp.g.q.b"                        # CPUs roles (qp,g,q,b)
+# | #
+# | # ==== Bosons (V=bosons) ===
+# | BoseTemp= 0.000000                   [K]    # Bosonic Temperature
+# | #
+# | # ==== FFT ===
+# | #FFTAliased                     # [FFT] Minimal boxes, pair densities alias (Yambo 5, less memory)
+# | #
+# | # ==== Fields (V=fields) ===
+# | EF_interaction= "r.E"                       # Interaction kind (r.E|p.A)
+# | #
+# | # ==== Coulomb cutoff (V=cutoff) ===
+# | CUTGeo= "slab z"                            # Coulomb Cutoff geometry: box/cylinder/sphere/ws/slab X/Y/Z/XY..
+# | % CUTBox
+# |  0.000000 | 0.000000 | 0.000000 |           # [au] Box sides
+# | %
+# | CUTRadius= 0.000000                         # [au] Sphere/Cylinder radius
+# | CUTCylLen= 0.000000                         # [au] Cylinder length
+# | CUTwsGvec= 0.000000                         # WS cutoff: number of G to be modified
+# | #CUTCol_test                    # Perform a cutoff test in R-space
+# | #
+# | # ==== RIM (V=rim) ===
+# | RandQpts= 1000000                           # Number of random q-points in the BZ
+# | RandGvec= 109                        [RL]   # Coulomb interaction RS components
+# | #
+# | # ==== Dipoles (V=dipoles) ===
+# | % DipBands
+# |    1 |  40 |                                # Bands range for dipoles
+# | %
+# | DipComputed= " R V P [G-space]"             # [default R P V; extra P2 Spin Orb]
+# | #
+# | # ==== Hartree-Fock (V=hf) ===
+# | EXXRLvcs= 1003                       [RL]   # Exchange    RL components
+# | VXCRLvcs= 1003                       [RL]   # XCpotential RL components
+# | #
+# | # ==== Static dielectric matrix (V=X) ===
+# | EM1S_NGsBlk= 109                     [RL]   # Response block size
+# | % EM1S_QpntsR
+# |   1 |  7 |                                  # Transferred momenta
+# | %
+# | % EM1S_BndsRn
+# |    1 |  40 |                                # Polarization function bands
+# | %
+# | % EM1S_LongDr
+# |  1.000000 | 0.000000 | 0.000000 |           # [cc] Electric Field
+# | %
+# | EM1S_CGrdSp= 100.0000                       # [o/o] Poles coarse grid controller
+# | #
+# | # ==== TDDFT ===
+# | TDDFTKernel= "HARTREE"                      # TDDFT Kernel: IP/Hartree/ALDA/LRC/PF/BSfxc
+# | #
+# | # ==== GW (V=gw) ===
+# | % GbndRnge
+# |    1 |  40 |                                # G[W] bands range
+# | %
+# | #
+# | # ==== Dyson solver (V=qp) ===
+# | DysSolver= "o"                              # Dyson Equation solver ("o","n","s","g")
+# | # ==== Hartree-Fock (V=hf) ===
+# | %HF_lXC_krange                   # Generalized Kpoint/Band indices
+# | 1|2|1|4|
+# | %
+# | # ==== GW (V=gw) ===
+# | %GW_krange                       # Generalized Kpoint/Band indices
+# | 1|2|1|4|
+# | %

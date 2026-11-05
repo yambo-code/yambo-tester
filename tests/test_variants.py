@@ -1,7 +1,7 @@
 import pytest  # test framework
 
 from yambo_tester.variants import load_variant, rewrite_input  # code under test
-from yambo_tester.versioning import resolve_workflow_metadata, workflow_steps_for_version  # overlay chain
+from yambo_tester.versioning import resolve_workflow_metadata, workflow_steps_for_version, workflow_supports_version, variant_chain  # overlay chain
 
 
 def write(tmp_path, text):  # scratch input helper
@@ -59,3 +59,24 @@ def test_thread_env_always_sets_omp_threads(monkeypatch):  # MPI-only builds mus
     monkeypatch.delenv("OMP_NUM_THREADS", raising=False)  # as in a plain shell
     assert thread_env({"omp": False, "thrs": 4})["OMP_NUM_THREADS"] == "1"  # MPI-only yambo: one thread per task
     assert thread_env({"omp": True, "thrs": 4})["OMP_NUM_THREADS"] == "4"  # OpenMP yambo: the requested threads
+
+
+def test_extends_chain_and_inherited_runlevels():  # bse extends develop: its rules and overlays first
+    assert variant_chain("bse") == ["develop", "bse"]  # most general first
+    assert variant_chain("") == []  # no variant
+    assert "self_energy" in load_variant("bse", "6")["runlevels"]  # develop runlevel rules inherited
+
+
+def test_extends_overlays_and_variant_only_workflow():  # a workflow enabled only for one variant
+    workflow = {
+        "yambo_versions": {"supported": ["5"]},  # plain Yambo 6 builds do not have the plugin
+        "versions": {"6-bse": {"yambo_versions": {"supported": ["5", "6"]}}},  # the bse variant does
+        "01": {"reference": {"base": []},
+               "versions": {"6-develop": {"reference": {"develop": []}}, "6-bse": {"input": "bse"}}},
+    }
+    assert not workflow_supports_version(workflow, "6")  # no variant
+    assert not workflow_supports_version(workflow, "6", "develop")  # parent variant only
+    assert workflow_supports_version(workflow, "6", "bse")  # the variant that enables it
+    step = workflow_steps_for_version(workflow, "6", "bse")["01"]
+    assert step["reference"] == {"develop": []} and step["input"] == "bse"  # develop overlay, then bse
+

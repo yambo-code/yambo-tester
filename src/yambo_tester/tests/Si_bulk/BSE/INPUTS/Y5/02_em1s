@@ -1,0 +1,52 @@
+#                                                                     
+#  **    **    **     ****     ****  ******     *******               
+# //**  **    ****   /**/**   **/** /*////**   **/////**              
+#  //****    **//**  /**//** ** /** /*   /**  **     //**             
+#   //**    **  //** /** //***  /** /******  /**      /**             
+#    /**   **********/**  //*   /** /*//// **/**      /**             
+#    /**  /**//////**/**   /    /** /*    /**//**     **              
+#    /**  /**     /**/**        /** /*******  //*******               
+#    //   //      // //         //  ///////    ///////                
+#                                                                     
+# Version 5.4.0 Revision 24143 Hash (prev commit) 77ed66f02           
+#                        Branch is                                    
+#             MPI+SLK+SLEPC+HDF5_MPI_IO Build                         
+#                http://www.yambo-code.eu                             
+#
+screen                           # [R] Inverse Dielectric/Response Matrix
+em1s                             # [R][Xs] Statically Screened Interaction
+infver                           # [R] Input file variables verbosity
+dipoles                          # [R] Oscillator strenghts (or dipoles)
+#DegFix                        # Force the code to impose the energy levels to respect their degeneracy
+Chimod= "HARTREE"                # [X] IP/Hartree/ALDA/LRC/PF/BSfxc
+ChiLinAlgMod= "LIN_SYS"          # [X] inversion/lin_sys,cpu/gpu
+% DipBands
+  1 | 10 |                           # [DIP] Bands range for dipoles
+%
+#DipBandsALL                   # [DIP] Compute all bands range, not only valence and conduction
+DipApproach= "G-space v"         # [DIP] [G-space v/R-space x/Covariant/Shifted grids]
+DipComputed= ""                  # [DIP] [default R P V; extra P2 Spin Orb]
+#DipPDirect                    # [DIP] Directly compute <v> also when using other approaches for dipoles
+ShiftedPaths= ""                 # [DIP] Shifted grids paths (separated by a space)
+DipoleEtresh= 0.100000E-4  eV    # [DIP] Treshold in the definition of R=P/deltaE
+% QpntsRXs
+  1 |  8 |                           # [Xs] Transferred momenta
+%
+% BndsRnXs
+  1 | 10 |
+%
+NGsBlkXs= 51 RL
+GrFnTpXs= "T"                    # [Xs] Green`s function (T)ordered,(R)etarded,(r)senant,(a)ntiresonant [T, R, r, Ta, Ra]
+% DmRngeXs
+ 0.100000E-2 | 0.100000E-2 |   eV    # [Xs] Damping range
+%
+CGrdSpXs= 100.0000               # [Xs] [o/o] Coarse grid controller
+% EhEngyXs
+-1.000000 |-1.000000 |         eV    # [Xs] Electron-hole energy range
+%
+% LongDrXs
+ 1.000000 | 0.000000 | 0.000000 |        # [Xs] [cc] Electric Field
+%
+DrudeWXs= ( 0.000000 , 0.000000 )  eV    # [Xs] Drude plasmon
+XTermKind= "none"                # [X] X terminator ("none","BG" Bruneval-Gonze)
+XTermEn= 40.00000          eV    # [X] X terminator energy (only for kind="BG")

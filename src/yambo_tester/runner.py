@@ -114,7 +114,7 @@ def source_workflow_config(test, parameters):
 def parameters_with_workflow_download_link(test, parameters, logger):
     workflow_config = source_workflow_config(test, parameters)
     yambo_version = parameters.get('yambo_version') or DEFAULT_YAMBO_VERSION
-    if not workflow_supports_version(workflow_config, yambo_version):
+    if not workflow_supports_version(workflow_config, yambo_version, parameters.get('yambo_variant') or ""):
         logger.info(f"[{test['name']}/{test['type']}] skipped download for unsupported Yambo version {yambo_version}")
         return None
 
@@ -185,7 +185,7 @@ def setup_rundir(test, parameters, logger):
         raise FileNotFoundError(f"{local_config} not available") 
 
     yambo_version = parameters.get('yambo_version') or DEFAULT_YAMBO_VERSION
-    if workflow_supports_version(config, yambo_version):
+    if workflow_supports_version(config, yambo_version, parameters.get('yambo_variant') or ""):
         tar_file, process = download_workflow_tarball(test, parameters, logger)
         try:
             if process is not None:
@@ -238,7 +238,7 @@ def run_test(test, parameters, logger, verbose=False):
         "yambo_build": f"{parameters.get('revision', '')} {parameters.get('hash', '')}".strip(),  # traceability: Revision Hash of yambo -h
     }
 
-    if not workflow_supports_version(workflow_config, yambo_version):
+    if not workflow_supports_version(workflow_config, yambo_version, parameters.get('yambo_variant') or ""):
         for name, run in config.items():
             results[name] = {
                 "returncode": UNSUPPORTED_VERSION_RETURNCODE,

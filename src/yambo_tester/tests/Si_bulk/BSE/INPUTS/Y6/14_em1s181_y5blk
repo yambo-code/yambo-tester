@@ -1,0 +1,107 @@
+#                                                                     
+# :   :::   :::     ::::    ::::  :::::::::   ::::::::                
+# :+:   :+: :+: :+:   +:+:+: :+:+:+ :+:    :+: :+:    :+              
+#  +:+ +:+ +:+   +:+  +:+ +:+:+ +:+ +:+    +:+ +:+    +:+             
+#   +#++: +#++:++#++: +#+  +:+  +#+ +#++:++#+  +#+    +:+             
+#    +#+  +#+     +#+ +#+       +#+ +#+    +#+ +#+    +#+             
+#    #+#  #+#     #+# #+#       #+# #+#    #+# #+#    #+#             
+#    ###  ###     ### ###       ### #########   ########              
+#                                                                     
+#                                                                     
+# Version 6.0.0 Revision 23875 Hash (prev commit) 4d36a1a             
+#                     Branch is main                                  
+#                MPI+SLK+HDF5_MPI_IO Build                            
+#                http://www.yambo-code.eu                             
+#
+#
+# ==== Runlevels ===
+screen                                      # Inverse Dielectric/Response Matrix
+X_static                                    # Statically Screened Interaction
+dipoles                                     # Oscillator strenghts (or dipoles)
+infver                                      # Input file variables verbosity
+#
+# ==== MPI (V=parallel) ===
+NLogCPUs=0                                  # Live-timing CPU`s (0 for all)
+PAR_def_mode= "balanced"                    # Default distribution mode ("balanced"/"memory"/"workload"/"KQmemory")
+DIP_CPU= ""                                 # CPUs for each role
+DIP_ROLEs= ""                               # CPUs roles (k,c,v)
+EM1S_CPU= ""                                # CPUs for each role
+EM1S_ROLEs= ""                              # CPUs roles (q,g,k,c,v)
+EM1S_nCPU_LinAlg_INV=-1                     # CPUs for Linear Algebra (if -1 it is automatically set)
+#
+# ==== Memory (V=memory) ===
+MEM_tresh=  51200                    [Kb]   # Treshold on traced memory allocations/deallocations
+#
+# ==== Timing (V=timing) ===
+StdoHash=  40                               # Live-timing Hashes
+#
+# ==== WF (V=wf) ===
+FFTGvecs=  609                       [RL]   # [FFT] Plane-waves (WF G-vectors, below the full set truncates the WFs)
+#
+# ==== Electrons (V=el) ===
+Nelectro= 8.000000                          # Electrons number
+OccTresh= 0.100000E-4                       # Occupation treshold (metallic bands)
+#
+# ==== Temperatures (V=el) ===
+ElecTemp= 0.000000                   [K]    # Electronic Temperature
+#
+# ==== Bosons (V=bosons) ===
+BoseTemp= -315775.                   [K]    # Bosonic Temperature
+BoseCut= 0.100000                           # Finite T Bose function cutoff
+#
+# ==== Direct Lattice (V=DL) ===
+NonPDirs= "none"                            # Non periodic chartesian directions (X,Y,Z,XY...)
+% MolPos
+ 0.000000 | 0.000000 | 0.000000 |           # Molecule coord in supercell, 0.5 is the middle
+%
+#
+# ==== I/O (V=io) ===
+DBsIOoff= "none"                            # Space-separated list of DB with NO I/O. DB=(DIP,X,HF,COLLs,J,GF,CARRIERs,OBS,W,SC,BS,ALL)
+DBsFRAGpm= "none"                           # Space-separated list of +DB to FRAG and -DB to NOT FRAG. DB=(DIP,X,W,HF,COLLS,K,BS,QINDX,RT,ELPH,SC,
+#
+# ==== FFT ===
+#FFTAliasFree                   # [FFT] Alias-free boxes for pair densities (exact, more memory)
+#
+# ==== Fields (V=fields) ===
+EF_interaction= "r.E"                       # Interaction kind (r.E|p.A)
+#
+# ==== Dipoles (V=dipoles) ===
+% DipQpt
+ 1 | 1 |                                    # Qpts range for dipoles
+%
+% DipBands
+  1 | 10 |                                  # Bands range for dipoles
+%
+#DipBandsALL                    # Compute all bands range, not only valence and conduction
+DipApproach= "G-space v"                    # [G-space v/R-space x/Covariant/Shifted grids]
+DipComputed= "R P V"                        # [default R P V; extra P2 Spin Orb]
+#DipPDirect                     # Directly compute <v> also when using other approaches for dipoles
+ShiftedPaths= ""                            # Shifted grids paths (separated by a space)
+DipoleEtresh= 0.010000               [mev]  # Treshold in the definition of R=P/deltaE
+#
+# ==== Response Function (V=X) ===
+ChiLinAlgMod= "LIN_SYS"                     # Inversion/lin_sys,cpu/gpu
+XTermKind= "none"                           # Terminator ("none","BG" Bruneval-Gonze)
+XTermEn= 40.00000                    [ev]   # Terminator energy (only for kind="BG")
+#XTermLegacyQ0                  # [DEV] Yambo 5 terminator at q=0 (unphysical, code comparison only)
+DbGdQsize=-1.000000                         # [o/o] Percentual of the total DbGd transitions to be used
+#
+# ==== Static dielectric matrix (V=X) ===
+EM1S_GrFnTp= "T"                            # Time-order: T R r Ta Ra. (T)ordered,(R)etarded,(r)sonant,(a)nti-resonant
+EM1S_NGsBlk= 181 RL
+% EM1S_QpntsR
+  1 |  8 |                                  # Transferred momenta
+%
+% EM1S_BndsRn
+  1 | 10 |                                  # Polarization function bands
+%
+EM1S_DrudeW= ( 0.000000 , 0.000000 )       [eV]   # Drude plasma frequency
+% EM1S_LongDr
+ 1.000000 | 0.000000 | 0.000000 |           # [cc] Electric Field
+%
+EM1S_CGrdSp= 100.0000                       # [o/o] Poles coarse grid controller
+#
+# ==== TDDFT ===
+TDDFTKernel= "HARTREE"                      # TDDFT Kernel: IP/Hartree/ALDA/LRC/PF/BSfxc
+XqGRule= 0
+Xq0Avg= 0                     # [DEVELOPER] W(q->0) at the single direction q0, as Yambo 5

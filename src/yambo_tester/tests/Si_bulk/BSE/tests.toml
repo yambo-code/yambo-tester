@@ -1,0 +1,422 @@
+# Bulk Si BSE (bse plugin, conventional: no symadapt): exciton spectrum at q->0 for the kernel
+# variants. ONCV PBE, 20 Ry, 4x4x4 k-grid (64 BZ), 10 bands; BSE bands 1-8 (1024 transitions),
+# resonant, field (1,0,0), 0-10 eV, 100 steps, damping 0.1 eV. Exchange 100 RL; the *181 runs use
+# 181 RL for exchange and W. Screening: em1s bands 1-10, 51 RL (02_em1s) or 181 RL (03_em1s181).
+# Same QE SAVE as Si_bulk/GW (si.save byte-identical), each version runs its own p2y.
+#
+# Yambo 6 runs only with --variant bse (develop with the bse plugin built in). Its references are in
+# REFERENCE/Y6-bse. The screening uses the physical G sets of develop: the |q+G| ball of every q (XqGRule=2),
+# closed under the little group of q, see "Symmetric Screening at Every q.html" in the Yambo 6 tree.
+#
+# Yambo 5 cross-checks (REFERENCE/Y5, same inputs, tester metric = max element relative difference on the
+# significant values, tolerance rounded up from the value measured when porting):
+#  - unscreened kernels, same in both G rules: HARTREE bar 8.5e-4, HF 181 RL 5.8e-4 -> 2e-3;
+#    Haydock (HayTrs=-0.001) bar 1.3e-2, full 3.5e-3, both codes stop at the threshold -> 3e-2;
+#  - screened kernels with the Yambo 5 G block (XqGRule=0, steps 12-15, their own screening):
+#    SEX 51 RL 8.6e-3 (Yambo 5 |G| block truncation at zone-boundary q, Y5_BUGS #16) -> 2e-2,
+#    SEX 181 RL 2.5e-4 -> 2e-3.
+#  The screened steps 08-11 use the |q+G| sets and are not compared with Yambo 5: at 51 RL the W truncation of
+#  the |G| block alone moves the spectrum by 6.8% of the peak (2.3% with |q+G|), both converge to the same limit.
+#  Columns: E, Im/Re eps (BSE), Im/Re eps (IP). The Y5 Haydock file has two more (6, 7): skip_columns.
+# Y5 diago with Lkind=full returns no spectrum (Y5_BUGS #18): 05_hartree_full runs the Y5 Haydock
+# (hay_full input) and Y6 diago is compared with it.
+sha256 = "8df197df984e486e07414f487b0bfd2b44e6906061a7039f0dcd9884f5a3dfdc"
+tarball_url = "https://media.yambo-code.eu/robots/databases/y6"
+
+[yambo_versions]
+supported = ["5"]
+
+# Yambo 6 only with the bse plugin built in: --variant bse (develop + plugin, data/variants.toml)
+[versions."6-bse".yambo_versions]
+supported = ["5", "6"]
+
+[00_p2y]
+step_type = "p2y"
+input_dir = "si.save"
+
+[01_init]
+step_type = "init"
+
+[02_em1s]
+exe = "yambo"
+input = "INPUTS/Y6/02_em1s"
+output = "02_em1s"
+runlevel = "bse"
+dependencies = ["01_init"]
+
+[02_em1s.reference]
+"REFERENCE/Y6-bse/o-02_em1s.ndb.static_dielectric_matrix" = { path = "02_em1s/ndb.static_dielectric_matrix", variables = ["EM1S_X_at_Q_1"], tolerance = 0.001 }
+"REFERENCE/Y6-bse/r-02_em1s" = ["Game Over & Game summary"]
+
+[02_em1s.versions."5"]
+input = "INPUTS/Y5/02_em1s"
+
+[02_em1s.versions."5".reference]
+"REFERENCE/Y5/r-02_em1s" = ["Game Over & Game summary"]
+
+[03_em1s181]
+exe = "yambo"
+input = "INPUTS/Y6/03_em1s181"
+output = "03_em1s181"
+runlevel = "bse"
+dependencies = ["01_init"]
+
+[03_em1s181.reference]
+"REFERENCE/Y6-bse/o-03_em1s181.ndb.static_dielectric_matrix" = { path = "03_em1s181/ndb.static_dielectric_matrix", variables = ["EM1S_X_at_Q_1"], tolerance = 0.001 }
+"REFERENCE/Y6-bse/r-03_em1s181" = ["Game Over & Game summary"]
+
+[03_em1s181.versions."5"]
+input = "INPUTS/Y5/03_em1s181"
+
+[03_em1s181.versions."5".reference]
+"REFERENCE/Y5/r-03_em1s181" = ["Game Over & Game summary"]
+
+[04_hartree_bar]
+exe = "yambo"
+input = "INPUTS/Y6/04_hartree_bar"
+output = "04_hartree_bar"
+runlevel = "bse"
+dependencies = ["01_init"]
+
+[04_hartree_bar.reference]
+"REFERENCE/Y6-bse/o-04_hartree_bar.eps_q1_bse_HARTREE" = { path = "o-04_hartree_bar.eps_q1_bse_HARTREE", tolerance = 0.001 }
+"REFERENCE/Y5/o-04_hartree_bar.eps_q1_ydiago_bse" = { path = "o-04_hartree_bar.eps_q1_bse_HARTREE", tolerance = 0.002 }
+"REFERENCE/Y6-bse/r-04_hartree_bar" = ["Game Over & Game summary"]
+
+[04_hartree_bar.versions."5"]
+input = "INPUTS/Y5/04_hartree_bar"
+
+[04_hartree_bar.versions."5".reference]
+"REFERENCE/Y5/o-04_hartree_bar.eps_q1_ydiago_bse" = { path = "o-04_hartree_bar.eps_q1_ydiago_bse", tolerance = 0.001 }
+"REFERENCE/Y5/r-04_hartree_bar" = ["Game Over & Game summary"]
+
+[05_hartree_full]
+exe = "yambo"
+input = "INPUTS/Y6/05_hartree_full"
+output = "05_hartree_full"
+runlevel = "bse"
+dependencies = ["01_init"]
+
+[05_hartree_full.reference]
+"REFERENCE/Y6-bse/o-05_hartree_full.eps_q1_bse_HARTREE" = { path = "o-05_hartree_full.eps_q1_bse_HARTREE", tolerance = 0.001 }
+"REFERENCE/Y5/o-05_hartree_full.eps_q1_haydock_bse" = { path = "o-05_hartree_full.eps_q1_bse_HARTREE", tolerance = 0.03, skip_columns = [6, 7] }
+"REFERENCE/Y6-bse/r-05_hartree_full" = ["Game Over & Game summary"]
+
+[05_hartree_full.versions."5"]
+input = "INPUTS/Y5/05_hartree_full"
+
+[05_hartree_full.versions."5".reference]
+"REFERENCE/Y5/o-05_hartree_full.eps_q1_haydock_bse" = { path = "o-05_hartree_full.eps_q1_haydock_bse", tolerance = 0.001 }
+"REFERENCE/Y5/r-05_hartree_full" = ["Game Over & Game summary"]
+
+[06_hay_bar]
+exe = "yambo"
+input = "INPUTS/Y6/06_hay_bar"
+output = "06_hay_bar"
+runlevel = "bse"
+dependencies = ["01_init"]
+
+[06_hay_bar.reference]
+"REFERENCE/Y6-bse/o-06_hay_bar.eps_q1_bse_HARTREE" = { path = "o-06_hay_bar.eps_q1_bse_HARTREE", tolerance = 0.001 }
+"REFERENCE/Y5/o-06_hay_bar.eps_q1_haydock_bse" = { path = "o-06_hay_bar.eps_q1_bse_HARTREE", tolerance = 0.03, skip_columns = [6, 7] }
+"REFERENCE/Y6-bse/r-06_hay_bar" = ["Game Over & Game summary"]
+
+[06_hay_bar.versions."5"]
+input = "INPUTS/Y5/06_hay_bar"
+
+[06_hay_bar.versions."5".reference]
+"REFERENCE/Y5/o-06_hay_bar.eps_q1_haydock_bse" = { path = "o-06_hay_bar.eps_q1_haydock_bse", tolerance = 0.001 }
+"REFERENCE/Y5/r-06_hay_bar" = ["Game Over & Game summary"]
+
+[07_hf181]
+exe = "yambo"
+input = "INPUTS/Y6/07_hf181"
+output = "07_hf181"
+runlevel = "bse"
+dependencies = ["01_init"]
+
+[07_hf181.reference]
+"REFERENCE/Y6-bse/o-07_hf181.eps_q1_bse_HF" = { path = "o-07_hf181.eps_q1_bse_HF", tolerance = 0.001 }
+"REFERENCE/Y5/o-07_hf181.eps_q1_ydiago_bse" = { path = "o-07_hf181.eps_q1_bse_HF", tolerance = 0.002 }
+"REFERENCE/Y6-bse/r-07_hf181" = ["Game Over & Game summary"]
+
+[07_hf181.versions."5"]
+input = "INPUTS/Y5/07_hf181"
+
+[07_hf181.versions."5".reference]
+"REFERENCE/Y5/o-07_hf181.eps_q1_ydiago_bse" = { path = "o-07_hf181.eps_q1_ydiago_bse", tolerance = 0.001 }
+"REFERENCE/Y5/r-07_hf181" = ["Game Over & Game summary"]
+
+# SEX steps read the screening of 02_em1s/03_em1s181 (-J <step>,<em1s step>); the report pins it.
+[08_sex]
+exe = "yambo"
+input = "INPUTS/Y6/08_sex"
+output = "08_sex"
+runlevel = "bse"
+flags = "02_em1s"
+dependencies = ["02_em1s"]
+
+[08_sex.reference]
+"REFERENCE/Y6-bse/o-08_sex.eps_q1_bse_SEX" = { path = "o-08_sex.eps_q1_bse_SEX", tolerance = 0.001 }
+"REFERENCE/Y6-bse/r-08_sex" = { contains = "[RD@./02_em1s//ndb.static_dielectric_matrix_header]" }
+
+[08_sex.versions."5"]
+input = "INPUTS/Y5/08_sex"
+
+[08_sex.versions."5".reference]
+"REFERENCE/Y5/o-08_sex.eps_q1_ydiago_bse" = { path = "o-08_sex.eps_q1_ydiago_bse", tolerance = 0.001 }
+"REFERENCE/Y5/r-08_sex" = ["Game Over & Game summary"]
+
+[09_sex181]
+exe = "yambo"
+input = "INPUTS/Y6/09_sex181"
+output = "09_sex181"
+runlevel = "bse"
+flags = "03_em1s181"
+dependencies = ["03_em1s181"]
+
+[09_sex181.reference]
+"REFERENCE/Y6-bse/o-09_sex181.eps_q1_bse_SEX" = { path = "o-09_sex181.eps_q1_bse_SEX", tolerance = 0.001 }
+"REFERENCE/Y6-bse/r-09_sex181" = { contains = "[RD@./03_em1s181//ndb.static_dielectric_matrix_header]" }
+
+[09_sex181.versions."5"]
+input = "INPUTS/Y5/09_sex181"
+
+[09_sex181.versions."5".reference]
+"REFERENCE/Y5/o-09_sex181.eps_q1_ydiago_bse" = { path = "o-09_sex181.eps_q1_ydiago_bse", tolerance = 0.001 }
+"REFERENCE/Y5/r-09_sex181" = ["Game Over & Game summary"]
+
+[10_sex_wdiag181]
+exe = "yambo"
+input = "INPUTS/Y6/10_sex_wdiag181"
+output = "10_sex_wdiag181"
+runlevel = "bse"
+flags = "03_em1s181"
+dependencies = ["03_em1s181"]
+
+[10_sex_wdiag181.reference]
+"REFERENCE/Y6-bse/o-10_sex_wdiag181.eps_q1_bse_SEX" = { path = "o-10_sex_wdiag181.eps_q1_bse_SEX", tolerance = 0.001 }
+"REFERENCE/Y6-bse/r-10_sex_wdiag181" = { contains = "[RD@./03_em1s181//ndb.static_dielectric_matrix_header]" }
+
+[10_sex_wdiag181.versions."5"]
+input = "INPUTS/Y5/10_sex_wdiag181"
+
+[10_sex_wdiag181.versions."5".reference]
+"REFERENCE/Y5/o-10_sex_wdiag181.eps_q1_ydiago_bse" = { path = "o-10_sex_wdiag181.eps_q1_ydiago_bse", tolerance = 0.001 }
+"REFERENCE/Y5/r-10_sex_wdiag181" = ["Game Over & Game summary"]
+
+# 4 CPUs. Y6: ScaLAPACK diagonalization (diago_SLK), H stays distributed; Y5: its own 4-CPU run.
+[11_sex181_np4]
+exe = "yambo"
+input = "INPUTS/Y6/11_sex181_np4"
+output = "11_sex181_np4"
+runlevel = "bse"
+nprocs = 4
+flags = "03_em1s181"
+dependencies = ["03_em1s181"]
+
+[11_sex181_np4.reference]
+"REFERENCE/Y6-bse/o-11_sex181_np4.eps_q1_bse_SEX" = { path = "o-11_sex181_np4.eps_q1_bse_SEX", tolerance = 0.001 }
+"REFERENCE/Y6-bse/r-11_sex181_np4" = { contains = "BSE diago (SLK)" }
+
+[11_sex181_np4.versions."5"]
+input = "INPUTS/Y5/11_sex181_np4"
+
+[11_sex181_np4.versions."5".reference]
+"REFERENCE/Y5/o-11_sex181_np4.eps_q1_ydiago_bse" = { path = "o-11_sex181_np4.eps_q1_ydiago_bse", tolerance = 0.001 }
+"REFERENCE/Y5/r-11_sex181_np4" = ["Game Over & Game summary"]
+
+# Yambo 5 G block (XqGRule=0, first NG of the |G| list at every q) and W(q->0) at one direction (Xq0Avg=0):
+# the screening and SEX again, to keep reproducing Yambo 5 with the flags. The screening database records
+# both, so it has its own em1s steps.
+[12_em1s_y5blk]
+exe = "yambo"
+input = "INPUTS/Y6/12_em1s_y5blk"
+output = "12_em1s_y5blk"
+runlevel = "bse"
+dependencies = ["01_init"]
+
+[12_em1s_y5blk.reference]
+"REFERENCE/Y6-bse/r-12_em1s_y5blk" = ["Game Over & Game summary"]
+
+[12_em1s_y5blk.versions."5"]
+input = "INPUTS/Y5/02_em1s"
+
+[12_em1s_y5blk.versions."5".reference]
+"REFERENCE/Y5/r-12_em1s_y5blk" = ["Game Over & Game summary"]
+
+[13_sex_y5blk]
+exe = "yambo"
+input = "INPUTS/Y6/13_sex_y5blk"
+output = "13_sex_y5blk"
+runlevel = "bse"
+flags = "12_em1s_y5blk"
+dependencies = ["12_em1s_y5blk"]
+
+[13_sex_y5blk.reference]
+"REFERENCE/Y6-bse/o-13_sex_y5blk.eps_q1_bse_SEX" = { path = "o-13_sex_y5blk.eps_q1_bse_SEX", tolerance = 0.001 }
+"REFERENCE/Y5/o-08_sex.eps_q1_ydiago_bse" = { path = "o-13_sex_y5blk.eps_q1_bse_SEX", tolerance = 2e-2 }
+"REFERENCE/Y6-bse/r-13_sex_y5blk" = { contains = "[RD@./12_em1s_y5blk//ndb.static_dielectric_matrix_header]" }
+
+[13_sex_y5blk.versions."5"]
+input = "INPUTS/Y5/08_sex"
+
+[13_sex_y5blk.versions."5".reference]
+"REFERENCE/Y5/o-13_sex_y5blk.eps_q1_ydiago_bse" = { path = "o-13_sex_y5blk.eps_q1_ydiago_bse", tolerance = 0.001 }
+"REFERENCE/Y5/r-13_sex_y5blk" = ["Game Over & Game summary"]
+
+[14_em1s181_y5blk]
+exe = "yambo"
+input = "INPUTS/Y6/14_em1s181_y5blk"
+output = "14_em1s181_y5blk"
+runlevel = "bse"
+dependencies = ["01_init"]
+
+[14_em1s181_y5blk.reference]
+"REFERENCE/Y6-bse/r-14_em1s181_y5blk" = ["Game Over & Game summary"]
+
+[14_em1s181_y5blk.versions."5"]
+input = "INPUTS/Y5/03_em1s181"
+
+[14_em1s181_y5blk.versions."5".reference]
+"REFERENCE/Y5/r-14_em1s181_y5blk" = ["Game Over & Game summary"]
+
+[15_sex181_y5blk]
+exe = "yambo"
+input = "INPUTS/Y6/15_sex181_y5blk"
+output = "15_sex181_y5blk"
+runlevel = "bse"
+flags = "14_em1s181_y5blk"
+dependencies = ["14_em1s181_y5blk"]
+
+[15_sex181_y5blk.reference]
+"REFERENCE/Y6-bse/o-15_sex181_y5blk.eps_q1_bse_SEX" = { path = "o-15_sex181_y5blk.eps_q1_bse_SEX", tolerance = 0.001 }
+"REFERENCE/Y5/o-09_sex181.eps_q1_ydiago_bse" = { path = "o-15_sex181_y5blk.eps_q1_bse_SEX", tolerance = 5e-4 }
+"REFERENCE/Y6-bse/r-15_sex181_y5blk" = { contains = "[RD@./14_em1s181_y5blk//ndb.static_dielectric_matrix_header]" }
+
+[15_sex181_y5blk.versions."5"]
+input = "INPUTS/Y5/09_sex181"
+
+[15_sex181_y5blk.versions."5".reference]
+"REFERENCE/Y5/o-15_sex181_y5blk.eps_q1_ydiago_bse" = { path = "o-15_sex181_y5blk.eps_q1_ydiago_bse", tolerance = 0.001 }
+"REFERENCE/Y5/r-15_sex181_y5blk" = ["Game Over & Game summary"]
+
+
+# Finite q (BSE_QpntsR / BSEQptR): q1-q3 of the 4x4x4 grid, q1 = q->0. testing-materials/Silicon/BSE_q.
+# Unscreened kernels and the Yambo 5 G block (XqGRule=0, Xq0Avg=0) are compared with Yambo 5 (measured
+# 2026-11-05: HARTREE 8.4e-4, Haydock 7.5e-3, full 5.8e-3; SEX 51 RL 8.7e-3 at q1, 4.8e-2 at q2, 2.7e-2 at q3,
+# about 1e-3 of the peak: the |G| block breaks the symmetry of W at zone-boundary q, Y5_BUGS #16 -> 2e-2/5e-2); 18_sex_q is the
+# default physics (|q+G| sets, W(q->0) star average) with its own references only. Lkind default is full at q>0,
+# 20_full_q2 checks it against the Y5 Haydock (Y5 diago with full returns no spectrum, Y5_BUGS #18).
+
+[16_hartree_bar_q]
+exe = "yambo"
+input = "INPUTS/Y6/16_hartree_bar_q"
+output = "16_hartree_bar_q"
+runlevel = "bse"
+dependencies = ["01_init"]
+
+[16_hartree_bar_q.reference]
+"REFERENCE/Y6-bse/o-16_hartree_bar_q.eps_q1_bse_HARTREE" = { path = "o-16_hartree_bar_q.eps_q1_bse_HARTREE", tolerance = 0.001 }
+"REFERENCE/Y6-bse/o-16_hartree_bar_q.eps_q2_bse_HARTREE" = { path = "o-16_hartree_bar_q.eps_q2_bse_HARTREE", tolerance = 0.001 }
+"REFERENCE/Y6-bse/o-16_hartree_bar_q.eps_q3_bse_HARTREE" = { path = "o-16_hartree_bar_q.eps_q3_bse_HARTREE", tolerance = 0.001 }
+"REFERENCE/Y5/o-16_hartree_bar_q.eps_q1_ydiago_bse" = { path = "o-16_hartree_bar_q.eps_q1_bse_HARTREE", tolerance = 0.002 }
+"REFERENCE/Y5/o-16_hartree_bar_q.eps_q2_ydiago_bse" = { path = "o-16_hartree_bar_q.eps_q2_bse_HARTREE", tolerance = 0.002 }
+"REFERENCE/Y5/o-16_hartree_bar_q.eps_q3_ydiago_bse" = { path = "o-16_hartree_bar_q.eps_q3_bse_HARTREE", tolerance = 0.002 }
+"REFERENCE/Y6-bse/r-16_hartree_bar_q" = ["Game Over & Game summary"]
+
+[16_hartree_bar_q.versions."5"]
+input = "INPUTS/Y5/16_hartree_bar_q"
+
+[16_hartree_bar_q.versions."5".reference]
+"REFERENCE/Y5/o-16_hartree_bar_q.eps_q1_ydiago_bse" = { path = "o-16_hartree_bar_q.eps_q1_ydiago_bse", tolerance = 0.001 }
+"REFERENCE/Y5/o-16_hartree_bar_q.eps_q2_ydiago_bse" = { path = "o-16_hartree_bar_q.eps_q2_ydiago_bse", tolerance = 0.001 }
+"REFERENCE/Y5/o-16_hartree_bar_q.eps_q3_ydiago_bse" = { path = "o-16_hartree_bar_q.eps_q3_ydiago_bse", tolerance = 0.001 }
+"REFERENCE/Y5/r-16_hartree_bar_q" = ["Game Over & Game summary"]
+
+[17_sex_q_y5blk]
+exe = "yambo"
+input = "INPUTS/Y6/17_sex_q_y5blk"
+output = "17_sex_q_y5blk"
+runlevel = "bse"
+flags = "12_em1s_y5blk"
+dependencies = ["12_em1s_y5blk"]
+
+[17_sex_q_y5blk.reference]
+"REFERENCE/Y6-bse/o-17_sex_q_y5blk.eps_q1_bse_SEX" = { path = "o-17_sex_q_y5blk.eps_q1_bse_SEX", tolerance = 0.001 }
+"REFERENCE/Y6-bse/o-17_sex_q_y5blk.eps_q2_bse_SEX" = { path = "o-17_sex_q_y5blk.eps_q2_bse_SEX", tolerance = 0.001 }
+"REFERENCE/Y6-bse/o-17_sex_q_y5blk.eps_q3_bse_SEX" = { path = "o-17_sex_q_y5blk.eps_q3_bse_SEX", tolerance = 0.001 }
+"REFERENCE/Y5/o-17_sex_q.eps_q1_ydiago_bse" = { path = "o-17_sex_q_y5blk.eps_q1_bse_SEX", tolerance = 0.02 }
+"REFERENCE/Y5/o-17_sex_q.eps_q2_ydiago_bse" = { path = "o-17_sex_q_y5blk.eps_q2_bse_SEX", tolerance = 0.05 }
+"REFERENCE/Y5/o-17_sex_q.eps_q3_ydiago_bse" = { path = "o-17_sex_q_y5blk.eps_q3_bse_SEX", tolerance = 0.05 }
+"REFERENCE/Y6-bse/r-17_sex_q_y5blk" = ["Game Over & Game summary"]
+
+[17_sex_q_y5blk.versions."5"]
+input = "INPUTS/Y5/17_sex_q"
+
+[17_sex_q_y5blk.versions."5".reference]
+"REFERENCE/Y5/o-17_sex_q.eps_q1_ydiago_bse" = { path = "o-17_sex_q_y5blk.eps_q1_ydiago_bse", tolerance = 0.001 }
+"REFERENCE/Y5/o-17_sex_q.eps_q2_ydiago_bse" = { path = "o-17_sex_q_y5blk.eps_q2_ydiago_bse", tolerance = 0.001 }
+"REFERENCE/Y5/o-17_sex_q.eps_q3_ydiago_bse" = { path = "o-17_sex_q_y5blk.eps_q3_ydiago_bse", tolerance = 0.001 }
+"REFERENCE/Y5/r-17_sex_q_y5blk" = ["Game Over & Game summary"]
+
+[18_sex_q]
+exe = "yambo"
+input = "INPUTS/Y6/18_sex_q"
+output = "18_sex_q"
+runlevel = "bse"
+flags = "02_em1s"
+dependencies = ["02_em1s"]
+
+[18_sex_q.reference]
+"REFERENCE/Y6-bse/o-18_sex_q.eps_q1_bse_SEX" = { path = "o-18_sex_q.eps_q1_bse_SEX", tolerance = 0.001 }
+"REFERENCE/Y6-bse/o-18_sex_q.eps_q2_bse_SEX" = { path = "o-18_sex_q.eps_q2_bse_SEX", tolerance = 0.001 }
+"REFERENCE/Y6-bse/o-18_sex_q.eps_q3_bse_SEX" = { path = "o-18_sex_q.eps_q3_bse_SEX", tolerance = 0.001 }
+"REFERENCE/Y6-bse/r-18_sex_q" = ["Game Over & Game summary"]
+
+[18_sex_q.versions."5"]
+input = "INPUTS/Y5/17_sex_q"
+
+[18_sex_q.versions."5".reference]
+"REFERENCE/Y5/o-17_sex_q.eps_q1_ydiago_bse" = { path = "o-18_sex_q.eps_q1_ydiago_bse", tolerance = 0.001 }
+"REFERENCE/Y5/o-17_sex_q.eps_q2_ydiago_bse" = { path = "o-18_sex_q.eps_q2_ydiago_bse", tolerance = 0.001 }
+"REFERENCE/Y5/o-17_sex_q.eps_q3_ydiago_bse" = { path = "o-18_sex_q.eps_q3_ydiago_bse", tolerance = 0.001 }
+"REFERENCE/Y5/r-18_sex_q" = ["Game Over & Game summary"]
+
+[19_hay_bar_q2]
+exe = "yambo"
+input = "INPUTS/Y6/19_hay_bar_q2"
+output = "19_hay_bar_q2"
+runlevel = "bse"
+dependencies = ["01_init"]
+
+[19_hay_bar_q2.reference]
+"REFERENCE/Y6-bse/o-19_hay_bar_q2.eps_q2_bse_HARTREE" = { path = "o-19_hay_bar_q2.eps_q2_bse_HARTREE", tolerance = 0.001 }
+"REFERENCE/Y5/o-19_hay_bar_q2.eps_q2_haydock_bse" = { path = "o-19_hay_bar_q2.eps_q2_bse_HARTREE", tolerance = 0.03, skip_columns = [6, 7] }
+"REFERENCE/Y6-bse/r-19_hay_bar_q2" = ["Game Over & Game summary"]
+
+[19_hay_bar_q2.versions."5"]
+input = "INPUTS/Y5/19_hay_bar_q2"
+
+[19_hay_bar_q2.versions."5".reference]
+"REFERENCE/Y5/o-19_hay_bar_q2.eps_q2_haydock_bse" = { path = "o-19_hay_bar_q2.eps_q2_haydock_bse", tolerance = 0.001 }
+"REFERENCE/Y5/r-19_hay_bar_q2" = ["Game Over & Game summary"]
+
+[20_full_q2]
+exe = "yambo"
+input = "INPUTS/Y6/20_full_q2"
+output = "20_full_q2"
+runlevel = "bse"
+dependencies = ["01_init"]
+
+[20_full_q2.reference]
+"REFERENCE/Y6-bse/o-20_full_q2.eps_q2_bse_HARTREE" = { path = "o-20_full_q2.eps_q2_bse_HARTREE", tolerance = 0.001 }
+"REFERENCE/Y5/o-20_full_q2.eps_q2_haydock_bse" = { path = "o-20_full_q2.eps_q2_bse_HARTREE", tolerance = 0.03, skip_columns = [6, 7] }
+"REFERENCE/Y6-bse/r-20_full_q2" = ["Game Over & Game summary"]
+
+[20_full_q2.versions."5"]
+input = "INPUTS/Y5/20_full_q2"
+
+[20_full_q2.versions."5".reference]
+"REFERENCE/Y5/o-20_full_q2.eps_q2_haydock_bse" = { path = "o-20_full_q2.eps_q2_haydock_bse", tolerance = 0.001 }
+"REFERENCE/Y5/r-20_full_q2" = ["Game Over & Game summary"]

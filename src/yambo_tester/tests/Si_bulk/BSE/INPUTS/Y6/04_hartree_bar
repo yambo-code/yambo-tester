@@ -1,0 +1,99 @@
+#                                                                     
+#  __  __   ________   ___ __ __    _______   ______                  
+# /_/\/_/\ /_______/\ /__//_//_/\ /_______/\ /_____/\                 
+# \ \ \ \ \\::: _  \ \\::\| \| \ \\::: _  \ \\:::_ \ \                
+#  \:\_\ \ \\::(_)  \ \\:.      \ \\::(_)  \/_\:\ \ \ \               
+#   \::::_\/ \:: __  \ \\:.\-/\  \ \\::  _  \ \\:\ \ \ \              
+#     \::\ \  \:.\ \  \ \\. \  \  \ \\::(_)  \ \\:\_\ \ \             
+#      \__\/   \__\/\__\/ \__\/ \__\/ \_______\/ \_____\/             
+#                                                                     
+#                                                                     
+# Version 6.0.0 Revision 23875 Hash (prev commit) 4d36a1a             
+#                     Branch is main                                  
+#                MPI+SLK+HDF5_MPI_IO Build                            
+#                http://www.yambo-code.eu                             
+#
+#
+# ==== Runlevels ===
+optics                                      # Linear Response optical properties
+bse                                         # Bethe-Salpeter equation
+dipoles                                     # Oscillator strenghts (or dipoles)
+kernel                                      # Kernel
+bss                                         # BSE solver
+infver                                      # Input file variables verbosity
+#
+# ==== MPI (V=parallel) ===
+NLogCPUs=0                                  # Live-timing CPU`s (0 for all)
+PAR_def_mode= "balanced"                    # Default distribution mode ("balanced"/"memory"/"workload"/"KQmemory")
+DIP_CPU= ""                                 # CPUs for each role
+DIP_ROLEs= ""                               # CPUs roles (k,c,v)
+BSE_CPU= ""                                 # CPUs for each role
+BSE_ROLEs= ""                               # CPUs roles (r,c,g)
+#
+# ==== Memory (V=memory) ===
+MEM_tresh=  51200                    [Kb]   # Treshold on traced memory allocations/deallocations
+#
+# ==== Timing (V=timing) ===
+StdoHash=  40                               # Live-timing Hashes
+#
+# ==== Electrons (V=el) ===
+Nelectro= 8.000000                          # Electrons number
+OccTresh= 0.100000E-4                       # Occupation treshold (metallic bands)
+#
+# ==== Temperatures (V=el) ===
+ElecTemp= 0.000000                   [K]    # Electronic Temperature
+#
+# ==== Bosons (V=bosons) ===
+BoseTemp= -315775.                   [K]    # Bosonic Temperature
+BoseCut= 0.100000                           # Finite T Bose function cutoff
+#
+# ==== I/O (V=io) ===
+DBsIOoff= "none"                            # Space-separated list of DB with NO I/O. DB=(DIP,X,HF,COLLs,J,GF,CARRIERs,OBS,W,SC,BS,ALL)
+DBsFRAGpm= "none"                           # Space-separated list of +DB to FRAG and -DB to NOT FRAG. DB=(DIP,X,W,HF,COLLS,K,BS,QINDX,RT,ELPH,SC,
+#
+# ==== Dipoles (V=dipoles) ===
+% DipQpt
+ 1 | 1 |                                    # Qpts range for dipoles
+%
+% DipBands
+  1 | 10 |                                  # Bands range for dipoles
+%
+#DipBandsALL                    # Compute all bands range, not only valence and conduction
+DipApproach= "G-space v"                    # [G-space v/R-space x/Covariant/Shifted grids]
+DipComputed= "R P V"                        # [default R P V; extra P2 Spin Orb]
+#DipPDirect                     # Directly compute <v> also when using other approaches for dipoles
+ShiftedPaths= ""                            # Shifted grids paths (separated by a space)
+DipoleEtresh= 0.010000               [mev]  # Treshold in the definition of R=P/deltaE
+#
+# ==== Frequency sampling ===
+% BSE_EnRnge
+  0.00000 | 10.00000 |               [eV]   # Real frequency range
+%
+% BSE_DmRnge
+ 100.0000 | 100.0000 |               [mev]  # Frequency damping range
+%
+BSE_DmERef= 0.000000                 [eV]   # Damping reference frequency energy
+BSE_ETStps= 100                             # Frequency steps
+#
+# ==== Memory ===
+BSE_EMStps= 100.0000                        # [o/o] Frequency steps in memory
+#
+# ==== Bethe-Salpeter equation (V=bse) ===
+BSE_mode= "resonant"                        # resonant/retarded/coupling
+BSE_Kernel= "HARTREE"
+BSE_Solver= "d"                             # (d)iagonalization/(h)aydock/(s)lepc/(i)nversion
+BSE_Lkind= "bar"
+% BSE_QP_E
+ 0.000000 | 1.000000 | 1.000000 |           # [EXTQP BSE] E parameters (c/v) eV|adim|adim
+%
+BSE_QP_db= "none"                           # [EXTQP BSE] Y6 QP database ndb.QP_<name> (none: not used)
+BSE_NGsBlk= 100 RL
+% BSE_BndsRn
+  1 | 8 |
+%
+% BSE_LongDr
+ 1.000000 | 0.000000 | 0.000000 |           # [cc] Electric Field
+%
+% BSE_EhEngy
+-27.21139 |-27.21139 |               [eV]   # Electron-hole energy range
+%

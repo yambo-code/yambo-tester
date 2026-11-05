@@ -64,10 +64,26 @@ def download_link_for_version(yambo_version):
     return YAMBO_VERSION_DOWNLOAD_LINKS[major]
 
 
+def variant_chain(variant):
+    """Variant names from the most general to `variant`, following `extends` in data/variants.toml."""
+    if not variant:  # no variant selected
+        return []
+    import tomllib  # local: versioning is imported by variants.py, keep this module free of that import
+    from importlib.resources import files
+    table = tomllib.loads(files("yambo_tester.data").joinpath("variants.toml").read_text())
+    chain = []
+    while variant:  # walk up the extends links
+        if variant in chain:
+            raise ValueError(f"Yambo variant '{variant}' extends itself.")
+        chain.insert(0, variant)
+        variant = table.get(variant, {}).get("extends", "")
+    return chain  # e.g. ["develop", "bse"]
+
+
 def overlay_keys(yambo_version, variant=""):
-    """Overlay keys in order: "<major>", then "<major>-<variant>" when a variant is selected."""
+    """Overlay keys in order: "<major>", then "<major>-<v>" for every variant of the extends chain."""
     major = normalize_yambo_version(yambo_version)  # e.g. "6"
-    return [major] + ([f"{major}-{variant}"] if variant else [])  # e.g. ["6", "6-develop"]
+    return [major] + [f"{major}-{v}" for v in variant_chain(variant)]  # e.g. ["6", "6-develop", "6-bse"]
 
 
 def resolve_workflow_metadata(workflow_config, yambo_version, variant=""):
@@ -104,11 +120,12 @@ def resolve_workflow_tarball_url(workflow_config, yambo_version, parameters=None
     return metadata.get("tarball_url", "")
 
 
-def workflow_supports_version(workflow_config, yambo_version):
+def workflow_supports_version(workflow_config, yambo_version, variant=""):
     """
-    Return whether workflow metadata allows the selected Yambo major version.
+    Return whether workflow metadata allows the selected Yambo major version (after the variant overlays,
+    so a workflow can be enabled for one variant only, e.g. a plugin built into the binary).
     """
-    version_metadata = resolve_workflow_metadata(workflow_config, yambo_version).get("yambo_versions", {})
+    version_metadata = resolve_workflow_metadata(workflow_config, yambo_version, variant).get("yambo_versions", {})
     supported = version_metadata.get("supported", [])
     if not supported:
         return True

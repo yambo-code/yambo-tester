@@ -4,6 +4,8 @@
 #
 # [<name>.runlevels.<runlevel>] replaces the line <runlevel> of a scratch input with the runlevels
 # chosen by the value of the variable `by` (case insensitive), or `default`; `drop` removes that variable.
+# extends = "<name>": the variant also takes the runlevel rules and the tests.toml overlays of <name> (applied
+# first), e.g. a develop binary with a plugin built in.
 
 [develop]
 major = "6"                                   # applies to Yambo 6 inputs
@@ -14,3 +16,8 @@ by = "SEApprox"                               # variable that picks the new runl
 drop = true                                   # develop has no SEApprox
 HF = ["HF_lXC", "dyson"]                      # Hartree-Fock only
 default = ["HF_lXC", "gw", "dyson"]           # COHSEX, PPA, FF: screening set by the X runlevels
+
+[bse]
+major = "6"
+extends = "develop"                           # develop binary with the bse plugin built in
+description = "develop branch with the bse plugin (BSE runlevels, Si_bulk/BSE)"
