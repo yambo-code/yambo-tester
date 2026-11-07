@@ -4,6 +4,13 @@
 # 181 RL for exchange and W. Screening: em1s bands 1-10, 51 RL (02_em1s) or 181 RL (03_em1s181).
 # Same QE SAVE as Si_bulk/GW (si.save byte-identical), each version runs its own p2y.
 #
+# 2026-11-05: Y6-bse spectra regenerated after the kernel moved to SCATTER_block_engine (GEMM summation order:
+# kernel ~2e-7 relative, sharp SP peaks move up to 7e-4 of the file maximum).
+# 2026-11-06: 06/19 Haydock refs regenerated after Haydock moved to LA_lanczos + COLL_M_by_V: SP rounding moves the
+# stop from 91 to 92 iterations; vs diago (04) old 7.4e-5, new 1.2e-4 of the peak, 2.4e-5 with HayTrs=1e-5.
+# 2026-11-06: 06/11/19/21 refs regenerated after the work-weighted row/column split of the kernel (pass B): the kernel is
+# bit-identical, only the reduction grouping over CPUs changes (Haydock 7e-5/4.5e-4, SLEPc 1e-6, SLK 6e-8 of the peak).
+#
 # Yambo 6 runs only with --variant bse (develop with the bse plugin built in). Its references are in
 # REFERENCE/Y6-bse. The screening uses the physical G sets of develop: the |q+G| ball of every q (XqGRule=2),
 # closed under the little group of q, see "Symmetric Screening at Every q.html" in the Yambo 6 tree.
@@ -12,7 +19,7 @@
 # significant values, tolerance rounded up from the value measured when porting):
 #  - unscreened kernels, same in both G rules: HARTREE bar 8.5e-4, HF 181 RL 5.8e-4 -> 2e-3;
 #    Haydock (HayTrs=-0.001) bar 1.3e-2, full 3.5e-3, both codes stop at the threshold -> 3e-2;
-#  - screened kernels with the Yambo 5 G block (XqGRule=0, steps 12-15, their own screening):
+#  - screened kernels with the Yambo 5 G block (Y5LegacyGBlock, steps 12-15, their own screening):
 #    SEX 51 RL 8.6e-3 (Yambo 5 |G| block truncation at zone-boundary q, Y5_BUGS #16) -> 2e-2,
 #    SEX 181 RL 2.5e-4 -> 2e-3.
 #  The screened steps 08-11 use the |q+G| sets and are not compared with Yambo 5: at 51 RL the W truncation of
@@ -226,7 +233,7 @@ input = "INPUTS/Y5/11_sex181_np4"
 "REFERENCE/Y5/o-11_sex181_np4.eps_q1_ydiago_bse" = { path = "o-11_sex181_np4.eps_q1_ydiago_bse", tolerance = 0.001 }
 "REFERENCE/Y5/r-11_sex181_np4" = ["Game Over & Game summary"]
 
-# Yambo 5 G block (XqGRule=0, first NG of the |G| list at every q) and W(q->0) at one direction (Xq0Avg=0):
+# Yambo 5 G block (Y5LegacyGBlock, first NG of the |G| list at every q) and W(q->0) at one direction (Y5LegacyQ0Direction):
 # the screening and SEX again, to keep reproducing Yambo 5 with the flags. The screening database records
 # both, so it has its own em1s steps.
 [12_em1s_y5blk]
@@ -303,7 +310,7 @@ input = "INPUTS/Y5/09_sex181"
 
 
 # Finite q (BSE_QpntsR / BSEQptR): q1-q3 of the 4x4x4 grid, q1 = q->0. testing-materials/Silicon/BSE_q.
-# Unscreened kernels and the Yambo 5 G block (XqGRule=0, Xq0Avg=0) are compared with Yambo 5 (measured
+# Unscreened kernels and the Yambo 5 G block (Y5LegacyGBlock, Y5LegacyQ0Direction) are compared with Yambo 5 (measured
 # 2026-11-05: HARTREE 8.4e-4, Haydock 7.5e-3, full 5.8e-3; SEX 51 RL 8.7e-3 at q1, 4.8e-2 at q2, 2.7e-2 at q3,
 # about 1e-3 of the peak: the |G| block breaks the symmetry of W at zone-boundary q, Y5_BUGS #16 -> 2e-2/5e-2); 18_sex_q is the
 # default physics (|q+G| sets, W(q->0) star average) with its own references only. Lkind default is full at q>0,
@@ -420,3 +427,49 @@ input = "INPUTS/Y5/20_full_q2"
 [20_full_q2.versions."5".reference]
 "REFERENCE/Y5/o-20_full_q2.eps_q2_haydock_bse" = { path = "o-20_full_q2.eps_q2_haydock_bse", tolerance = 0.001 }
 "REFERENCE/Y5/r-20_full_q2" = ["Game Over & Game summary"]
+
+# Solver s (SLEPc, 50 lowest levels): needs a Y6 build with --enable-slepc-linalg (and Y5 with SLEPc). The spectrum
+# holds only the poles of the 50 levels, so it is compared with the Y5 SLEPc run with the same BSSNEig, not with 04.
+# Y6 vs Y5 SLEPc measured 3.9e-5 (max element relative difference on the significant values) -> 1e-4.
+[21_hartree_slepc]
+exe = "yambo"
+input = "INPUTS/Y6/21_hartree_slepc"
+output = "21_hartree_slepc"
+runlevel = "bse"
+requires = ["slepc"]
+dependencies = ["01_init"]
+
+[21_hartree_slepc.reference]
+"REFERENCE/Y6-bse/o-21_hartree_slepc.eps_q1_bse_HARTREE" = { path = "o-21_hartree_slepc.eps_q1_bse_HARTREE", tolerance = 0.001 }
+"REFERENCE/Y5/o-21_hartree_slepc.eps_q1_slepc_bse" = { path = "o-21_hartree_slepc.eps_q1_bse_HARTREE", tolerance = 1e-4, skip_columns = [6, 7] }
+"REFERENCE/Y6-bse/r-21_hartree_slepc" = ["Game Over & Game summary"]
+
+[21_hartree_slepc.versions."5"]
+input = "INPUTS/Y5/21_hartree_slepc"
+
+[21_hartree_slepc.versions."5".reference]
+"REFERENCE/Y5/o-21_hartree_slepc.eps_q1_slepc_bse" = { path = "o-21_hartree_slepc.eps_q1_slepc_bse", tolerance = 0.001 }
+"REFERENCE/Y5/r-21_hartree_slepc" = ["Game Over & Game summary"]
+
+# Solver i (inversion of W-H at every frequency, no diagonalization): same input as 04 with BSE_Solver="i".
+# Y5 runs BSSmod="i" with BSSInvMode="f" (full inversion, the like-for-like mode; its default perturbative
+# mode is not ported). Y6 vs Y5 measured 4.1e-5 (max element relative difference on the significant
+# values) -> 1e-4.
+[22_hartree_inv]
+exe = "yambo"
+input = "INPUTS/Y6/22_hartree_inv"
+output = "22_hartree_inv"
+runlevel = "bse"
+dependencies = ["01_init"]
+
+[22_hartree_inv.reference]
+"REFERENCE/Y6-bse/o-22_hartree_inv.eps_q1_bse_HARTREE" = { path = "o-22_hartree_inv.eps_q1_bse_HARTREE", tolerance = 0.001 }
+"REFERENCE/Y5/o-22_hartree_inv.eps_q1_inv_bse" = { path = "o-22_hartree_inv.eps_q1_bse_HARTREE", tolerance = 1e-4, skip_columns = [6, 7] }
+"REFERENCE/Y6-bse/r-22_hartree_inv" = ["Game Over & Game summary"]
+
+[22_hartree_inv.versions."5"]
+input = "INPUTS/Y5/22_hartree_inv"
+
+[22_hartree_inv.versions."5".reference]
+"REFERENCE/Y5/o-22_hartree_inv.eps_q1_inv_bse" = { path = "o-22_hartree_inv.eps_q1_inv_bse", tolerance = 0.001 }
+"REFERENCE/Y5/r-22_hartree_inv" = ["Game Over & Game summary"]

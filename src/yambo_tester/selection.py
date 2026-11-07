@@ -1,12 +1,23 @@
 # Copyright (c) 2025 Nicola Spallanzani
 # Licensed under the MIT License. See LICENSE file for details.
 
+MISSING_FEATURE_RETURNCODE = -9996
 UNSUPPORTED_VERSION_RETURNCODE = -9997
 RUNLEVEL_FILTER_RETURNCODE = -9998
 MISSING_EXECUTABLE_RETURNCODE = -9999
+MISSING_FEATURE_REASON = "missing-build-feature"
 UNSUPPORTED_VERSION_REASON = "unsupported-yambo-version"
 RUNLEVEL_FILTER_REASON = "runlevel-filter"
 MISSING_EXECUTABLE_REASON = "missing-executable"
+
+
+def missing_features(run, parameters):
+    """
+    Build features a step requires (``requires = ["slepc"]`` in tests.toml) that the
+    yambo binary does not have. The features are those of the ``Configuration`` line
+    of ``yambo -h`` (mpi, omp, dp, slk, slepc, par_io), read by get_yambo_info.
+    """
+    return [f for f in run.get('requires', []) if not parameters.get(str(f).lower(), False)]
 
 
 def normalize_runlevels(runlevels):

@@ -24,6 +24,9 @@ from .versioning import (
     workflow_supports_version,
 )
 from .selection import (
+    MISSING_FEATURE_REASON,
+    MISSING_FEATURE_RETURNCODE,
+    missing_features,
     MISSING_EXECUTABLE_REASON,
     MISSING_EXECUTABLE_RETURNCODE,
     RUNLEVEL_FILTER_REASON,
@@ -283,6 +286,18 @@ def run_test(test, parameters, logger, verbose=False):
                 "runlevel": run.get("runlevel", ""),
             }
             local_logger.info(f"{name} skipped by runlevel selection")
+        elif missing_features(run, parameters):
+            # the binary lacks a build feature the step needs (e.g. SLEPc): an intentional skip, not a failure
+            results[name] = {
+                "returncode": MISSING_FEATURE_RETURNCODE,
+                "cmd": '',
+                "stdout": None,
+                "stderr": None,
+                "run_dir": str(test['run_dir']),
+                "skip_reason": MISSING_FEATURE_REASON,
+                "runlevel": run.get("runlevel", ""),
+            }
+            local_logger.info(f"{name} skipped: the yambo build lacks {', '.join(missing_features(run, parameters))}")
         elif get_executable(parameters, run['exe']):
             
             # Execution of any actions

@@ -23,6 +23,7 @@ from yambo_tester.reference_compare import (
 )
 from yambo_tester.log import get_test_logger
 from yambo_tester.selection import (
+    MISSING_FEATURE_RETURNCODE,
     MISSING_EXECUTABLE_RETURNCODE,
     RUNLEVEL_FILTER_RETURNCODE,
     UNSUPPORTED_VERSION_RETURNCODE,
@@ -188,6 +189,7 @@ def pytest_generate_tests(metafunc):
             if key in METADATA_KEYS:
                 continue
             skip = results[key]['returncode'] in {
+                MISSING_FEATURE_RETURNCODE,
                 MISSING_EXECUTABLE_RETURNCODE,
                 RUNLEVEL_FILTER_RETURNCODE,
                 UNSUPPORTED_VERSION_RETURNCODE,
@@ -221,7 +223,9 @@ def test_runs_ok(run_item):
     Checks if the returncode of the run is 0.
     """
     name, info = run_item
-    if info["returncode"] == MISSING_EXECUTABLE_RETURNCODE:
+    if info["returncode"] == MISSING_FEATURE_RETURNCODE:
+        pytest.skip("Test skipped: the yambo build lacks a required feature")
+    elif info["returncode"] == MISSING_EXECUTABLE_RETURNCODE:
         pytest.skip("Test skipped due to missing executable")
     elif info["returncode"] == RUNLEVEL_FILTER_RETURNCODE:
         pytest.skip("Test skipped by runlevel selection")

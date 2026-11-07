@@ -293,6 +293,18 @@ Steps whose `runlevel` does not match and are not dependencies are marked as
 intentional skips in `results.toml`, so their references are skipped during
 pytest validation.
 
+A step that needs a build feature declares it, for example a solver available
+only with SLEPc:
+
+```toml
+[21_hartree_slepc]
+requires = ["slepc"]
+```
+
+The features are those of the `Configuration` line of `yambo -h` (`mpi`, `omp`,
+`dp`, `slk`, `slepc`, `par_io`). With a binary that lacks one, the step is recorded
+as an intentional skip (`missing-build-feature`) instead of failing.
+
 ## Executable Registry
 
 The main configuration file now stores executables under `[executables]`

@@ -83,7 +83,8 @@ DipoleEtresh= 0.010000               [mev]  # Treshold in the definition of R=P/
 ChiLinAlgMod= "LIN_SYS"                     # Inversion/lin_sys,cpu/gpu
 XTermKind= "none"                           # Terminator ("none","BG" Bruneval-Gonze)
 XTermEn= 40.00000                    [ev]   # Terminator energy (only for kind="BG")
-#XTermLegacyQ0                  # [DEV] Yambo 5 terminator at q=0 (unphysical, code comparison only)
+#Y5LegacyXTermQ0               # [DEVELOPER] Yambo 5 terminator closure at q=0 (unphysical, code comparison only)
+
 DbGdQsize=-1.000000                         # [o/o] Percentual of the total DbGd transitions to be used
 #
 # ==== Static dielectric matrix (V=X) ===

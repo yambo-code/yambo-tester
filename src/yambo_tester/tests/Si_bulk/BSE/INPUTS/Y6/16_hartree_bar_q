@@ -97,7 +97,7 @@ BSE_NGsBlk= 100 RL
 % BSE_EhEngy
 -27.21139 |-27.21139 |               [eV]   # Electron-hole energy range
 %
-XqGRule= 0
+Y5LegacyGBlock                 # [DEVELOPER] Yambo 5 G block: first NG of the |G| list at every q, screening and Fock (Y5 comparisons)
 % BSE_QpntsR
  1 | 3 |
 %

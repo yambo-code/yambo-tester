@@ -83,7 +83,8 @@ DipoleEtresh= 0.010000               [mev]  # Treshold in the definition of R=P/
 ChiLinAlgMod= "LIN_SYS"                     # Inversion/lin_sys,cpu/gpu
 XTermKind= "none"                           # Terminator ("none","BG" Bruneval-Gonze)
 XTermEn= 40.00000                    [ev]   # Terminator energy (only for kind="BG")
-#XTermLegacyQ0                  # [DEV] Yambo 5 terminator at q=0 (unphysical, code comparison only)
+#Y5LegacyXTermQ0               # [DEVELOPER] Yambo 5 terminator closure at q=0 (unphysical, code comparison only)
+
 DbGdQsize=-1.000000                         # [o/o] Percentual of the total DbGd transitions to be used
 #
 # ==== Static dielectric matrix (V=X) ===
@@ -103,5 +104,6 @@ EM1S_CGrdSp= 100.0000                       # [o/o] Poles coarse grid controller
 #
 # ==== TDDFT ===
 TDDFTKernel= "HARTREE"                      # TDDFT Kernel: IP/Hartree/ALDA/LRC/PF/BSfxc
-XqGRule= 0
-Xq0Avg= 0                     # [DEVELOPER] W(q->0) at the single direction q0, as Yambo 5
+Y5LegacyGBlock                 # [DEVELOPER] Yambo 5 G block: first NG of the |G| list at every q, screening and Fock (Y5 comparisons)
+Y5LegacyQ0Direction           # [DEVELOPER] W(q->0) at the single direction q0, as Yambo 5
+
