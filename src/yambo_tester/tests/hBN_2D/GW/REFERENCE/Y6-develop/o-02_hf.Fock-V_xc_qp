@@ -1,0 +1,115 @@
+#                                                                     
+#   __   __     _        __  __       ____      U  ___  u             
+#   \ \ / / U  /"\  U u |" \/ "| u U | __") u    \/"_ \/              
+#    \ V /   \/ _ \/   \| |\/| |/   \|  _ \/     | | | |              
+#   U_|"|_u  / ___ \    | |  | |     | |_) | .-,_| |_| |              
+#     |_|   /_/   \_\   |_|  |_|     |____/   \_)-\___/               
+# .-,//|(_   \\    >>  <<,-,,-.     _|| \\_        \\                 
+#  \_) (__) (__)  (__)  (./  \.)   (__) (__)      (__)                
+#                                                                     
+#                                                                     
+# Version 6.0.0 Revision 23930 Hash (prev commit) 3b04d76b            
+#                  Branch is develop-rr                               
+#                MPI+SLK+HDF5_MPI_IO Build                            
+#                http://www.yambo-code.eu                             
+#
+#
+#  Dyson solver                      : o
+#  Number of states                  :  28
+#  Number of bands                   :   6
+#  Number of k-points                :   7
+#  [Fock] Kind                       : Self-Energy
+#  [Fock] Approximation              : Fock
+#  [Fock] Number of states           :  28
+#  [Fock] Bands mixing               :   0.00000000   
+#  [Fock] Number of frequencies      :  1
+#  [Fock] Total self-energy weight   :   1.00000000   
+#  [Fock] Reciprocal lattice vectors :  1003
+#  [Fock] G sets rule (XqGRule)      :  2
+#  [V_xc] Density grid RL vectors    :  19039
+#  [V_xc] Kind                       : V_xc
+#  [V_xc] Approximation              : Perdew, Burke & Ernzerhof(X)+Perdew, Burke & Ernzerhof(C)
+#  [V_xc] Number of states           :  28
+#  [V_xc] Bands mixing               :   0.00000000   
+#  [V_xc] Number of frequencies      :  1
+#  [V_xc] Total self-energy weight   :  -1.00000000   
+#  [V_xc] Reciprocal lattice vectors :  1003
+#                                                                                                                                                                                                                                                                                                           
+#  QP @ state[ 1 ] K range           :   1   7
+#  QP @ state[ 1 ] b range           :   3   6
+#
+#
+#    K-point            Band               Eo [eV]            E [eV]             E-Eo [eV]          Fock(Eo) [eV]      V_xc(Eo) [eV]
+#
+        1                  3                 -1.404829          -5.730350          -4.325521          -22.55451          -18.22899
+        1                   4                -1.404827          -5.730370          -4.325542          -22.55452          -18.22898
+        1                   5                 4.653343           6.965247           2.311903          -1.289344          -3.601248
+        1                   6                 5.664001           7.147595           1.483594          -0.659409          -2.143004
+        2                  3                 -3.378315          -8.415122          -5.036807          -22.44129          -17.40449
+        2                   4                -2.297321          -6.890309          -4.592988          -22.42640          -17.83341
+        2                   5                 5.546723           7.890968           2.344245          -1.267574          -3.611819
+        2                   6                 6.487167           8.123589           1.636422          -0.854623          -2.491045
+        3                  3                 -3.658245          -8.727212          -5.068966          -22.47367          -17.40471
+        3                   4                -2.598153          -6.857170          -4.259017          -18.33710          -14.07809
+        3                   5                 7.035465           12.50472           5.469258          -6.475298          -11.94456
+        3                   6                 8.002345           10.96180           2.959454          -1.836764          -4.796219
+         4                 3                 -4.223079          -9.493819          -5.270741          -22.54501          -17.27427
+         4                  4                -0.918094          -4.551230          -3.633136          -19.11593          -15.48279
+         4                  5                 4.769152           9.725266           4.956115          -5.907598          -10.86371
+         4                  6                 9.618391           15.45537           5.836979          -6.498287          -12.33527
+         5                 3                 -3.988211          -9.132516          -5.144305          -22.18209          -17.03779
+         5                  4                -3.199162          -7.736139          -4.536978          -18.30920          -13.77223
+         5                  5                 7.274174           9.768113           2.493939          -1.264591          -3.758530
+         5                  6                 7.662480           11.64892           3.986441          -4.251997          -8.238439
+         6                 3                 -5.381110          -11.07990          -5.698794          -22.33413          -16.63534
+         6                  4                -1.079976          -4.686392          -3.606417          -18.77131          -15.16490
+         6                  5                 5.447548           10.70362           5.256068          -6.435174          -11.69124
+         6                  6                 10.48349           14.02298           3.539483          -2.269157          -5.808640
+         7                 3                 -7.219752          -13.88749          -6.667740          -22.60382          -15.93607
+         7                  4                 0.000000          -3.267553          -3.267553          -19.72496          -16.45741
+         7                  5                 4.631999           9.830004           5.198006          -5.658388          -10.85639
+         7                  6                 12.36209           16.64851           4.286420          -2.460480          -6.746900
+# 
+# 11/08/2026 at 14:12 yambo @ UNIJ2P4Q7TFK3 [start]
+# 11/08/2026 at 14:12                       [end]
+#  
+# Timing   [Min/Max/Average]: 02s/02s/02s
+#
+# .-Input file  02_hf/02_hf
+# | #
+# | # ==== Runlevels ===
+# | rim_cut                                     # Coulomb potential
+# | HF_lXC                                      # Hartree-Fock
+# | dyson                                       # Solver
+# | #
+# | # ==== MPI (V=parallel) ===
+# | HFlXC_CPU= "2.2.1.1"                        # CPUs for each role
+# | HFlXC_ROLEs= "qp.g.q.b"                     # CPUs roles (qp,g,q,b)
+# | #
+# | # ==== Bosons (V=bosons) ===
+# | BoseTemp= 0.000000                   [K]    # Bosonic Temperature
+# | #
+# | # ==== Coulomb cutoff (V=cutoff) ===
+# | CUTGeo= "slab z"                            # Coulomb Cutoff geometry: box/cylinder/sphere/ws/slab X/Y/Z/XY..
+# | % CUTBox
+# |  0.000000 | 0.000000 | 0.000000 |           # [au] Box sides
+# | %
+# | CUTRadius= 0.000000                         # [au] Sphere/Cylinder radius
+# | CUTCylLen= 0.000000                         # [au] Cylinder length
+# | CUTwsGvec= 0.000000                         # WS cutoff: number of G to be modified
+# | #CUTCol_test                    # Perform a cutoff test in R-space
+# | #
+# | # ==== RIM (V=rim) ===
+# | RandQpts= 1000000                           # Number of random q-points in the BZ
+# | RandGvec= 109                        [RL]   # Coulomb interaction RS components
+# | #
+# | # ==== Hartree-Fock (V=hf) ===
+# | EXXRLvcs= 1003                       [RL]   # Exchange    RL components
+# | VXCRLvcs= 1003                       [RL]   # XCpotential RL components
+# | #
+# | # ==== Dyson solver (V=qp) ===
+# | DysSolver= "o"                              # Dyson Equation solver ("o","n","s","g")
+# | # ==== Hartree-Fock (V=hf) ===
+# | %HF_lXC_krange                   # Generalized Kpoint/Band indices
+# | 1|2|1|4|
+# | %

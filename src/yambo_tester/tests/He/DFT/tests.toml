@@ -16,3 +16,11 @@ step_type = "HF"
 
 [02_HF.versions."5".reference]
 "REFERENCE/Y5/r-02_HF_HF_and_locXC_rim_cut" = ["Game Over & Game summary"]
+
+# develop: V_xc is computed on the density grid (main, Oct 2026), with VXCRLvcs=257 the 1s V_xc moves
+# from -16.113 eV (Y5, old Y6) to -16.646 eV. The default tolerance (0.1, relative) hid it; use 1e-3.
+[02_HF.versions."6-develop".reference]
+"REFERENCE/Y6-develop/o-02_HF.Fock-V_xc_qp" = { path = "o-02_HF.Fock-V_xc_qp", tolerance = 0.001 }
+"REFERENCE/Y6-develop/o-02_HF.ndb.SE_Fock" = { path = "02_HF/ndb.SE_Fock", variables = ["SPECTRAL_FUNCTION"], tolerance = 0.001 }
+"REFERENCE/Y6-develop/o-02_HF.ndb.SE_Kohn_Sham" = { path = "02_HF/ndb.SE_Kohn_Sham", variables = ["SPECTRAL_FUNCTION"], tolerance = 0.001 }
+"REFERENCE/Y6/r-02_HF_HF_and_locXC" = ["Game Over & Game summary"]

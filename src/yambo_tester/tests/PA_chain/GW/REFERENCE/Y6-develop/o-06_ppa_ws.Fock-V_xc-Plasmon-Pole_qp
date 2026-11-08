@@ -1,0 +1,178 @@
+#                                                                     
+# :   :::   :::     ::::    ::::  :::::::::   ::::::::                
+# :+:   :+: :+: :+:   +:+:+: :+:+:+ :+:    :+: :+:    :+              
+#  +:+ +:+ +:+   +:+  +:+ +:+:+ +:+ +:+    +:+ +:+    +:+             
+#   +#++: +#++:++#++: +#+  +:+  +#+ +#++:++#+  +#+    +:+             
+#    +#+  +#+     +#+ +#+       +#+ +#+    +#+ +#+    +#+             
+#    #+#  #+#     #+# #+#       #+# #+#    #+# #+#    #+#             
+#    ###  ###     ### ###       ### #########   ########              
+#                                                                     
+#                                                                     
+# Version 6.0.0 Revision 23930 Hash (prev commit) 3b04d76b            
+#                  Branch is develop-rr                               
+#                MPI+SLK+HDF5_MPI_IO Build                            
+#                http://www.yambo-code.eu                             
+#
+#
+#  Dyson solver                                   : n
+#  Number of states                               :   8
+#  Number of bands                                :   6
+#  Number of k-points                             :   4
+#  [Fock] Kind                                    : Self-Energy
+#  [Fock] Approximation                           : Fock
+#  [Fock] Number of states                        :   8
+#  [Fock] Bands mixing                            :   0.00000000   
+#  [Fock] Number of frequencies                   :  1
+#  [Fock] Total self-energy weight                :   1.00000000   
+#  [Fock] Reciprocal lattice vectors              :   5003
+#  [Fock] G sets rule (XqGRule)                   :  2
+#  [V_xc] Density grid RL vectors                 :  20877
+#  [V_xc] Kind                                    : V_xc
+#  [V_xc] Approximation                           : Slater exchange(X)+Perdew & Zunger(C)
+#  [V_xc] Number of states                        :   8
+#  [V_xc] Bands mixing                            :   0.00000000   
+#  [V_xc] Number of frequencies                   :  1
+#  [V_xc] Total self-energy weight                :  -1.00000000   
+#  [V_xc] Reciprocal lattice vectors              :  20877
+#  [Plasmon-Pole] Kind                            : Self-Energy
+#  [Plasmon-Pole] Approximation                   : Plasmon-Pole
+#  [Plasmon-Pole] Number of states                :   8
+#  [Plasmon-Pole] Bands mixing                    :   0.00000000   
+#  [Plasmon-Pole] Number of frequencies           :  2
+#  [Plasmon-Pole] Total self-energy weig          :   1.00000000   
+#  [Plasmon-Pole] Reciprocal lattice vec          :  21
+#  [Plasmon-Pole] G[W] bands range                :   1  20
+#  [Plasmon-Pole] Energy step                     :  0.100000001    [eV]
+#  [Plasmon-Pole] Damping                         :  0.100000001    [eV]
+#  [Plasmon-Pole] PPA imaginary energy            :   27.2113800    [eV]
+#  [Plasmon-Pole] [X] Bands range                 :   1  10
+#  [Plasmon-Pole] [X] Time-ordering               : Retarded
+#  [Plasmon-Pole] [X] Electron-Field int          : r.E
+#  [Plasmon-Pole] [X] [r,Vnl] included            : no
+#  [Plasmon-Pole] [X] Response function           :  21
+#  [Plasmon-Pole] [X] G sets rule (XqGRu          :  2
+#  [Plasmon-Pole] [X] q->0 star average           :  1
+#  [Plasmon-Pole] [X] Dyson equation Ker          : HARTREE
+#  [Plasmon-Pole] [X] Reduction fraction          :   100.000000    [%]
+#  [Plasmon-Pole] [X] Number of frequenc          :  2
+#  [Plasmon-Pole] [X] Frequencies range           :   0.00000000      10.0000010    [eV]
+#  [Plasmon-Pole] [X] Damping range               :  0.999999940E-1  0.999999940E-1 [eV]
+#  [Plasmon-Pole] [Xs] Bands range                :   1  10
+#  [Plasmon-Pole] [Xs] Time-ordering              : Retarded
+#  [Plasmon-Pole] [Xs] Electron-Field in          : r.E
+#  [Plasmon-Pole] [Xs] [r,Vnl] included           : no
+#  [Plasmon-Pole] [Xs] Response function          :  21
+#  [Plasmon-Pole] [Xs] G sets rule (XqGR          :  2
+#  [Plasmon-Pole] [Xs] q->0 star average          :  1
+#  [Plasmon-Pole] [Xs] Dyson equation Ke          : HARTREE
+#  [Plasmon-Pole] [Xs] Reduction fractio          :   100.000000    [%]
+#  [Plasmon-Pole] [Xs] Number of frequen          :  2
+#  [Plasmon-Pole] [Xs] Frequencies range          :   0.00000000      10.0000010    [eV]
+#  [Plasmon-Pole] [Xs] Damping range              :  0.999999940E-1  0.999999940E-1 [eV]
+#                                                                                                                                                                                                                                                                                                           
+#  QP @ state[ 1 ] K range                        :   1   4
+#  QP @ state[ 1 ] b range                        :   5   6
+#
+#
+#    K-point                  Band                     Eo [eV]                  E [eV]                   E-Eo [eV]                Fock(Eo) [eV]            V_xc(Eo) [eV]            Plasmon-Pole(Eo) [eV]    dSc/dw(Eo)               Re(Z)                    Im(Z)                    Im(E) [eV]
+#
+        1                         5                       0.000000                -0.970873                -0.970873                -9.102181                -8.659118                -0.653102                -0.129058                 0.885691                -0.001683                -0.002406
+        1                         6                       0.737137                 2.526632                 1.789496                -4.160783                -6.500783                -0.360128                -0.106380                 0.903846                -0.001551                -0.005511
+        2                         5                      -1.119857                -2.084787                -0.964931                -15.67093                -14.31672                 0.269055                -0.124581                 0.889218                -0.001451                 0.003951
+        2                         6                       1.401973                 3.114609                 1.712636                -2.975749                -5.525347                -0.653953                -0.106849                 0.903463                -0.001591                -0.008171
+        3                         5                      -4.345878                -6.152844                -1.806966                -20.92155                -17.16697                 1.579710                -0.203622                 0.830820                 0.002258                 0.009633
+        3                         6                       2.992585                 5.765805                 2.773221                -3.318990                -8.071082                -1.558935                -0.151402                 0.868500                -0.002474                -0.020499
+         4                        5                      -6.887250                -9.456754                -2.569504                -21.26304                -15.87942                 2.183704                -0.245164                 0.803043                -0.007183                 0.042150
+         4                        6                       5.327321                 8.381301                 3.053980                -3.996309                -9.311801                -1.691976                -0.186444                 0.842840                -0.003530                -0.027785
+# 
+# 11/08/2026 at 14:13 yambo @ UNIJ2P4Q7TFK3 [start]
+# 11/08/2026 at 14:13                       [end]
+#
+# .-Input file  06_ppa_ws/06_ppa_ws
+# | #
+# | # ==== Runlevels ===
+# | rim_cut                                     # Coulomb potential
+# | HF_lXC                                      # Hartree-Fock
+# | gw                                          # GW self-energy, needs a screening -X
+# | dyson                                       # Solver
+# | dipoles                                     # Oscillator strenghts (or dipoles)
+# | X_PPA                                       # Plasmon Pole Approximation for the Screened Interaction
+# | #
+# | # ==== MPI (V=parallel) ===
+# | HFlXC_CPU= "2.2.1.1"                        # CPUs for each role
+# | HFlXC_ROLEs= "qp.g.q.b"                     # CPUs roles (qp,g,q,b)
+# | DIP_CPU= "2.2.1"                            # CPUs for each role
+# | DIP_ROLEs= "k.c.v"                          # CPUs roles (k,c,v)
+# | PPA_CPU= "2.2.1.1.1"                        # CPUs for each role
+# | PPA_ROLEs= "q.g.k.c.v"                      # CPUs roles (q,g,k,c,v)
+# | PPA_nCPU_LinAlg_INV=-1                      # CPUs for Linear Algebra (<=0: all CPUs of the pool; serial if fewer than 4)
+# | GW_CPU= "2.2.1.1"                           # CPUs for each role
+# | GW_ROLEs= "qp.g.q.b"                        # CPUs roles (qp,g,q,b)
+# | #
+# | # ==== Bosons (V=bosons) ===
+# | BoseTemp= 0.000000                   [K]    # Bosonic Temperature
+# | #
+# | # ==== Fields (V=fields) ===
+# | EF_interaction= "r.E"                       # Interaction kind (r.E|p.A)
+# | #
+# | # ==== Coulomb cutoff (V=cutoff) ===
+# | CUTGeo= "ws xy"                             # Coulomb Cutoff geometry: box/cylinder/sphere/ws/slab X/Y/Z/XY..
+# | % CUTBox
+# |  0.000000 | 0.000000 | 0.000000 |           # [au] Box sides
+# | %
+# | CUTRadius= 0.000000                         # [au] Sphere/Cylinder radius
+# | CUTCylLen= 0.000000                         # [au] Cylinder length
+# | CUTwsGvec= 0.700000                         # WS cutoff: number of G to be modified
+# | #CUTCol_test                    # Perform a cutoff test in R-space
+# | #
+# | # ==== RIM (V=rim) ===
+# | RandQpts=0                                  # Number of random q-points in the BZ
+# | RandGvec=0                           [RL]   # Coulomb interaction RS components
+# | #
+# | # ==== Dipoles (V=dipoles) ===
+# | % DipBands
+# |   1 | 20 |                                  # Bands range for dipoles
+# | %
+# | DipComputed= " R V P [G-space]"             # [default R P V; extra P2 Spin Orb]
+# | #
+# | # ==== Hartree-Fock (V=hf) ===
+# | EXXRLvcs=  5003                      [RL]   # Exchange    RL components
+# | VXCRLvcs= 20877                      [RL]   # XCpotential RL components
+# | #
+# | # ==== Plasmon-Pole dielectric matrix (V=X) ===
+# | PPA_GrFnTp= "R"                             # Time-order: T R r Ta Ra. (T)ordered,(R)etarded,(r)sonant,(a)nti-resonant
+# | PPA_NGsBlk= 21                       [RL]   # Response block size
+# | % PPA_QpntsR
+# |   1 |  6 |                                  # Transferred momenta
+# | %
+# | % PPA_BndsRn
+# |   1 | 10 |                                  # Polarization function bands
+# | %
+# | % PPA_LongDr
+# |  1.000000 | 1.000000 | 1.000000 |           # [cc] Electric Field
+# | %
+# | PPA_CGrdSp= 100.0000                        # [o/o] Poles coarse grid controller
+# | #
+# | # ==== Plasmon-Pole ===
+# | PPA_PPAPnt= 27.21138                 [eV]   # PPA imaginary energy
+# | #
+# | # ==== TDDFT ===
+# | TDDFTKernel= "HARTREE"                      # TDDFT Kernel: IP/Hartree/ALDA/LRC/PF/BSfxc
+# | #
+# | # ==== GW (V=gw) ===
+# | % GbndRnge
+# |   1 | 20 |                                  # G[W] bands range
+# | %
+# | #
+# | # ==== Dyson solver (V=qp) ===
+# | DysSolver= "n"                              # Dyson Equation solver ("o","n","s","g")
+# | GDamping= 0.100000                   [eV]   # G[W] damping
+# | ExtendOut                       # Print all variables in the output file
+# | # ==== Hartree-Fock (V=hf) ===
+# | %HF_lXC_krange                   # Generalized Kpoint/Band indices
+# | 1|2|1|5|
+# | %
+# | # ==== GW (V=gw) ===
+# | %GW_krange                       # Generalized Kpoint/Band indices
+# | 1|2|1|5|
+# | %

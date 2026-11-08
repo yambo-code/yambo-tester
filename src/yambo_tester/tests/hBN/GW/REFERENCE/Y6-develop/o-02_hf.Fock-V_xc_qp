@@ -1,0 +1,86 @@
+#                                                                     
+#  **    **    **     ****     ****  ******     *******               
+# //**  **    ****   /**/**   **/** /*////**   **/////**              
+#  //****    **//**  /**//** ** /** /*   /**  **     //**             
+#   //**    **  //** /** //***  /** /******  /**      /**             
+#    /**   **********/**  //*   /** /*//// **/**      /**             
+#    /**  /**//////**/**   /    /** /*    /**//**     **              
+#    /**  /**     /**/**        /** /*******  //*******               
+#    //   //      // //         //  ///////    ///////                
+#                                                                     
+# Version 6.0.0 Revision 23930 Hash (prev commit) 3b04d76b            
+#                  Branch is develop-rr                               
+#                MPI+SLK+HDF5_MPI_IO Build                            
+#                http://www.yambo-code.eu                             
+#
+#
+#  Dyson solver                      : o
+#  Number of states                  :  14
+#  Number of bands                   :   9
+#  Number of k-points                :   4
+#  [Fock] Kind                       : Self-Energy
+#  [Fock] Approximation              : Fock
+#  [Fock] Number of states           :  14
+#  [Fock] Bands mixing               :   0.00000000   
+#  [Fock] Number of frequencies      :  1
+#  [Fock] Total self-energy weight   :   1.00000000   
+#  [Fock] Reciprocal lattice vectors :  311
+#  [Fock] G sets rule (XqGRule)      :  2
+#  [V_xc] Density grid RL vectors    :  22647
+#  [V_xc] Kind                       : V_xc
+#  [V_xc] Approximation              : Teter 93(XC)
+#  [V_xc] Number of states           :  14
+#  [V_xc] Bands mixing               :   0.00000000   
+#  [V_xc] Number of frequencies      :  1
+#  [V_xc] Total self-energy weight   :  -1.00000000   
+#  [V_xc] Reciprocal lattice vectors :  22647
+#                                                                                                                                                                                                                                                                                                           
+#  QP @ state[ 1 ] K range           :   1   4
+#  QP @ state[ 1 ] b range           :   7   9
+#  QP @ state[ 2 ] K range           :  3  3
+#  QP @ state[ 2 ] b range           :   5   6
+#
+#
+#    K-point            Band               Eo [eV]            E [eV]             E-Eo [eV]          Fock(Eo) [eV]      V_xc(Eo) [eV]
+#
+        1                   7                -0.882467          -8.434122          -7.551655          -25.82368          -18.27202
+        1                   8                -0.882467          -8.434120          -7.551653          -25.82368          -18.27202
+        1                   9                 5.277162           9.762262           4.485101          -4.956254          -9.441354
+        2                   7                -1.313334          -7.775140          -6.461806          -20.98479          -14.52299
+        2                   8                 0.000000          -6.001716          -6.001716          -22.26925          -16.26753
+        2                   9                 4.094748           9.841393           5.746645          -4.740566          -10.48721
+        3                   5                -0.908691          -8.472722          -7.564031          -25.80781          -18.24378
+        3                   6                -0.908691          -8.472720          -7.564029          -25.80781          -18.24378
+        3                   7                -0.908688          -8.472719          -7.564031          -25.80781          -18.24378
+        3                   8                -0.908688          -8.472715          -7.564027          -25.80781          -18.24378
+        3                   9                 7.961607           13.40828           5.446671          -6.066477          -11.51315
+         4                  7                -0.625211          -6.846093          -6.220882          -21.63029          -15.40941
+         4                  8                -0.625208          -6.846128          -6.220919          -21.63038          -15.40946
+         4                  9                 4.656362           10.40028           5.743917          -5.481786          -11.22570
+# 
+# 11/08/2026 at 14:12 yambo @ UNIJ2P4Q7TFK3 [start]
+# 11/08/2026 at 14:12                       [end]
+#
+# .-Input file  02_hf/02_hf
+# | #
+# | # ==== Runlevels ===
+# | HF_lXC                                      # Hartree-Fock
+# | dyson                                       # Solver
+# | #
+# | # ==== MPI (V=parallel) ===
+# | HFlXC_CPU= "2.2.1.1"                        # CPUs for each role
+# | HFlXC_ROLEs= "qp.g.q.b"                     # CPUs roles (qp,g,q,b)
+# | #
+# | # ==== Bosons (V=bosons) ===
+# | BoseTemp= 0.000000                   [K]    # Bosonic Temperature
+# | #
+# | # ==== Hartree-Fock (V=hf) ===
+# | EXXRLvcs= 311                        [RL]   # Exchange    RL components
+# | VXCRLvcs= 22647                      [RL]   # XCpotential RL components
+# | #
+# | # ==== Dyson solver (V=qp) ===
+# | DysSolver= "o"                              # Dyson Equation solver ("o","n","s","g")
+# | # ==== Hartree-Fock (V=hf) ===
+# | %HF_lXC_krange                   # Generalized Kpoint/Band indices
+# | 1|2|1|8|
+# | %

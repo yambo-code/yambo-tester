@@ -369,3 +369,77 @@ input = "INPUTS/Y5/10_ff_q"
 "REFERENCE/Y5/o-10_ff_q.ndb.QP" = { path = "10_ff_q/ndb.QP", variables = ["QP_E", "QP_Z"], tolerance = 0.005 }
 "REFERENCE/Y5/r-10_ff_q" = ["Game Over & Game summary"]
 
+[03_cohsex_inv.versions."6-develop".reference]
+"REFERENCE/Y6-develop/o-03_cohsex_inv.Fock-V_xc-CoHSeX_qp" = { path = "o-03_cohsex_inv.Fock-V_xc-CoHSeX_qp", tolerance = 0.001 }
+"REFERENCE/Y6-develop/o-03_cohsex_inv.ndb.static_dielectric_matrix" = { path = "03_cohsex_inv/ndb.static_dielectric_matrix", variables = ["EM1S_X_at_Q_1"], tolerance = 0.001 }
+"REFERENCE/Y6-develop/o-03_cohsex_inv.ndb.QP_Fock-V_xc-CoHSeX" = { path = "03_cohsex_inv/ndb.QP_Fock-V_xc-CoHSeX", variables = ["QP energies"], tolerance = 0.001 }
+"REFERENCE/Y6/r-03_cohsex_inv" = ["Game Over & Game summary"]
+
+[03_cohsex_g.versions."6-develop".reference]
+"REFERENCE/Y6-develop/o-03_cohsex_g.Fock-V_xc-CoHSeX_qp" = { path = "o-03_cohsex_g.Fock-V_xc-CoHSeX_qp", tolerance = 0.001 }
+"REFERENCE/Y6-develop/o-03_cohsex_g.ndb.static_dielectric_matrix" = { path = "03_cohsex_g/ndb.static_dielectric_matrix", variables = ["EM1S_X_at_Q_1"], tolerance = 0.001 }
+"REFERENCE/Y6-develop/o-03_cohsex_g.ndb.QP_Fock-V_xc-CoHSeX" = { path = "03_cohsex_g/ndb.QP_Fock-V_xc-CoHSeX", variables = ["QP energies"], tolerance = 0.001 }
+"REFERENCE/Y6/r-03_cohsex_g" = ["Game Over & Game summary"]
+
+[04_ppa_np1.versions."6-develop".reference]
+"REFERENCE/Y6-develop/o-04_ppa_np1.Fock-V_xc-Plasmon-Pole_qp" = { path = "o-04_ppa_np1.Fock-V_xc-Plasmon-Pole_qp", tolerance = 0.001 }
+"REFERENCE/Y6-develop/o-04_ppa_np1.ndb.plasmon-pole_dielectric_matrix" = { path = "04_ppa_np1/ndb.plasmon-pole_dielectric_matrix", variables = ["PPA_X_at_Q_1"], tolerance = 0.001 }
+"REFERENCE/Y6-develop/o-04_ppa_np1.ndb.QP_Fock-V_xc-Plasmon-Pole" = { path = "04_ppa_np1/ndb.QP_Fock-V_xc-Plasmon-Pole", variables = ["QP energies", "Ren Factors"], tolerance = 0.001 }
+"REFERENCE/Y6/r-04_ppa_np1" = ["Game Over & Game summary"]
+
+[04_ppa_np3.versions."6-develop".reference]
+"REFERENCE/Y6-develop/o-04_ppa_np3.Fock-V_xc-Plasmon-Pole_qp" = { path = "o-04_ppa_np3.Fock-V_xc-Plasmon-Pole_qp", tolerance = 0.001 }
+"REFERENCE/Y6-develop/o-04_ppa_np3.ndb.plasmon-pole_dielectric_matrix" = { path = "04_ppa_np3/ndb.plasmon-pole_dielectric_matrix", variables = ["PPA_X_at_Q_1"], tolerance = 0.001 }
+"REFERENCE/Y6-develop/o-04_ppa_np3.ndb.QP_Fock-V_xc-Plasmon-Pole" = { path = "04_ppa_np3/ndb.QP_Fock-V_xc-Plasmon-Pole", variables = ["QP energies", "Ren Factors"], tolerance = 0.001 }
+"REFERENCE/Y6/r-04_ppa_np3" = ["Game Over & Game summary"]
+
+[04_ppa_base.versions."6-develop".reference]
+"REFERENCE/Y6-develop/o-04_ppa_base.Fock-V_xc-Plasmon-Pole_qp" = { path = "o-04_ppa_base.Fock-V_xc-Plasmon-Pole_qp", tolerance = 0.001 }
+"REFERENCE/Y6-develop/o-04_ppa_base.ndb.plasmon-pole_dielectric_matrix" = { path = "04_ppa_base/ndb.plasmon-pole_dielectric_matrix", variables = ["PPA_X_at_Q_1"], tolerance = 0.001 }
+"REFERENCE/Y6-develop/o-04_ppa_base.ndb.QP_Fock-V_xc-Plasmon-Pole" = { path = "04_ppa_base/ndb.QP_Fock-V_xc-Plasmon-Pole", variables = ["QP energies", "Ren Factors"], tolerance = 0.001 }
+"REFERENCE/Y6/r-04_ppa_base" = ["Game Over & Game summary"]
+
+[04_ppa_q.versions."6-develop".reference]
+"REFERENCE/Y6-develop/o-04_ppa_q.Fock-V_xc-Plasmon-Pole_qp" = { path = "o-04_ppa_q.Fock-V_xc-Plasmon-Pole_qp", tolerance = 0.001 }
+"REFERENCE/Y6-develop/o-04_ppa_q.ndb.plasmon-pole_dielectric_matrix" = { path = "04_ppa_q/ndb.plasmon-pole_dielectric_matrix", variables = ["PPA_X_at_Q_1"], tolerance = 0.001 }
+"REFERENCE/Y6-develop/o-04_ppa_q.ndb.QP_Fock-V_xc-Plasmon-Pole" = { path = "04_ppa_q/ndb.QP_Fock-V_xc-Plasmon-Pole", variables = ["QP energies", "Ren Factors"], tolerance = 0.001 }
+"REFERENCE/Y6/r-04_ppa_q" = ["Game Over & Game summary"]
+
+[04_ppa_kcv.versions."6-develop".reference]
+"REFERENCE/Y6-develop/o-04_ppa_kcv.Fock-V_xc-Plasmon-Pole_qp" = { path = "o-04_ppa_kcv.Fock-V_xc-Plasmon-Pole_qp", tolerance = 0.001 }
+"REFERENCE/Y6-develop/o-04_ppa_kcv.ndb.plasmon-pole_dielectric_matrix" = { path = "04_ppa_kcv/ndb.plasmon-pole_dielectric_matrix", variables = ["PPA_X_at_Q_1"], tolerance = 0.001 }
+"REFERENCE/Y6-develop/o-04_ppa_kcv.ndb.QP_Fock-V_xc-Plasmon-Pole" = { path = "04_ppa_kcv/ndb.QP_Fock-V_xc-Plasmon-Pole", variables = ["QP energies", "Ren Factors"], tolerance = 0.001 }
+"REFERENCE/Y6/r-04_ppa_kcv" = ["Game Over & Game summary"]
+
+[04_ppa_qp.versions."6-develop".reference]
+"REFERENCE/Y6-develop/o-04_ppa_qp.Fock-V_xc-Plasmon-Pole_qp" = { path = "o-04_ppa_qp.Fock-V_xc-Plasmon-Pole_qp", tolerance = 0.001 }
+"REFERENCE/Y6-develop/o-04_ppa_qp.ndb.plasmon-pole_dielectric_matrix" = { path = "04_ppa_qp/ndb.plasmon-pole_dielectric_matrix", variables = ["PPA_X_at_Q_1"], tolerance = 0.001 }
+"REFERENCE/Y6-develop/o-04_ppa_qp.ndb.QP_Fock-V_xc-Plasmon-Pole" = { path = "04_ppa_qp/ndb.QP_Fock-V_xc-Plasmon-Pole", variables = ["QP energies", "Ren Factors"], tolerance = 0.001 }
+"REFERENCE/Y6/r-04_ppa_qp" = ["Game Over & Game summary"]
+
+[04_ppa_mem.versions."6-develop".reference]
+"REFERENCE/Y6-develop/o-04_ppa_mem.Fock-V_xc-Plasmon-Pole_qp" = { path = "o-04_ppa_mem.Fock-V_xc-Plasmon-Pole_qp", tolerance = 0.001 }
+"REFERENCE/Y6-develop/o-04_ppa_mem.ndb.plasmon-pole_dielectric_matrix" = { path = "04_ppa_mem/ndb.plasmon-pole_dielectric_matrix", variables = ["PPA_X_at_Q_1"], tolerance = 0.001 }
+"REFERENCE/Y6-develop/o-04_ppa_mem.ndb.QP_Fock-V_xc-Plasmon-Pole" = { path = "04_ppa_mem/ndb.QP_Fock-V_xc-Plasmon-Pole", variables = ["QP energies", "Ren Factors"], tolerance = 0.001 }
+"REFERENCE/Y6/r-04_ppa_mem" = ["Game Over & Game summary"]
+
+[04_ppa_work.versions."6-develop".reference]
+"REFERENCE/Y6-develop/o-04_ppa_work.Fock-V_xc-Plasmon-Pole_qp" = { path = "o-04_ppa_work.Fock-V_xc-Plasmon-Pole_qp", tolerance = 0.001 }
+"REFERENCE/Y6-develop/o-04_ppa_work.ndb.plasmon-pole_dielectric_matrix" = { path = "04_ppa_work/ndb.plasmon-pole_dielectric_matrix", variables = ["PPA_X_at_Q_1"], tolerance = 0.001 }
+"REFERENCE/Y6-develop/o-04_ppa_work.ndb.QP_Fock-V_xc-Plasmon-Pole" = { path = "04_ppa_work/ndb.QP_Fock-V_xc-Plasmon-Pole", variables = ["QP energies", "Ren Factors"], tolerance = 0.001 }
+"REFERENCE/Y6/r-04_ppa_work" = ["Game Over & Game summary"]
+
+[04_ppa_noio.versions."6-develop".reference]
+"REFERENCE/Y6-develop/o-04_ppa_noio.Fock-V_xc-Plasmon-Pole_qp" = { path = "o-04_ppa_noio.Fock-V_xc-Plasmon-Pole_qp", tolerance = 0.001 }
+"REFERENCE/Y6-develop/o-04_ppa_noio.ndb.QP_Fock-V_xc-Plasmon-Pole" = { path = "04_ppa_noio/ndb.QP_Fock-V_xc-Plasmon-Pole", variables = ["QP energies", "Ren Factors"], tolerance = 0.001 }
+"REFERENCE/Y6/r-04_ppa_noio" = ["Game Over & Game summary"]
+
+[04_ppa_reuse.versions."6-develop".reference]
+"REFERENCE/Y6-develop/o-04_ppa_reuse.Fock-V_xc-Plasmon-Pole_qp" = { path = "o-04_ppa_reuse.Fock-V_xc-Plasmon-Pole_qp", tolerance = 0.001 }
+"REFERENCE/Y6-develop/o-04_ppa_reuse.ndb.QP_Fock-V_xc-Plasmon-Pole" = { path = "04_ppa_reuse/ndb.QP_Fock-V_xc-Plasmon-Pole", variables = ["QP energies", "Ren Factors"], tolerance = 0.001 }
+"REFERENCE/Y6/r-04_ppa_reuse" = { contains = "[RD@./04_ppa_base//ndb.plasmon-pole_dielectric_matrix_header]" }
+
+[10_ff_q.versions."6-develop".reference]
+"REFERENCE/Y6-develop/o-10_ff_q.Fock-V_xc-Real-Axis_qp" = { path = "o-10_ff_q.Fock-V_xc-Real-Axis_qp", tolerance = 0.005 }
+"REFERENCE/Y6-develop/o-10_ff_q.ndb.QP_Fock-V_xc-Real-Axis" = { path = "10_ff_q/ndb.QP_Fock-V_xc-Real-Axis", variables = ["QP energies", "Ren Factors"], tolerance = 0.005 }
+"REFERENCE/Y6/r-10_ff_q" = ["Game Over & Game summary"]

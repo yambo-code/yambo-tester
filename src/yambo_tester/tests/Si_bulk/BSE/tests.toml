@@ -10,6 +10,8 @@
 # stop from 91 to 92 iterations; vs diago (04) old 7.4e-5, new 1.2e-4 of the peak, 2.4e-5 with HayTrs=1e-5.
 # 2026-11-06: 06/11/19/21 refs regenerated after the work-weighted row/column split of the kernel (pass B): the kernel is
 # bit-identical, only the reduction grouping over CPUs changes (Haydock 7e-5/4.5e-4, SLEPc 1e-6, SLK 6e-8 of the peak).
+# 2026-11-08: 05/06/17(q3)/18(q2,q3)/19 refs regenerated with the binary after the develop merge: 1.0-1.9e-3 relative
+# at sharp points, SP rounding (serial vs SLK diago 6e-5, each vs the old ref ~1e-4 of the peak).
 #
 # Yambo 6 runs only with --variant bse (develop with the bse plugin built in). Its references are in
 # REFERENCE/Y6-bse. The screening uses the physical G sets of develop: the |q+G| ball of every q (XqGRule=2),

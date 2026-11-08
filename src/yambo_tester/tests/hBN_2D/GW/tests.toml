@@ -137,3 +137,8 @@ input = "INPUTS/Y5/05_rimw"
 "REFERENCE/Y6-develop/o-05_rimw.ndb.RIM_W" = { path = "05_rimw/ndb.RIM_W", variables = ["RIM_W"], tolerance = 0.001 }
 "REFERENCE/Y6-develop/o-05_rimw.ndb.QP_Fock-V_xc-Plasmon-Pole" = { path = "05_rimw/ndb.QP_Fock-V_xc-Plasmon-Pole", variables = ["QP energies", "Ren Factors"], tolerance = 0.001 }
 "REFERENCE/Y6-develop/r-05_rimw_rim_cut_rim_w_dipoles_X_PPA_self_energy" = ["Game Over & Game summary"]
+
+[02_hf.versions."6-develop".reference]
+"REFERENCE/Y6-develop/o-02_hf.Fock-V_xc_qp" = { path = "o-02_hf.Fock-V_xc_qp", tolerance = 0.001 }
+"REFERENCE/Y6-develop/o-02_hf.ndb.QP_Fock-V_xc" = { path = "02_hf/ndb.QP_Fock-V_xc", variables = ["QP energies"], tolerance = 0.001 }
+"REFERENCE/Y6/r-02_hf_rim_cut_self_energy" = ["Game Over & Game summary"]

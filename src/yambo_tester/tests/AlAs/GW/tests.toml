@@ -127,3 +127,23 @@ input = "INPUTS/Y5/07_rim_ppa"
 "REFERENCE/Y5/o-07_rim_ppa.qp" = { path = "o-07_rim_ppa.qp", tolerance = 0.001 }
 "REFERENCE/Y5/o-07_rim_ppa.ndb.QP" = { path = "07_rim_ppa/ndb.QP", variables = ["QP_E", "QP_Z"], tolerance = 0.001 }
 "REFERENCE/Y5/r-07_rim_ppa_REPORT5" = ["Game Over & Game summary"]
+
+[03_cohsex.versions."6-develop".reference]
+"REFERENCE/Y6-develop/o-03_cohsex.Fock-V_xc-CoHSeX_qp" = { path = "o-03_cohsex.Fock-V_xc-CoHSeX_qp", tolerance = 0.001 }
+"REFERENCE/Y6-develop/o-03_cohsex.ndb.QP_Fock-V_xc-CoHSeX" = { path = "03_cohsex/ndb.QP_Fock-V_xc-CoHSeX", variables = ["QP energies"], tolerance = 0.001 }
+"REFERENCE/Y6/r-03_cohsex_dipoles_X_static_self_energy" = ["Game Over & Game summary"]
+
+[04_ppa.versions."6-develop".reference]
+"REFERENCE/Y6-develop/o-04_ppa.Fock-V_xc-Plasmon-Pole_qp" = { path = "o-04_ppa.Fock-V_xc-Plasmon-Pole_qp", tolerance = 0.001 }
+"REFERENCE/Y6-develop/o-04_ppa.ndb.QP_Fock-V_xc-Plasmon-Pole" = { path = "04_ppa/ndb.QP_Fock-V_xc-Plasmon-Pole", variables = ["QP energies", "Ren Factors"], tolerance = 0.001 }
+"REFERENCE/Y6/r-04_ppa_dipoles_X_PPA_self_energy" = ["Game Over & Game summary"]
+
+[05_ff.versions."6-develop".reference]
+"REFERENCE/Y6-develop/o-05_ff.Fock-V_xc-Real-Axis_qp" = { path = "o-05_ff.Fock-V_xc-Real-Axis_qp", tolerance = 0.005 }
+"REFERENCE/Y6-develop/o-05_ff.ndb.QP_Fock-V_xc-Real-Axis" = { path = "05_ff/ndb.QP_Fock-V_xc-Real-Axis", variables = ["QP energies", "Ren Factors"], tolerance = 0.005 }
+"REFERENCE/Y6/r-05_ff_dipoles_X_dynamic_self_energy" = ["Game Over & Game summary"]
+
+[07_rim_ppa.versions."6-develop".reference]
+"REFERENCE/Y6-develop/o-07_rim_ppa.Fock-V_xc-Plasmon-Pole_qp" = { path = "o-07_rim_ppa.Fock-V_xc-Plasmon-Pole_qp", tolerance = 0.001 }
+"REFERENCE/Y6-develop/o-07_rim_ppa.ndb.QP_Fock-V_xc-Plasmon-Pole" = { path = "07_rim_ppa/ndb.QP_Fock-V_xc-Plasmon-Pole", variables = ["QP energies", "Ren Factors"], tolerance = 0.001 }
+"REFERENCE/Y6/r-07_rim_ppa_rim_cut_dipoles_X_PPA_self_energy" = ["Game Over & Game summary"]

@@ -1,0 +1,86 @@
+#                                                                     
+# :   :::   :::     ::::    ::::  :::::::::   ::::::::                
+# :+:   :+: :+: :+:   +:+:+: :+:+:+ :+:    :+: :+:    :+              
+#  +:+ +:+ +:+   +:+  +:+ +:+:+ +:+ +:+    +:+ +:+    +:+             
+#   +#++: +#++:++#++: +#+  +:+  +#+ +#++:++#+  +#+    +:+             
+#    +#+  +#+     +#+ +#+       +#+ +#+    +#+ +#+    +#+             
+#    #+#  #+#     #+# #+#       #+# #+#    #+# #+#    #+#             
+#    ###  ###     ### ###       ### #########   ########              
+#                                                                     
+#                                                                     
+# Version 6.0.0 Revision 23930 Hash (prev commit) 3b04d76b            
+#                  Branch is develop-rr                               
+#                MPI+SLK+HDF5_MPI_IO Build                            
+#                http://www.yambo-code.eu                             
+#
+#
+#  Dyson solver                      : o
+#  Number of states                  :  1
+#  Number of bands                   :  1
+#  Number of k-points                :  1
+#  [Fock] Kind                       : Self-Energy
+#  [Fock] Approximation              : Fock
+#  [Fock] Number of states           :  1
+#  [Fock] Bands mixing               :   0.00000000   
+#  [Fock] Number of frequencies      :  1
+#  [Fock] Total self-energy weight   :   1.00000000   
+#  [Fock] Reciprocal lattice vectors :  257
+#  [Fock] G sets rule (XqGRule)      :  2
+#  [V_xc] Density grid RL vectors    :  12053
+#  [V_xc] Kind                       : V_xc
+#  [V_xc] Approximation              : Perdew, Burke & Ernzerhof(X)+Perdew, Burke & Ernzerhof(C)
+#  [V_xc] Number of states           :  1
+#  [V_xc] Bands mixing               :   0.00000000   
+#  [V_xc] Number of frequencies      :  1
+#  [V_xc] Total self-energy weight   :  -1.00000000   
+#  [V_xc] Reciprocal lattice vectors :  257
+#                                                                                                                                                                                                                                                                                                           
+#  QP @ state[ 1 ] K range           :  1  1
+#  QP @ state[ 1 ] b range           :  1  1
+#
+#
+#    K-point            Band               Eo [eV]            E [eV]             E-Eo [eV]          Fock(Eo) [eV]      V_xc(Eo) [eV]
+#
+        1                  1                  0.000000          -6.968580          -6.968580          -23.61451          -16.64593
+# 
+# 11/08/2026 at 14:13 yambo @ UNIJ2P4Q7TFK3 [start]
+# 11/08/2026 at 14:13                       [end]
+#
+# .-Input file  02_HF/02_HF
+# | #
+# | # ==== Runlevels ===
+# | rim_cut                                     # Coulomb potential
+# | HF_lXC                                      # Hartree-Fock
+# | dyson                                       # Solver
+# | #
+# | # ==== MPI (V=parallel) ===
+# | HFlXC_CPU= ""                               # CPUs for each role
+# | HFlXC_ROLEs= ""                             # CPUs roles (qp,g,q,b)
+# | #
+# | # ==== Bosons (V=bosons) ===
+# | BoseTemp= 0.000000                   [K]    # Bosonic Temperature
+# | #
+# | # ==== Coulomb cutoff (V=cutoff) ===
+# | CUTGeo= "ws x"                              # Coulomb Cutoff geometry: box/cylinder/sphere/ws/slab X/Y/Z/XY..
+# | % CUTBox
+# |  0.000000 | 0.000000 | 0.000000 |           # [au] Box sides
+# | %
+# | CUTRadius= 0.000000                         # [au] Sphere/Cylinder radius
+# | CUTCylLen= 0.000000                         # [au] Cylinder length
+# | CUTwsGvec= 0.700000                         # WS cutoff: number of G to be modified
+# | #CUTCol_test                    # Perform a cutoff test in R-space
+# | #
+# | # ==== RIM (V=rim) ===
+# | RandQpts=0                                  # Number of random q-points in the BZ
+# | RandGvec=0                           [RL]   # Coulomb interaction RS components
+# | #
+# | # ==== Hartree-Fock (V=hf) ===
+# | EXXRLvcs= 257                        [RL]   # Exchange    RL components
+# | VXCRLvcs= 257                        [RL]   # XCpotential RL components
+# | #
+# | # ==== Dyson solver (V=qp) ===
+# | DysSolver= "o"                              # Dyson Equation solver ("o","n","s","g")
+# | # ==== Hartree-Fock (V=hf) ===
+# | %HF_lXC_krange                   # Generalized Kpoint/Band indices
+# | 1|1|1|1|
+# | %

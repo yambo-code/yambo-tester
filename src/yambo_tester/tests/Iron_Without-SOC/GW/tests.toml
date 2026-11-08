@@ -87,3 +87,20 @@ input = "INPUTS/Y5/04_ppa"
 "REFERENCE/Y5/o-04_ppa.qp" = { path = "o-04_ppa.qp", tolerance = 0.01 }
 "REFERENCE/Y5/o-04_ppa.ndb.QP" = { path = "04_ppa/ndb.QP", variables = ["QP_E", "QP_Z"], tolerance = 0.01 }
 "REFERENCE/Y5/r-04_ppa_REPORT5" = ["Game Over & Game summary"]
+
+[02_hf.versions."6-develop".reference]
+"REFERENCE/Y6-develop/o-02_hf.Fock-V_xc_qp" = { path = "o-02_hf.Fock-V_xc_qp", tolerance = 0.001 }
+"REFERENCE/Y6-develop/o-02_hf.ndb.QP_Fock-V_xc" = { path = "02_hf/ndb.QP_Fock-V_xc", variables = ["QP energies"], tolerance = 0.001 }
+"REFERENCE/Y6/r-02_hf_self_energy" = ["Game Over & Game summary"]
+
+[03_cohsex.versions."6-develop".reference]
+"REFERENCE/Y6-develop/o-03_cohsex.Fock-V_xc-CoHSeX_qp" = { path = "o-03_cohsex.Fock-V_xc-CoHSeX_qp", tolerance = 0.001 }
+"REFERENCE/Y6-develop/o-03_cohsex.ndb.QP_Fock-V_xc-CoHSeX" = { path = "03_cohsex/ndb.QP_Fock-V_xc-CoHSeX", variables = ["QP energies"], tolerance = 0.001 }
+"REFERENCE/Y6/r-03_cohsex_dipoles_X_static_self_energy" = ["Game Over & Game summary"]
+
+# PPA on Fe is not converged (Sc moves ~200 meV from 89 to 169 RL) and Z is ill-conditioned (low PPA
+# poles in a metal), so E, E-Eo, dSc/dw, Z and Im(E) jump by eV with any change in W. Compare only
+# Eo, Fock, V_xc and Sc(Eo) (columns 3, 6, 7, 8); the ndb.QP holds only E and Z, so it is not compared.
+[04_ppa.versions."6-develop".reference]
+"REFERENCE/Y6-develop/o-04_ppa.Fock-V_xc-Plasmon-Pole_qp" = { path = "o-04_ppa.Fock-V_xc-Plasmon-Pole_qp", tolerance = 0.01, skip_columns = [4, 5, 9, 10, 11, 12] }
+"REFERENCE/Y6/r-04_ppa_dipoles_X_PPA_self_energy" = ["Game Over & Game summary"]
