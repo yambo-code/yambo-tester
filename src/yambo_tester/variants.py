@@ -24,6 +24,7 @@ def load_variant(name, yambo_version):
     if parent:  # the parent rules first, this variant's own on top
         base = load_variant(parent, yambo_version)
         rules["runlevels"] = {**base.get("runlevels", {}), **rules.get("runlevels", {})}
+        rules["features"] = sorted(set(base.get("features", [])) | set(rules.get("features", [])))
     return rules  # rules
 
 

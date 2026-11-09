@@ -475,3 +475,38 @@ input = "INPUTS/Y5/22_hartree_inv"
 [22_hartree_inv.versions."5".reference]
 "REFERENCE/Y5/o-22_hartree_inv.eps_q1_inv_bse" = { path = "o-22_hartree_inv.eps_q1_inv_bse", tolerance = 0.001 }
 "REFERENCE/Y5/r-22_hartree_inv" = ["Game Over & Game summary"]
+
+# Symmetry-adapted BSE (symadapt plugin built in too: --variant bse-sym). Same case as 09_sex181, with BSESymm:
+# kernel at one k per orbit, other rows rebuilt as U H U^+, irrep blocks diagonalized one by one. The spectrum
+# is compared with a copy of the conventional 09 reference (o-23/o-24 = o-09, keep them equal): at porting time sym vs conventional 1.9e-5 of the peak,
+# lowest 40 excitons 5.7e-6 eV. Builds without symadapt skip these steps (requires = ["symadapt"]).
+# ndb.BSE_excitons stores the levels block by block (irrep order), not sorted as the conventional run: its
+# reference is the first 100 levels of this run (2026-11-08, 6.0-symmetry, plugin bse a849f8a).
+[23_sex181_sym]
+exe = "yambo"
+input = "INPUTS/Y6/23_sex181_sym"
+output = "23_sex181_sym"
+runlevel = "bse"
+flags = "03_em1s181"
+dependencies = ["03_em1s181"]
+requires = ["symadapt"]
+
+[23_sex181_sym.reference]
+"REFERENCE/Y6-bse/o-23_sex181_sym.eps_q1_bse_SEX" = { path = "o-23_sex181_sym.eps_q1_bse_SEX", tolerance = 0.001 }
+"REFERENCE/Y6-bse/o-23_sex181_sym.ndb.BSE_excitons" = { path = "23_sex181_sym/ndb.BSE_excitons", variables = ["BSE_EXCITON_ENERGIES"], tolerance = 0.001 }
+"REFERENCE/Y6-bse/r-23_sex181_sym" = { contains = "T_2  G_15 P_4" }
+"REFERENCE/Y6-bse/r-23_sex181_sym_Wcheck" = { contains = "[BSE SYM W]" }
+
+# Bright blocks only (BSESymmBright): the dark blocks carry no dipole, so the spectrum equals the full one.
+[24_sex181_sym_bright]
+exe = "yambo"
+input = "INPUTS/Y6/24_sex181_sym_bright"
+output = "24_sex181_sym_bright"
+runlevel = "bse"
+flags = "03_em1s181"
+dependencies = ["03_em1s181"]
+requires = ["symadapt"]
+
+[24_sex181_sym_bright.reference]
+"REFERENCE/Y6-bse/o-24_sex181_sym_bright.eps_q1_bse_SEX" = { path = "o-24_sex181_sym_bright.eps_q1_bse_SEX", tolerance = 0.001 }
+"REFERENCE/Y6-bse/r-24_sex181_sym_bright" = ["Game Over & Game summary"]

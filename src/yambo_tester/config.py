@@ -268,7 +268,9 @@ def check_parameters(parameters, executables=None, logger=None):
         yambo_info = get_yambo_info(parameters['executables']['yambo'])
         parameters.update(yambo_info)
         parameters = resolve_runtime_yambo_version(parameters, yambo_info, logger)
-        load_variant(parameters.get('yambo_variant'), parameters['yambo_version'])  # fail early on unknown/mismatched variant
+        variant = load_variant(parameters.get('yambo_variant'), parameters['yambo_version'])  # fail early on unknown/mismatched variant
+        for feature in variant.get('features', []):  # build features yambo -h cannot show (plugins), declared by the variant
+            parameters[str(feature).lower()] = True
         if parameters.get('download_link'):
             logger.info(f"download_link: {parameters['download_link']}")
         

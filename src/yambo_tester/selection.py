@@ -15,7 +15,8 @@ def missing_features(run, parameters):
     """
     Build features a step requires (``requires = ["slepc"]`` in tests.toml) that the
     yambo binary does not have. The features are those of the ``Configuration`` line
-    of ``yambo -h`` (mpi, omp, dp, slk, slepc, par_io), read by get_yambo_info.
+    of ``yambo -h`` (mpi, omp, dp, slk, slepc, par_io), read by get_yambo_info, plus the
+    ``features`` a variant declares for plugins that ``yambo -h`` does not list (e.g. symadapt).
     """
     return [f for f in run.get('requires', []) if not parameters.get(str(f).lower(), False)]
 

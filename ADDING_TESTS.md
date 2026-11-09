@@ -305,6 +305,10 @@ The features are those of the `Configuration` line of `yambo -h` (`mpi`, `omp`,
 `dp`, `slk`, `slepc`, `par_io`). With a binary that lacks one, the step is recorded
 as an intentional skip (`missing-build-feature`) instead of failing.
 
+Plugins do not appear in `yambo -h`, so a variant declares them instead: `features = ["symadapt"]` in
+`data/variants.toml` (variant `bse-sym`, which extends `bse`). Steps with `requires = ["symadapt"]` then run
+only with `--variant bse-sym` and are skipped by every other build.
+
 ## Executable Registry
 
 The main configuration file now stores executables under `[executables]`

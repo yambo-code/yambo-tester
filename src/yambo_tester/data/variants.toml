@@ -21,3 +21,9 @@ default = ["HF_lXC", "gw", "dyson"]           # COHSEX, PPA, FF: screening set b
 major = "6"
 extends = "develop"                           # develop binary with the bse plugin built in
 description = "develop branch with the bse plugin (BSE runlevels, Si_bulk/BSE)"
+
+[bse-sym]
+major = "6"
+extends = "bse"                               # bse binary with the symadapt plugin built in too
+features = ["symadapt"]                       # yambo -h does not list plugins: steps with requires = ["symadapt"] run only here
+description = "develop branch with the bse and symadapt plugins (symmetry-adapted BSE, BSESymm)"
