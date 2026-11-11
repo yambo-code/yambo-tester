@@ -480,8 +480,8 @@ input = "INPUTS/Y5/22_hartree_inv"
 # kernel at one k per orbit, other rows rebuilt as U H U^+, irrep blocks diagonalized one by one. The spectrum
 # is compared with a copy of the conventional 09 reference (o-23/o-24 = o-09, keep them equal): at porting time sym vs conventional 1.9e-5 of the peak,
 # lowest 40 excitons 5.7e-6 eV. Builds without symadapt skip these steps (requires = ["symadapt"]).
-# ndb.BSE_excitons stores the levels block by block (irrep order), not sorted as the conventional run: its
-# reference is the first 100 levels of this run (2026-11-08, 6.0-symmetry, plugin bse a849f8a).
+# ndb.BSE_excitons: the first 100 levels in energy order, as the conventional run (the symmetric path sorts
+# the irrep blocks before writing since 2026-11-09; the reference of 2026-11-08 was in block order).
 [23_sex181_sym]
 exe = "yambo"
 input = "INPUTS/Y6/23_sex181_sym"
@@ -510,3 +510,39 @@ requires = ["symadapt"]
 [24_sex181_sym_bright.reference]
 "REFERENCE/Y6-bse/o-24_sex181_sym_bright.eps_q1_bse_SEX" = { path = "o-24_sex181_sym_bright.eps_q1_bse_SEX", tolerance = 0.001 }
 "REFERENCE/Y6-bse/r-24_sex181_sym_bright" = ["Game Over & Game summary"]
+
+# BSESymm at finite exciton momentum (2026-11-10): same case as 18_sex_q. Only the little group of q (C3v at q2, q3)
+# leaves H(q) invariant, so seeds, orbits and irreps are those of G_q, and the hole of a transition is rotated at k-q.
+# The spectra are compared with copies of the conventional 18 references (o-25/o-26 = o-18, keep them equal): sym vs
+# conventional 1.7e-5 (q1), 2.5e-5 (q2), 1.6e-5 (q3) of the peak, all 1024 exciton energies 9e-7 eV. 26: only the
+# identity irrep of G_q is solved (the vertex rho(q) is a scalar), the same spectrum. q2 tolerance 2e-3: the tester metric is
+# relative per point, and at one sharp point (|eps|=0.23, 4e-5 of the peak) the sym/conventional SP difference is 1.1e-3.
+[25_sex_q_sym]
+exe = "yambo"
+input = "INPUTS/Y6/25_sex_q_sym"
+output = "25_sex_q_sym"
+runlevel = "bse"
+flags = "02_em1s"
+dependencies = ["02_em1s"]
+requires = ["symadapt"]
+
+[25_sex_q_sym.reference]
+"REFERENCE/Y6-bse/o-25_sex_q_sym.eps_q1_bse_SEX" = { path = "o-25_sex_q_sym.eps_q1_bse_SEX", tolerance = 0.001 }
+"REFERENCE/Y6-bse/o-25_sex_q_sym.eps_q2_bse_SEX" = { path = "o-25_sex_q_sym.eps_q2_bse_SEX", tolerance = 0.002 }
+"REFERENCE/Y6-bse/o-25_sex_q_sym.eps_q3_bse_SEX" = { path = "o-25_sex_q_sym.eps_q3_bse_SEX", tolerance = 0.001 }
+"REFERENCE/Y6-bse/r-25_sex_q_sym" = ["Game Over & Game summary"]
+
+[26_sex_q_sym_bright]
+exe = "yambo"
+input = "INPUTS/Y6/26_sex_q_sym_bright"
+output = "26_sex_q_sym_bright"
+runlevel = "bse"
+flags = "02_em1s"
+dependencies = ["02_em1s"]
+requires = ["symadapt"]
+
+[26_sex_q_sym_bright.reference]
+"REFERENCE/Y6-bse/o-26_sex_q_sym_bright.eps_q1_bse_SEX" = { path = "o-26_sex_q_sym_bright.eps_q1_bse_SEX", tolerance = 0.001 }
+"REFERENCE/Y6-bse/o-26_sex_q_sym_bright.eps_q2_bse_SEX" = { path = "o-26_sex_q_sym_bright.eps_q2_bse_SEX", tolerance = 0.002 }
+"REFERENCE/Y6-bse/o-26_sex_q_sym_bright.eps_q3_bse_SEX" = { path = "o-26_sex_q_sym_bright.eps_q3_bse_SEX", tolerance = 0.001 }
+"REFERENCE/Y6-bse/r-26_sex_q_sym_bright" = ["Game Over & Game summary"]
