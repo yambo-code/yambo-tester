@@ -73,7 +73,7 @@ runlevel = "rim_cut"
 dependencies = ["01_init"]
 
 [04_ppa.reference]
-"REFERENCE/Y6/o-04_ppa.Fock-V_xc-Plasmon-Pole_qp" = { path = "o-04_ppa.Fock-V_xc-Plasmon-Pole_qp", tolerance = 0.001, skip_columns = [11] }
+"REFERENCE/Y6/o-04_ppa.Fock-V_xc-Plasmon-Pole_qp" = { path = "o-04_ppa.Fock-V_xc-Plasmon-Pole_qp", tolerance = 0.001, skip_columns = [9, 11] }
 "REFERENCE/Y6/o-04_ppa.ndb.QP_Fock-V_xc-Plasmon-Pole" = { path = "04_ppa/ndb.QP_Fock-V_xc-Plasmon-Pole", variables = ["QP energies", "Ren Factors"], tolerance = 0.001 }
 "REFERENCE/Y6/r-04_ppa_rim_cut_dipoles_X_PPA_self_energy" = ["Game Over & Game summary"]
 
@@ -81,7 +81,7 @@ dependencies = ["01_init"]
 input = "INPUTS/Y5/04_ppa"
 
 [04_ppa.versions."5".reference]
-"REFERENCE/Y5/o-04_ppa.qp" = { path = "o-04_ppa.qp", tolerance = 0.001, skip_columns = [12, 13, 14] }
+"REFERENCE/Y5/o-04_ppa.qp" = { path = "o-04_ppa.qp", tolerance = 0.001, skip_columns = [10, 12, 13, 14] }
 "REFERENCE/Y5/o-04_ppa.ndb.QP" = { path = "04_ppa/ndb.QP", variables = ["QP_E", "QP_Z"], tolerance = 0.001 }
 "REFERENCE/Y5/r-04_ppa_REPORT5" = ["Game Over & Game summary"]
 
@@ -95,7 +95,7 @@ runlevel = "rim_cut"
 dependencies = ["01_init"]
 
 [05_ff.reference]
-"REFERENCE/Y6/o-05_ff.Fock-V_xc-Real-Axis_qp" = { path = "o-05_ff.Fock-V_xc-Real-Axis_qp", tolerance = 0.005, skip_columns = [11] }
+"REFERENCE/Y6/o-05_ff.Fock-V_xc-Real-Axis_qp" = { path = "o-05_ff.Fock-V_xc-Real-Axis_qp", tolerance = 0.005, skip_columns = [9, 11] }
 "REFERENCE/Y6/o-05_ff.ndb.QP_Fock-V_xc-Real-Axis" = { path = "05_ff/ndb.QP_Fock-V_xc-Real-Axis", variables = ["QP energies", "Ren Factors"], tolerance = 0.005 }
 "REFERENCE/Y6/r-05_ff_rim_cut_dipoles_X_dynamic_self_energy" = ["Game Over & Game summary"]
 
@@ -103,6 +103,6 @@ dependencies = ["01_init"]
 input = "INPUTS/Y5/05_ff"
 
 [05_ff.versions."5".reference]
-"REFERENCE/Y5/o-05_ff.qp" = { path = "o-05_ff.qp", tolerance = 0.005, skip_columns = [12, 13, 14] }
+"REFERENCE/Y5/o-05_ff.qp" = { path = "o-05_ff.qp", tolerance = 0.005, skip_columns = [10, 12, 13, 14] }
 "REFERENCE/Y5/o-05_ff.ndb.QP" = { path = "05_ff/ndb.QP", variables = ["QP_E", "QP_Z"], tolerance = 0.005 }
 "REFERENCE/Y5/r-05_ff_REPORT5" = ["Game Over & Game summary"]

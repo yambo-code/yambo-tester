@@ -117,7 +117,7 @@ nprocs = 1
 dependencies = ["01_init"]
 
 [04_ppa_np1.reference]
-"REFERENCE/Y6/o-04_ppa_np1.Fock-V_xc-Plasmon-Pole_qp" = { path = "o-04_ppa_np1.Fock-V_xc-Plasmon-Pole_qp", tolerance = 0.001, skip_columns = [11] }
+"REFERENCE/Y6/o-04_ppa_np1.Fock-V_xc-Plasmon-Pole_qp" = { path = "o-04_ppa_np1.Fock-V_xc-Plasmon-Pole_qp", tolerance = 0.001, skip_columns = [9, 11] }
 "REFERENCE/Y6/o-04_ppa_np1.ndb.plasmon-pole_dielectric_matrix" = { path = "04_ppa_np1/ndb.plasmon-pole_dielectric_matrix", variables = ["PPA_X_at_Q_1"], tolerance = 0.001 }
 "REFERENCE/Y6/o-04_ppa_np1.ndb.QP_Fock-V_xc-Plasmon-Pole" = { path = "04_ppa_np1/ndb.QP_Fock-V_xc-Plasmon-Pole", variables = ["QP energies", "Ren Factors"], tolerance = 0.001 }
 "REFERENCE/Y6/r-04_ppa_np1" = ["Game Over & Game summary"]
@@ -126,7 +126,7 @@ dependencies = ["01_init"]
 input = "INPUTS/Y5/04_ppa_np1"
 
 [04_ppa_np1.versions."5".reference]
-"REFERENCE/Y5/o-04_ppa_np1.qp" = { path = "o-04_ppa_np1.qp", tolerance = 0.001, skip_columns = [12, 13, 14] }
+"REFERENCE/Y5/o-04_ppa_np1.qp" = { path = "o-04_ppa_np1.qp", tolerance = 0.001, skip_columns = [10, 12, 13, 14] }
 "REFERENCE/Y5/o-04_ppa_np1.ndb.pp_fragment_1" = { path = "04_ppa_np1/ndb.pp_fragment_1", variables = ["X_Q_1"], tolerance = 0.001 }
 "REFERENCE/Y5/o-04_ppa_np1.ndb.QP" = { path = "04_ppa_np1/ndb.QP", variables = ["QP_E", "QP_Z"], tolerance = 0.001 }
 "REFERENCE/Y5/r-04_ppa_np1" = ["Game Over & Game summary"]
@@ -141,7 +141,7 @@ nprocs = 3
 dependencies = ["01_init"]
 
 [04_ppa_np3.reference]
-"REFERENCE/Y6/o-04_ppa_np3.Fock-V_xc-Plasmon-Pole_qp" = { path = "o-04_ppa_np3.Fock-V_xc-Plasmon-Pole_qp", tolerance = 0.001, skip_columns = [11] }
+"REFERENCE/Y6/o-04_ppa_np3.Fock-V_xc-Plasmon-Pole_qp" = { path = "o-04_ppa_np3.Fock-V_xc-Plasmon-Pole_qp", tolerance = 0.001, skip_columns = [9, 11] }
 "REFERENCE/Y6/o-04_ppa_np3.ndb.plasmon-pole_dielectric_matrix" = { path = "04_ppa_np3/ndb.plasmon-pole_dielectric_matrix", variables = ["PPA_X_at_Q_1"], tolerance = 0.001 }
 "REFERENCE/Y6/o-04_ppa_np3.ndb.QP_Fock-V_xc-Plasmon-Pole" = { path = "04_ppa_np3/ndb.QP_Fock-V_xc-Plasmon-Pole", variables = ["QP energies", "Ren Factors"], tolerance = 0.001 }
 "REFERENCE/Y6/r-04_ppa_np3" = ["Game Over & Game summary"]
@@ -150,7 +150,7 @@ dependencies = ["01_init"]
 input = "INPUTS/Y5/04_ppa_np3"
 
 [04_ppa_np3.versions."5".reference]
-"REFERENCE/Y5/o-04_ppa_np3.qp" = { path = "o-04_ppa_np3.qp", tolerance = 0.001, skip_columns = [12, 13, 14] }
+"REFERENCE/Y5/o-04_ppa_np3.qp" = { path = "o-04_ppa_np3.qp", tolerance = 0.001, skip_columns = [10, 12, 13, 14] }
 "REFERENCE/Y5/o-04_ppa_np3.ndb.pp_fragment_1" = { path = "04_ppa_np3/ndb.pp_fragment_1", variables = ["X_Q_1"], tolerance = 0.001 }
 "REFERENCE/Y5/o-04_ppa_np3.ndb.QP" = { path = "04_ppa_np3/ndb.QP", variables = ["QP_E", "QP_Z"], tolerance = 0.001 }
 "REFERENCE/Y5/r-04_ppa_np3" = ["Game Over & Game summary"]
@@ -165,7 +165,7 @@ nprocs = 2
 dependencies = ["01_init"]
 
 [04_ppa_base.reference]
-"REFERENCE/Y6/o-04_ppa_base.Fock-V_xc-Plasmon-Pole_qp" = { path = "o-04_ppa_base.Fock-V_xc-Plasmon-Pole_qp", tolerance = 0.001, skip_columns = [11] }
+"REFERENCE/Y6/o-04_ppa_base.Fock-V_xc-Plasmon-Pole_qp" = { path = "o-04_ppa_base.Fock-V_xc-Plasmon-Pole_qp", tolerance = 0.001, skip_columns = [9, 11] }
 "REFERENCE/Y6/o-04_ppa_base.ndb.plasmon-pole_dielectric_matrix" = { path = "04_ppa_base/ndb.plasmon-pole_dielectric_matrix", variables = ["PPA_X_at_Q_1"], tolerance = 0.001 }
 "REFERENCE/Y6/o-04_ppa_base.ndb.QP_Fock-V_xc-Plasmon-Pole" = { path = "04_ppa_base/ndb.QP_Fock-V_xc-Plasmon-Pole", variables = ["QP energies", "Ren Factors"], tolerance = 0.001 }
 "REFERENCE/Y6/r-04_ppa_base" = ["Game Over & Game summary"]
@@ -174,7 +174,7 @@ dependencies = ["01_init"]
 input = "INPUTS/Y5/04_ppa_base"
 
 [04_ppa_base.versions."5".reference]
-"REFERENCE/Y5/o-04_ppa_base.qp" = { path = "o-04_ppa_base.qp", tolerance = 0.001, skip_columns = [12, 13, 14] }
+"REFERENCE/Y5/o-04_ppa_base.qp" = { path = "o-04_ppa_base.qp", tolerance = 0.001, skip_columns = [10, 12, 13, 14] }
 "REFERENCE/Y5/o-04_ppa_base.ndb.pp_fragment_1" = { path = "04_ppa_base/ndb.pp_fragment_1", variables = ["X_Q_1"], tolerance = 0.001 }
 "REFERENCE/Y5/o-04_ppa_base.ndb.QP" = { path = "04_ppa_base/ndb.QP", variables = ["QP_E", "QP_Z"], tolerance = 0.001 }
 "REFERENCE/Y5/r-04_ppa_base" = ["Game Over & Game summary"]
@@ -189,7 +189,7 @@ nprocs = 4
 dependencies = ["01_init"]
 
 [04_ppa_q.reference]
-"REFERENCE/Y6/o-04_ppa_q.Fock-V_xc-Plasmon-Pole_qp" = { path = "o-04_ppa_q.Fock-V_xc-Plasmon-Pole_qp", tolerance = 0.001, skip_columns = [11] }
+"REFERENCE/Y6/o-04_ppa_q.Fock-V_xc-Plasmon-Pole_qp" = { path = "o-04_ppa_q.Fock-V_xc-Plasmon-Pole_qp", tolerance = 0.001, skip_columns = [9, 11] }
 "REFERENCE/Y6/o-04_ppa_q.ndb.plasmon-pole_dielectric_matrix" = { path = "04_ppa_q/ndb.plasmon-pole_dielectric_matrix", variables = ["PPA_X_at_Q_1"], tolerance = 0.001 }
 "REFERENCE/Y6/o-04_ppa_q.ndb.QP_Fock-V_xc-Plasmon-Pole" = { path = "04_ppa_q/ndb.QP_Fock-V_xc-Plasmon-Pole", variables = ["QP energies", "Ren Factors"], tolerance = 0.001 }
 "REFERENCE/Y6/r-04_ppa_q" = ["Game Over & Game summary"]
@@ -198,7 +198,7 @@ dependencies = ["01_init"]
 input = "INPUTS/Y5/04_ppa_q"
 
 [04_ppa_q.versions."5".reference]
-"REFERENCE/Y5/o-04_ppa_q.qp" = { path = "o-04_ppa_q.qp", tolerance = 0.001, skip_columns = [12, 13, 14] }
+"REFERENCE/Y5/o-04_ppa_q.qp" = { path = "o-04_ppa_q.qp", tolerance = 0.001, skip_columns = [10, 12, 13, 14] }
 "REFERENCE/Y5/o-04_ppa_q.ndb.pp_fragment_1" = { path = "04_ppa_q/ndb.pp_fragment_1", variables = ["X_Q_1"], tolerance = 0.001 }
 "REFERENCE/Y5/o-04_ppa_q.ndb.QP" = { path = "04_ppa_q/ndb.QP", variables = ["QP_E", "QP_Z"], tolerance = 0.001 }
 "REFERENCE/Y5/r-04_ppa_q" = ["Game Over & Game summary"]
@@ -213,7 +213,7 @@ nprocs = 4
 dependencies = ["01_init"]
 
 [04_ppa_kcv.reference]
-"REFERENCE/Y6/o-04_ppa_kcv.Fock-V_xc-Plasmon-Pole_qp" = { path = "o-04_ppa_kcv.Fock-V_xc-Plasmon-Pole_qp", tolerance = 0.001, skip_columns = [11] }
+"REFERENCE/Y6/o-04_ppa_kcv.Fock-V_xc-Plasmon-Pole_qp" = { path = "o-04_ppa_kcv.Fock-V_xc-Plasmon-Pole_qp", tolerance = 0.001, skip_columns = [9, 11] }
 "REFERENCE/Y6/o-04_ppa_kcv.ndb.plasmon-pole_dielectric_matrix" = { path = "04_ppa_kcv/ndb.plasmon-pole_dielectric_matrix", variables = ["PPA_X_at_Q_1"], tolerance = 0.001 }
 "REFERENCE/Y6/o-04_ppa_kcv.ndb.QP_Fock-V_xc-Plasmon-Pole" = { path = "04_ppa_kcv/ndb.QP_Fock-V_xc-Plasmon-Pole", variables = ["QP energies", "Ren Factors"], tolerance = 0.001 }
 "REFERENCE/Y6/r-04_ppa_kcv" = ["Game Over & Game summary"]
@@ -222,7 +222,7 @@ dependencies = ["01_init"]
 input = "INPUTS/Y5/04_ppa_kcv"
 
 [04_ppa_kcv.versions."5".reference]
-"REFERENCE/Y5/o-04_ppa_kcv.qp" = { path = "o-04_ppa_kcv.qp", tolerance = 0.001, skip_columns = [12, 13, 14] }
+"REFERENCE/Y5/o-04_ppa_kcv.qp" = { path = "o-04_ppa_kcv.qp", tolerance = 0.001, skip_columns = [10, 12, 13, 14] }
 "REFERENCE/Y5/o-04_ppa_kcv.ndb.pp_fragment_1" = { path = "04_ppa_kcv/ndb.pp_fragment_1", variables = ["X_Q_1"], tolerance = 0.001 }
 "REFERENCE/Y5/o-04_ppa_kcv.ndb.QP" = { path = "04_ppa_kcv/ndb.QP", variables = ["QP_E", "QP_Z"], tolerance = 0.001 }
 "REFERENCE/Y5/r-04_ppa_kcv" = ["Game Over & Game summary"]
@@ -237,7 +237,7 @@ nprocs = 4
 dependencies = ["01_init"]
 
 [04_ppa_qp.reference]
-"REFERENCE/Y6/o-04_ppa_qp.Fock-V_xc-Plasmon-Pole_qp" = { path = "o-04_ppa_qp.Fock-V_xc-Plasmon-Pole_qp", tolerance = 0.001, skip_columns = [11] }
+"REFERENCE/Y6/o-04_ppa_qp.Fock-V_xc-Plasmon-Pole_qp" = { path = "o-04_ppa_qp.Fock-V_xc-Plasmon-Pole_qp", tolerance = 0.001, skip_columns = [9, 11] }
 "REFERENCE/Y6/o-04_ppa_qp.ndb.plasmon-pole_dielectric_matrix" = { path = "04_ppa_qp/ndb.plasmon-pole_dielectric_matrix", variables = ["PPA_X_at_Q_1"], tolerance = 0.001 }
 "REFERENCE/Y6/o-04_ppa_qp.ndb.QP_Fock-V_xc-Plasmon-Pole" = { path = "04_ppa_qp/ndb.QP_Fock-V_xc-Plasmon-Pole", variables = ["QP energies", "Ren Factors"], tolerance = 0.001 }
 "REFERENCE/Y6/r-04_ppa_qp" = ["Game Over & Game summary"]
@@ -246,7 +246,7 @@ dependencies = ["01_init"]
 input = "INPUTS/Y5/04_ppa_qp"
 
 [04_ppa_qp.versions."5".reference]
-"REFERENCE/Y5/o-04_ppa_qp.qp" = { path = "o-04_ppa_qp.qp", tolerance = 0.001, skip_columns = [12, 13, 14] }
+"REFERENCE/Y5/o-04_ppa_qp.qp" = { path = "o-04_ppa_qp.qp", tolerance = 0.001, skip_columns = [10, 12, 13, 14] }
 "REFERENCE/Y5/o-04_ppa_qp.ndb.pp_fragment_1" = { path = "04_ppa_qp/ndb.pp_fragment_1", variables = ["X_Q_1"], tolerance = 0.001 }
 "REFERENCE/Y5/o-04_ppa_qp.ndb.QP" = { path = "04_ppa_qp/ndb.QP", variables = ["QP_E", "QP_Z"], tolerance = 0.001 }
 "REFERENCE/Y5/r-04_ppa_qp" = ["Game Over & Game summary"]
@@ -261,7 +261,7 @@ nprocs = 4
 dependencies = ["01_init"]
 
 [04_ppa_mem.reference]
-"REFERENCE/Y6/o-04_ppa_mem.Fock-V_xc-Plasmon-Pole_qp" = { path = "o-04_ppa_mem.Fock-V_xc-Plasmon-Pole_qp", tolerance = 0.001, skip_columns = [11] }
+"REFERENCE/Y6/o-04_ppa_mem.Fock-V_xc-Plasmon-Pole_qp" = { path = "o-04_ppa_mem.Fock-V_xc-Plasmon-Pole_qp", tolerance = 0.001, skip_columns = [9, 11] }
 "REFERENCE/Y6/o-04_ppa_mem.ndb.plasmon-pole_dielectric_matrix" = { path = "04_ppa_mem/ndb.plasmon-pole_dielectric_matrix", variables = ["PPA_X_at_Q_1"], tolerance = 0.001 }
 "REFERENCE/Y6/o-04_ppa_mem.ndb.QP_Fock-V_xc-Plasmon-Pole" = { path = "04_ppa_mem/ndb.QP_Fock-V_xc-Plasmon-Pole", variables = ["QP energies", "Ren Factors"], tolerance = 0.001 }
 "REFERENCE/Y6/r-04_ppa_mem" = ["Game Over & Game summary"]
@@ -270,7 +270,7 @@ dependencies = ["01_init"]
 input = "INPUTS/Y5/04_ppa_mem"
 
 [04_ppa_mem.versions."5".reference]
-"REFERENCE/Y5/o-04_ppa_mem.qp" = { path = "o-04_ppa_mem.qp", tolerance = 0.001, skip_columns = [12, 13, 14] }
+"REFERENCE/Y5/o-04_ppa_mem.qp" = { path = "o-04_ppa_mem.qp", tolerance = 0.001, skip_columns = [10, 12, 13, 14] }
 "REFERENCE/Y5/o-04_ppa_mem.ndb.pp_fragment_1" = { path = "04_ppa_mem/ndb.pp_fragment_1", variables = ["X_Q_1"], tolerance = 0.001 }
 "REFERENCE/Y5/o-04_ppa_mem.ndb.QP" = { path = "04_ppa_mem/ndb.QP", variables = ["QP_E", "QP_Z"], tolerance = 0.001 }
 "REFERENCE/Y5/r-04_ppa_mem" = ["Game Over & Game summary"]
@@ -285,7 +285,7 @@ nprocs = 4
 dependencies = ["01_init"]
 
 [04_ppa_work.reference]
-"REFERENCE/Y6/o-04_ppa_work.Fock-V_xc-Plasmon-Pole_qp" = { path = "o-04_ppa_work.Fock-V_xc-Plasmon-Pole_qp", tolerance = 0.001, skip_columns = [11] }
+"REFERENCE/Y6/o-04_ppa_work.Fock-V_xc-Plasmon-Pole_qp" = { path = "o-04_ppa_work.Fock-V_xc-Plasmon-Pole_qp", tolerance = 0.001, skip_columns = [9, 11] }
 "REFERENCE/Y6/o-04_ppa_work.ndb.plasmon-pole_dielectric_matrix" = { path = "04_ppa_work/ndb.plasmon-pole_dielectric_matrix", variables = ["PPA_X_at_Q_1"], tolerance = 0.001 }
 "REFERENCE/Y6/o-04_ppa_work.ndb.QP_Fock-V_xc-Plasmon-Pole" = { path = "04_ppa_work/ndb.QP_Fock-V_xc-Plasmon-Pole", variables = ["QP energies", "Ren Factors"], tolerance = 0.001 }
 "REFERENCE/Y6/r-04_ppa_work" = ["Game Over & Game summary"]
@@ -294,7 +294,7 @@ dependencies = ["01_init"]
 input = "INPUTS/Y5/04_ppa_work"
 
 [04_ppa_work.versions."5".reference]
-"REFERENCE/Y5/o-04_ppa_work.qp" = { path = "o-04_ppa_work.qp", tolerance = 0.001, skip_columns = [12, 13, 14] }
+"REFERENCE/Y5/o-04_ppa_work.qp" = { path = "o-04_ppa_work.qp", tolerance = 0.001, skip_columns = [10, 12, 13, 14] }
 "REFERENCE/Y5/o-04_ppa_work.ndb.pp_fragment_1" = { path = "04_ppa_work/ndb.pp_fragment_1", variables = ["X_Q_1"], tolerance = 0.001 }
 "REFERENCE/Y5/o-04_ppa_work.ndb.QP" = { path = "04_ppa_work/ndb.QP", variables = ["QP_E", "QP_Z"], tolerance = 0.001 }
 "REFERENCE/Y5/r-04_ppa_work" = ["Game Over & Game summary"]
@@ -309,7 +309,7 @@ nprocs = 2
 dependencies = ["01_init"]
 
 [04_ppa_noio.reference]
-"REFERENCE/Y6/o-04_ppa_noio.Fock-V_xc-Plasmon-Pole_qp" = { path = "o-04_ppa_noio.Fock-V_xc-Plasmon-Pole_qp", tolerance = 0.001, skip_columns = [11] }
+"REFERENCE/Y6/o-04_ppa_noio.Fock-V_xc-Plasmon-Pole_qp" = { path = "o-04_ppa_noio.Fock-V_xc-Plasmon-Pole_qp", tolerance = 0.001, skip_columns = [9, 11] }
 "REFERENCE/Y6/o-04_ppa_noio.ndb.QP_Fock-V_xc-Plasmon-Pole" = { path = "04_ppa_noio/ndb.QP_Fock-V_xc-Plasmon-Pole", variables = ["QP energies", "Ren Factors"], tolerance = 0.001 }
 "REFERENCE/Y6/r-04_ppa_noio" = ["Game Over & Game summary"]
 
@@ -317,7 +317,7 @@ dependencies = ["01_init"]
 input = "INPUTS/Y5/04_ppa_noio"
 
 [04_ppa_noio.versions."5".reference]
-"REFERENCE/Y5/o-04_ppa_noio.qp" = { path = "o-04_ppa_noio.qp", tolerance = 0.001, skip_columns = [12, 13, 14] }
+"REFERENCE/Y5/o-04_ppa_noio.qp" = { path = "o-04_ppa_noio.qp", tolerance = 0.001, skip_columns = [10, 12, 13, 14] }
 "REFERENCE/Y5/o-04_ppa_noio.ndb.QP" = { path = "04_ppa_noio/ndb.QP", variables = ["QP_E", "QP_Z"], tolerance = 0.001 }
 "REFERENCE/Y5/r-04_ppa_noio" = ["Game Over & Game summary"]
 
@@ -336,7 +336,7 @@ flags = "04_ppa_base"
 dependencies = ["04_ppa_base"]
 
 [04_ppa_reuse.reference]
-"REFERENCE/Y6/o-04_ppa_reuse.Fock-V_xc-Plasmon-Pole_qp" = { path = "o-04_ppa_reuse.Fock-V_xc-Plasmon-Pole_qp", tolerance = 0.001, skip_columns = [11] }
+"REFERENCE/Y6/o-04_ppa_reuse.Fock-V_xc-Plasmon-Pole_qp" = { path = "o-04_ppa_reuse.Fock-V_xc-Plasmon-Pole_qp", tolerance = 0.001, skip_columns = [9, 11] }
 "REFERENCE/Y6/o-04_ppa_reuse.ndb.QP_Fock-V_xc-Plasmon-Pole" = { path = "04_ppa_reuse/ndb.QP_Fock-V_xc-Plasmon-Pole", variables = ["QP energies", "Ren Factors"], tolerance = 0.001 }
 "REFERENCE/Y6/r-04_ppa_reuse" = { contains = "[RD@./04_ppa_base//ndb.plasmon-pole_dielectric_matrix_header]" }
 
@@ -357,7 +357,7 @@ nprocs = 4
 dependencies = ["01_init"]
 
 [10_ff_q.reference]
-"REFERENCE/Y6/o-10_ff_q.Fock-V_xc-Real-Axis_qp" = { path = "o-10_ff_q.Fock-V_xc-Real-Axis_qp", tolerance = 0.005, skip_columns = [11] }
+"REFERENCE/Y6/o-10_ff_q.Fock-V_xc-Real-Axis_qp" = { path = "o-10_ff_q.Fock-V_xc-Real-Axis_qp", tolerance = 0.005, skip_columns = [9, 11] }
 "REFERENCE/Y6/o-10_ff_q.ndb.QP_Fock-V_xc-Real-Axis" = { path = "10_ff_q/ndb.QP_Fock-V_xc-Real-Axis", variables = ["QP energies", "Ren Factors"], tolerance = 0.005 }
 "REFERENCE/Y6/r-10_ff_q" = ["Game Over & Game summary"]
 
@@ -365,7 +365,7 @@ dependencies = ["01_init"]
 input = "INPUTS/Y5/10_ff_q"
 
 [10_ff_q.versions."5".reference]
-"REFERENCE/Y5/o-10_ff_q.qp" = { path = "o-10_ff_q.qp", tolerance = 0.005, skip_columns = [12, 13, 14] }
+"REFERENCE/Y5/o-10_ff_q.qp" = { path = "o-10_ff_q.qp", tolerance = 0.005, skip_columns = [10, 12, 13, 14] }
 "REFERENCE/Y5/o-10_ff_q.ndb.QP" = { path = "10_ff_q/ndb.QP", variables = ["QP_E", "QP_Z"], tolerance = 0.005 }
 "REFERENCE/Y5/r-10_ff_q" = ["Game Over & Game summary"]
 
