@@ -1,17 +1,17 @@
-#  __      __   ______   __       __  _______    ______               
-# |  \    /  \ /      \ |  \     /  \|       \  /      \              
-#  \$$\  /  $$|  $$$$$$\| $$\   /  $$| $$$$$$$\|  $$$$$$\             
-#   \$$\/  $$ | $$__| $$| $$$\ /  $$$| $$__/ $$| $$  | $$             
-#    \$$  $$  | $$    $$| $$$$\  $$$$| $$    $$| $$  | $$             
-#     \$$$$   | $$$$$$$$| $$\$$ $$ $$| $$$$$$$\| $$  | $$             
-#     | $$    | $$  | $$| $$ \$$$| $$| $$__/ $$| $$__/ $$             
-#     | $$    | $$  | $$| $$  \$ | $$| $$    $$ \$$    $$             
-#      \$$     \$$   \$$ \$$      \$$ \$$$$$$$   \$$$$$$              
 #                                                                     
-# Version 5.4.0 Revision 24143 Hash (prev commit) 77ed66f02           
-#                        Branch is                                    
-#                MPI+SLK+HDF5_MPI_IO Build                            
-#                http://www.yambo-code.eu                             
+# ooooo   oooo ..     ooo        ooo ooooooooo.    .oooo.             
+#  `88.   .8" .88.    `88.       .88 `88"   `Y8b  dP"  `Yb            
+#   `88. .8" .8"88.    888b     d"88  88     888 88      88           
+#    `88.8" .8" `88.   8 Y88. .P  88  88oooo888" 88      88           
+#     `88" .88ooo888.  8  `888"   88  88    `88b 88      88           
+#      88 .8"     `88. 8    Y     88  88    .88P `8b    d8"           
+#     o88o88o      888o8          88 o88bood8P"   `Ybod8P"            
+#                                                                     
+#                                                                     
+# Version 5.3.0 Revision 23927 Hash (prev commit) 1730222ea           
+#                         Branch is                                   
+#          MPI+OpenMP+SLK+SLEPC+HDF5_MPI_IO Build                     
+#                 http://www.yambo-code.eu                            
 #
 #
 # GW solver                                       : Newton
@@ -39,17 +39,19 @@
 #
 #    K-point            Band               Eo [eV]            E [eV]             E-Eo [eV]          Vxc [eV]           Vnlxc [eV]         Sc|Eo [eV]         Re(Z)              Im(Z)              Width [meV]        Width [fs]
 #
-        1                   5                 0.000000          -1.395853          -1.395853          -8.658958          -9.002580          -1.052231           1.000000           0.000000          -0.167199            3936.70
-        1                   6                 0.737137           2.434528           1.697391          -6.500567          -4.162495          -0.640680           1.000000           0.000000          -0.099555            6611.51
-        2                   5                -1.119856          -2.509809          -1.389952          -14.31613          -15.55904          -0.147046           1.000000           0.000000          -0.034369            19151.2
-        2                   6                 1.401973           3.000087           1.598114          -5.525242          -2.973878          -0.953250           1.000000           0.000000          -0.151977            4331.01
-        3                   5                -4.345878          -6.883929          -2.538051          -17.16645          -20.76082           1.056312           1.000000           0.000000           0.105287            6251.60
-        3                   6                 2.992585           5.754987           2.762402          -8.071076          -3.303599          -2.005075           1.000000           0.000000          -0.235893            2790.30
-         4                  5                -6.887249          -10.44168          -3.554432          -15.87930          -21.10271           1.668975           1.000000           0.000000           0.167591            3927.48
-         4                  6                 5.327320           8.595155           3.267835          -9.311792          -3.982758          -2.061200           1.000000           0.000000          -0.230807            2851.79
+        1                   5                 0.000000          -1.395867          -1.395867          -8.658943          -9.002580          -1.052231           1.000000           0.000000          -0.069871            9420.36
+        1                   6                 0.737137           2.434531           1.697395          -6.500570          -4.162496          -0.640680           1.000000           0.000000          -0.456641            1441.42
+        2                   5                -1.119856          -2.509867          -1.390011          -14.31607          -15.55904          -0.147046           1.000000           0.000000           0.124789            5274.62
+        2                   6                 1.401973           3.000086           1.598113          -5.525241          -2.973878          -0.953250           1.000000           0.000000          -0.467658            1407.46
+        3                   5                -4.345878          -6.884004          -2.538126          -17.16638          -20.76082           1.056312           1.000000           0.000000           0.272788            2412.91
+        3                   6                 2.992585           5.754971           2.762386          -8.071060          -3.303599          -2.005075           1.000000           0.000000          -0.392493            1677.00
+         4                  5                -6.887249          -10.44174          -3.554495          -15.87924          -21.10271           1.668974           1.000000           0.000000           0.284030            2317.40
+         4                  6                 5.327320           8.595133           3.267813          -9.311770          -3.982758          -2.061199           1.000000           0.000000          -0.388011            1696.38
 # 
-# 10/17/2026 at 11:15 yambo @ UNIJ2P4Q7TFK3 [start]
-# 10/17/2026 at 11:15                       [end]
+# 11/26/2026 at 10:32 yambo @ totoro [start]
+# 11/26/2026 at 10:32                [end]
+#  
+# Timing   [Min/Max/Average]: 04s/04s/04s
 #
 # .-Input file  03_cohsex/03_cohsex
 # | HF_and_locXC                     # [R] Hartree-Fock
@@ -62,15 +64,9 @@
 # | el_el_corr                       # [R] Electron-Electron Correlation
 # | BoseTemp= 0.000000         eV    # Bosonic Temperature
 # | #DegFix                        # Force the code to impose the energy levels to respect their degeneracy
-# | DIP_CPU= "2.1"                   # [PARALLEL] CPUs for each role
-# | DIP_ROLEs= "v.k"                 # [PARALLEL] CPUs roles (k,c,v)
-# | X_and_IO_CPU= "2.1.1"            # [PARALLEL] CPUs for each role
-# | X_and_IO_ROLEs= "c.k.q"          # [PARALLEL] CPUs roles (q,g,k,c,v)
-# | X_and_IO_nCPU_LinAlg_INV= 1      # [PARALLEL] CPUs for Linear Algebra (if -1 it is automatically set)
-# | SX_CPU= "2.1"                    # [PARALLEL] CPUs for each role
-# | SX_ROLEs= "b.q"                  # [PARALLEL] CPUs roles (q,g,qp,b)
-# | SE_CPU= "2.1"                    # [PARALLEL] CPUs for each role
-# | SE_ROLEs= "b.q"                  # [PARALLEL] CPUs roles (q,g,qp,b)
+# | DIP_Threads= 1                   # [OPENMP/X] Number of threads for dipoles
+# | X_Threads= 1                     # [OPENMP/X] Number of threads for response functions
+# | SE_Threads= 1                    # [OPENMP/GW] Number of threads for self-energy
 # | RandQpts=0                       # [RIM] Number of random q-points in the BZ
 # | RandGvec= 1                RL    # [RIM] Coulomb interaction RS components
 # | CUTGeo= "box xy"                 # [CUT] Coulomb Cutoff geometry: box/cylinder/sphere/ws/slab X/Y/Z/XY..
