@@ -1,0 +1,34 @@
+rim_cut
+self_energy
+X_PPA
+dipoles
+CUTGeo= "box xy"
+% CUTBox
+ 19.0 | 19.0 | 0.0 |
+%
+EXXRLvcs= 5000 RL
+% DipBands
+ 1 | 20 |
+%
+PPA_NGsBlk= 21 RL
+% PPA_QpntsR
+ 1 | 6 |
+%
+% PPA_BndsRn
+ 1 | 10 |
+%
+% PPA_LongDr
+ 1.0 | 1.0 | 1.0 |
+%
+TDDFTKernel= "HARTREE"
+PPA_PPAPnt= 27.21138 eV
+% GbndRnge
+ 1 | 20 |
+%
+DysSolver= "n"
+GDamping= 0.1 eV
+ExtendOut
+SEApprox= "PPA"
+%QP_krange
+1|4|5|6|
+%

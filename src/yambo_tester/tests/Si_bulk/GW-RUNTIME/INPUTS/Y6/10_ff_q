@@ -1,0 +1,47 @@
+self_energy                                 # Self-energy and quasi-particle corrections
+X_dynamic                                       # Plasmon Pole Approximation for the Screened Interaction
+dipoles                                     # Oscillator strenghts (or dipoles)
+HFlXC_CPU= ""                               # CPUs for each role
+HFlXC_ROLEs= ""                             # CPUs roles (qp,g,q,b)
+DIP_CPU= ""                                 # CPUs for each role
+DIP_ROLEs= ""                               # CPUs roles (k,c,v)
+EM1D_CPU= "4 1 1 1 1"
+EM1D_ROLEs= "q g k c v"
+EM1D_nCPU_LinAlg_INV=-1                      # CPUs for Linear Algebra (if -1 it is automatically set)
+GW_CPU= "1 1 1 4"
+GW_ROLEs= "qp g q b"
+EF_interaction= "r.E"                       # Interaction kind (r.E|p.A)
+% DipBands
+  1 | 10 |                                  # Bands range for dipoles
+%
+EXXRLvcs= 300 RL
+VXCRLvcs=  3383                      [RL]   # XCpotential RL components
+EM1D_NGsBlk= 51 RL
+% EM1D_QpntsR
+  1 |  8 |                                  # Transferred momenta
+%
+% EM1D_BndsRn
+  1 | 10 |                                  # Polarization function bands
+%
+% EM1D_LongDr
+ 1.000000 | 0.000000 | 0.000000 |           # [cc] Electric Field
+%
+EM1D_CGrdSp= 100.0000                        # [o/o] Poles coarse grid controller
+% EM1D_EnRnge
+ 0.000000 |  0.000000 |            [eV]   # left empty on purpose: a self-energy-driven X_dynamic
+%
+% EM1D_DmRnge
+ 0.100000 |  0.100000 |           [eV]   # Damping range
+%
+EM1D_ETStps= 600                            # Frequency steps
+TDDFTKernel= "HARTREE"                      # TDDFT Kernel: IP/Hartree/ALDA/LRC/PF/BSfxc
+% GbndRnge
+  1 | 10 |
+%
+SEApprox= "FF"                             # Self-energy approximation ("HF","COHSEX","PPA")
+DysSolver= "n"                              # Dyson Equation solver ("n","s","g")
+GDamping= 0.100000                   [ev]   # G[W] damping
+%QP_krange                       # Generalized Kpoint/Band indices
+1|8|3|6|
+%
+ExtendOut

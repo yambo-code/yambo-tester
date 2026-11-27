@@ -1,12 +1,14 @@
 # Copyright (c) 2025 Nicola Spallanzani
 # Licensed under the MIT License. See LICENSE file for details.
 
+DEPENDENCY_FAILED_RETURNCODE = -9996
 UNSUPPORTED_VERSION_RETURNCODE = -9997
 RUNLEVEL_FILTER_RETURNCODE = -9998
 MISSING_EXECUTABLE_RETURNCODE = -9999
 UNSUPPORTED_VERSION_REASON = "unsupported-yambo-version"
 RUNLEVEL_FILTER_REASON = "runlevel-filter"
 MISSING_EXECUTABLE_REASON = "missing-executable"
+DEPENDENCY_FAILED_REASON = "required-workflow-failed"
 
 
 def normalize_runlevels(runlevels):
@@ -75,3 +77,40 @@ def selected_step_names(steps, runlevels):
                 selected.add(dependency)
                 stack.append(dependency)
     return selected
+
+
+def expand_workflow_requirements(tests, requires_of):
+    """
+    Return the selected workflows in run order, with required workflows first.
+
+    ``tests`` maps a system name to its list of workflow types, as in the
+    ``[tests]`` table. ``requires_of(name, type)`` returns the workflow type the
+    workflow requires (its ``requires`` metadata) or ``None``. A required
+    workflow belongs to the same system; it is added when not selected and is
+    placed before every workflow that needs it. Duplicates are removed.
+
+    :return: list of ``(name, type)`` pairs in run order.
+    """
+    ordered, done, visiting = [], set(), set()
+
+    def visit(name, workflow_type, chain):
+        key = (name, workflow_type)
+        if key in done:
+            return
+        if key in visiting:
+            cycle = " -> ".join(f"{n}/{t}" for n, t in chain + [key])
+            raise ValueError(f"Workflow requirement cycle: {cycle}.")
+        visiting.add(key)
+        required = requires_of(name, workflow_type)
+        if required:
+            if not isinstance(required, str):
+                raise TypeError(f"{name}/{workflow_type}: requires must be a workflow type string.")
+            visit(name, required, chain + [key])
+        visiting.discard(key)
+        done.add(key)
+        ordered.append(key)
+
+    for name, workflow_types in tests.items():
+        for workflow_type in workflow_types:
+            visit(name, workflow_type, [])
+    return ordered

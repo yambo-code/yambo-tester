@@ -1,8 +1,10 @@
+# Riccardo Reho
 import re
 import tomllib
 from pathlib import Path
 
 from yambo_tester.template_expansion import expand_workflow_templates, workflow_uses_templates
+from yambo_tester.versioning import WORKFLOW_METADATA_KEYS
 
 
 DFT_URL = "https://media.yambo-code.eu/robots/databases/y6"
@@ -37,12 +39,29 @@ def test_imported_workflows_declare_version_support_and_tarball_url():
     for path in workflow_files():
         config = load_workflow_file(path)
 
-        if path.parent.name == "DFT":
+        if "requires" in config:  # starts from the SAVE of a sibling workflow: no tarball of its own
+            assert "tarball_url" not in config and "sha256" not in config, path
+            assert config["yambo_versions"]["supported"] == ["5", "6"], path
+            continue
+
+        # DFT workflows and workflows written for Yambo 6 (e.g. Si_bulk/GW, hBN_2D/GW) run on both
+        # majors from the Yambo 6 repository; legacy imported workflows are Yambo 5 only.
+        if path.parent.name == "DFT" or config["tarball_url"] == DFT_URL:
             assert config["yambo_versions"]["supported"] == ["5", "6"], path
             assert config["tarball_url"] == DFT_URL, path
         else:
             assert config["yambo_versions"]["supported"] == ["5"], path
             assert config["tarball_url"] == TESTS_URL, path
+
+
+def test_required_workflows_exist_and_have_no_requirement_themselves():
+    for path in workflow_files():
+        config = load_workflow_file(path)
+        if "requires" not in config:
+            continue
+        required = path.parent.parent / config["requires"] / "tests.toml"
+        assert required.exists(), path
+        assert "requires" not in load_workflow_file(required), path
 
 
 def test_packaged_default_config_restores_validated_workflows():
@@ -57,7 +76,7 @@ def test_imported_reference_keys_are_explicit_relative_paths():
         config = load_workflow_file(path)
 
         for step_name, step in config.items():
-            if step_name in {"sha256", "tarball_url", "yambo_versions", "versions"}:
+            if step_name in WORKFLOW_METADATA_KEYS:
                 continue
             references = [step.get("reference", {})]
             references.extend(
@@ -100,7 +119,7 @@ def test_dft_workflows_use_yambo6_tarballs_and_yambo5_step_overlays():
 
         assert config.get("versions", {}).get("5", {}).get("tarball_url", DFT_URL) == DFT_URL, path
         for step_name, step in config.items():
-            if step_name in {"sha256", "tarball_url", "yambo_versions", "versions"}:
+            if step_name in WORKFLOW_METADATA_KEYS:
                 continue
             if "reference" in step:
                 assert all(key == "STDOUT" or key.startswith("REFERENCE/Y6/") for key in step["reference"]), (path, step_name)
@@ -119,7 +138,7 @@ def test_step_child_tables_are_grouped_with_their_step():
         text = path.read_text()
         headers = [(match.group(1), match.start()) for match in table_re.finditer(text)]
         config = load_workflow_file(path)
-        step_names = [name for name in config if name not in {"sha256", "tarball_url", "yambo_versions", "versions"}]
+        step_names = [name for name in config if name not in WORKFLOW_METADATA_KEYS]
 
         step_header_positions = {name: pos for name, pos in headers if name in step_names}
         assert set(step_header_positions) == set(step_names), path

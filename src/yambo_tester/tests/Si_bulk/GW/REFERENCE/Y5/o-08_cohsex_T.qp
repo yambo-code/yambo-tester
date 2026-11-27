@@ -1,0 +1,112 @@
+#                                                                     
+#                                                                     
+# Y88b    /   e           e    e      888~~\    ,88~-_                
+#  Y88b  /   d8b         d8b  d8b     888   |  d888   \               
+#   Y88b/   /Y88b       d888bdY88b    888 _/  88888    |              
+#    Y8Y   /  Y88b     / Y88Y Y888b   888  \  88888    |              
+#     Y   /____Y88b   /   YY   Y888b  888   |  Y888   /               
+#    /   /      Y88b /          Y888b 888__/    `88_-~                
+#                                                                     
+#                                                                     
+# Version 5.3.0 Revision 23927 Hash (prev commit) 1730222ea           
+#                       Branch is                                     
+#         MPI+OpenMP+SLK+SLEPC+HDF5_MPI_IO Build                      
+#                http://www.yambo-code.eu                             
+#
+#
+# GW solver                                       : Newton
+# GW approximation                                : COHSEX
+# X G`s                                           :   51 [used]
+# X G`s                                           :   51 [disk]
+# X bands                                         :   1  10
+# X poles                                         :   100.000000    [o/o]
+# X e/h E range                                   :  -1.00000000     -1.00000000    [ev]
+# X Hxc Kernel                                    : HARTREE
+# X BZ energy Double Grid                         : no
+# X Optical Averaged directions                   : none
+# Sc Empty Bands                                  : no
+# Sc bands terminator                             : no
+# Sx RL components                                :  307
+#                                                 
+# QP @ state[ 1 ] K range                         :   1   8
+# QP @ state[ 1 ] b range                         :   3   6
+# GF WF`s kind                                    : Perdew, Burke & Ernzerhof(X)+Perdew, Burke & Ernzerhof(C)
+# Xs energies kind                                : Perdew, Burke & Ernzerhof(X)+Perdew, Burke & Ernzerhof(C)
+# Xs WF`s kind                                    : Perdew, Burke & Ernzerhof(X)+Perdew, Burke & Ernzerhof(C)
+#
+# Vxc  =Perdew, Burke & Ernzerhof(X)+Perdew, Burke & Ernzerhof(C)
+# Vnlxc=Hartree-Fock
+#
+#    K-point            Band               Eo [eV]            E [eV]             E-Eo [eV]          Vxc [eV]           Vnlxc [eV]         Sc|Eo [eV]         Re(Z)              Im(Z)              Width [meV]        Width [fs]
+#
+        1                  3                 -0.234478          -1.228087          -0.993609          -11.25904          -11.69420          -0.558446           1.000000           0.000000          -0.311886E-4        0.211042E+8
+        1                   4                -0.234478          -1.240459          -1.005981          -11.25904          -11.69421          -0.570815           1.000000           0.000000          -0.294994E-4        0.223127E+8
+        1                   5                 2.293588           1.988618          -0.304970          -9.977068          -5.633367          -4.648671           1.000000           0.000000           0.111884E-5        0.588297E+9
+        1                   6                 2.293588           1.978049          -0.315539          -9.977068          -5.633367          -4.659241           1.000000           0.000000          -0.880513E-4        0.747533E+7
+        2                  3                 -0.990931          -2.042447          -1.051516          -11.02518          -12.29876           0.222070           1.000000           0.000000           0.192413E-6        0.34208E+10
+        2                   4                -0.990931          -2.044827          -1.053896          -11.02518          -12.29876           0.219683           1.000000           0.000000           0.310030E-5        0.212306E+9
+        2                   5                 1.705091           1.362391          -0.342701          -10.04678          -5.746001          -4.643483           1.000000           0.000000          -0.117922E-3        0.558175E+7
+        2                   6                 3.236822           2.999101          -0.237721          -10.02055          -5.387247          -4.871023           1.000000           0.000000           0.715268E-6        0.920231E+9
+        3                  3                 -1.428769          -2.542409          -1.113640          -10.99700          -12.64453           0.533890           1.000000           0.000000           0.306380E-4        0.214835E+8
+        3                   4                -1.428769          -2.539613          -1.110844          -10.99700          -12.64453           0.536684           1.000000           0.000000          -0.371575E-4        0.177141E+8
+        3                   5                 1.220074           0.830776          -0.389298          -10.02562          -5.885891          -4.529025           1.000000           0.000000           0.536897E-5        0.122596E+9
+        3                   6                 3.102061           2.865433          -0.236628          -9.603091          -4.970523          -4.869196           1.000000           0.000000           0.149240E-4        0.441042E+8
+         4                 3                 -2.103659          -3.301428          -1.197769          -10.66470          -12.44992           0.587454           1.000000           0.000000           0.135627E-4        0.485312E+8
+         4                  4                -2.103659          -3.257870          -1.154210          -10.66470          -12.44993           0.631016           1.000000           0.000000          -0.192909E-4        0.341204E+8
+         4                  5                 0.897259           0.410706          -0.486552          -9.306900          -5.536548          -4.256905           1.000000           0.000000           0.263941E-5        0.249378E+9
+         4                  6                 2.890893           2.529166          -0.361727          -9.127943          -4.582942          -4.906728           1.000000           0.000000          -0.188433E-4        0.349308E+8
+         5                 3                 -3.721740          -5.016675          -1.294934          -10.15324          -12.46469           1.016520           1.000000           0.000000          -0.280606E-4        0.234568E+8
+         5                  4                -2.416361          -3.611994          -1.195633          -10.65883          -12.67476           0.820299           1.000000           0.000000          -0.470517E-4        0.139891E+8
+         5                  5                 1.292698           0.883216          -0.409483          -9.163908          -5.159350          -4.414041           1.000000           0.000000           0.779993E-4        0.843868E+7
+         5                  6                 4.197840           3.836460          -0.361380          -9.552314          -4.778650          -5.135044           1.000000           0.000000           0.416398E-5        0.158073E+9
+         6                 3                 -3.929435          -5.251763          -1.322329          -9.994727          -12.39478           1.077727           1.000000           0.000000          -0.264963E-4        0.248417E+8
+         6                  4                -1.553309          -2.655364          -1.102054          -10.90172          -12.50413           0.500354           1.000000           0.000000          -0.115599E-5        0.569393E+9
+         6                  5                 2.185680           1.902734          -0.282946          -9.537709          -5.141635          -4.679019           1.000000           0.000000           0.300363E-4        0.219138E+8
+         6                  6                 4.494159           4.308370          -0.185789          -10.05821          -4.871823          -5.372180           1.000000           0.000000           0.188371E-3        0.349423E+7
+         7                 3                 -3.054125          -4.347742          -1.293617          -10.53277          -12.87681           1.050424           1.000000           0.000000          -0.489763E-4        0.134394E+8
+         7                  4                -3.054125          -4.335781          -1.281656          -10.53277          -12.87681           1.062388           1.000000           0.000000           0.366342E-4        0.179672E+8
+         7                  5                 0.500139          -0.087045          -0.587185          -8.917025          -5.458197          -4.046013           1.000000           0.000000           0.150504E-4        0.437340E+8
+         7                  6                 0.500139          -0.020976          -0.521115          -8.917027          -5.458196          -3.979945           1.000000           0.000000           0.803411E-5        0.819272E+8
+         8                 3                 -4.022765          -5.396504          -1.373739          -9.927654          -12.39586           1.094471           1.000000           0.000000          -0.875012E-5        0.752232E+8
+         8                  4                -4.022765          -5.339299          -1.316533          -9.927656          -12.39587           1.151677           1.000000           0.000000          -0.477299E-4        0.137904E+8
+         8                  5                 4.046432           3.650419          -0.396014          -9.485772          -4.929509          -4.952277           1.000000           0.000000           0.663206E-5        0.992469E+8
+         8                  6                 4.046432           3.668554          -0.377878          -9.485774          -4.929512          -4.934141           1.000000           0.000000           0.131761E-4        0.499551E+8
+# 
+# 11/26/2026 at 10:34 yambo @ totoro [start]
+# 11/26/2026 at 10:34                [end]
+#  
+# Timing   [Min/Max/Average]: 04s/04s/04s
+#
+# .-Input file  08_cohsex_T/08_cohsex_T
+# | HF_and_locXC                     # [R] Hartree-Fock
+# | gw0                              # [R] GW approximation
+# | dyson                            # [R] Dyson Equation solver
+# | dipoles                          # [R] Oscillator strenghts (or dipoles)
+# | cohsex                           # [R][Xp] COlumb Hole Screened EXchange
+# | em1s                             # [R][Xs] Statically Screened Interaction
+# | el_el_corr                       # [R] Electron-Electron Correlation
+# | ElecTemp= 0.300009         eV    # Electronic Temperature
+# | BoseTemp= 0.300000         eV    # Bosonic Temperature
+# | #DegFix                        # Force the code to impose the energy levels to respect their degeneracy
+# | FFTGvecs=  609             RL    # [FFT] Plane-waves
+# | DIP_Threads= 1                   # [OPENMP/X] Number of threads for dipoles
+# | X_Threads= 1                     # [OPENMP/X] Number of threads for response functions
+# | SE_Threads= 1                    # [OPENMP/GW] Number of threads for self-energy
+# | EXXRLvcs= 307              RL    # [XX] Exchange    RL components
+# | VXCRLvcs=  3383            RL    # [XC] XCpotential RL components
+# | Chimod= "HARTREE"                # [X] IP/Hartree/ALDA/LRC/PF/BSfxc
+# | DipComputed= "R V P [G-space]"   # [DIP] [default R P V; extra P2 Spin Orb]
+# | % BndsRnXs
+# |   1 | 10 |                           # [Xs] Polarization function bands
+# | %
+# | NGsBlkXs=  51              RL    # [Xs] Response block size
+# | GrFnTpXs= "R"                    # [Xs] Green`s function (T)ordered,(R)etarded,(r)senant,(a)ntiresonant [T, R, r, Ta, Ra]
+# | % LongDrXs
+# |  0.100000E-4 |  0.00000    |  0.00000    # [Xs] [cc] Electric Field
+# | %
+# | %QPkrange                        # [GW] QP generalized Kpoint/Band indices
+# | 1|8|3|6|
+# | %
+# | %QPerange                        # [GW] QP generalized Kpoint/Energy indices
+# | 1|8| 0.000000|-1.000000|
+# | %

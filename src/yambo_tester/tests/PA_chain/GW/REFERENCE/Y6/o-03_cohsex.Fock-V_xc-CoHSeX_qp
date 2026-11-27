@@ -1,0 +1,141 @@
+#                                                                     
+#                                                                     
+# Y88b    /   e           e    e      888~~\    ,88~-_                
+#  Y88b  /   d8b         d8b  d8b     888   |  d888   \               
+#   Y88b/   /Y88b       d888bdY88b    888 _/  88888    |              
+#    Y8Y   /  Y88b     / Y88Y Y888b   888  \  88888    |              
+#     Y   /____Y88b   /   YY   Y888b  888   |  Y888   /               
+#    /   /      Y88b /          Y888b 888__/    `88_-~                
+#                                                                     
+#                                                                     
+# Version 6.0.0 Revision 23875 Hash (prev commit) 4d36a1a             
+#                   Branch is devel-GW                                
+#               MPI+SLK+HDF5_MPI_IO Build                             
+#                http://www.yambo-code.eu                             
+#
+#
+#  Dyson solver                             : exact
+#  Number of states                         :   8
+#  Number of bands                          :   6
+#  Number of k-points                       :   4
+#  [Fock] Kind                              : Self-Energy
+#  [Fock] Approximation                     : Fock
+#  [Fock] Number of states                  :   8
+#  [Fock] Number of frequencies             :  1
+#  [Fock] Total self-energy weight          :   1.00000000   
+#  [Fock] Reciprocal lattice vectors        :   5003
+#  [V_xc] Kind                              : V_xc
+#  [V_xc] Approximation                     : Slater exchange(X)+Perdew & Zunger(C)
+#  [V_xc] Number of states                  :   8
+#  [V_xc] Number of frequencies             :  1
+#  [V_xc] Total self-energy weight          :  -1.00000000   
+#  [V_xc] Reciprocal lattice vectors        :  20877
+#  [CoHSeX] Kind                            : Self-Energy
+#  [CoHSeX] Approximation                   : CoHSeX
+#  [CoHSeX] Number of states                :   8
+#  [CoHSeX] Number of frequencies           :  1
+#  [CoHSeX] Total self-energy weight        :   1.00000000   
+#  [CoHSeX] Reciprocal lattice vectors      :  21
+#  [CoHSeX] G[W] bands range                :   1   6
+#  [CoHSeX] Empty bands in COH              : no
+#  [CoHSeX] [Xs] Bands range                :   1  10
+#  [CoHSeX] [Xs] Time-ordering              : T-ordered
+#  [CoHSeX] [Xs] Electron-Field interact    : r.E
+#  [CoHSeX] [Xs] [r,Vnl] included           : no
+#  [CoHSeX] [Xs] Response function size     :  21
+#  [CoHSeX] [Xs] Dyson equation Kernel      : HARTREE
+#  [CoHSeX] [Xs] Reduction fraction         :   100.000000    [%]
+#  [CoHSeX] [Xs] Number of frequencies      :  1
+#  [CoHSeX] [Xs] Frequencies range          :   0.00000000      0.00000000    [eV]
+#  [CoHSeX] [Xs] Damping range              :  0.100000005E-2  0.100000005E-2 [eV]
+#                                                                                                                                                                                                                                                                                                           
+#  QP @ state[ 1 ] K range                  :   1   4
+#  QP @ state[ 1 ] b range                  :   5   6
+#
+#
+#    K-point            Band               Eo [eV]            E [eV]             E-Eo [eV]          Fock|Eo [eV]       V_xc|Eo [eV]       CoHSeX|Eo [eV]     Im(E) [eV]
+#
+        1                   5                 0.000000          -1.395630          -1.395630          -9.002581          -8.659118          -1.052167          -0.167179E-3
+        1                   6                 0.737137           2.434801           1.697665          -4.162496          -6.500783          -0.640623          -0.995441E-4
+        2                   5                -1.119857          -2.509189          -1.389332          -15.55904          -14.31672          -0.147014          -0.343846E-4
+        2                   6                 1.401973           3.000257           1.598284          -2.973878          -5.525347          -0.953185          -0.151975E-3
+        3                   5                -4.345878          -6.883394          -2.537515          -20.76082          -17.16696           1.056339           0.105323E-3
+        3                   6                 2.992585           5.755151           2.762566          -3.303599          -8.071082          -2.004917          -0.235879E-3
+         4                  5                -6.887250          -10.44161          -3.554356          -21.10271          -15.87941           1.668947           0.167584E-3
+         4                  6                 5.327321           8.595318           3.267997          -3.982759          -9.311800          -2.061044          -0.230771E-3
+# 
+# 10/17/2026 at 11:06 yambo @ UNIJ2P4Q7TFK3 [start]
+# 10/17/2026 at 11:06                       [end]
+#
+# .-Input file  03_cohsex/03_cohsex
+# | #
+# | # ==== Runlevels ===
+# | rim_cut                                     # Coulomb potential
+# | dipoles                                     # Oscillator strenghts (or dipoles)
+# | X_static                                    # Statically Screened Interaction
+# | self_energy                                 # Self-energy and quasi-particle corrections
+# | #
+# | # ==== MPI (V=parallel) ===
+# | HFlXC_CPU= "2.1.1.1"                        # CPUs for each role
+# | HFlXC_ROLEs= "qp.g.q.b"                     # CPUs roles (qp,g,q,b)
+# | DIP_CPU= "2.1.1"                            # CPUs for each role
+# | DIP_ROLEs= "k.c.v"                          # CPUs roles (k,c,v)
+# | EM1S_CPU= "2.1.1.1.1"                       # CPUs for each role
+# | EM1S_ROLEs= "q.g.k.c.v"                     # CPUs roles (q,g,k,c,v)
+# | EM1S_nCPU_LinAlg_INV=-1                     # CPUs for Linear Algebra (if -1 it is automatically set)
+# | GW_CPU= "2.1.1.1"                           # CPUs for each role
+# | GW_ROLEs= "qp.g.q.b"                        # CPUs roles (qp,g,q,b)
+# | #
+# | # ==== Bosons (V=bosons) ===
+# | BoseTemp= 0.000000                   [K]    # Bosonic Temperature
+# | #
+# | # ==== Fields (V=fields) ===
+# | EF_interaction= "r.E"                       # Interaction kind (r.E|p.A)
+# | #
+# | # ==== Coulomb cutoff (V=cutoff) ===
+# | CUTGeo= "box xy"                            # Coulomb Cutoff geometry: box/cylinder/sphere/ws/slab X/Y/Z/XY..
+# | % CUTBox
+# |  19.00000 | 19.00000 |  0.00000 |           # [au] Box sides
+# | %
+# | CUTRadius= 0.000000                         # [au] Sphere/Cylinder radius
+# | CUTCylLen= 0.000000                         # [au] Cylinder length
+# | CUTwsGvec= 0.000000                         # WS cutoff: number of G to be modified
+# | #CUTCol_test                    # Perform a cutoff test in R-space
+# | #
+# | # ==== RIM (V=rim) ===
+# | RandQpts=0                                  # Number of random q-points in the BZ
+# | RandGvec=0                           [RL]   # Coulomb interaction RS components
+# | #
+# | # ==== Dipoles (V=dipoles) ===
+# | % DipBands
+# |   1 | 20 |                                  # Bands range for dipoles
+# | %
+# | DipComputed= " R V P [G-space]"             # [default R P V; extra P2 Spin Orb]
+# | #
+# | # ==== Hartree-Fock (V=hf) ===
+# | EXXRLvcs=  5003                      [RL]   # Exchange    RL components
+# | VXCRLvcs= 20877                      [RL]   # XCpotential RL components
+# | #
+# | # ==== Static dielectric matrix (V=X) ===
+# | EM1S_NGsBlk= 21                      [RL]   # Response block size
+# | % EM1S_QpntsR
+# |   1 |  6 |                                  # Transferred momenta
+# | %
+# | % EM1S_BndsRn
+# |   1 | 10 |                                  # Polarization function bands
+# | %
+# | % EM1S_LongDr
+# |  1.000000 | 1.000000 | 1.000000 |           # [cc] Electric Field
+# | %
+# | EM1S_CGrdSp= 100.0000                       # [o/o] Poles coarse grid controller
+# | #
+# | # ==== TDDFT ===
+# | TDDFTKernel= "HARTREE"                      # TDDFT Kernel: IP/Hartree/ALDA/LRC/PF/BSfxc
+# | #
+# | # ==== GW (V=gw) ===
+# | % GbndRnge
+# |   1 | 20 |                                  # G[W] bands range
+# | %
+# | #
+# | # ==== Self-energy (V=qp) ===
+# | SEApprox= "COHSEX"                          # Self-energy approximation ("HF","COHSEX","PPA")

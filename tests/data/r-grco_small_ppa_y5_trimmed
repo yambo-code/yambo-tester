@@ -1,0 +1,44 @@
+                                                                          
+    Version 5.4.0 Revision 24143 Hash (prev commit) 77ed66f02             
+                            Branch is                                     
+                MPI+OpenMP+SLK+HDF5_MPI_IO Build                          
+                    http://www.yambo-code.eu                              
+ 
+ 09/19/2025 at 18:17 yambo @ nid001199
+ ==================================================
+
+ Cores-Threads       : 16(CPU)-16(threads)
+ Cores-Threads       : DIP(environment)-1 16 1(CPUs)-k c v(ROLEs)
+ Cores-Threads       : X_and_IO(environment)-1 1 1 16 1(CPUs)-q g k c v(ROLEs)
+ Cores-Threads       : SE(environment)-1 1 1 16(CPUs)-g q qp b(ROLEs)
+ Cores-Threads       : SX(environment)-1 1 1 16(CPUs)-g q qp b(ROLEs)
+ MPI Cores           :  16
+ Threads per core    :  16
+ Threads total       :  256
+ Nodes Computing     :  2
+ Nodes IO            :  1
+
+ [10] Timing Overview
+ ====================
+
+ Clock: global (MAX - min (if any spread is present) clocks)
+                                io_ATMPROJ_pwscf :      0.0004s P8 [MAX]      0.0000s P15 [min]
+                                       GW(REDUX) :    213.7260s P16 [MAX]      0.0001s P14 [min]
+      MATRIX transfer (X_G_finite_q_X_redux_1_2) :      0.1293s P1 ( 7 calls,  18.470 msec avg) [MAX]      0.0004s P14 ( 7 calls,   0.060 msec avg) [min]
+                                    io_QP_and_GF :      0.0195s P1
+                                   X (procedure) :      4.0023s P2 ( 7 calls,   0.572 msec avg) [MAX]      0.1098s P10 ( 7 calls,  15.692 msec avg) [min]
+                                      Xo (REDUX) :      22m-10s P16 ( 7 calls, 190.139 msec avg) [MAX]      0.4912s P1 ( 7 calls,  70.175 msec avg) [min]
+                                              HF :      3.2498s P1 [MAX]      0.6402s P16 [min]
+                                         Dipoles :     16.9260s P1 [MAX]     16.9260s P14 [min]
+                                         GW(ppa) :      15m-26s P14 [MAX]      11m-52s P16 [min]
+                                  Xo (procedure) :      01h-25m P1 ( 7 calls, 733.369 sec avg) [MAX]      01h-03m P16 ( 7 calls, 544.254 sec avg) [min]
+
+
+ [11] Game Over & Game summary
+ =============================
+
+ 09/19/2025 at 18:17 yambo @ nid001199 [start]
+ 09/19/2025 at 19:59                   [end]
+
+ Timing   [Min/Max/Average]: 01h-41m/01h-41m/01h-41m
+             [Time-Profile]: 01h-41m

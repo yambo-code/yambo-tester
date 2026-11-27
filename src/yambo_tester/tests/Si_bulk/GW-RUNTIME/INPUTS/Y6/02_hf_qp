@@ -1,0 +1,9 @@
+self_energy                                 # Self-energy and quasi-particle corrections
+HFlXC_CPU= "4 1 1 1"
+HFlXC_ROLEs= "qp g q b"
+EXXRLvcs= 300 RL
+VXCRLvcs=  3383                      [RL]   # XCpotential RL components
+SEApprox= "HF"                              # Self-energy approximation ("HF","COHSEX","PPA")
+%QP_krange                       # Generalized Kpoint/Band indices
+1|8|3|6|
+%

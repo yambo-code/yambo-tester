@@ -1,0 +1,32 @@
+rim_cut
+HF_and_locXC
+gw0
+dyson
+el_el_corr
+dipoles
+ppa
+em1d
+CUTGeo= "none"
+RandQpts= 1000000
+RandGvec= 51 RL
+EXXRLvcs= 300 RL
+Chimod= "HARTREE"
+% BndsRnXp
+ 1 | 10 |
+%
+NGsBlkXp= 51 RL
+% LongDrXp
+ 1.0 | 1.0 | 1.0 |
+%
+PPAPntXp= 27.21138 eV
+% GbndRnge
+ 1 | 10 |
+%
+GTermKind= "none"
+DysSolver= "n"
+GDamping= 0.1 eV
+dScStep= 0.1 eV
+%QPkrange
+1|3|3|6|
+%
+ExtendOut

@@ -1,0 +1,13 @@
+# Version-neutral parallel block -> Yambo <NAME>_CPU / <NAME>_ROLEs prefix, per major version.
+# Roles (k c v q g qp b) are the same in both versions; only the block names differ.
+["5"]
+dip = "DIP"        # dipoles (k c v)
+chi = "X_and_IO"   # response function (q g k c v)
+fock = "SX"        # exchange self-energy (q g qp b)
+gw = "SE"          # correlation self-energy (q g qp b)
+
+["6"]
+dip = "DIP"        # packages/dipoles
+chi = "PPA"        # packages/X, named after the X kind: override with EM1D/EM1S/RESP in [benchmark.names."6"]
+fock = "HFlXC"     # packages/HF_lXC
+gw = "GW"          # packages/GW

@@ -12,6 +12,7 @@ tollerance = 0.1
 runlevels = []
 download_link = ""
 yambo_version = ""
+yambo_variant = ""   # development-branch input dialect, e.g. "develop" (see data/variants.toml)
 
 [executables]
 # required executables
@@ -19,6 +20,20 @@ yambo = "yambo"
 p2y = "p2y"
 a2y = "a2y"
 # Optional executables are registered explicitly in a local config.toml or with --exe KEY=VALUE.
+
+[cluster]
+# SLURM settings used by --submit (benchmark mode)
+partition = ""
+account = ""
+qos = ""           # empty: no --qos line
+time = "01:00:00"
+modules = []
+setup = []          # raw shell lines run before the command (e.g. "source env.sh")
+mpi = ""           # launcher or wrapper script; empty: [parameters].mpi_launcher
+tasks_per_node = 0  # MPI tasks per node of this machine (0: from the workflow [benchmark])
+threads = 0         # OpenMP threads per task (0: from the workflow [benchmark])
+nodes = []          # node counts to run (empty: from the workflow [benchmark])
+template = ""       # own sbatch template (empty: packaged data/slurm_job.sh)
 
 [tests]
 Al_bulk = ["DFT", "GW-OPTICS", "ELPH"]

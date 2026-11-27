@@ -1,0 +1,943 @@
+                                                                          
+                                                                          
+    Y88b    /   e           e    e      888~~\    ,88~-_                  
+     Y88b  /   d8b         d8b  d8b     888   |  d888   \                 
+      Y88b/   /Y88b       d888bdY88b    888 _/  88888    |                
+       Y8Y   /  Y88b     / Y88Y Y888b   888  \  88888    |                
+        Y   /____Y88b   /   YY   Y888b  888   |  Y888   /                 
+       /   /      Y88b /          Y888b 888__/    `88_-~                  
+                                                                          
+                                                                          
+    Version 6.0.0 Revision 23875 Hash (prev commit) 4d36a1a               
+                      Branch is devel-GW                                  
+                  MPI+SLK+HDF5_MPI_IO Build                               
+                   http://www.yambo-code.eu                               
+ 
+ 10/17/2026 at 11:06 yambo @ UNIJ2P4Q7TFK3
+
+ [01] Units
+ ==========
+
+
+  [01.01] Constants (SI)
+  ======================
+
+  Planck constant             :  0.66261E-33 [J s]
+  Planck constant / 2 pi      :  0.10546E-33 [J s]
+  Speed of light              :  0.299792E+9 [m/s]
+  Speed of light              :  137.0360 [au]
+  Electron charge             :  0.16022E-18 [C]
+  Avogadro number             :  0.60221E+24 [none]
+  Boltzmann constant          :  0.13806E-22 [J/K]
+  Rydberg constant            :  0.109737E+8 [1/m]
+  Fine structure constant     :  0.007297 [none]
+  Atomic mass unit            :  0.16605E-26 [kg]
+  Atomic mass unit            :  0.16605E-26 [au]
+  Electron mass               :  0.91094E-30 [kg]
+  mu0                         :  0.125664E-5 [N/A^2]
+  epsilon0                    :  0.88542E-11 [C^2/N m^2]
+  E_hatree                    :  0.43597E-17 [J]
+  Bohr radius                 :  0.52918E-10 [m]
+  Bohr magneton               :  0.92740E-23 [J/T]
+
+  [01.02] Convertions
+  ===================
+
+  Length                      : 1 [au]=  1.000000 [Am - AU]
+  Frequency                   : 1 [au]=  0.41341E+17 [Hz - SI]
+  Temperature                 : 1 [au]=   315775.    [K - SI]
+  Energy                      : 1 [au]=  27.21139 [eV - INT]
+  Time                        : 1 [au]=  0.024189 [fs - SI]
+
+ [02] Setup
+ ==========
+
+ [RD@./SAVE//ns.electrons]----------------------------------------------
+  Number of bands                      :  20
+  Number of K-points                   :   8
+  Spinor components                    :  1
+  Spin polarizations                   :  1
+  Number of electrons                  :  3.000000
+  Exchange-correlation                 : Slater exchange(X)+Perdew & Zunger(C)
+  Exact exchange fraction              :  0.000000
+  Exact exchange screening             :  0.000000
+  Temperature                          :  300.0000 [K]
+ - S/N 000583 ------------------------------------ v.06.00.00 r.23875 -
+ [RD@./SAVE//ns.lattices]-----------------------------------------------
+  Reciprocal space vectors             :   941
+  Symmetries                           :   48 spatial
+  Max atoms/species                    :  1
+  Atomic species                       :  1
+  Magnetic symmetries                  : no
+  Lattice parameters                   :  3.750000  3.750000  3.750000 [Am]
+ - S/N 000583 ------------------------------------ v.06.00.00 r.23875 -
+  
+ Job string                  : 05_ff
+ CORE databases              : .
+ Additional I/O              : .
+ Communications              : 05_ff
+ Input file                  : 05_ff/05_ff
+ Report file                 : 05_ff/r-05_ff_dipoles_X_dynamic_self_energy
+ Verbose log/report          : no
+ Log files                   : 05_ff/LOG
+ Precision                             : SINGLE
+
+  [02.01] OpenMP environment
+  ==========================
+
+
+  [02.02] MPI environment
+  =======================
+
+  MPI cpu                               :  2
+  Computing nodes                       :  1
+  IO nodes                              :  1
+
+  [02.03] Direct Lattice
+  ======================
+
+
+  Cell kind                             : FCC
+  Atoms in the cell                     : Al
+  number of Al atoms                    :  1
+
+  List of atomic masses
+  Al mass:   26.98000 [Da]
+
+  List of atomic coordinates [cc]
+  Al1:   0.000000  0.000000  0.000000 [Am]
+
+  Lattice constants:   3.750000  3.750000  3.750000
+  Direct lattice volume:   105.4688 [Am^3]
+  Direct lattice vectors:   A[ 1 ]  A[ 2 ]  A[ 3 ]
+  A[ 1 ]:  -1.000000  0.000000  1.000000 [iru]
+  A[ 2 ]:   0.000000  1.000000  1.000000 [iru]
+  A[ 3 ]:  -1.000000  1.000000  0.000000 [iru]
+
+  [02.04] Symmetries
+  ==================
+
+  Symmetries system                     : Carthesian
+  Inversion symmetry                    : yes
+  Spatial inversion                     : yes
+  Inversion index                       :  25
+  Time-reversal                         : no
+   
+   [S  1]:    1.00000    -0.237159E-8  0.237159E-8 -0.237159E-8   1.00000     0.237159E-8  0.237159E-8 -0.237159E-8   1.00000   
+   [S  2]:   -1.00000     0.237159E-8  0.237159E-8  0.237159E-8  -1.00000     0.237159E-8 -0.237159E-8  0.237159E-8   1.00000   
+   [S  3]:   -1.00000    -0.237159E-8 -0.237159E-8  0.237159E-8   1.00000    -0.237159E-8 -0.237159E-8 -0.237159E-8  -1.00000   
+   [S  4]:    1.00000     0.237159E-8 -0.237159E-8 -0.237159E-8  -1.00000    -0.237159E-8  0.237159E-8  0.237159E-8  -1.00000   
+   [S  5]:  -0.237159E-8   1.00000    -0.237159E-8   1.00000    -0.237159E-8 -0.237159E-8 -0.237159E-8  0.237159E-8  -1.00000   
+   [S  6]:   0.237159E-8  -1.00000    -0.237159E-8  -1.00000     0.237159E-8 -0.237159E-8  0.237159E-8 -0.237159E-8  -1.00000   
+   [S  7]:  -0.237159E-8  -1.00000     0.237159E-8   1.00000     0.237159E-8  0.237159E-8 -0.237159E-8 -0.237159E-8   1.00000   
+   [S  8]:   0.237159E-8   1.00000     0.237159E-8  -1.00000    -0.237159E-8  0.237159E-8  0.237159E-8  0.237159E-8   1.00000   
+   [S  9]:   0.237159E-8  0.237159E-8   1.00000     0.237159E-8  -1.00000    -0.237159E-8   1.00000     0.237159E-8  0.237159E-8
+   [S 10]:  -0.237159E-8  0.237159E-8  -1.00000    -0.237159E-8  -1.00000     0.237159E-8  -1.00000     0.237159E-8 -0.237159E-8
+   [S 11]:   0.237159E-8 -0.237159E-8  -1.00000     0.237159E-8   1.00000     0.237159E-8   1.00000    -0.237159E-8 -0.237159E-8
+   [S 12]:  -0.237159E-8 -0.237159E-8   1.00000    -0.237159E-8   1.00000    -0.237159E-8  -1.00000    -0.237159E-8  0.237159E-8
+   [S 13]:   -1.00000     0.237159E-8 -0.237159E-8  0.237159E-8  0.237159E-8   1.00000    -0.237159E-8   1.00000    -0.237159E-8
+   [S 14]:   -1.00000    -0.237159E-8  0.237159E-8  0.237159E-8 -0.237159E-8  -1.00000    -0.237159E-8  -1.00000     0.237159E-8
+   [S 15]:    1.00000     0.237159E-8  0.237159E-8 -0.237159E-8  0.237159E-8  -1.00000     0.237159E-8   1.00000     0.237159E-8
+   [S 16]:    1.00000    -0.237159E-8 -0.237159E-8 -0.237159E-8 -0.237159E-8   1.00000     0.237159E-8  -1.00000    -0.237159E-8
+   [S 17]:  -0.237159E-8  0.237159E-8   1.00000      1.00000     0.237159E-8 -0.237159E-8 -0.237159E-8   1.00000     0.237159E-8
+   [S 18]:   0.237159E-8  0.237159E-8  -1.00000     -1.00000     0.237159E-8  0.237159E-8  0.237159E-8   1.00000    -0.237159E-8
+   [S 19]:  -0.237159E-8 -0.237159E-8  -1.00000      1.00000    -0.237159E-8  0.237159E-8 -0.237159E-8  -1.00000    -0.237159E-8
+   [S 20]:   0.237159E-8 -0.237159E-8   1.00000     -1.00000    -0.237159E-8 -0.237159E-8  0.237159E-8  -1.00000     0.237159E-8
+   [S 21]:   0.237159E-8   1.00000    -0.237159E-8  0.237159E-8 -0.237159E-8   1.00000      1.00000     0.237159E-8 -0.237159E-8
+   [S 22]:   0.237159E-8  -1.00000     0.237159E-8  0.237159E-8  0.237159E-8  -1.00000      1.00000    -0.237159E-8  0.237159E-8
+   [S 23]:  -0.237159E-8  -1.00000    -0.237159E-8 -0.237159E-8  0.237159E-8   1.00000     -1.00000    -0.237159E-8 -0.237159E-8
+   [S 24]:  -0.237159E-8   1.00000     0.237159E-8 -0.237159E-8 -0.237159E-8  -1.00000     -1.00000     0.237159E-8  0.237159E-8
+   [S 25]:   -1.00000     0.237159E-8 -0.237159E-8  0.237159E-8  -1.00000    -0.237159E-8 -0.237159E-8  0.237159E-8  -1.00000   
+   [S 26]:    1.00000    -0.237159E-8 -0.237159E-8 -0.237159E-8   1.00000    -0.237159E-8  0.237159E-8 -0.237159E-8  -1.00000   
+   [S 27]:    1.00000     0.237159E-8  0.237159E-8 -0.237159E-8  -1.00000     0.237159E-8  0.237159E-8  0.237159E-8   1.00000   
+   [S 28]:   -1.00000    -0.237159E-8  0.237159E-8  0.237159E-8   1.00000     0.237159E-8 -0.237159E-8 -0.237159E-8   1.00000   
+   [S 29]:   0.237159E-8  -1.00000     0.237159E-8  -1.00000     0.237159E-8  0.237159E-8  0.237159E-8 -0.237159E-8   1.00000   
+   [S 30]:  -0.237159E-8   1.00000     0.237159E-8   1.00000    -0.237159E-8  0.237159E-8 -0.237159E-8  0.237159E-8   1.00000   
+   [S 31]:   0.237159E-8   1.00000    -0.237159E-8  -1.00000    -0.237159E-8 -0.237159E-8  0.237159E-8  0.237159E-8  -1.00000   
+   [S 32]:  -0.237159E-8  -1.00000    -0.237159E-8   1.00000     0.237159E-8 -0.237159E-8 -0.237159E-8 -0.237159E-8  -1.00000   
+   [S 33]:  -0.237159E-8 -0.237159E-8  -1.00000    -0.237159E-8   1.00000     0.237159E-8  -1.00000    -0.237159E-8 -0.237159E-8
+   [S 34]:   0.237159E-8 -0.237159E-8   1.00000     0.237159E-8   1.00000    -0.237159E-8   1.00000    -0.237159E-8  0.237159E-8
+   [S 35]:  -0.237159E-8  0.237159E-8   1.00000    -0.237159E-8  -1.00000    -0.237159E-8  -1.00000     0.237159E-8  0.237159E-8
+   [S 36]:   0.237159E-8  0.237159E-8  -1.00000     0.237159E-8  -1.00000     0.237159E-8   1.00000     0.237159E-8 -0.237159E-8
+   [S 37]:    1.00000    -0.237159E-8  0.237159E-8 -0.237159E-8 -0.237159E-8  -1.00000     0.237159E-8  -1.00000     0.237159E-8
+   [S 38]:    1.00000     0.237159E-8 -0.237159E-8 -0.237159E-8  0.237159E-8   1.00000     0.237159E-8   1.00000    -0.237159E-8
+   [S 39]:   -1.00000    -0.237159E-8 -0.237159E-8  0.237159E-8 -0.237159E-8   1.00000    -0.237159E-8  -1.00000    -0.237159E-8
+   [S 40]:   -1.00000     0.237159E-8  0.237159E-8  0.237159E-8  0.237159E-8  -1.00000    -0.237159E-8   1.00000     0.237159E-8
+   [S 41]:   0.237159E-8 -0.237159E-8  -1.00000     -1.00000    -0.237159E-8  0.237159E-8  0.237159E-8  -1.00000    -0.237159E-8
+   [S 42]:  -0.237159E-8 -0.237159E-8   1.00000      1.00000    -0.237159E-8 -0.237159E-8 -0.237159E-8  -1.00000     0.237159E-8
+   [S 43]:   0.237159E-8  0.237159E-8   1.00000     -1.00000     0.237159E-8 -0.237159E-8  0.237159E-8   1.00000     0.237159E-8
+   [S 44]:  -0.237159E-8  0.237159E-8  -1.00000      1.00000     0.237159E-8  0.237159E-8 -0.237159E-8   1.00000    -0.237159E-8
+   [S 45]:  -0.237159E-8  -1.00000     0.237159E-8 -0.237159E-8  0.237159E-8  -1.00000     -1.00000    -0.237159E-8  0.237159E-8
+   [S 46]:  -0.237159E-8   1.00000    -0.237159E-8 -0.237159E-8 -0.237159E-8   1.00000     -1.00000     0.237159E-8 -0.237159E-8
+   [S 47]:   0.237159E-8   1.00000     0.237159E-8  0.237159E-8 -0.237159E-8  -1.00000      1.00000     0.237159E-8  0.237159E-8
+   [S 48]:   0.237159E-8  -1.00000    -0.237159E-8  0.237159E-8  0.237159E-8   1.00000      1.00000    -0.237159E-8 -0.237159E-8
+
+ [03] Reciprocal Lattice
+ =======================
+
+
+ Reciprocal lattice volume             :  2.351884 [1/Am^3]
+ Reciprocal lattice vectors            :  B[ 1 ]  B[ 2 ]  B[ 3 ]
+ B[ 1 ]:  -0.500000 -0.500000  0.500000  [iku]
+ B[ 2 ]:   0.500000  0.500000  0.500000  [iku]
+ B[ 3 ]:  -0.500000  0.500000 -0.500000  [iku]
+
+  [03.01] Shells
+  ==============
+
+  Number of shells                      :   33
+  Reciprocal charge vectors             :   941
+  G-vecs. in first 3 shells             :  [ Number ]
+    1   9  15
+  ...
+  Shell energy in first 3 shells        : [mHa]
+    0.000000   1403.68
+  ...
+   
+
+ [04] K-points
+ =============
+
+ Compatible Grid is                    : 3D
+ Base K vectors                        :  K_min[ 1 ]  K_min[ 2 ]  K_min[ 3 ]
+ K_min[ 1 ]                            : -0.66654E-09  0.25000      0.10224E-08 [rlu]
+ K_min[ 2 ]                            :  0.66654E-09  0.66654E-09  0.25000     [rlu]
+ K_min[ 3 ]                            :  0.25000     -0.66654E-09  0.23555E-08 [rlu]
+ Grid dimensions                       :   4   4   4
+ K lattice UC volume                   :  0.036748 [a.u.]
+
+ IBZ K-points                          :   8
+ BZ  K-points                          :   64
+
+ Units: rlu = crystal or reduced units; cc = cartesian coordinates; iku = interal k-units
+
+ K [1]:   0.000000  0.000000  0.000000 [rlu] [WF components 113]
+ K [2]:  -0.77635E-09 -0.77635E-09  0.25000     [rlu] [WF components 117]
+ K [3]:   0.155271E-8  0.155271E-8 -0.500000    [rlu] [WF components 120]
+ K [4]:   0.337796E-8  0.250000     0.250000    [rlu] [WF components 125]
+ K [5]:   0.232906E-8  0.250000    -0.500000    [rlu] [WF components 113]
+ K [6]:   0.155271E-8  0.250000    -0.250000    [rlu] [WF components 117]
+ K [7]:  -0.675592E-8 -0.500000    -0.500000    [rlu] [WF components 116]
+ K [8]:   0.250000 -0.500000 -0.250000 [rlu] [WF components 108]
+
+ [05] Electrons
+ ==============
+
+
+  [05.01] Energies & Occupations
+  ==============================
+
+  [X] === General ===
+  [X] Electronic Temperature            :  300.1000 [K]
+  [X] Bosonic Temperature               :  300.1000 [K]
+  [X] Finite Temperature mode           : yes
+  [X] El. density                       :  0.30754E+11 [C/m^3]
+  [X] Fermi Level                       :  7.559247 [eV]
+
+  [X] === Gaps and Widths ===
+  [X] Conduction Band Min               :  7.559247 [eV]
+  [X] Valence Band Max                  :  7.559247 [eV]
+  [X] Metallic Bands                    :  1  2
+  [X] Empty Bands                       :   3  20
+   
+  [X] === Metallic Characters ===
+  [X] N of el / N of met el             :  3.000000  2.946036
+  [X] Average metallic occ.             :  0.368255
+
+  [WARNING] [X] Metallic system
+   
+  Non degenerated bands @ K [1]:   13
+    1   2   5   8   9  11  12  15  16  17  18  19  20
+   
+  Energies [eV] @ K [1]
+  -10.74593  13.62617  13.62617  13.62617  15.00246  15.00246  15.00246  17.51280
+   20.91492  20.91492  23.46902  25.67626  25.67626  25.67626  33.12323  56.90297
+   56.90308  56.90359  59.28981  59.29927
+   
+  Occupations @ K [1]
+   2.000000  0.000000  0.000000  0.000000  0.000000  0.000000  0.000000  0.000000
+   0.000000  0.000000  0.000000  0.000000  0.000000  0.000000  0.000000  0.000000
+   0.000000  0.000000  0.000000  0.000000
+   
+  Non degenerated bands @ K [2]:   15
+    1   2   3   5   6   8   9  11  12  13  15  16  18  19  20
+   
+  Energies [eV] @ K [2]
+   -8.97755   4.23191  11.83954  11.83954  15.40150  15.78491  15.78491  19.81422
+   20.10207  20.10207  25.89501  32.32397  33.96548  33.96548  39.16377  42.62565
+   42.62565  46.85852  59.44580  59.44781
+   
+  Occupations @ K [2]
+   2.000000  0.000000  0.000000  0.000000  0.000000  0.000000  0.000000  0.000000
+   0.000000  0.000000  0.000000  0.000000  0.000000  0.000000  0.000000  0.000000
+   0.000000  0.000000  0.000000  0.000000
+   
+  Non degenerated bands @ K [3]:   14
+    1   2   3   5   7   8   9  11  13  14  15  16  18  19
+   
+  Energies [eV] @ K [3]
+   -3.96331  -3.73555  12.34306  12.34306  12.40484  12.40484  16.15103  16.43388
+   26.87220  26.87220  31.75184  31.75184  32.19849  38.30854  46.20442  47.30704
+   47.30705  48.00901  49.18530  49.18532
+   
+  Occupations @ K [3]
+   2.000000  2.000000  0.000000  0.000000  0.000000  0.000000  0.000000  0.000000
+   0.000000  0.000000  0.000000  0.000000  0.000000  0.000000  0.000000  0.000000
+   0.000000  0.000000  0.000000  0.000000
+   
+  Non degenerated bands @ K [4]:   16
+    1   2   3   5   6   7   8  10  11  12  14  15  16  18  19
+   20
+   
+  Energies [eV] @ K [4]
+   -8.39608   8.23169   8.41501   8.41501   9.13094  12.05861  23.11292  23.19655
+   23.19655  27.61864  28.15260  29.00341  29.00341  32.63441  43.08511  43.17000
+   43.17000  45.30487  48.98598  58.65282
+   
+  Occupations @ K [4]
+   2.000000  0.000000  0.000000  0.000000  0.000000  0.000000  0.000000  0.000000
+   0.000000  0.000000  0.000000  0.000000  0.000000  0.000000  0.000000  0.000000
+   0.000000  0.000000  0.000000  0.000000
+   
+  Non degenerated bands @ K [5]:   20
+    1   2   3   4   5   6   7   8   9  10  11  12  13  14  15
+   16  17  18  19  20
+   
+  Energies [eV] @ K [5]
+   -4.41911  -0.03492   4.47415   7.94979   9.66153  17.13928  19.89447  22.85922
+   26.04311  27.40159  32.66899  33.89181  36.74752  39.33767  40.36943  43.19040
+   45.12825  46.25493  48.10279  51.18655
+   
+  Occupations @ K [5]
+   2.000000  1.588322  0.000000  0.000000  0.000000  0.000000  0.000000  0.000000
+   0.000000  0.000000  0.000000  0.000000  0.000000  0.000000  0.000000  0.000000
+   0.000000  0.000000  0.000000  0.000000
+   
+  Non degenerated bands @ K [6]:   20
+    1   2   3   4   5   6   7   8   9  10  11  12  13  14  15
+   16  17  18  19  20
+   
+  Energies [eV] @ K [6]
+   -6.10006   1.96270   3.60431  10.39487  12.42855  18.21131  18.68214  19.80255
+   22.45531  27.07236  29.18618  31.86638  37.70567  38.28245  43.60907  44.03931
+   46.78306  47.86563  47.93318  51.31215
+   
+  Occupations @ K [6]
+   2.000000  0.000000  0.000000  0.000000  0.000000  0.000000  0.000000  0.000000
+   0.000000  0.000000  0.000000  0.000000  0.000000  0.000000  0.000000  0.000000
+   0.000000  0.000000  0.000000  0.000000
+   
+  Non degenerated bands @ K [7]:   15
+    1   2   3   4   6   7   8  10  12  13  14  15  17  19  20
+   
+  Energies [eV] @ K [7]
+   -2.22277  -0.91735   5.92032   6.49928   6.49928  10.13608  27.61869  29.30929
+   29.30929  33.79536  33.79536  33.91228  34.46151  37.33025  42.74193  42.74194
+   42.86871  42.86872  43.45866  43.86998
+   
+  Occupations @ K [7]
+   2.000000  2.000000  0.000000  0.000000  0.000000  0.000000  0.000000  0.000000
+   0.000000  0.000000  0.000000  0.000000  0.000000  0.000000  0.000000  0.000000
+   0.000000  0.000000  0.000000  0.000000
+   
+  Non degenerated bands @ K [8]:   15
+    1   3   4   5   7   8   9  10  11  13  15  16  17  19  20
+   
+  Energies [eV] @ K [8]
+   -0.13685  -0.13685   0.81117   2.08392  16.91176  16.91176  17.31235  19.67055
+   29.60841  34.34883  35.18347  35.18347  37.09073  37.09073  37.53422  38.83665
+   48.12292  48.12293  50.73846  54.09296
+   
+  Occupations @ K [8]
+   1.989985  1.989985  0.000000  0.000000  0.000000  0.000000  0.000000  0.000000
+   0.000000  0.000000  0.000000  0.000000  0.000000  0.000000  0.000000  0.000000
+   0.000000  0.000000  0.000000  0.000000
+   
+
+  [05.02] Exchange-correlation components
+  =======================================
+
+
+ [06] Transferred momenta grid and indexes
+ =========================================
+
+ [RD@./SAVE//ndb.KPT_indexes]-------------------------------------------
+  Fragmentation                        : yes
+  Polarization last K ( bz)            :   64
+  Polarization last K (ibz)            :   8
+  QP states                            :   1   8
+  Q points computed                    :   1   8
+  X grid is uniform                    : yes
+  Grids (string)                       :  X B C S
+  Grids (int-vector)                   :  1  1  1  1
+ - S/N 000583 ------------------------------------ v.06.00.00 r.23875 -
+
+ IBZ Q-points                          :   8
+ BZ  Q-points                          :   64
+
+ Units: rlu = crystal or reduced units; cc = cartesian coordinates; iku = interal k-units
+
+ Q [1]:   0.000000  0.000000  0.000000 [rlu]
+ Q [2]:   0.210944E-8  0.210944E-8  0.250000    [rlu]
+ Q [3]:  -0.421887E-8 -0.421887E-8 -0.500000    [rlu]
+ Q [4]:   0.337796E-8  0.250000     0.250000    [rlu]
+ Q [5]:  -0.421218E-7  0.250000     0.500000    [rlu]
+ Q [6]:  -0.421887E-8  0.250000    -0.250000    [rlu]
+ Q [7]:  -0.675592E-8 -0.500000    -0.500000    [rlu]
+ Q [8]:   0.250000 -0.500000 -0.250000 [rlu]
+
+ [WARNING] DipBands: bands 1-6 extended to 1-7 to keep the degenerate shells complete (Yambo 5 uses the range as given)
+
+ [WARNING] EM1D_BndsRn: bands 1-6 extended to 1-7 to keep the degenerate shells complete (Yambo 5 uses the range as given)
+
+ [WARNING] GbndRnge: bands 1-2 extended to 1-7 to keep the degenerate shells complete (Yambo 5 uses the range as given)
+
+ [07] Dipoles
+ ============
+
+ [WR@./05_ff//ndb.dipoles_iR]-------------------------------------------
+  Total number of states               :  226
+  Bands range                          :   1  20
+  Electron-hole energy range           : -1.000000 -1.000000
+  RL vectors                           :  175
+  [r,Vnl] included                     : yes
+  Electron-Hole pairs locked           : yes
+  Direct v evaluation                  : no
+  Approach used                        : G-space v
+  Observables                          :  R V P [G-space]
+  Wavefunctions                        : Slater exchange(X)+Perdew & Zunger(C)
+ - S/N 000583 ------------------------------------ v.06.00.00 r.23875 -
+ [WR@./05_ff//ndb.dipoles_V]--------------------------------------------
+  Total number of states               :  226
+  Bands range                          :   1  20
+  Electron-hole energy range           : -1.000000 -1.000000
+  RL vectors                           :  175
+  [r,Vnl] included                     : yes
+  Electron-Hole pairs locked           : yes
+  Direct v evaluation                  : no
+  Approach used                        : G-space v
+  Observables                          :  R V P [G-space]
+  Wavefunctions                        : Slater exchange(X)+Perdew & Zunger(C)
+ - S/N 000583 ------------------------------------ v.06.00.00 r.23875 -
+ [WR@./05_ff//ndb.dipoles_P]--------------------------------------------
+  Total number of states               :  226
+  Bands range                          :   1  20
+  Electron-hole energy range           : -1.000000 -1.000000
+  RL vectors                           :  175
+  [r,Vnl] included                     : yes
+  Electron-Hole pairs locked           : yes
+  Direct v evaluation                  : no
+  Approach used                        : G-space v
+  Observables                          :  R V P [G-space]
+  Wavefunctions                        : Slater exchange(X)+Perdew & Zunger(C)
+ - S/N 000583 ------------------------------------ v.06.00.00 r.23875 -
+ [RD@./SAVE//ns.kb_pp_pwscf]--------------------------------------------
+  Fragmentation                        : yes
+ - S/N 000583 ------------------------------------ v.06.00.00 r.23875 -
+ [RD@./SAVE//ns.wf]-----------------------------------------------------
+  Fragmentation                        : yes
+  Bands in each block                  :  20
+  Blocks                               :  1
+  Reciprocal lattice vectors           :  175
+  Components                           :  125
+ - S/N 000583 ------------------------------------ v.06.00.00 r.23875 -
+
+ [WARNING] In case H contains other non local terms, these are neglected
+
+ [08] Dynamical dielectric matrix
+ ================================
+
+ [WR@./05_ff//ndb.dynamical_dielectric_matrix_header]-------------------
+  Total number of states               :  226
+  Bands range                          :   1  20
+  Electron-hole energy range           : -1.000000 -1.000000
+  RL vectors                           :  175
+  [r,Vnl] included                     : yes
+  Electron-Hole pairs locked           : yes
+  Direct v evaluation                  : no
+  Approach used                        : G-space v
+  Observables                          :  R V P [G-space]
+  Wavefunctions                        : Slater exchange(X)+Perdew & Zunger(C)
+  Bands range                          :   1  20
+  Time-ordering                        : Retarded
+  Electron-Field interaction           : r.E
+  [r,Vnl] included                     : no
+  Response function size               :   51
+  Dyson equation Kernel                : HARTREE
+  Reduction fraction                   :  100.0000 [%]
+  Number of frequencies                :   600
+  Frequencies range                    :  0.000000  1.102480
+  Damping range                        :  0.003675  0.003675
+ - S/N 000583 ------------------------------------ v.06.00.00 r.23875 -
+ FFT id                                :  1
+ Dimension                             :  12  12  12
+ N of RL vectors                       :  175
+ RL shift                              :  25
+
+ [RD@./SAVE//ns.wf]-----------------------------------------------------
+  Fragmentation                        : yes
+  Bands in each block                  :  20
+  Blocks                               :  1
+  Reciprocal lattice vectors           :  175
+  Components                           :  125
+ - S/N 000583 ------------------------------------ v.06.00.00 r.23875 -
+ [FFT] Using ID                        :  1
+ [RD@./SAVE//ns.wf]-----------------------------------------------------
+  Fragmentation                        : yes
+  Bands in each block                  :  20
+  Blocks                               :  1
+  Reciprocal lattice vectors           :  175
+  Components                           :  125
+ - S/N 000583 ------------------------------------ v.06.00.00 r.23875 -
+ [FFT] Using ID                        :  1
+ [RD@./SAVE//ns.wf]-----------------------------------------------------
+  Fragmentation                        : yes
+  Bands in each block                  :  20
+  Blocks                               :  1
+  Reciprocal lattice vectors           :  175
+  Components                           :  125
+ - S/N 000583 ------------------------------------ v.06.00.00 r.23875 -
+ [FFT] Using ID                        :  1
+ [RD@./SAVE//ns.wf]-----------------------------------------------------
+  Fragmentation                        : yes
+  Bands in each block                  :  20
+  Blocks                               :  1
+  Reciprocal lattice vectors           :  175
+  Components                           :  125
+ - S/N 000583 ------------------------------------ v.06.00.00 r.23875 -
+
+ [09] Mean-field potentials
+ ==========================
+
+
+  [09.01] Setup
+  =============
+
+
+  [09.02] Fock
+  ============
+
+  FFT id                                :  2
+  Dimension                             :  14  14  14
+  N of RL vectors                       :  307
+  RL shift                              :  23
+
+  [RD@./SAVE//ns.wf]-----------------------------------------------------
+   Fragmentation                        : yes
+   Bands in each block                  :  20
+   Blocks                               :  1
+   Reciprocal lattice vectors           :  175
+   Components                           :  125
+  - S/N 000583 ------------------------------------ v.06.00.00 r.23875 -
+  [WR@./05_ff//ndb.SE_Fock]----------------------------------------------
+   Kind                                 : Self-Energy
+   Approximation                        : Fock
+   Number of states                     :  31
+   Number of frequencies                :  1
+   Total self-energy weight             :  1.000000
+   Reciprocal lattice vectors           :  307
+  - S/N 000583 ------------------------------------ v.06.00.00 r.23875 -
+
+  [09.03] V_xc
+  ============
+
+  FFT id                                :  3
+  Dimension                             :  14  14  14
+  N of RL vectors                       :   941
+  RL shift                              :  1
+
+  [RD@./SAVE//ns.wf]-----------------------------------------------------
+   Fragmentation                        : yes
+   Bands in each block                  :  20
+   Blocks                               :  1
+   Reciprocal lattice vectors           :  175
+   Components                           :  125
+  - S/N 000583 ------------------------------------ v.06.00.00 r.23875 -
+  [xc] Functional                       : Slater exchange(X)+Perdew & Zunger(C)
+
+  [xc] LIBXC is used to calculate xc functional
+
+  [WR@./05_ff//ndb.SE_Kohn_Sham]-----------------------------------------
+   Kind                                 : V_xc
+   Approximation                        : Slater exchange(X)+Perdew & Zunger(C)
+   Number of states                     :  31
+   Number of frequencies                :  1
+   Total self-energy weight             : -1.000000
+   Reciprocal lattice vectors           :   941
+  - S/N 000583 ------------------------------------ v.06.00.00 r.23875 -
+
+  [xc] E_xc                             : -0.817965 [Ha]
+       E_xc                             : -1.635930 [Ry]
+
+   Matrix elements @ K [1]              :  eV
+  <1|Fock|1> = -15.55444  0.183133E-7 <1|V_xc|1> = -9.657715 -0.19591E-10
+  <2|Fock|2> = -2.799949  0.200892E-8 <2|V_xc|2> = -9.783710  0.202117E-6
+  <3|Fock|3> = -2.799949 -0.201106E-8 <3|V_xc|3> = -9.783711  0.507074E-7
+  <4|Fock|4> = -2.799949 -0.231254E-8 <4|V_xc|4> = -9.783714 -0.507745E-7
+
+   Matrix elements @ K [2]              :  eV
+  <1|Fock|1> = -14.72783 -0.140386E-7 <1|V_xc|1> = -9.656552  0.40841E-10
+  <2|Fock|2> = -5.007613  0.873698E-8 <2|V_xc|2> = -9.674994 -0.251174E-7
+  <3|Fock|3> = -2.972875  0.160126E-8 <3|V_xc|3> = -9.652314 -0.255176E-7
+  <4|Fock|4> = -2.972876  0.159919E-8 <4|V_xc|4> = -9.652316  0.625316E-8
+
+   Matrix elements @ K [3]              :  eV
+  <1|Fock|1> = -11.93818 -0.174943E-7 <1|V_xc|1> = -9.607222 -0.54059E-10
+  <2|Fock|2> = -11.74161 -0.401478E-8 <2|V_xc|2> = -9.710519 -0.381149E-7
+  <3|Fock|3> = -2.890255 -0.48914E-12 <3|V_xc|3> = -9.633137  0.190014E-7
+  <4|Fock|4> = -2.890254 -0.44826E-09 <4|V_xc|4> = -9.633134 -0.260333E-7
+
+   Matrix elements @ K [4]              :  eV
+  <1|Fock|1> = -14.44846  0.145906E-7 <1|V_xc|1> = -9.655979 -0.17859E-09
+  <2|Fock|2> = -4.166917 -0.338121E-8 <2|V_xc|2> = -9.820601  0.355363E-8
+  <3|Fock|3> = -3.713701 -0.629987E-8 <3|V_xc|3> = -9.645391  0.174375E-7
+  <4|Fock|4> = -3.713701  0.218639E-8 <4|V_xc|4> = -9.645391 -0.662534E-8
+
+   Matrix elements @ K [5]              :  eV
+  <1|Fock|1> = -12.22425 -0.514459E-8 <1|V_xc|1> = -9.656301  0.104671E-7
+  <2|Fock|2> = -9.230002  0.162787E-8 <2|V_xc|2> = -9.668856 -0.202641E-6
+  <3|Fock|3> = -4.840493  0.99332E-09 <3|V_xc|3> = -9.611098  0.223594E-8
+  <4|Fock|4> = -3.831499  0.307938E-8 <4|V_xc|4> = -9.638804  0.48550E-09
+
+   Matrix elements @ K [6]              :  eV
+  <1|Fock|1> = -13.21876  0.461335E-8 <1|V_xc|1> = -9.655163  0.505606E-7
+  <2|Fock|2> = -6.297421  0.180965E-8 <2|V_xc|2> = -9.737120  0.126605E-7
+  <3|Fock|3> = -4.913769 -0.82713E-10 <3|V_xc|3> = -9.547444 -0.223544E-7
+  <4|Fock|4> = -3.229790  0.301476E-8 <4|V_xc|4> = -9.633435 -0.191405E-7
+
+   Matrix elements @ K [7]              :  eV
+  <1|Fock|1> = -11.56484  0.105086E-7 <1|V_xc|1> = -9.738799  0.101281E-6
+  <2|Fock|2> = -9.381498  0.560939E-8 <2|V_xc|2> = -9.520880  0.63809E-12
+  <3|Fock|3> = -5.076091 -0.683612E-8 <3|V_xc|3> = -9.823422 -0.126201E-7
+
+   Matrix elements @ K [8]              :  eV
+  <1|Fock|1> = -10.31981 -0.997348E-8 <1|V_xc|1> = -9.738420  0.101243E-6
+  <2|Fock|2> = -10.31981 -0.238198E-8 <2|V_xc|2> = -9.738422  0.252503E-7
+  <3|Fock|3> = -5.879978 -0.974503E-8 <3|V_xc|3> = -9.456289  0.253634E-7
+  <4|Fock|4> = -5.496099  0.600202E-8 <4|V_xc|4> = -9.629542 -0.251350E-7
+
+
+  [09.04] GW: Real-Axis approximation
+  ===================================
+
+
+   [09.04.01] Setup
+   ================
+
+   [FF] W on this CPU (states q bands fre:    16    64    20   600
+   [FF] W on this CPU [Mb]               :  93.75000
+   [RD@./05_ff//ndb.dynamical_dielectric_matrix_header]-------------------
+    Total number of states               :  226
+    Bands range                          :   1  20
+    Electron-hole energy range           : -1.000000 -1.000000
+    RL vectors                           :  175
+    [r,Vnl] included                     : yes
+    Electron-Hole pairs locked           : yes
+    Direct v evaluation                  : no
+    Approach used                        : G-space v
+    Observables                          :  R V P [G-space]
+    Wavefunctions                        : Slater exchange(X)+Perdew & Zunger(C)
+    Bands range                          :   1  20
+    Time-ordering                        : Retarded
+    Electron-Field interaction           : r.E
+    [r,Vnl] included                     : no
+    Response function size               :   51
+    Dyson equation Kernel                : HARTREE
+    Reduction fraction                   :  100.0000 [%]
+    Number of frequencies                :   600
+    Frequencies range                    :  0.000000  1.102480
+    Damping range                        :  0.003675  0.003675
+   - S/N 000583 ------------------------------------ v.06.00.00 r.23875 -
+   [FFT] Using ID                        :  1
+   [RD@./SAVE//ns.wf]-----------------------------------------------------
+    Fragmentation                        : yes
+    Bands in each block                  :  20
+    Blocks                               :  1
+    Reciprocal lattice vectors           :  175
+    Components                           :  125
+   - S/N 000583 ------------------------------------ v.06.00.00 r.23875 -
+   [WR@./05_ff//ndb.SE_Real-Axis]-----------------------------------------
+    Kind                                 : Self-Energy
+    Approximation                        : Real-Axis
+    Number of states                     :  31
+    Number of frequencies                :  2
+    Total self-energy weight             :  1.000000
+    Reciprocal lattice vectors           :   51
+    G[W] bands range                     :   1  20
+    Energy step                          :  0.003675
+    Damping                              :  0.003675
+    W frequencies                        :   600
+    [Xs] Bands range                     :   1  20
+    [Xs] Time-ordering                   : Retarded
+    [Xs] Electron-Field interaction      : r.E
+    [Xs] [r,Vnl] included                : no
+    [Xs] Response function size          :   51
+    [Xs] Dyson equation Kernel           : HARTREE
+    [Xs] Reduction fraction              :  100.0000 [%]
+    [Xs] Number of frequencies           :   600
+    [Xs] Frequencies range               :  0.000000  1.102480
+    [Xs] Damping range                   :  0.003675  0.003675
+   - S/N 000583 ------------------------------------ v.06.00.00 r.23875 -
+
+    [09.04.01.01] Real-Axis report
+    ==============================
+
+
+     Matrix elements @ K [1]              :  eV
+    <1|Sc(Eo)|1> =  7.344352  2.127483  dSc/dw =  0.184453 -4.704700
+    <2|Sc(Eo)|2> = -6.704756  0.611179  dSc/dw = -1.275567  0.504021
+    <3|Sc(Eo)|3> = -6.704649  0.611132  dSc/dw = -1.275376  0.503726
+    <4|Sc(Eo)|4> = -6.704542  0.611208  dSc/dw = -1.275376  0.503171
+
+     Matrix elements @ K [2]              :  eV
+    <1|Sc(Eo)|1> =  5.898094  1.355202  dSc/dw = -0.695145 -1.984141
+    <2|Sc(Eo)|2> = -4.511748  0.249012  dSc/dw =  0.153029  0.286564
+    <3|Sc(Eo)|3> = -6.649889  0.495917  dSc/dw = -0.527843  0.431426
+    <4|Sc(Eo)|4> = -6.649871  0.496119  dSc/dw = -0.527036  0.431768
+
+     Matrix elements @ K [3]              :  eV
+    <1|Sc(Eo)|1> =  2.503119  0.216438  dSc/dw = -0.267930  0.010780
+    <2|Sc(Eo)|2> =  2.325121  0.207031  dSc/dw = -0.302678 -0.365622
+    <3|Sc(Eo)|3> = -6.881813  0.575350  dSc/dw = -0.730766  0.799342
+    <4|Sc(Eo)|4> = -6.881695  0.575305  dSc/dw = -0.730726  0.799390
+
+     Matrix elements @ K [4]              :  eV
+    <1|Sc(Eo)|1> =  5.517497  1.215197  dSc/dw =  0.485454 -1.253519
+    <2|Sc(Eo)|2> = -5.403556  0.504912  dSc/dw =  0.301029  0.951121
+    <3|Sc(Eo)|3> = -5.776505  0.400500  dSc/dw = -0.113636 -0.165784
+    <4|Sc(Eo)|4> = -5.776124  0.400519  dSc/dw = -0.113904 -0.166309
+
+     Matrix elements @ K [5]              :  eV
+    <1|Sc(Eo)|1> =  2.930565  0.336921  dSc/dw = -0.647554 -0.620233
+    <2|Sc(Eo)|2> = -0.262056  0.039324  dSc/dw = -0.364595 -0.020893
+    <3|Sc(Eo)|3> = -4.528820  0.208433  dSc/dw = -0.032710 -0.039053
+    <4|Sc(Eo)|4> = -5.705565  0.245836  dSc/dw = -0.591350  0.270439
+
+     Matrix elements @ K [6]              :  eV
+    <1|Sc(Eo)|1> =  3.948686  0.522280  dSc/dw = -0.514568 -0.436539
+    <2|Sc(Eo)|2> = -3.304247  0.068028  dSc/dw = -0.281297  0.108769
+    <3|Sc(Eo)|3> = -4.393312  0.095458  dSc/dw = -0.374012  0.068009
+    <4|Sc(Eo)|4> = -6.257238  0.532393  dSc/dw = -0.444018 -0.168469
+
+     Matrix elements @ K [7]              :  eV
+    <1|Sc(Eo)|1> =  1.978758  0.330159  dSc/dw =  0.053820 -0.539394
+    <2|Sc(Eo)|2> =  0.175197  0.086250  dSc/dw = -0.186466 -0.117611
+    <3|Sc(Eo)|3> = -4.494761  0.157679  dSc/dw = -0.487275  0.189540
+
+     Matrix elements @ K [8]              :  eV
+    <1|Sc(Eo)|1> =  0.685986  0.064025  dSc/dw = -0.300043 -0.106694
+    <2|Sc(Eo)|2> =  0.686070  0.064020  dSc/dw = -0.299963 -0.106701
+    <3|Sc(Eo)|3> = -3.302053  0.055822  dSc/dw = -0.245231  0.025388
+    <4|Sc(Eo)|4> = -3.901180  0.067916  dSc/dw = -0.237843  0.059869
+
+
+ Timing [Min/Max/Average]: 24s/24s/24s
+
+ [10] Dyson equation solver
+ ==========================
+
+ [Newton] Sc step                      :  0.100000 [eV]
+ [Newton] Sc damping                   :  0.100000 [eV]
+ [WR@./05_ff//ndb.QP_Fock-V_xc-Real-Axis]-------------------------------
+  Dyson solver                         : n
+  Number of states                     :  31
+  Number of bands                      :   4
+  Number of k-points                   :   8
+  On mass shell                        : no
+  [Fock] Kind                          : Self-Energy
+  [Fock] Approximation                 : Fock
+  [Fock] Number of states              :  31
+  [Fock] Number of frequencies         :  1
+  [Fock] Total self-energy weight      :  1.000000
+  [Fock] Reciprocal lattice vectors    :  307
+  [V_xc] Kind                          : V_xc
+  [V_xc] Approximation                 : Slater exchange(X)+Perdew & Zunger(C)
+  [V_xc] Number of states              :  31
+  [V_xc] Number of frequencies         :  1
+  [V_xc] Total self-energy weight      : -1.000000
+  [V_xc] Reciprocal lattice vectors    :   941
+  [Real-Axis] Kind                     : Self-Energy
+  [Real-Axis] Approximation            : Real-Axis
+  [Real-Axis] Number of states         :  31
+  [Real-Axis] Number of frequencies    :  2
+  [Real-Axis] Total self-energy weight :  1.000000
+  [Real-Axis] Reciprocal lattice vector:   51
+  [Real-Axis] G[W] bands range         :   1  20
+  [Real-Axis] Energy step              :  0.003675
+  [Real-Axis] Damping                  :  0.003675
+  [Real-Axis] W frequencies            :   600
+  [Real-Axis] [Xs] Bands range         :   1  20
+  [Real-Axis] [Xs] Time-ordering       : Retarded
+  [Real-Axis] [Xs] Electron-Field inter: r.E
+  [Real-Axis] [Xs] [r,Vnl] included    : no
+  [Real-Axis] [Xs] Response function si:   51
+  [Real-Axis] [Xs] Dyson equation Kerne: HARTREE
+  [Real-Axis] [Xs] Reduction fraction  :  100.0000 [%]
+  [Real-Axis] [Xs] Number of frequencie:   600
+  [Real-Axis] [Xs] Frequencies range   :  0.000000  1.102480
+  [Real-Axis] [Xs] Damping range       :  0.003675  0.003675
+                                         
+  QP @ state[ 1 ] K range              :   1   6
+  QP @ state[ 1 ] b range              :   1   4
+  QP @ state[ 2 ] K range              :   7   8
+  QP @ state[ 2 ] b range              :  1  3
+  QP @ state[ 3 ] K range              :   8   8
+  QP @ state[ 3 ] b range              :   4   4
+ - S/N 000583 ------------------------------------ v.06.00.00 r.23875 -
+
+ [11] Game Over & Game summary
+ =============================
+
+ 10/17/2026 at 11:06 yambo @ UNIJ2P4Q7TFK3 [start]
+ 10/17/2026 at 11:07                       [end]
+ Timing   [Min/Max/Average]: 25s/25s/25s
+             [Time-Profile]: 25s
+
+
+  [11.01] Timing Overview
+  =======================
+
+  Clock: global (MAX - min (if any spread is present) clocks)
+                                         io_QP :      0.0054s P1 [MAX]      0.0000s P2 [min]
+                               io_PP_KB_abinit :      0.0000s P2 [MAX]      0.0000s P1 [min]
+                           io_DL_ATMPROJ_pwscf :      0.0000s P2
+                        io_COLL_collisions_SEX :      0.0000s P2 [MAX]      0.0000s P1 [min]
+                                    io_COL_CUT :      0.0000s P2 [MAX]      0.0000s P1 [min]
+                                    Xo (REDUX) :      0.0000s P1 (   4 calls,   0.003 msec avg) [MAX]      0.0000s P2 (   4 calls,   0.003 msec avg) [min]
+                         io_COLL_collisions_HF :      0.0000s P2 [MAX]      0.0000s P1 [min]
+                       IO_srv_Messaging_switch :      0.0000s P2 (  13 calls,   0.002 msec avg) [MAX]      0.0000s P1 (  13 calls,   0.002 msec avg) [min]
+                                     io_FineGd :      0.0000s P2 (   2 calls,   0.018 msec avg) [MAX]      0.0000s P1 (   2 calls,   0.017 msec avg) [min]
+                                  PP_uspp_init :      0.0002s P2 (   8 calls,   0.020 msec avg) [MAX]      0.0001s P1 (   8 calls,   0.018 msec avg) [min]
+                                  SCATTER_Gamp :      0.0003s P2 ( 128 calls,   0.002 msec avg) [MAX]      0.0003s P1 ( 136 calls,   0.002 msec avg) [min]
+                           XC_potential_driver :      0.0006s P2 (   2 calls,   0.277 msec avg) [MAX]      0.0003s P1 (   2 calls,   0.148 msec avg) [min]
+                                  io_RL_shells :      0.0014s P1 (   2 calls,   0.698 msec avg) [MAX]      0.0014s P2 (   2 calls,   0.690 msec avg) [min]
+                                  io_EL_shells :      0.0016s P1 (   2 calls,   0.801 msec avg) [MAX]      0.0015s P2 (   2 calls,   0.746 msec avg) [min]
+                                     FFT_setup :      0.0019s P2 (  10 calls,   0.191 msec avg) [MAX]      0.0019s P1 (  10 calls,   0.188 msec avg) [min]
+                                io_PP_KB_pwscf :      0.0043s P2 (   7 calls,   0.615 msec avg) [MAX]      0.0040s P1 (   6 calls,   0.674 msec avg) [min]
+                                io_KPT_indexes :      0.0046s P1 (   5 calls,   0.910 msec avg) [MAX]      0.0045s P2 (   5 calls,   0.896 msec avg) [min]
+                                DIPOLE_g_space :      0.0065s P2 [MAX]      0.0062s P1 [min]
+                                  HF_lXC_local :      0.0082s P1 [MAX]      0.0065s P2 [min]
+                                         io_SE :      0.0191s P1 (  72 calls,   0.266 msec avg) [MAX]      0.0074s P2 (  70 calls,   0.105 msec avg) [min]
+                             io_COLL_dipoles_P :      0.0102s P1 (   4 calls,   2.556 msec avg) [MAX]      0.0077s P2 (   4 calls,   1.920 msec avg) [min]
+                             io_COLL_dipoles_V :      0.0110s P1 (   4 calls,   2.741 msec avg) [MAX]      0.0082s P2 (   4 calls,   2.062 msec avg) [min]
+                            io_COLL_dipoles_iR :      0.0349s P2 (   6 calls,   5.822 msec avg) [MAX]      0.0118s P1 (   4 calls,   2.953 msec avg) [min]
+                               IO_srv_fragment :      0.0150s P1 (  67 calls,   0.223 msec avg) [MAX]      0.0145s P2 (  68 calls,   0.213 msec avg) [min]
+                                         io_WF :      0.0246s P1 (  69 calls,   0.357 msec avg) [MAX]      0.0235s P2 (  69 calls,   0.341 msec avg) [min]
+                                          Fock :      0.0258s P2 [MAX]      0.0257s P1 [min]
+                                       WF_load :      0.0289s P1 (   8 calls,   3.618 msec avg) [MAX]      0.0274s P2 (   8 calls,   3.422 msec avg) [min]
+                           DIPOLE_get_database :      0.0332s P2
+                                       Dipoles :      0.0394s P1 [MAX]      0.0375s P2 [min]
+                             SERIAL_lin_system :      0.1114s P1 (2400 calls,   0.046 msec avg) [MAX]      0.1113s P2 (2400 calls,   0.046 msec avg) [min]
+                                LINEAR ALGEBRA :      0.1143s P2 (2400 calls,   0.048 msec avg) [MAX]      0.1141s P1 (2400 calls,   0.048 msec avg) [min]
+                                          io_X :      0.1352s P2 (  21 calls,   6.437 msec avg) [MAX]      0.1200s P1 (  21 calls,   5.716 msec avg) [min]
+       Dynamical dielectric matrix (procedure) :      0.1465s P2 (   4 calls,  36.632 msec avg) [MAX]      0.1463s P1 (   4 calls,  36.579 msec avg) [min]
+                                Xo (procedure) :      0.6901s P1 (   4 calls, 172.520 msec avg) [MAX]      0.6079s P2 (   4 calls, 151.981 msec avg) [min]
+                                     Real-Axis :     23.9086s P2 [MAX]     23.9073s P1 [min]
+
+  [11.02] Memory Overview
+  =======================
+
+  Memory Usage: global (Only MASTER cpu here). [O] stands for group 'O'
+  Memory treshold are: 51.20000 [Mb] (basic treshold)  512.0000 [Mb] (SAVEs treshold)
+
+
+          Max memory used   :  200.7320 [Mb]
+
+  .-ACKNOWLEDGMENT
+  |
+  | The users of YAMBO have little formal obligations with respect to
+  | the YAMBO group (those specified in the GNU General Public
+  | License, http://www.gnu.org/copyleft/gpl.txt). However, it is
+  | common practice in the scientific literature, to acknowledge the
+  | efforts of people that have made the research possible. In this
+  | spirit, please find below the reference we kindly ask you to use
+  | in order to acknowledge YAMBO
+  |
+  | Many-body perturbation theory calculations using the yambo code
+  | D. Sangalli, A. Ferretti, H. Miranda, C. Attaccalite, I. Marri, E. Cannuccia, P. Melo,
+  | M Marsili, F Paleari, A Marrazzo, G Prandini, P Bonfà, M O Atambo, F Affinito,
+  | M Palummo, A Molina-Sánchez, C Hogan, M Grüning, D Varsano and A Marini.
+  | J. Phys.: Condens. Matter 31, 325902 (2019).
+  |
+  | Yambo: An ab initio tool for excited state calculations
+  | A. Marini, C. Hogan, M. Grüning, D. Varsano
+  | Computer Physics Communications 180, 1392 (2009).
+  |
+   
+ .-Input file  05_ff/05_ff
+ | #
+ | # ==== Runlevels ===
+ | dipoles                                     # Oscillator strenghts (or dipoles)
+ | X_dynamic                                   # Dynamically Screened Interaction
+ | self_energy                                 # Self-energy and quasi-particle corrections
+ | #
+ | # ==== MPI (V=parallel) ===
+ | HFlXC_CPU= "2.1.1.1"                        # CPUs for each role
+ | HFlXC_ROLEs= "qp.g.q.b"                     # CPUs roles (qp,g,q,b)
+ | DIP_CPU= "2.1.1"                            # CPUs for each role
+ | DIP_ROLEs= "k.c.v"                          # CPUs roles (k,c,v)
+ | EM1D_CPU= "2.1.1.1.1"                       # CPUs for each role
+ | EM1D_ROLEs= "q.g.k.c.v"                     # CPUs roles (q,g,k,c,v)
+ | EM1D_nCPU_LinAlg_INV=-1                     # CPUs for Linear Algebra (if -1 it is automatically set)
+ | GW_CPU= "2.1.1.1"                           # CPUs for each role
+ | GW_ROLEs= "qp.g.q.b"                        # CPUs roles (qp,g,q,b)
+ | #
+ | # ==== Temperatures (V=el) ===
+ | ElecTemp= 300.1000                   [K]    # Electronic Temperature
+ | #
+ | # ==== Bosons (V=bosons) ===
+ | BoseTemp= 300.1000                   [K]    # Bosonic Temperature
+ | #
+ | # ==== Fields (V=fields) ===
+ | EF_interaction= "r.E"                       # Interaction kind (r.E|p.A)
+ | #
+ | # ==== Dipoles (V=dipoles) ===
+ | % DipBands
+ |   1 | 20 |                                  # Bands range for dipoles
+ | %
+ | DipComputed= " R V P [G-space]"             # [default R P V; extra P2 Spin Orb]
+ | #
+ | # ==== Hartree-Fock (V=hf) ===
+ | EXXRLvcs= 307                        [RL]   # Exchange    RL components
+ | VXCRLvcs=  941                       [RL]   # XCpotential RL components
+ | #
+ | # ==== Frequency sampling ===
+ | % EM1D_EnRnge
+ |   0.00000 | 67.56003 |               [eV]   # Real frequency range
+ | %
+ | % EM1D_DmRnge
+ |  0.100000 | 0.100000 |               [eV]   # Frequency damping range
+ | %
+ | EM1D_ETStps=  600                           # Frequency steps
+ | #
+ | # ==== Dynamical dielectric matrix (V=X) ===
+ | EM1D_GrFnTp= "R"                            # Time-order: T R r Ta Ra. (T)ordered,(R)etarded,(r)sonant,(a)nti-resonant
+ | EM1D_NGsBlk=  51                     [RL]   # Response block size
+ | % EM1D_QpntsR
+ |   1 |  8 |                                  # Transferred momenta
+ | %
+ | % EM1D_BndsRn
+ |   1 | 20 |                                  # Polarization function bands
+ | %
+ | EM1D_DrudeW= ( 0.96260E-35 , 0.93711E-39 ) [eV]   # Drude plasma frequency
+ | % EM1D_LongDr
+ |  1.000000 | 1.000000 | 1.000000 |           # [cc] Electric Field
+ | %
+ | EM1D_CGrdSp= 100.0000                       # [o/o] Poles coarse grid controller
+ | % EM1D_EhEngy
+ |   0.00000 | 67.56003 |               [eV]   # Electron-hole energy range
+ | %
+ | #
+ | # ==== TDDFT ===
+ | TDDFTKernel= "HARTREE"                      # TDDFT Kernel: IP/Hartree/ALDA/LRC/PF/BSfxc
+ | #
+ | # ==== GW (V=gw) ===
+ | % GbndRnge
+ |   1 | 20 |                                  # G[W] bands range
+ | %
+ | #
+ | # ==== Self-energy (V=qp) ===
+ | SEApprox= "FF"                              # Self-energy approximation ("HF","COHSEX","PPA")
+ | DysSolver= "n"                              # Dyson Equation solver ("n","s","g")
+ | GDamping= 0.100000                   [eV]   # G[W] damping
+ | ExtendOut                       # Print all variables in the output file

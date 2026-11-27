@@ -1,0 +1,32 @@
+rim_cut
+HF_and_locXC
+gw0
+dyson
+el_el_corr
+dipoles
+cohsex
+em1s
+CUTGeo= "box xy"
+% CUTBox
+ 19.0 | 19.0 | 0.0 |
+%
+EXXRLvcs= 5000 RL
+Chimod= "HARTREE"
+% BndsRnXs
+ 1 | 10 |
+%
+NGsBlkXs= 21 RL
+% LongDrXs
+ 1.0 | 1.0 | 1.0 |
+%
+% GbndRnge
+ 1 | 20 |
+%
+GTermKind= "none"
+DysSolver= "n"
+GDamping= 0.1 eV
+dScStep= 0.1 eV
+%QPkrange
+1|4|5|6|
+%
+ExtendOut

@@ -1,0 +1,40 @@
+rim_cut
+self_energy
+X_dynamic
+dipoles
+CUTGeo= "box xy"
+% CUTBox
+ 19.0 | 19.0 | 0.0 |
+%
+EXXRLvcs= 5000 RL
+% DipBands
+ 1 | 20 |
+%
+EM1D_NGsBlk= 21 RL
+% EM1D_QpntsR
+ 1 | 6 |
+%
+% EM1D_BndsRn
+ 1 | 10 |
+%
+% EM1D_LongDr
+ 1.0 | 1.0 | 1.0 |
+%
+TDDFTKernel= "HARTREE"
+% EM1D_EnRnge
+ 0.0 | 30.0 | eV
+%
+% EM1D_DmRnge
+ 0.1 | 0.1 | eV
+%
+EM1D_ETStps= 600
+% GbndRnge
+ 1 | 20 |
+%
+DysSolver= "n"
+GDamping= 0.1 eV
+ExtendOut
+SEApprox= "FF"
+%QP_krange
+1|4|5|6|
+%

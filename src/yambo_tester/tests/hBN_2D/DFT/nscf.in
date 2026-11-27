@@ -1,0 +1,36 @@
+&CONTROL
+  calculation = 'nscf'
+  restart_mode = 'from_scratch'
+  outdir = './'
+  pseudo_dir = '../../pseudos_dojo'
+  verbosity = 'high'
+  wf_collect = .true.
+  prefix = 'hBN'
+/
+&SYSTEM
+  ibrav = 0
+  nat = 2
+  ntyp = 2
+  occupations = 'fixed'
+  ecutwfc = 40.0
+  ecutrho = 160.0
+  nbnd = 40
+/
+&ELECTRONS
+  conv_thr = 1.0d-8
+  mixing_beta = 0.3
+  electron_maxstep = 250
+  diagonalization = 'david'
+/
+ATOMIC_SPECIES
+B 10.810 B_ONCV_PBE-1.0.upf
+N 14.007 N_ONCV_PBE-1.0.upf
+CELL_PARAMETERS angstrom
+   2.5123700000   0.0000000000   0.0000000000
+  -1.2561850000   2.1757770000   0.0000000000
+   0.0000000000   0.0000000000   15.0000000000
+ATOMIC_POSITIONS crystal
+B   0.0000000000   0.0000000000   0.5000000000
+N   0.3333333333   0.6666666667   0.5000000000
+K_POINTS automatic
+6 6 1  0 0 0

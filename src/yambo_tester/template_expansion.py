@@ -60,6 +60,8 @@ def expand_workflow_templates(workflow_config, templates=None, workflow_file=Non
 
         context = {"step": name, "previous_step": previous_step}
         expanded[name] = _expand_step(templates[step_type], value, context)
+        if "dependencies" in expanded[name]:  # first step: "{previous_step}" expands to ""
+            expanded[name]["dependencies"] = [dep for dep in expanded[name]["dependencies"] if dep]
         previous_step = name
 
     return expanded

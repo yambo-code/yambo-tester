@@ -1,0 +1,18 @@
+rim_cut                          # [R] Coulomb potential
+HF_and_locXC                     # [R] Hartree-Fock
+#DegFix                        # Force the code to impose the energy levels to respect their degeneracy
+RandQpts= 1000000
+RandGvec= 51 RL
+CUTGeo= "sphere XYZ"
+% CUTBox
+ 0.000000 | 0.000000 | 0.000000 |        # [CUT] [au] Box sides
+%
+CUTRadius= 5.0
+CUTCylLen= 0.000000              # [CUT] [au] Cylinder length
+CUTwsGvec= 0.700000              # [CUT] WS cutoff: number of G to be modified
+EXXRLvcs= 300 RL
+VXCRLvcs=  3383            RL    # [XC] XCpotential RL components
+%QPkrange                        # [GW] QP generalized Kpoint/Band indices
+1|8|3|6|
+%
+ExtendOut

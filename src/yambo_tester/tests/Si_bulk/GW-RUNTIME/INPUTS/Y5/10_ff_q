@@ -1,0 +1,37 @@
+em1d                             # [R][X] Dynamically Screened Interaction
+dyson                            # [R] Dyson Equation solver
+gw0                              # [R] GW approximation
+el_el_corr                       # [R] Electron-Electron Correlation
+HF_and_locXC                     # [R] Hartree-Fock
+EXXRLvcs= 300 RL
+VXCRLvcs= 3383 RL
+Chimod= "HARTREE"
+% BndsRnXd
+  1 | 10 |
+%
+NGsBlkXd= 51 RL
+% EnRngeXd
+  0.000000 | 30.00000 |      eV
+%
+% DmRngeXd
+ 0.100000 | 0.100000 |       eV
+%
+ETStpsXd= 600
+% LongDrXd
+ 1.000000 | 0.000000 | 0.000000 |
+%
+% GbndRnge
+  1 | 10 |
+%
+GTermKind= "none"
+DysSolver= "n"
+%QPkrange
+1|8|3|6|
+%
+ExtendOut
+GDamping= 0.1 eV
+dScStep= 0.1 eV
+X_and_IO_CPU= "4 1 1 1 1"
+X_and_IO_ROLEs= "q g k c v"
+SE_CPU= "1 1 1 4"
+SE_ROLEs= "q g qp b"

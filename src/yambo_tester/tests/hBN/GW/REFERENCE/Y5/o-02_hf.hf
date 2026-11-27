@@ -1,0 +1,50 @@
+#                                                                     
+# ooooo   oooo ..     ooo        ooo ooooooooo.    .oooo.             
+#  `88.   .8" .88.    `88.       .88 `88"   `Y8b  dP"  `Yb            
+#   `88. .8" .8"88.    888b     d"88  88     888 88      88           
+#    `88.8" .8" `88.   8 Y88. .P  88  88oooo888" 88      88           
+#     `88" .88ooo888.  8  `888"   88  88    `88b 88      88           
+#      88 .8"     `88. 8    Y     88  88    .88P `8b    d8"           
+#     o88o88o      888o8          88 o88bood8P"   `Ybod8P"            
+#                                                                     
+#                                                                     
+# Version 5.3.0 Revision 23927 Hash (prev commit) 1730222ea           
+#                         Branch is                                   
+#          MPI+OpenMP+SLK+SLEPC+HDF5_MPI_IO Build                     
+#                 http://www.yambo-code.eu                            
+#
+# Vxc  =Teter 93(XC)
+# Vnlxc=Hartree-Fock
+#
+#    K-point            Band               Eo [eV]            Ehf [eV]           Vxc [eV]           Vnlxc [eV]
+#
+        1                   7                -0.882467          -8.401769          -18.27197          -25.79127
+        1                   8                -0.882467          -8.401744          -18.27198          -25.79126
+        1                   9                 5.277161           9.769172          -9.441355          -4.949344
+        2                   7                -1.313334          -7.750235          -14.52298          -20.95988
+        2                   8                 0.000000          -5.967441          -16.26752          -22.23496
+        2                   9                 4.094747           9.844521          -10.48721          -4.737437
+        3                   7                -0.908688          -8.440197          -18.24371          -25.77522
+        3                   8                -0.908688          -8.440190          -18.24372          -25.77522
+        3                   9                 7.961606           13.43031          -11.51313          -6.044431
+         4                  7                -0.625211          -6.816676          -15.40940          -21.60087
+         4                  8                -0.625208          -6.816726          -15.40944          -21.60095
+         4                  9                 4.656362           10.40776          -11.22570          -5.474306
+# 
+# 11/26/2026 at 11:02 yambo @ totoro [start]
+# 11/26/2026 at 11:02                [end]
+#
+# .-Input file  02_hf/02_hf
+# | HF_and_locXC                     # [R] Hartree-Fock
+# | BoseTemp= 0.000000         eV    # Bosonic Temperature
+# | #DegFix                        # Force the code to impose the energy levels to respect their degeneracy
+# | FFTGvecs=  3703            RL    # [FFT] Plane-waves
+# | SE_Threads= 1                    # [OPENMP/GW] Number of threads for self-energy
+# | EXXRLvcs= 311              RL    # [XX] Exchange    RL components
+# | VXCRLvcs= 22647            RL    # [XC] XCpotential RL components
+# | %QPkrange                        # [GW] QP generalized Kpoint/Band indices
+# | 1|4|7|9|
+# | %
+# | %QPerange                        # [GW] QP generalized Kpoint/Energy indices
+# | 1|4| 0.000000|-1.000000|
+# | %

@@ -7,7 +7,9 @@ import importlib.resources
 import tomllib
 from .log import setup_logging
 from .config import load_config, check_parameters
-from .runner import download_workflow_tarball, setup_rundir, run_test, run_pytest
+from .runner import download_workflow_tarball, setup_rundir, run_test, run_pytest, workflow_requires
+from .selection import expand_workflow_requirements
+from .benchmark import collect, prepare_jobs, submit  # benchmark mode
 
 
 def parse_executable_override(value):
@@ -60,6 +62,9 @@ def set_cl_args(config):
                         help='Download link', type=str, dest='download_link')
     parser.add_argument('-y', '--yambo-version',
                         help='Yambo major version used for test database selection', type=str, dest='yambo_version')
+    parser.add_argument('--variant',  # development-branch input dialect
+                        help='Input dialect of a Yambo development branch (data/variants.toml), e.g. develop',
+                        type=str, dest='yambo_variant')
     parser.add_argument('--download_only',
                         help="Download only the tests' tarballs", dest='donly', action='store_true')
     parser.add_argument('--nochecksum',
@@ -94,6 +99,18 @@ def set_cl_args(config):
                             help='List the runlevel keywords known to the tester and exit.',
                             dest='list_runlevels',
                             action='store_true')
+    parser.add_argument('--submit',  # benchmark mode: one SLURM job per node count
+                        help='Write and sbatch one job per [benchmark] node count of the selected workflows, then exit.',
+                        dest='submit', action='store_true')
+    parser.add_argument('--dry-run',  # with --submit: print instead of sbatch
+                        help='With --submit, write and print the job scripts without calling sbatch.',
+                        dest='dry_run', action='store_true')
+    parser.add_argument('--collect',  # benchmark mode: timing table
+                        help='Parse r- reports under DIR, write DIR/result.dat and print the scaling table, then exit.',
+                        type=str, dest='collect', metavar='DIR')
+    parser.add_argument('--nodes',  # set inside benchmark jobs
+                        help='Node count of this benchmark run: patches the [benchmark] parallel strategy into the inputs.',
+                        type=int, dest='nodes')
     parser.add_argument('--exe',
                         help='Executable override in KEY=VALUE form. May be repeated.',
                         type=parse_executable_override,
@@ -135,31 +152,53 @@ def main():
         if config['parameters'].get('list_runlevels'):
             print_keywords(keywords["runlevels"])
         return
+    if config['parameters'].get('collect'):  # benchmark: build result.dat and exit
+        collect(config['parameters']['collect'])  # parse reports, print table
+        return  # early exit
+    if config['parameters'].get('submit'):  # benchmark: write job dirs and submit, then exit
+        submit(prepare_jobs(config), dry_run=config['parameters'].get('dry_run', False))  # sbatch or print
+        return  # early exit
     logger = setup_logging(Path(config['parameters']['logger']))
     if not config['parameters']['init']: logger.info(f"Using {config['config']}")
     parameters = check_parameters(config['parameters'], config['executables'], logger)
 
+    if parameters['init']:
+        return
+
+    # Workflows in run order: a workflow's `requires` (e.g. GW -> DFT) runs first, added if not selected
+    requires = {}
+    def requires_of(test_name, test_type):
+        if (test_name, test_type) not in requires:
+            requires[(test_name, test_type)] = workflow_requires({'name': test_name, 'type': test_type}, parameters)
+        return requires[(test_name, test_type)]
+    workflows = expand_workflow_requirements(config['tests'], requires_of)
+    selected = {(name, wtype) for name, wtypes in config['tests'].items() for wtype in wtypes}
+    required = {(name, req) for (name, _), req in requires.items() if req}
+    for test_name, test_type in workflows:
+        if (test_name, test_type) not in selected:
+            logger.info(f"[{test_name}/{test_type}] Added: required by another selected workflow")
+
     if parameters['donly']:
-        for test_name, test_types in config['tests'].items():
-            for test_type in test_types:
-                test = {'name': test_name, 'type': test_type}
-                tar_file, process = download_workflow_tarball(test, parameters, logger)
-                if process is not None:
-                    retcode = process.wait()
-                    if retcode != 0:
-                        raise RuntimeError(f"Download of tarball {tar_file} failed.")
-    elif parameters['init']:
-        pass
+        for test_name, test_type in workflows:
+            test = {'name': test_name, 'type': test_type}
+            tar_file, process = download_workflow_tarball(test, parameters, logger)
+            if process is not None:
+                retcode = process.wait()
+                if retcode != 0:
+                    raise RuntimeError(f"Download of tarball {tar_file} failed.")
     else:
         # Running the tests
-        for test_name, test_types in config['tests'].items():
-            for test_type in test_types:
-                test = {'name': test_name, 'type': test_type}
-                logger.info(f"[{test_name}/{test_type}] Starting test")
-                test['test_dir'], test['run_dir']  = setup_rundir(test, parameters, logger)
-                local_logger = run_test(test, parameters, logger, verbose=parameters['verbose'])
-                run_pytest(test, local_logger, verbose=parameters['verbose'])
-                logger.info(f"[{test_name}/{test_type}] Finished test")
+        for test_name, test_type in workflows:
+            test = {'name': test_name, 'type': test_type}
+            test_parameters = parameters
+            if (test_name, test_type) in required and parameters.get('runlevels'):
+                test_parameters = dict(parameters, runlevels=[])  # its SAVE is needed: run every step
+                logger.info(f"[{test_name}/{test_type}] Runlevel selection ignored: required by another workflow")
+            logger.info(f"[{test_name}/{test_type}] Starting test")
+            test['test_dir'], test['run_dir']  = setup_rundir(test, test_parameters, logger)
+            local_logger = run_test(test, test_parameters, logger, verbose=parameters['verbose'])
+            run_pytest(test, local_logger, verbose=parameters['verbose'])
+            logger.info(f"[{test_name}/{test_type}] Finished test")
 
 
 if __name__ == '__main__':

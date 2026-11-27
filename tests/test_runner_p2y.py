@@ -270,3 +270,106 @@ def test_download_workflow_tarball_skips_unsupported_version(monkeypatch, tmp_pa
     }
 
     assert download_workflow_tarball({"name": "Al_bulk", "type": "DFT"}, parameters, logging.getLogger("test-unsupported-url")) == (None, None)
+
+
+def _write_dependent_workflow(tmp_path):
+    tests_dir = tmp_path / "tests-src"
+    workflow_dir = tests_dir / "He" / "GW"
+    workflow_dir.mkdir(parents=True)
+    (workflow_dir / "tests.toml").write_text(
+        'requires = "DFT"\n\n'
+        '[01_init]\n'
+        'exe = "yambo"\n'
+        'input = "INPUTS/01_init"\n'
+        'runlevel = "init"\n'
+        'dependencies = []\n'
+        '[01_init.reference]\n'
+        '"STDOUT" = ["unused"]\n'
+    )
+    return tests_dir
+
+
+def _write_required_run(scratch, returncode=0, with_save=True):
+    dft_dir = scratch / "He" / "DFT"
+    dft_dir.mkdir(parents=True)
+    (dft_dir / "results.toml").write_text(
+        'tollerance = 0.1\n'
+        f'[00_p2y]\nreturncode = {returncode}\n'
+    )
+    if with_save:
+        (dft_dir / "SAVE").mkdir()
+        (dft_dir / "SAVE" / "ns.db1").write_text("db1")
+    return dft_dir
+
+
+def _dependent_parameters(tests_dir, tmp_path):
+    return {
+        "tests_dir": tests_dir,
+        "scratch_test": tmp_path / "scratch",
+        "cache_dir": tmp_path,
+        "download_link": "",
+        "yambo_version": "5",
+        "verbose": False,
+        "nochecksum": False,
+    }
+
+
+def _no_download(monkeypatch):
+    def fake_download_test(*_args, **_kwargs):
+        raise AssertionError("download_test should not be called")
+
+    monkeypatch.setattr(runner, "download_test", fake_download_test)
+
+
+def test_setup_rundir_copies_save_of_required_workflow(monkeypatch, tmp_path):
+    tests_dir = _write_dependent_workflow(tmp_path)
+    _write_required_run(tmp_path / "scratch")
+    _no_download(monkeypatch)
+    test = {"name": "He", "type": "GW"}
+
+    _, run_dir = setup_rundir(test, _dependent_parameters(tests_dir, tmp_path), logging.getLogger("test-requires"))
+
+    assert (run_dir / "SAVE" / "ns.db1").read_text() == "db1"
+    assert not (run_dir / "SAVE").is_symlink()
+    assert "required_workflow_failed" not in test
+
+
+def test_download_workflow_tarball_skips_dependent_workflow(monkeypatch, tmp_path):
+    tests_dir = _write_dependent_workflow(tmp_path)
+    _no_download(monkeypatch)
+
+    result = download_workflow_tarball(
+        {"name": "He", "type": "GW"}, _dependent_parameters(tests_dir, tmp_path), logging.getLogger("test-requires-dl")
+    )
+
+    assert result == (None, None)
+
+
+def test_dependent_workflow_is_skipped_when_required_workflow_failed(monkeypatch, tmp_path):
+    tests_dir = _write_dependent_workflow(tmp_path)
+    _write_required_run(tmp_path / "scratch", returncode=1, with_save=False)
+    _no_download(monkeypatch)
+    parameters = _dependent_parameters(tests_dir, tmp_path)
+    parameters.update({"mpi": False, "mpi_launcher": None, "nprocs": 1, "omp": False, "thrs": 1,
+                       "tollerance": 0.1, "runlevels": [], "executables": {}})
+    test = {"name": "He", "type": "GW"}
+
+    test["test_dir"], test["run_dir"] = setup_rundir(test, parameters, logging.getLogger("test-requires-fail"))
+    run_test(test, parameters, logging.getLogger("test-requires-fail"))
+
+    assert test["required_workflow_failed"] == "He/DFT"
+    assert not (test["run_dir"] / "SAVE").exists()
+    with open(test["run_dir"] / "results.toml", "rb") as f:
+        results = tomllib.load(f)
+    assert results["01_init"]["returncode"] == -9996
+    assert results["01_init"]["skip_reason"] == "required-workflow-failed"
+
+
+def test_order_steps_runs_dependencies_first():
+    config = {
+        "00_a2y": {"exe": "a2y", "input": "DB/AlAs_o_DS2_WFK.nc", "dependencies": []},
+        "01_init": {"exe": "yambo", "dependencies": ["00_a2y"]},
+        "02_hf": {"exe": "yambo", "input": "INPUTS/Y6/02_hf", "dependencies": ["01_init"]},
+    }
+
+    assert [name for name, _ in runner.order_steps(config)] == ["00_a2y", "01_init", "02_hf"]

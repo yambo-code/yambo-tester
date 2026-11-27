@@ -23,6 +23,7 @@ from yambo_tester.reference_compare import (
 )
 from yambo_tester.log import get_test_logger
 from yambo_tester.selection import (
+    DEPENDENCY_FAILED_RETURNCODE,
     MISSING_EXECUTABLE_RETURNCODE,
     RUNLEVEL_FILTER_RETURNCODE,
     UNSUPPORTED_VERSION_RETURNCODE,
@@ -166,9 +167,11 @@ def pytest_generate_tests(metafunc):
         results = tomllib.load(f)
     tollerance = results.pop('tollerance', None)
     yambo_version = results.pop('yambo_version', DEFAULT_YAMBO_VERSION)
+    variant = results.pop('yambo_variant', "")  # development-branch dialect
+    results.pop('yambo_build', None)  # traceability only, not a step
     with open(rundir / "tests.toml", 'rb') as f:
         workflow_config = tomllib.load(f)
-    tests = workflow_steps_for_version(workflow_config, yambo_version)
+    tests = workflow_steps_for_version(workflow_config, yambo_version, variant)  # same overlays as the run
 
     # Sequence for test_runs_ok func
     if "run_item" in metafunc.fixturenames:
@@ -189,6 +192,7 @@ def pytest_generate_tests(metafunc):
                 MISSING_EXECUTABLE_RETURNCODE,
                 RUNLEVEL_FILTER_RETURNCODE,
                 UNSUPPORTED_VERSION_RETURNCODE,
+                DEPENDENCY_FAILED_RETURNCODE,
             }
             for r, o in val['reference'].items():
                 ref_spec = normalize_reference(o)
@@ -225,6 +229,8 @@ def test_runs_ok(run_item):
         pytest.skip("Test skipped by runlevel selection")
     elif info["returncode"] == UNSUPPORTED_VERSION_RETURNCODE:
         pytest.skip("Test skipped by unsupported Yambo version")
+    elif info["returncode"] == DEPENDENCY_FAILED_RETURNCODE:
+        pytest.skip("Test skipped because the required workflow failed")
     else:
         assert info["returncode"] == 0, f"Subtest {name} failed: {info['stderr']}"
 

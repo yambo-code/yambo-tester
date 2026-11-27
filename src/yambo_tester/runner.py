@@ -13,14 +13,19 @@ import importlib.resources
 from .log import setup_test_logger
 from .config import get_executable
 from .download import download_test, sha256sum
+from .benchmark import link_save, parallel_lines, patch_input  # benchmark mode: SAVE symlink, input patching
+from .variants import load_variant, rewrite_input  # development-branch input dialects
 from .template_expansion import expand_workflow_templates, workflow_uses_templates
 from .versioning import (
     DEFAULT_YAMBO_VERSION,
+    resolve_workflow_metadata,  # [benchmark] table with version overlay
     resolve_workflow_tarball_url,
     workflow_steps_for_version,
     workflow_supports_version,
 )
 from .selection import (
+    DEPENDENCY_FAILED_REASON,
+    DEPENDENCY_FAILED_RETURNCODE,
     MISSING_EXECUTABLE_REASON,
     MISSING_EXECUTABLE_RETURNCODE,
     RUNLEVEL_FILTER_REASON,
@@ -36,6 +41,40 @@ def step_sort_key(item):
     return run.get('input', name)
 
 
+def order_steps(config):
+    """
+    Return the workflow steps in execution order.
+
+    Steps are sorted with step_sort_key (input name when available), then moved
+    after their declared dependencies: an a2y step whose input is "DB/x.nc" sorts
+    after "01_init" but must run before it.
+    """
+    pending = sorted(config.items(), key=step_sort_key)
+    names = {name for name, _ in pending}
+    ordered, done = [], set()
+    while pending:
+        for i, (name, run) in enumerate(pending):
+            deps = [d for d in run.get('dependencies', []) if d in names]
+            if all(d in done for d in deps):
+                ordered.append(pending.pop(i))
+                done.add(name)
+                break
+        else:
+            # dependency cycle: keep the remaining sorted order
+            ordered.extend(pending)
+            break
+    return ordered
+
+
+def thread_env(parameters):
+    """Environment of the yambo runs, with the threads per MPI task always set."""
+    env = os.environ.copy()  # inherit the user environment
+    # threaded libraries (e.g. OpenBLAS with OpenMP) start one thread per core in every MPI task when
+    # OMP_NUM_THREADS is unset: with an MPI-only yambo that oversubscribes the cores (Si FF: 2 s -> 16 min)
+    env["OMP_NUM_THREADS"] = str(parameters['thrs'] if parameters.get('omp') else 1)  # yambo OpenMP: thrs; else 1
+    return env  # for subprocess
+
+
 def stdout_filename(step_name):
     return f"{step_name}.stdout"
 
@@ -44,7 +83,8 @@ def build_run_command(run, parameters):
     cmd = []
     if parameters['mpi'] and parameters['mpi_launcher']:
         nprocs = run.get('nprocs', parameters['nprocs'])
-        cmd.extend([str(parameters['mpi_launcher']), '-np', str(nprocs)])
+        np_flag = '-n' if Path(str(parameters['mpi_launcher'])).name == 'srun' else '-np'  # srun takes -n, not -np
+        cmd.extend([str(parameters['mpi_launcher']), np_flag, str(nprocs)])  # launcher and task count
     executable = get_executable(parameters, run['exe'])
     if executable is None:
         raise FileNotFoundError(f"{run['exe']}: executable not available.")
@@ -73,11 +113,26 @@ def source_workflow_config(test, parameters):
         return tomllib.load(f)
 
 
+def workflow_requires(test, parameters):
+    """
+    Return the workflow type required by a workflow (its ``requires`` metadata), or None.
+
+    The value is resolved from the source tests.toml after the version overlay.
+    """
+    workflow_config = source_workflow_config(test, parameters)
+    yambo_version = parameters.get('yambo_version') or DEFAULT_YAMBO_VERSION
+    return resolve_workflow_metadata(workflow_config, yambo_version).get('requires') or None
+
+
 def parameters_with_workflow_download_link(test, parameters, logger):
     workflow_config = source_workflow_config(test, parameters)
     yambo_version = parameters.get('yambo_version') or DEFAULT_YAMBO_VERSION
     if not workflow_supports_version(workflow_config, yambo_version):
         logger.info(f"[{test['name']}/{test['type']}] skipped download for unsupported Yambo version {yambo_version}")
+        return None
+    requires = resolve_workflow_metadata(workflow_config, yambo_version).get('requires')
+    if requires:  # starts from the SAVE of the required workflow: no tarball
+        logger.info(f"[{test['name']}/{test['type']}] no tarball: requires {test['name']}/{requires}")
         return None
 
     download_link = resolve_workflow_tarball_url(workflow_config, yambo_version, parameters)
@@ -97,6 +152,47 @@ def download_workflow_tarball(test, parameters, logger):
     if resolved_parameters is None:
         return None, None
     return download_test(test['name'], test['type'], resolved_parameters, logger)
+
+
+def required_workflow_problem(required_dir):
+    """
+    Return why the required workflow in ``required_dir`` cannot provide its SAVE, or None.
+
+    The required workflow must have run (results.toml), every step must have
+    returned 0 (skips included: a skipped conversion leaves no SAVE), and the
+    SAVE directory must exist.
+    """
+    results_file = required_dir.joinpath("results.toml")
+    if not results_file.exists():
+        return f"{results_file} not available"
+    with open(results_file, "rb") as f:
+        results = tomllib.load(f)
+    for name, info in results.items():
+        if isinstance(info, dict) and info.get("returncode", 0) != 0:
+            return f"step {name} returned {info['returncode']}"
+    if not required_dir.joinpath("SAVE").is_dir():
+        return f"{required_dir.joinpath('SAVE')} not available"
+    return None
+
+
+def copy_required_save(test, test_dir, run_dir, requires, logger):
+    """
+    Copy the SAVE of the required workflow into the run directory.
+
+    The SAVE is copied, not linked: later steps (e.g. init) write into it.
+    When the required workflow failed, mark the test with
+    ``required_workflow_failed`` so that run_test skips every step.
+    """
+    this_test = f"[{test['name']}/{test['type']}]"
+    required = f"{test['name']}/{requires}"
+    required_dir = test_dir.joinpath(requires)
+    problem = required_workflow_problem(required_dir)
+    if problem:
+        logger.warning(f"{this_test} required workflow {required} not usable: {problem}")
+        test['required_workflow_failed'] = required
+        return
+    shutil.copytree(required_dir.joinpath("SAVE"), run_dir.joinpath("SAVE"), symlinks=True)
+    logger.info(f"{this_test} Copied SAVE from {required}")
 
 
 def setup_rundir(test, parameters, logger):
@@ -147,7 +243,10 @@ def setup_rundir(test, parameters, logger):
         raise FileNotFoundError(f"{local_config} not available") 
 
     yambo_version = parameters.get('yambo_version') or DEFAULT_YAMBO_VERSION
-    if workflow_supports_version(config, yambo_version):
+    requires = resolve_workflow_metadata(config, yambo_version).get('requires')
+    if workflow_supports_version(config, yambo_version) and requires:  # no tarball: start from the required SAVE
+        copy_required_save(test, test_dir, run_dir, requires, logger)
+    elif workflow_supports_version(config, yambo_version):
         tar_file, process = download_workflow_tarball(test, parameters, logger)
         try:
             if process is not None:
@@ -158,8 +257,11 @@ def setup_rundir(test, parameters, logger):
                 if not config['sha256'] == sha256sum(tar_file):
                     logger.error(f"SHA-256 mismatch for file '{tar_file.name}'.")
                     raise ValueError(f"SHA-256 mismatch for file '{tar_file.name}'.")
-            with tarfile.open(tar_file) as tar:
-                tar.extractall(path=test_dir)
+            if config.get('benchmark'):  # benchmark: big SAVE shared via symlink
+                link_save(tar_file, parameters['cache_dir'], test_dir)  # extract once, link per job
+            else:  # regular tests: private copy
+                with tarfile.open(tar_file) as tar:
+                    tar.extractall(path=test_dir)
             logger.info(f"Extracted tarball")
         except RuntimeError as e:
             logger.error(e)
@@ -188,10 +290,13 @@ def run_test(test, parameters, logger, verbose=False):
         SAVE = SAVE_converted.rename(SAVE)
 
     yambo_version = parameters.get('yambo_version') or DEFAULT_YAMBO_VERSION
-    config = workflow_steps_for_version(workflow_config, yambo_version)
+    variant = parameters.get('yambo_variant') or ""  # development-branch dialect, if any
+    config = workflow_steps_for_version(workflow_config, yambo_version, variant)  # "<major>-<variant>" overlay on top
     results = {
         "tollerance": parameters['tollerance'],
         "yambo_version": yambo_version,
+        "yambo_variant": variant,  # read back by test_reference
+        "yambo_build": f"{parameters.get('revision', '')} {parameters.get('hash', '')}".strip(),  # traceability: Revision Hash of yambo -h
     }
 
     if not workflow_supports_version(workflow_config, yambo_version):
@@ -210,13 +315,37 @@ def run_test(test, parameters, logger, verbose=False):
         local_logger.info(f"{this_test} skipped for unsupported Yambo version {yambo_version}")
         return local_logger
 
-    subtests = list(config.items())
-    subtests.sort(key=step_sort_key) # input sorting when available
+    if test.get('required_workflow_failed'):  # set by setup_rundir: no SAVE to start from
+        for name, run in config.items():
+            results[name] = {
+                "returncode": DEPENDENCY_FAILED_RETURNCODE,
+                "cmd": '',
+                "stdout": None,
+                "stderr": None,
+                "run_dir": str(test['run_dir']),
+                "skip_reason": DEPENDENCY_FAILED_REASON,
+                "runlevel": run.get("runlevel", ""),
+            }
+        with open(test['run_dir'].joinpath("results.toml"), "w") as f:
+            toml.dump(results, f)
+        local_logger.info(f"{this_test} skipped: required workflow {test['required_workflow_failed']} failed")
+        return local_logger
+
+    subtests = order_steps(config) # input sorting when available, after the dependencies
+    rules = load_variant(variant, yambo_version)  # variant input rules ({} without variant)
+    for _, run in subtests:  # every step
+        if rules and str(run.get('exe', '')).startswith('yambo') and run.get('input') and (test['run_dir'] / run['input']).is_file():  # yambo inputs only
+            rewrite_input(test['run_dir'] / run['input'], rules)  # runlevels of the variant, in the scratch copy
+    bench = resolve_workflow_metadata(workflow_config, yambo_version, variant).get('benchmark')  # [benchmark] table, if any
+    if bench and parameters.get('nodes'):  # benchmark job (--nodes): set parallel strategy in scratch inputs
+        lines = parallel_lines(bench, parameters['nprocs'], yambo_version, parameters['nodes'])  # <NAME>_CPU/_ROLEs values
+        for _, run in subtests:  # every step
+            if str(run.get('exe', '')).startswith('yambo') and run.get('input') and (test['run_dir'] / run['input']).is_file():  # yambo inputs only
+                patch_input(test['run_dir'] / run['input'], lines)  # rewrite/append parallel lines
     selected_names = selected_step_names(config, parameters.get('runlevels', []))
 
     # For OpenMP pralallelization
-    env = os.environ.copy()
-    if parameters['omp']: env["OMP_NUM_THREADS"] = str(parameters['thrs'])
+    env = thread_env(parameters)  # OMP_NUM_THREADS always set (threaded BLAS/FFT libraries too)
 
     # Loop that launches the subtests
     for name, run in subtests:
