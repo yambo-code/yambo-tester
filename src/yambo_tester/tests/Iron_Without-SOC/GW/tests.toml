@@ -7,21 +7,16 @@
 #   close to Eo (Re(Z) down to 0.05 or negative), where the finite-difference derivative is
 #   ill-conditioned. Looser tolerance for that step.
 
-sha256 = "1e8ecf2812146d6fc595cdd34fba01cfa96ddda3c0e70ea60a2aedbec918ab86"
-tarball_url = "https://media.yambo-code.eu/robots/databases/y6"
+requires = "DFT"  # starts from the SAVE of Iron_Without-SOC/DFT
 
 [yambo_versions]
 supported = ["5", "6"]
-
-[00_a2y]
-step_type = "a2y"
-input = "DB/Fe_o_DS2_WFK.nc"
 
 [01_init]
 exe = "yambo"
 output = "01_init"
 runlevel = "init"
-dependencies = ["00_a2y"]
+dependencies = []
 
 [01_init.reference]
 "REFERENCE/Y6/r-01_init_setup" = ["Game Over & Game summary"]

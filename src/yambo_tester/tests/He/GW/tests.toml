@@ -4,27 +4,13 @@
 # Y6 and Y5 references come from the same inputs; at porting time Y6 vs Y5 agree to (max |dE|):
 #   HF 1e-5 eV | COHSEX 9e-5 eV | PPA 1e-5 eV | FF 1.3e-4 eV
 
-sha256 = "a212dc6fdc0522ee290a077043cdb8ebc8ef8a15e3066a1fb07f450888bf0808"
-tarball_url = "https://media.yambo-code.eu/robots/databases/y6"
+requires = "DFT"  # starts from the SAVE of He/DFT
 
 [yambo_versions]
 supported = ["5", "6"]
 
-[00_p2y]
-step_type = "p2y"
-input_dir = "he.save"
-
 [01_init]
-exe = "yambo"
-output = "01_init"
-runlevel = "init"
-dependencies = ["00_p2y"]
-
-[01_init.reference]
-"REFERENCE/Y6/r-01_init_setup" = ["Game Over & Game summary"]
-
-[01_init.versions."5".reference]
-"REFERENCE/Y5/r-01_init_setup" = ["Game Over & Game summary"]
+step_type = "init"
 
 [02_hf]
 exe = "yambo"

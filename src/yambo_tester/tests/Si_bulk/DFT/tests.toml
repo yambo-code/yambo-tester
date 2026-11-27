@@ -8,8 +8,3 @@ supported = ["5", "6"]
 step_type = "p2y"
 input_dir = "Si.save"
 
-[01_init]
-step_type = "init"
-
-[02_HF]
-step_type = "HF"

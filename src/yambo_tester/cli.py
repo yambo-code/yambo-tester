@@ -7,7 +7,8 @@ import importlib.resources
 import tomllib
 from .log import setup_logging
 from .config import load_config, check_parameters
-from .runner import download_workflow_tarball, setup_rundir, run_test, run_pytest
+from .runner import download_workflow_tarball, setup_rundir, run_test, run_pytest, workflow_requires
+from .selection import expand_workflow_requirements
 from .benchmark import collect, prepare_jobs, submit  # benchmark mode
 
 
@@ -161,27 +162,43 @@ def main():
     if not config['parameters']['init']: logger.info(f"Using {config['config']}")
     parameters = check_parameters(config['parameters'], config['executables'], logger)
 
+    if parameters['init']:
+        return
+
+    # Workflows in run order: a workflow's `requires` (e.g. GW -> DFT) runs first, added if not selected
+    requires = {}
+    def requires_of(test_name, test_type):
+        if (test_name, test_type) not in requires:
+            requires[(test_name, test_type)] = workflow_requires({'name': test_name, 'type': test_type}, parameters)
+        return requires[(test_name, test_type)]
+    workflows = expand_workflow_requirements(config['tests'], requires_of)
+    selected = {(name, wtype) for name, wtypes in config['tests'].items() for wtype in wtypes}
+    required = {(name, req) for (name, _), req in requires.items() if req}
+    for test_name, test_type in workflows:
+        if (test_name, test_type) not in selected:
+            logger.info(f"[{test_name}/{test_type}] Added: required by another selected workflow")
+
     if parameters['donly']:
-        for test_name, test_types in config['tests'].items():
-            for test_type in test_types:
-                test = {'name': test_name, 'type': test_type}
-                tar_file, process = download_workflow_tarball(test, parameters, logger)
-                if process is not None:
-                    retcode = process.wait()
-                    if retcode != 0:
-                        raise RuntimeError(f"Download of tarball {tar_file} failed.")
-    elif parameters['init']:
-        pass
+        for test_name, test_type in workflows:
+            test = {'name': test_name, 'type': test_type}
+            tar_file, process = download_workflow_tarball(test, parameters, logger)
+            if process is not None:
+                retcode = process.wait()
+                if retcode != 0:
+                    raise RuntimeError(f"Download of tarball {tar_file} failed.")
     else:
         # Running the tests
-        for test_name, test_types in config['tests'].items():
-            for test_type in test_types:
-                test = {'name': test_name, 'type': test_type}
-                logger.info(f"[{test_name}/{test_type}] Starting test")
-                test['test_dir'], test['run_dir']  = setup_rundir(test, parameters, logger)
-                local_logger = run_test(test, parameters, logger, verbose=parameters['verbose'])
-                run_pytest(test, local_logger, verbose=parameters['verbose'])
-                logger.info(f"[{test_name}/{test_type}] Finished test")
+        for test_name, test_type in workflows:
+            test = {'name': test_name, 'type': test_type}
+            test_parameters = parameters
+            if (test_name, test_type) in required and parameters.get('runlevels'):
+                test_parameters = dict(parameters, runlevels=[])  # its SAVE is needed: run every step
+                logger.info(f"[{test_name}/{test_type}] Runlevel selection ignored: required by another workflow")
+            logger.info(f"[{test_name}/{test_type}] Starting test")
+            test['test_dir'], test['run_dir']  = setup_rundir(test, test_parameters, logger)
+            local_logger = run_test(test, test_parameters, logger, verbose=parameters['verbose'])
+            run_pytest(test, local_logger, verbose=parameters['verbose'])
+            logger.info(f"[{test_name}/{test_type}] Finished test")
 
 
 if __name__ == '__main__':

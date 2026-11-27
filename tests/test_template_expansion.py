@@ -182,3 +182,9 @@ def test_setup_rundir_rewrites_scratch_tests_toml_when_templates_are_used(monkey
         config = tomllib.load(f)
     assert config["01_demo"]["input"] == "INPUTS/Y6/01_demo"
     assert "step_type" not in config["01_demo"]
+
+
+def test_first_templated_step_has_no_empty_previous_step_dependency():
+    expanded = expand_workflow_templates({"requires": "DFT", "01_init": {"step_type": "init"}})
+
+    assert expanded["01_init"]["dependencies"] == []

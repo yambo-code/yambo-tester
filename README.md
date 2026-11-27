@@ -172,6 +172,28 @@ In typical usage, the user should set parameters either on the command line or i
 - To inspect the packaged workflow keyword inventory without running tests, use `yambo-tester --list-executables` or `yambo-tester --list-runlevels`.
 - The listed values come from `src/yambo_tester/data/workflow_keywords.toml`, which is kept in sync with the imported `tests.toml` files.
 
+### Workflow Dependencies
+
+A workflow can start from the SAVE produced by another workflow of the same
+system instead of downloading its own tarball. Most GW workflows declare this
+in their `tests.toml`:
+
+```toml
+requires = "DFT"  # starts from the SAVE of <system>/DFT
+```
+
+- A workflow with `requires` has no `tarball_url` or `sha256`; nothing is
+  downloaded for it, also with `--download_only`.
+- The required workflow always runs first. If it is not listed in `[tests]`,
+  it is added automatically and the log says so. With `--runlevel`, the
+  required workflow is run in full, because its SAVE is needed.
+- The required workflow's `SAVE` directory is copied (not linked) into the
+  dependent run directory, so later steps such as `init` can write into it.
+- If the required workflow fails (any step with a non-zero return code, or no
+  `SAVE`), every step of the dependent workflow is reported as skipped with
+  reason `required-workflow-failed`; the failure itself is reported by the
+  required workflow.
+
 ### Scratch and Cache Directories
 
 If the `scratch` and `cache` directories specified in the configuration do **not** already exist, they will be **automatically created** by `yambo-tester`.

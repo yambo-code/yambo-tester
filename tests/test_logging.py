@@ -127,6 +127,7 @@ def test_cli_logs_setup_and_test_lifecycle(monkeypatch, tmp_path):
     monkeypatch.setattr(cli, "setup_rundir", fake_setup_rundir)
     monkeypatch.setattr(cli, "run_test", fake_run_test)
     monkeypatch.setattr(cli, "run_pytest", fake_run_pytest)
+    monkeypatch.setattr(cli, "workflow_requires", lambda test, parameters: None)
 
     cli.main()
 

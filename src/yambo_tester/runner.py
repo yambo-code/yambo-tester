@@ -24,6 +24,8 @@ from .versioning import (
     workflow_supports_version,
 )
 from .selection import (
+    DEPENDENCY_FAILED_REASON,
+    DEPENDENCY_FAILED_RETURNCODE,
     MISSING_EXECUTABLE_REASON,
     MISSING_EXECUTABLE_RETURNCODE,
     RUNLEVEL_FILTER_REASON,
@@ -111,11 +113,26 @@ def source_workflow_config(test, parameters):
         return tomllib.load(f)
 
 
+def workflow_requires(test, parameters):
+    """
+    Return the workflow type required by a workflow (its ``requires`` metadata), or None.
+
+    The value is resolved from the source tests.toml after the version overlay.
+    """
+    workflow_config = source_workflow_config(test, parameters)
+    yambo_version = parameters.get('yambo_version') or DEFAULT_YAMBO_VERSION
+    return resolve_workflow_metadata(workflow_config, yambo_version).get('requires') or None
+
+
 def parameters_with_workflow_download_link(test, parameters, logger):
     workflow_config = source_workflow_config(test, parameters)
     yambo_version = parameters.get('yambo_version') or DEFAULT_YAMBO_VERSION
     if not workflow_supports_version(workflow_config, yambo_version):
         logger.info(f"[{test['name']}/{test['type']}] skipped download for unsupported Yambo version {yambo_version}")
+        return None
+    requires = resolve_workflow_metadata(workflow_config, yambo_version).get('requires')
+    if requires:  # starts from the SAVE of the required workflow: no tarball
+        logger.info(f"[{test['name']}/{test['type']}] no tarball: requires {test['name']}/{requires}")
         return None
 
     download_link = resolve_workflow_tarball_url(workflow_config, yambo_version, parameters)
@@ -135,6 +152,47 @@ def download_workflow_tarball(test, parameters, logger):
     if resolved_parameters is None:
         return None, None
     return download_test(test['name'], test['type'], resolved_parameters, logger)
+
+
+def required_workflow_problem(required_dir):
+    """
+    Return why the required workflow in ``required_dir`` cannot provide its SAVE, or None.
+
+    The required workflow must have run (results.toml), every step must have
+    returned 0 (skips included: a skipped conversion leaves no SAVE), and the
+    SAVE directory must exist.
+    """
+    results_file = required_dir.joinpath("results.toml")
+    if not results_file.exists():
+        return f"{results_file} not available"
+    with open(results_file, "rb") as f:
+        results = tomllib.load(f)
+    for name, info in results.items():
+        if isinstance(info, dict) and info.get("returncode", 0) != 0:
+            return f"step {name} returned {info['returncode']}"
+    if not required_dir.joinpath("SAVE").is_dir():
+        return f"{required_dir.joinpath('SAVE')} not available"
+    return None
+
+
+def copy_required_save(test, test_dir, run_dir, requires, logger):
+    """
+    Copy the SAVE of the required workflow into the run directory.
+
+    The SAVE is copied, not linked: later steps (e.g. init) write into it.
+    When the required workflow failed, mark the test with
+    ``required_workflow_failed`` so that run_test skips every step.
+    """
+    this_test = f"[{test['name']}/{test['type']}]"
+    required = f"{test['name']}/{requires}"
+    required_dir = test_dir.joinpath(requires)
+    problem = required_workflow_problem(required_dir)
+    if problem:
+        logger.warning(f"{this_test} required workflow {required} not usable: {problem}")
+        test['required_workflow_failed'] = required
+        return
+    shutil.copytree(required_dir.joinpath("SAVE"), run_dir.joinpath("SAVE"), symlinks=True)
+    logger.info(f"{this_test} Copied SAVE from {required}")
 
 
 def setup_rundir(test, parameters, logger):
@@ -185,7 +243,10 @@ def setup_rundir(test, parameters, logger):
         raise FileNotFoundError(f"{local_config} not available") 
 
     yambo_version = parameters.get('yambo_version') or DEFAULT_YAMBO_VERSION
-    if workflow_supports_version(config, yambo_version):
+    requires = resolve_workflow_metadata(config, yambo_version).get('requires')
+    if workflow_supports_version(config, yambo_version) and requires:  # no tarball: start from the required SAVE
+        copy_required_save(test, test_dir, run_dir, requires, logger)
+    elif workflow_supports_version(config, yambo_version):
         tar_file, process = download_workflow_tarball(test, parameters, logger)
         try:
             if process is not None:
@@ -252,6 +313,22 @@ def run_test(test, parameters, logger, verbose=False):
         with open(test['run_dir'].joinpath("results.toml"), "w") as f:
             toml.dump(results, f)
         local_logger.info(f"{this_test} skipped for unsupported Yambo version {yambo_version}")
+        return local_logger
+
+    if test.get('required_workflow_failed'):  # set by setup_rundir: no SAVE to start from
+        for name, run in config.items():
+            results[name] = {
+                "returncode": DEPENDENCY_FAILED_RETURNCODE,
+                "cmd": '',
+                "stdout": None,
+                "stderr": None,
+                "run_dir": str(test['run_dir']),
+                "skip_reason": DEPENDENCY_FAILED_REASON,
+                "runlevel": run.get("runlevel", ""),
+            }
+        with open(test['run_dir'].joinpath("results.toml"), "w") as f:
+            toml.dump(results, f)
+        local_logger.info(f"{this_test} skipped: required workflow {test['required_workflow_failed']} failed")
         return local_logger
 
     subtests = order_steps(config) # input sorting when available, after the dependencies

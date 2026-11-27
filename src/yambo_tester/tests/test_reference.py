@@ -23,6 +23,7 @@ from yambo_tester.reference_compare import (
 )
 from yambo_tester.log import get_test_logger
 from yambo_tester.selection import (
+    DEPENDENCY_FAILED_RETURNCODE,
     MISSING_EXECUTABLE_RETURNCODE,
     RUNLEVEL_FILTER_RETURNCODE,
     UNSUPPORTED_VERSION_RETURNCODE,
@@ -191,6 +192,7 @@ def pytest_generate_tests(metafunc):
                 MISSING_EXECUTABLE_RETURNCODE,
                 RUNLEVEL_FILTER_RETURNCODE,
                 UNSUPPORTED_VERSION_RETURNCODE,
+                DEPENDENCY_FAILED_RETURNCODE,
             }
             for r, o in val['reference'].items():
                 ref_spec = normalize_reference(o)
@@ -227,6 +229,8 @@ def test_runs_ok(run_item):
         pytest.skip("Test skipped by runlevel selection")
     elif info["returncode"] == UNSUPPORTED_VERSION_RETURNCODE:
         pytest.skip("Test skipped by unsupported Yambo version")
+    elif info["returncode"] == DEPENDENCY_FAILED_RETURNCODE:
+        pytest.skip("Test skipped because the required workflow failed")
     else:
         assert info["returncode"] == 0, f"Subtest {name} failed: {info['stderr']}"
 

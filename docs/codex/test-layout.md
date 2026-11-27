@@ -21,8 +21,8 @@ Examples currently include `Al_bulk/GW-OPTICS`, `Al_bulk/ELPH`, and `PA_chain/PA
 
 ## Runtime Flow
 
-1. `cli.py` loads configuration, applies CLI overrides, validates parameters, then loops over selected tests.
-2. `runner.setup_rundir()` downloads or reuses the test tarball, copies the imported fixture tree to scratch, extracts SAVE data, and returns the run directory.
+1. `cli.py` loads configuration, applies CLI overrides, validates parameters, orders the selected tests with `selection.expand_workflow_requirements()` (required workflows first, added when missing), then loops over them.
+2. `runner.setup_rundir()` copies the imported fixture tree to scratch, then either downloads or reuses the test tarball and extracts SAVE data, or, for a workflow with `requires`, copies the SAVE of the required workflow; it returns the run directory.
 3. `runner.run_test()` sorts workflow steps by their `input` field when present, runs each Yambo-related executable, and writes `results.toml`.
 4. `runner.run_pytest()` invokes pytest with `--rundir=<run_dir>`.
 5. `src/yambo_tester/tests/test_reference.py` reads `results.toml` plus `tests.toml` and validates runs and references.
@@ -163,6 +163,39 @@ Reference type detection is based on `Path(reference_key).name`, so
 `REFERENCE/Y6/o-file`, `REFERENCE/Y5/r-file`, and legacy `o-file` keys are
 classified by their basename.
 
+## Workflow Dependencies
+
+A workflow may declare the workflow type of the same system whose SAVE it
+starts from:
+
+```toml
+requires = "DFT"  # starts from the SAVE of <system>/DFT
+
+[yambo_versions]
+supported = ["5", "6"]
+
+[01_init]
+step_type = "init"
+```
+
+- `requires` is workflow metadata (`WORKFLOW_METADATA_KEYS`); it can be
+  overridden in a top-level `[versions."<major>"]` overlay.
+- A `requires` workflow has no `sha256`/`tarball_url` and no conversion step;
+  the required workflow keeps the `p2y`/`a2y` step and its references.
+- `setup_rundir()` copies `<scratch>/<system>/<requires>/SAVE` into the run
+  directory. If the required workflow has no `results.toml`, a step with a
+  non-zero return code, or no `SAVE`, the dependent workflow is marked and
+  `run_test()` records every step with return code `-9996` and
+  `skip_reason = "required-workflow-failed"`; pytest reports them as skipped.
+- The CLI runs required workflows before their dependents, adds missing ones,
+  rejects cycles, and runs a required workflow in full even with `--runlevel`.
+- `--download_only` skips workflows with `requires`.
+
+Currently AlAs, Al_bulk, He, hBN, hBN_2D, Iron_Without-SOC, Nickel and
+PA_chain `GW` require `DFT`. Si_bulk `GW` and `GW-RUNTIME` keep their own
+tarball because their SAVE comes from a different QE calculation than
+Si_bulk/DFT.
+
 ## Workflow Step Templates
 
 Reusable step metadata lives in
@@ -197,12 +230,14 @@ normal fully expanded `tests.toml`.
 
 Supported placeholders are `{step}` for the local table name and
 `{previous_step}` for the previous workflow step in TOML insertion order,
-excluding workflow metadata tables. Placeholders are applied recursively in
+excluding workflow metadata tables. For the first step `{previous_step}` is
+empty, and empty dependencies are dropped, so a first `init` step gets
+`dependencies = []`. Placeholders are applied recursively in
 strings, lists, dictionaries, reference keys, reference values, and
 version-specific sections.
 
 Expansion keeps top-level workflow metadata such as `sha256`, `tarball_url`,
-`yambo_versions`, and top-level `versions` unchanged. For each templated step,
+`requires`, `yambo_versions`, and top-level `versions` unchanged. For each templated step,
 template base fields are applied first, then local base overrides. Template and
 local reference tables merge by reference key, with local keys winning. Version
 sections are expanded similarly: template version fields are applied first, then

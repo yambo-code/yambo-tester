@@ -6,26 +6,25 @@
 #   COHSEX 8e-4 eV: Sigma_c is uniformly ~0.5 meV lower in Y6 for every state (static X, Fock and
 #   the SEX band sum are identical to Y5; only seen for a metal at finite T). Under investigation.
 
-sha256 = "fbe5958c8ce0670066db1eb75f0d62b805a30d26132520e9354ed6451d22ff0b"
-tarball_url = "https://media.yambo-code.eu/robots/databases/y6"
+requires = "DFT"  # starts from the SAVE of Al_bulk/DFT
 
 [yambo_versions]
 supported = ["5", "6"]
-
-[00_p2y]
-step_type = "p2y"
-input_dir = "Al.save"
 
 [01_init]
 exe = "yambo"
 output = "01_init"
 runlevel = "init"
-dependencies = ["00_p2y"]
+dependencies = []
 
+# k-point index DBs only: the DFT init that produced these references used MaxGvecs, so ndb.gops/RL_shells differ
 [01_init.reference]
+"REFERENCE/Y6/o-01_init.ndb.KPT_indexes_fragment_1" = ["SAVE/ndb.KPT_indexes_fragment_1", "Qindx"]
+"REFERENCE/Y6/o-01_init.ndb.KPT_indexes_fragment_2" = ["SAVE/ndb.KPT_indexes_fragment_2", "Sindx"]
 "REFERENCE/Y6/r-01_init_setup" = ["Game Over & Game summary"]
 
 [01_init.versions."5".reference]
+"REFERENCE/Y5/o-01_init.ndb.kindx" = ["SAVE/ndb.kindx", "Qindx", "Sindx"]
 "REFERENCE/Y5/r-01_init_setup" = ["Game Over & Game summary"]
 
 [02_hf]

@@ -5,21 +5,16 @@
 # Y6 completes the degenerate VBM triplet at Gamma (bands 2-4, Y5 3-4): the two versions' files
 # have different rows and are never compared with each other here.
 
-sha256 = "bbe4cb076409c185b9df955e675dbaf00b0b3731ee8ca7ef9c3fa1e559b2ca24"
-tarball_url = "https://media.yambo-code.eu/robots/databases/y6"
+requires = "DFT"  # starts from the SAVE of AlAs/DFT
 
 [yambo_versions]
 supported = ["5", "6"]
-
-[00_a2y]
-step_type = "a2y"
-input = "DB/AlAs_o_DS2_WFK.nc"
 
 [01_init]
 exe = "yambo"
 output = "01_init"
 runlevel = "init"
-dependencies = ["00_a2y"]
+dependencies = []
 
 [01_init.reference]
 "REFERENCE/Y6/r-01_init_setup" = ["Game Over & Game summary"]
